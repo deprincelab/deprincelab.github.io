@@ -1,0 +1,12 @@
+@article{eldabagh:2018:18256,
+author = {Eldabagh, Noor and Micek, Matthew and {DePrince III}, A. Eugene and Foley, Jonathan J.},
+title = {Resonance Energy Transfer Mediated by Metal–Dielectric Composite Nanostructures},
+journal = {J. Phys. Chem. C},
+volume = {122},
+number = {32},
+pages = {18256-18265},
+year = {2018},
+doi = {10.1021/acs.jpcc.8b04419},
+url = {https://doi.org/10.1021/acs.jpcc.8b04419},
+}
+

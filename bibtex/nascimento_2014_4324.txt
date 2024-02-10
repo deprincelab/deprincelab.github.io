@@ -1,0 +1,12 @@
+@article{nascimento:2014:4324,
+author = {Nascimento, Daniel R. and {DePrince III}, A. Eugene},
+title = {A Parametrized Coupled-Pair Functional for Molecular Interactions: PCPF-MI},
+journal = {J. Chem. Theory Comput.},
+volume = {10},
+number = {10},
+pages = {4324-4331},
+year = {2014},
+doi = {10.1021/ct500462p},
+URL = { https://doi.org/10.1021/ct500462p},
+        
+}

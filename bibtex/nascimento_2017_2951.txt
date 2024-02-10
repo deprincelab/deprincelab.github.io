@@ -1,0 +1,12 @@
+@article{Nascimento:2017:2951,
+author = {Nascimento, Daniel R. and {DePrince III}, A. Eugene},
+title = {Simulation of Near-Edge X-ray Absorption Fine Structure with Time-Dependent Equation-of-Motion Coupled-Cluster Theory},
+journal = {J. Phys. Chem. Lett.},
+volume = {8},
+number = {13},
+pages = {2951-2957},
+year = {2017},
+doi = {10.1021/acs.jpclett.7b01206},
+}
+
+

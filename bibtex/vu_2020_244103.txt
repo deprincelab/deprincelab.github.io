@@ -1,0 +1,11 @@
+@article{Vu:2020:244103,
+author = {Vu,Nam  and DePrince,A. Eugene },
+title = {Size-extensive seniority-zero energy functionals derived from configuration interaction with double excitations},
+journal = {J. Chem. Phys.},
+volume = {152},
+number = {24},
+pages = {244103},
+year = {2020},
+doi = {10.1063/5.0011637},
+URL = {https://doi.org/10.1063/5.0011637}, 
+}

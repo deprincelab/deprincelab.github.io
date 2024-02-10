@@ -1,0 +1,21 @@
+@article{mostafanejad:2020:2274,
+author = {Mostafanejad, Mohammad and Liebenthal, Marcus Dante and DePrince, A. Eugene},
+title = {Global Hybrid Multiconfiguration Pair-Density Functional Theory},
+journal = {Journal of Chemical Theory and Computation},
+volume = {16},
+number = {4},
+pages = {2274-2283},
+year = {2020},
+doi = {10.1021/acs.jctc.9b01178},
+    note ={PMID: 32101416},
+
+URL = { 
+        https://doi.org/10.1021/acs.jctc.9b01178
+    
+},
+eprint = { 
+        https://doi.org/10.1021/acs.jctc.9b01178
+    
+}
+
+}

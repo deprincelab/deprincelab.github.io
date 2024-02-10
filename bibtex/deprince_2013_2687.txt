@@ -1,0 +1,13 @@
+@article{deprince:2013:2687,
+author = {{DePrince III}, A. Eugene and Sherrill, C. David},
+title = {Accuracy and Efficiency of Coupled-Cluster Theory Using Density Fitting/Cholesky Decomposition, Frozen Natural Orbitals, and a t1-Transformed Hamiltonian},
+journal = {J. Chem. Theory Comput.},
+volume = {9},
+number = {6},
+pages = {2687-2696},
+year = {2013},
+doi = {10.1021/ct400250u},
+URL = {https://doi.org/10.1021/ct400250u},
+}
+
+

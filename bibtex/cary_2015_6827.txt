@@ -1,0 +1,10 @@
+@article {cary:2015:6827,
+authors = {Cary, Samantha K. and Vasiliu, Monica and Baumbach, Ryan E. and Stritzinger, Jared T. and Green, Thomas D. and Diefenbach, Kariem and Cross, Justin N. and Knappenberger, Kenneth L. and Liu, Guokui and Silver, Mark A. and {DePrince III}, A. Eugene and Polinski, Matthew J. and {Van Cleve}, Shelley M. and House, Jane H. and Kikugawa, Naoki and Gallagher, Andrew and Arico, Alexandra A. and Dixon, David A. and Albrecht-Schmitt, Thomas E.},
+title = {Emergence of californium as the second transitional element in the actinide series},
+journal = {Nat. Commun.},
+volume = {6},
+pages = {6827},
+year = {2015},
+doi = {10.1038/ncomms7827},
+URL = {http://dx.doi.org/10.1038/ncomms7827},
+}

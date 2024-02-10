@@ -1,0 +1,11 @@
+@article{mullinax:2019:6164,
+author = {Mullinax, J. Wayne and Maradzike, Elvis and Koulias, Lauren N. and Mostafanejad, Mohammad and Epifanovsky, Evgeny and Gidofalvi, Gergely and DePrince, A. Eugene},
+title = {Heterogeneous CPU + GPU Algorithm for Variational Two-Electron Reduced-Density Matrix-Driven Complete Active-Space Self-Consistent Field Theory},
+journal = {J. Chem. Theory Comput.},
+volume = {15},
+number = {11},
+pages = {6164-6178},
+year = {2019},
+doi = {10.1021/acs.jctc.9b00768},
+URL = {https://doi.org/10.1021/acs.jctc.9b00768},
+}

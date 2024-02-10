@@ -1,0 +1,12 @@
+@article{fossotande:2016:2260,
+author = {Fosso-Tande, Jacob and Nguyen, Truong-Son and Gidofalvi, Gergely and {DePrince III}, A. Eugene},
+title = {Large-Scale Variational Two-Electron Reduced-Density-Matrix-Driven Complete Active Space Self-Consistent Field Methods},
+journal = {J. Chem. Theory Comput.},
+volume = {12},
+number = {5},
+pages = {2260-2271},
+year = {2016},
+doi = {10.1021/acs.jctc.6b00190},
+}
+
+

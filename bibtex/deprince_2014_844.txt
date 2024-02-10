@@ -1,0 +1,11 @@
+@article{deprince:2014:844,
+author = {A. Eugene {DePrince III} and Matthew R. Kennedy and Bobby G. Sumpter and C. David Sherrill},
+title = {Density-fitted singles and doubles coupled cluster on graphics processing units},
+journal = {Mol. Phys.},
+volume = {112},
+number = {5-6},
+pages = {844-852},
+year  = {2014},
+publisher = {Taylor & Francis},
+doi = {10.1080/00268976.2013.874599},
+}

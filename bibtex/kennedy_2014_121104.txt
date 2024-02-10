@@ -1,0 +1,11 @@
+@article{kennedy:2014:121104,
+author = {Matthew R. Kennedy and Ashley Ringer McDonald and A. Eugene {DePrince III} and Michael S. Marshall and Rafal Podeszwa and C. David Sherrill},
+title = {Communication: Resolving the three-body contribution to the lattice energy of crystalline benzene: Benchmark results from coupled-cluster theory},
+journal = {J. Chem. Phys.},
+volume = {140},
+number = {12},
+pages = {121104},
+year = {2014},
+doi = {10.1063/1.4869686},
+URL = {  https://doi.org/10.1063/1.4869686},
+}

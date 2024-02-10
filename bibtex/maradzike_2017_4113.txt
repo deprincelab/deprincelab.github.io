@@ -1,0 +1,11 @@
+@article{maradzike:2017:4113,
+author = {Maradzike, Elvis and Gidofalvi, Gergely and Turney, Justin M. and {Schaefer III}, Henry F. and {DePrince III}, A. Eugene},
+title = {Analytic Energy Gradients for Variational Two-Electron Reduced-Density-Matrix-Driven Complete Active Space Self-Consistent Field Theory},
+journal = {J. Chem. Theory Comput.},
+volume = {13},
+number = {9},
+pages = {4113-4122},
+year = {2017},
+doi = {10.1021/acs.jctc.7b00366},
+}
+

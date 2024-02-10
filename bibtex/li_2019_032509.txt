@@ -1,0 +1,14 @@
+@article{Li:2019:032509,
+  title = {Orbital angular momentum constraints in the variational optimization of the two-electron reduced-density matrix},
+  author = {Li, Run R. and DePrince, A. Eugene},
+  journal = {Phys. Rev. A},
+  volume = {100},
+  issue = {3},
+  pages = {032509},
+  numpages = {10},
+  year = {2019},
+  month = {Sep},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevA.100.032509},
+  url = {https://link.aps.org/doi/10.1103/PhysRevA.100.032509}
+}
