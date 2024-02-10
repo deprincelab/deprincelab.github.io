@@ -1,0 +1,12 @@
+plugins:
+  - jekyll-remote-theme
+  
+remote_theme: vfvong/jekyll-theme-tao
+
+#plugins:
+#  - jekyll-paginate
+
+#paginate: 2
+
+title: EvolveMB
+#description: Relativistic many-body electronic strucure theory in the time domain
