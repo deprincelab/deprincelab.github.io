@@ -1,1 +1,1 @@
-# EvolveMB: Time-dependent relativistic many-body electronic structure theory
+# DePrince Lab: Quantum Chemistry Method Development and Simulations
