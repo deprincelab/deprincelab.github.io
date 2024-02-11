@@ -5,8 +5,8 @@ body {
 
 .scroll-container {
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap; /* Prevents content from wrapping to the next line */
+    overflow-x: scroll;
+    white-space: pre; /* Prevents content from wrapping to the next line */
 }
 
 .content {
