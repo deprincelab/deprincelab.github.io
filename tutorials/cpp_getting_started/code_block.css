@@ -1,16 +1,16 @@
-.scrolls {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    height: 80px;
-    white-space:nowrap;
+body {
+    margin: 0;
+    padding: 0;
 }
-.imageDiv img {
-    box-shadow: 1px 1px 10px #999;
-    margin: 2px;
-    max-height: 50px;
-    cursor: pointer;
-    display:inline-block;
-    *display:inline;/* For IE7*/
-    *zoom:1;/* For IE7*/
-    vertical-align:top;
- }
+
+.scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevents content from wrapping to the next line */
+}
+
+.content {
+    width: 800px; /* Set a fixed width for your content */
+    padding: 20px; /* Add padding or adjust as needed */
+    /* Your other styles for content go here */
+}
