@@ -48,7 +48,7 @@ First, you must download and install Psi4.  See the Psi4 <a href=https://github.
 
 <br>
 
-Once you have downloaded and installed Psi4, create a new plugin directory.  I\'m going to call my plugin \'myscf\': <br>
+Once you have downloaded and installed Psi4, create a new plugin directory.  I'm going to call my plugin 'myscf': <br>
 <br>
 
 <pre>
@@ -84,7 +84,7 @@ in Psi4 through the driver in pymodule.py.
 <br>
 <br>
 
-The closest thing to a \'main()\' function will reside in plugin.cc.  Take a look:
+The closest thing to a 'main()' function will reside in plugin.cc.  Take a look:
 <br>
 <br>
 
@@ -103,9 +103,9 @@ SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
 </pre>
 <br>
 
-Like the comment says, you\'re code belongs in the myscf(SharedWavefunction ref_wfn, Options& options) function.  
+Like the comment says, you're code belongs in the myscf(SharedWavefunction ref_wfn, Options& options) function.  
 The name of this function matches whatever you called your plugin.  
-Let\'s add a print statement using Psi4\'s printer class \'outfile\':
+Let's add a print statement using Psi4's printer class 'outfile':
 <br>
 <br>
 <pre class="prettyprint">
@@ -115,7 +115,7 @@ Let\'s add a print statement using Psi4\'s printer class \'outfile\':
 </pre>
 <br>
 
-Next, check out the \'read_options\' function:
+Next, check out the 'read_options' function:
 <br>
 <br>
 
@@ -140,7 +140,7 @@ valid Psi4 options, so you may not need to introduce any new ones.
 <br>
 <br>
 
-Now, let\'s compile and run the plugin.  You can use Psi4 to generate
+Now, let's compile and run the plugin.  You can use Psi4 to generate
 a Makefile, which you can then use to compile your plugin with make.
 
 <br>
@@ -177,7 +177,7 @@ loading initial cache file /Users/deprince/software/psi4/install/share/cmake/psi
 (13:40 ~/myscf/) make
 Scanning dependencies of target myscf
 [ 50%] Building CXX object CMakeFiles/myscf.dir/plugin.cc.o
-/Users/deprince/myscf/plugin.cc:52:20: warning: \'myscf\' has C-linkage specified, but returns user-defined type \'SharedWavefunction\' (aka \'shared_ptr<psi::Wavefunction>\') which is incompatible with C [-Wreturn-type-c-linkage]
+/Users/deprince/myscf/plugin.cc:52:20: warning: 'myscf' has C-linkage specified, but returns user-defined type 'SharedWavefunction' (aka 'shared_ptr<psi::Wavefunction>') which is incompatible with C [-Wreturn-type-c-linkage]
 SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
                    ^
 1 warning generated.
@@ -187,7 +187,7 @@ SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
 <br>
 
 If you look in input.dat,
-you should see a call to energy(\'myscf\') was automatically placed
+you should see a call to energy('myscf') was automatically placed
 there when you created the plugin. So, to run your plugin, you need
 only excecute psi4 using this input file.  
 
