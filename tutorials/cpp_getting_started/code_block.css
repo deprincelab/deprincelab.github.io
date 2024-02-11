@@ -5,12 +5,14 @@ body {
 
 .scroll-container {
     width: 100%;
-    overflow-x: scroll;
-    white-space: pre; /* Prevents content from wrapping to the next line */
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .content {
-    width: 800px; /* Set a fixed width for your content */
+    display: inline-block; /* Ensures the content stays in a single line */
+    white-space: normal; /* Allows normal white space within the content */
+    width: auto; /* Allows the content to expand based on its actual size */
     padding: 20px; /* Add padding or adjust as needed */
     /* Your other styles for content go here */
 }
