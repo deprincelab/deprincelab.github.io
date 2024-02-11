@@ -4,7 +4,7 @@ body {
 }
 
 .scroll-container {
-    width: 100%;
+    width: 10%;
     overflow-x: auto;
     white-space: nowrap;
 }
