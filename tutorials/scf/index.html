@@ -130,12 +130,7 @@ by considering a constrained minimization of the electronic energy
 with respect to the shape of the molecular orbitals, <i>&phi;</i>,
 which are expanded as a linear combination of atomic orbitals:
 <br>
-<br>
-<center>
-<img src="images/lcao.png" width=16%>
-</center>
-<br>
-<br>
+$$\phi_i = \sum_\mu C_{\mu i} \chi_\mu $$
 Using Lagrange's method of undetermined multipliers, the electronic
 energy is minimized with respect to the elements of <b>C</b> 
 subject to the constraint that the molecular orbitals form an
@@ -158,9 +153,7 @@ width:50%">
 </div>
 <br>
 <br>
-<br>
-Step 1.  Create a new plugin
-<br>
+<u>Step 1.  Create a new plugin</u>
 <br>
 <br>
 Create a new plugin, as described <a href=http://www.chem.fsu.edu/~deprince/programming_projects/getting_started.php>here</a>.  If you called your plugin 
@@ -224,11 +217,9 @@ project, I've assumed that the rest of the input is unchanged.
 Keep this in mind when comparing to my results.
 <br>
 <br>
-<br>
 
-Step 2.  Obtain 1-electron integrals
+<u>Step 2.  Obtain 1-electron integrals</u>
 
-<br>
 <br>
 <br>
 Now, close input.dat and open plugin.cc.  In order to use 
@@ -284,10 +275,8 @@ not using symmetry (which is the case here), then the AO and SO bases are
 equivalent.
 <br>
 <br>
-<br>
 
-Step 3.  Obtain 2-electron integrals
-<br>
+<u>Step 3.  Obtain 2-electron integrals</u>
 <br>
 <br>
 Now, we need the two-electron integrals in the SO basis.  This is a complicated 
@@ -407,7 +396,7 @@ expressing the Fock matrix in terms of the three-index integrals (see
 Step 6 below).
 <br>
 <br>
-Step 4.  Symmetric orthogonalization
+<u>Step 4.  Symmetric orthogonalization</u>
 <br>
 <br>
 Oftentimes in electronic structure theory, we would prefer to 
@@ -506,9 +495,7 @@ just a way that best matches our equations.
 Check your <a href=shalf.txt><b>S</b><sup>-1/2</sup> matrix</a> using the Shalf->print() function.
 <br>
 <br>
-<br>
-Step 5.  Guess orbitals, density, and energy
-<br>
+<u>Step 5.  Guess orbitals, density, and energy</u>
 <br>
 <br>
 To obtain a set of guess orbitals and an initial density, we approximate
@@ -598,9 +585,7 @@ and to obtain a new Fock matrix.
 Check your <a href=dmat.txt>density</a>.
 <br>
 <br>
-<br>
-Step 6.  The SCF procedure
-<br>
+<u>Step 6.  The SCF procedure</u>
 <br>
 <br>
 You may have noticed that the Fock matrix depends on the density:
@@ -698,9 +683,7 @@ Check your <a href=coulomb.txt>coulomb</a>, <a href=exchange.txt>exchange</a>,
 and <a href=fock.txt>Fock</a> matrices from the first SCF iteration.
 <br>
 <br>
-<br>
-Step 7. Monitoring convergence
-<br>
+<u>Step 7. Monitoring convergence</u>
 <br>
 <br>
 The SCF procedure is considered converged when the changes in the
