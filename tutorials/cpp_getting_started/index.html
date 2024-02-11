@@ -24,12 +24,14 @@ pre {
     -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
     -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
     width:100%;
-    background: rgb(248,248,248);
+    background: #5A5A5A;
+    color: rgb(0, 0, 0);
     text-indent: 1cm;
 }
 </style>
 <!--
     white-space: pre-wrap;
+    background: rgb(248,248,248);
 -->
 
 <br>
@@ -49,8 +51,7 @@ First, you must download and install Psi4.  See the Psi4 <a href=https://github.
 Once you have downloaded and installed Psi4, create a new plugin directory.  I\'m going to call my plugin \'myscf\': <br>
 <br>
 
-<div style="width: 100%; overflow-x: scroll; white-space: nowrap">
-    <pre>
+<pre>
 
 (13:39 ~/) psi4 --plugin-name myscf
 -- Creating "myscf" with "basic" template. ----------------------
@@ -72,8 +73,7 @@ total 48
 -rw-r--r--  1 deprince  staff   1.7K Nov 15 13:39 plugin.cc
 -rw-r--r--  1 deprince  staff   2.2K Nov 15 13:39 pymodule.py
 
-    </pre>
-</div>
+</pre>
 
 <br>
 
