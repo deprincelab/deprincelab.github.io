@@ -1,4 +1,4 @@
-@article{nascimento:2016:5834,
+@article{DePrince16_5834,
 author = {Nascimento, Daniel R. and {DePrince III}, A. Eugene},
 title = {Linear Absorption Spectra from Explicitly Time-Dependent Equation-of-Motion Coupled-Cluster Theory},
 journal = {J. Chem. Theory Comput.},

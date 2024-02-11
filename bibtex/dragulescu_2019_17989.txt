@@ -1,4 +1,4 @@
-@article{dragulescu:2019:17989,
+@article{Shatruk19_17989,
 author = {Dragulescu-Andrasi, Alina and Filatov, Alexander S. and Oakley, Richard T. and Li, Xiang and Lekin, Kristina and Huq, Ashfia and Pak, Chongin and Greer, Samuel M. and McKay, Johannes and Jo, Minyoung and Lengyel, Jeff and Hung, Ivan and Maradzike, Elvis and DePrince, A. Eugene and Stoian, Sebastian A. and Hill, Stephen and Hu, Yan-Yan and Shatruk, Michael},
 title = {Radical Dimerization in a Plastic Organic Crystal Leads to Structural and Magnetic Bistability with Wide Thermal Hysteresis},
 journal = {J. Am. Chem. Soc.},

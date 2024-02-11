@@ -1,4 +1,4 @@
-@article{mostafanejad:2019:26492,
+@article{DePrince19_26492,
 author ="Mostafanejad, Mohammad and Haney, Jessica and DePrince, A. Eugene",
 title  ="Kinetic-energy-based error quantification in Kohn–Sham density functional theory",
 journal  ="Phys. Chem. Chem. Phys.",

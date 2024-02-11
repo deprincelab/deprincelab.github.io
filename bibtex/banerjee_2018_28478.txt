@@ -1,4 +1,4 @@
-@article{banerjee:2018:28478,
+@article{Hanson18_28478,
 author = {Banerjee, Tanmay and Hill, Sean P. and Hermosilla-Palacios, M. Alejandra and Piercy, Brandon D. and Haney, Jess and Casale, Bryan and DePrince, A. Eugene and Losego, Mark D. and Kleiman, Valeria D. and Hanson, Kenneth},
 title = {Diphenylisobenzofuran Bound to Nanocrystalline Metal Oxides: Excimer Formation, Singlet Fission, Electron Injection, and Low Energy Sensitization},
 journal = {J. Phys. Chem. C},

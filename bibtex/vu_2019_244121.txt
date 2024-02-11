@@ -1,4 +1,4 @@
-@article{vu:2019:244121,
+@article{DePrince19_244121,
 author = {Vu,Nam  and Mitxelena,Ion  and DePrince,A. Eugene },
 title = {An adiabatic connection for doubly-occupied configuration interaction wave functions},
 journal = {J. Chem. Phys.},

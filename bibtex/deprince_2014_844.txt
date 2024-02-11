@@ -1,4 +1,4 @@
-@article{deprince:2014:844,
+@article{Sherrill14_844,
 author = {A. Eugene {DePrince III} and Matthew R. Kennedy and Bobby G. Sumpter and C. David Sherrill},
 title = {Density-fitted singles and doubles coupled cluster on graphics processing units},
 journal = {Mol. Phys.},

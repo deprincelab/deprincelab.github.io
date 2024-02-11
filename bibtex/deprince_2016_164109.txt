@@ -1,4 +1,4 @@
-@article{deprince:2016:164109,
+@article{DePrince16_164109,
 author = {A. Eugene DePrince III},
 title = {Variational optimization of the two-electron reduced-density matrix under pure-state N-representability conditions},
 journal = {J. Chem. Phys.},

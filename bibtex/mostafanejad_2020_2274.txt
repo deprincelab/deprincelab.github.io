@@ -1,4 +1,4 @@
-@article{mostafanejad:2020:2274,
+@article{DePrince20_2274,
 author = {Mostafanejad, Mohammad and Liebenthal, Marcus Dante and DePrince, A. Eugene},
 title = {Global Hybrid Multiconfiguration Pair-Density Functional Theory},
 journal = {Journal of Chemical Theory and Computation},

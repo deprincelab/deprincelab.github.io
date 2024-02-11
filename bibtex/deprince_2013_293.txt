@@ -1,4 +1,4 @@
-@article{deprince:2013:293,
+@article{Sherrill13_293,
 author = {{DePrince III}, A. Eugene and Sherrill, C. David},
 title = {Accurate Noncovalent Interaction Energies Using Truncated Basis Sets Based on Frozen Natural Orbitals},
 journal = {J. Chem. Theory Comput.},

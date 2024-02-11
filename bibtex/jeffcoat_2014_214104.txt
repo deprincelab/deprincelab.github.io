@@ -1,4 +1,4 @@
-@article{jeffcoat:2014:214104,
+@article{DePrince14_214104,
 author = {David B. Jeffcoat and A. Eugene {DePrince III}},
 title = {N-representability-driven reconstruction of the two-electron reduced-density matrix for a real-time time-dependent electronic structure method},
 journal = {J. Chem. Phys.},

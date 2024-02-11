@@ -1,4 +1,4 @@
-@article{maradzike:2018:234101,
+@article{DePrince18_234101,
 author = {Maradzike,Elvis  and DePrince,A. Eugene },
 title = {Modeling core-level excitations with variationally optimized reduced-density matrices and the extended random phase approximation},
 journal = {J. Chem. Phys.},

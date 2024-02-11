@@ -1,4 +1,4 @@
-@article{nascimento:2019:204107,
+@article{DePrince19_204107,
 author = {Nascimento,Daniel R.  and DePrince,A. Eugene },
 title = {A general time-domain formulation of equation-of-motion coupled-cluster theory for linear spectroscopy},
 journal = {J. Chem. Phys.},

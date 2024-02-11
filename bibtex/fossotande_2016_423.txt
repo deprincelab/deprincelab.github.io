@@ -1,4 +1,4 @@
-@article{fossotande:2016:423,
+@article{DePrince16_423,
 author = {Jacob Fosso-Tande and Daniel R. Nascimento and A. Eugene {DePrince III}},
 title = {Accuracy of two-particle N-representability conditions for describing different spin states and the singlet–triplet gap in the linear acene series},
 journal = {Mol. Phys.},

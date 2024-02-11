@@ -1,4 +1,4 @@
-@article{nascimento:2018:2418,
+@article{DePrince18_2418,
 author = {Nascimento, Daniel R. and {DePrince III}, A. Eugene},
 title = {Spatial and Spin Symmetry Breaking in Semidefinite-Programming-Based Hartree-Fock Theory},
 journal = {J. Chem. Theory Comput.},

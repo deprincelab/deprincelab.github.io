@@ -1,4 +1,4 @@
-@article{mullinax:2019:276,
+@article{DePrince19_276,
 author = {Mullinax, J. Wayne and Epifanovsky, Evgeny and Gidofalvi, Gergely and DePrince, A. Eugene},
 title = {Analytic Energy Gradients for Variational Two-Electron Reduced-Density Matrix Methods within the Density Fitting Approximation},
 journal = {J. Chem. Theory Comput.},

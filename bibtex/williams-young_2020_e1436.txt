@@ -1,4 +1,4 @@
-@article{williams-young:2020:e1436,
+@article{Li20_e1436,
 author = {Williams-Young, David B. and Petrone, Alessio and Sun, Shichao and Stetina, Torin F. and Lestrange, Patrick and Hoyer, Chad E. and Nascimento, Daniel R. and Koulias, Lauren and Wildman, Andrew and Kasper, Joseph and Goings, Joshua J. and Ding, Feizhi and DePrince III, A. Eugene and Valeev, Edward F. and Li, Xiaosong},
 title = {The Chronus Quantum software package},
 journal = {WIREs Computational Molecular Science},

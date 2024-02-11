@@ -1,4 +1,4 @@
-@article{nascimento:2015:214104,
+@article{DePrince15_214104,
 author = {Daniel R. Nascimento and A. Eugene {DePrince III}},
 title = {Modeling molecule-plasmon interactions using quantized radiation fields within time-dependent electronic structure theory},
 journal = {J. Chem. Phys.},

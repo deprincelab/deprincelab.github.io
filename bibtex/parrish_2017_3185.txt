@@ -1,4 +1,4 @@
-@article{parrish:2017:3185,
+@article{Sherrill17_3185,
 author = {Parrish, Robert M. and Burns, Lori A. and Smith, Daniel G. A. and Simmonett, Andrew C. and {DePrince III}, A. Eugene and Hohenstein, Edward G. and Bozkaya, Uğur and Sokolov, Alexander Yu. and Di Remigio, Roberto and Richard, Ryan M. and Gonthier, Jérôme F. and James, Andrew M. and McAlexander, Harley R. and Kumar, Ashutosh and Saitow, Masaaki and Wang, Xiao and Pritchard, Benjamin P. and Verma, Prakash and Schaefer, Henry F. and Patkowski, Konrad and King, Rollin A. and Valeev, Edward F. and Evangelista, Francesco A. and Turney, Justin M. and Crawford, T. Daniel and Sherrill, C. David},
 title = {Psi4 1.1: An Open-Source Electronic Structure Program Emphasizing Automation, Advanced Libraries, and Interoperability},
 journal = {J. Chem. Theory Comput.},

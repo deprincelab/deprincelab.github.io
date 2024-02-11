@@ -1,4 +1,4 @@
-@article{smith:2018:3504,
+@article{Sherrill18_3504,
 author = {Smith, Daniel G. A. and Burns, Lori A. and Sirianni, Dominic A. and Nascimento, Daniel R. and Kumar, Ashutosh and James, Andrew M. and Schriber, Jeffrey B. and Zhang, Tianyuan and Zhang, Boyi and Abbott, Adam S. and Berquist, Eric J. and Lechner, Marvin H. and Cunha, Leonardo A. and Heide, Alexander G. and Waldrop, Jonathan M. and Takeshita, Tyler Y. and Alenaizan, Asem and Neuhauser, Daniel and King, Rollin A. and Simmonett, Andrew C. and Turney, Justin M. and Schaefer, Henry F. and Evangelista, Francesco A. and DePrince, A. Eugene and Crawford, T. Daniel and Patkowski, Konrad and Sherrill, C. David},
 title = {Psi4NumPy: An Interactive Quantum Chemistry Programming Environment for Reference Implementations and Rapid Development},
 journal = {J. Chem. Theory Comput.},

@@ -1,4 +1,4 @@
-@article{nascimento:2014:4324,
+@article{DePrince14_4324,
 author = {Nascimento, Daniel R. and {DePrince III}, A. Eugene},
 title = {A Parametrized Coupled-Pair Functional for Molecular Interactions: PCPF-MI},
 journal = {J. Chem. Theory Comput.},

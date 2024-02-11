@@ -1,4 +1,4 @@
-@article{mostafanejad:2019:290,
+@article{DePrince19_290,
 author = {Mostafanejad, Mohammad and DePrince, A. Eugene},
 title = {Combining Pair-Density Functional Theory and Variational Two-Electron Reduced-Density Matrix Methods},
 journal = {J. Chem. Theory Comput.},

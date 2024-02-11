@@ -1,4 +1,4 @@
-@article{koulias:2019:6617,
+@article{Li19_6617,
 author = {Koulias, Lauren N. and Williams-Young, David B. and Nascimento, Daniel R. and DePrince, A. Eugene and Li, Xiaosong},
 title = {Relativistic Real-Time Time-Dependent Equation-of-Motion Coupled-Cluster},
 journal = {J. Chem. Theory Comput.},
