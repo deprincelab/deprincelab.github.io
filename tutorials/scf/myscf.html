@@ -1,0 +1,389 @@
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+
+<pre class="prettyprint">
+
+/*
+ * @BEGIN LICENSE
+ *
+ * myscf by Psi4 Developer, a plugin to:
+ *
+ * Psi4: an open-source quantum chemistry software package
+ *
+ * Copyright (c) 2007-2016 The Psi4 Developers.
+ *
+ * The copyrights for code used from other parties are included in
+ * the corresponding files.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * @END LICENSE
+ */
+
+#include "psi4/psi4-dec.h"
+#include "psi4/liboptions/liboptions.h"
+#include "psi4/libpsio/psio.hpp"
+
+#include "psi4/libmints/wavefunction.h"
+#include "psi4/libmints/mintshelper.h"
+#include "psi4/libmints/matrix.h"
+#include "psi4/libmints/vector.h"
+#include "psi4/libmints/basisset.h"
+#include "psi4/libmints/molecule.h"
+#include "psi4/lib3index/dftensor.h"
+#include "psi4/libqt/qt.h"
+
+namespace psi{ namespace myscf {
+
+extern "C" PSI_API
+int read_options(std::string name, Options& options)
+{
+    if (name == "MYSCF"|| options.read_globals()) {
+        /*- The amount of information printed to the output file -*/
+        options.add_int("PRINT", 1);
+    }
+
+    return true;
+}
+
+extern "C" PSI_API
+SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
+{
+    int print = options.get_int("PRINT");
+
+    /* Your code goes here */
+
+    outfile-&gtPrintf("\n\n");
+    outfile-&gtPrintf( "        *******************************************************\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *    myscf                                            *\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *    A restricted Hartree-Fock plugin to Psi4         *\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *    Eugene DePrince                                  *\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *******************************************************\n");
+
+    // make sure we are running in c1 symmetry
+    if ( ref_wfn-&gtnirrep() &gt 1 ) {
+        throw PsiException("plugin myscf only works with c1 symmetry. Set symmetry c1 in the molecule group in your input file.",__FILE__,__LINE__);
+    }
+
+    // grab the one-electron integrals from MintsHelper:
+    std::shared_ptr&ltMintsHelper&gt mints (new MintsHelper(ref_wfn));
+
+    // one-electron kinetic energy integrals
+    std::shared_ptr&ltMatrix&gt T = mints-&gtso_kinetic();
+
+    // one-electron potential energy integrals
+    std::shared_ptr&ltMatrix&gt V = mints-&gtso_potential();
+
+    // overlap integrals
+    std::shared_ptr&ltMatrix&gt S = mints-&gtso_overlap();
+
+    // build the core hamiltonian
+    std::shared_ptr&ltMatrix&gt h = (std::shared_ptr&ltMatrix&gt)(new Matrix(T));
+    h-&gtadd(V);
+
+    // grab the molecule from the wavefunction that was passed into the plugin
+    std::shared_ptr&ltMolecule&gt mol = ref_wfn-&gtmolecule();
+
+    // get primary basis:
+    std::shared_ptr&ltBasisSet&gt primary = ref_wfn-&gtget_basisset("ORBITAL");
+
+    // total number of basis functions
+    int nso = primary-&gtnbf();
+
+    // get auxiliary basis:
+    std::shared_ptr&ltBasisSet&gt auxiliary = ref_wfn-&gtget_basisset("DF_BASIS_SCF");
+
+    // total number of auxiliary basis functions
+    int nQ = auxiliary-&gtnbf();
+
+    // grab some input options
+    double e_convergence = options.get_double("E_CONVERGENCE");
+    double d_convergence = options.get_double("D_CONVERGENCE");
+    int maxiter          = options.get_int("MAXITER");
+
+    // use the molecule to determine the total number of electrons
+    int charge     = mol-&gtmolecular_charge();
+    int nelectron  = 0; 
+    for (int i = 0; i &lt mol-&gtnatom(); i++) {
+        nelectron += (int)mol-&gtZ(i);
+    }
+    nelectron -= charge;
+
+    // this code only works for closed shells
+    if ( nelectron % 2 != 0 ) {
+        throw PsiException("plugin myscf only works for closed shells",__FILE__,__LINE__);
+    }
+
+    // the number of alpha electrons
+    int na = nelectron / 2;
+
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    No. basis functions:            %5i\n",nso);
+    outfile-&gtPrintf("    No. auxiliary basis functions:  %5i\n",nQ);
+    outfile-&gtPrintf("    No. electrons:                  %5i\n",nelectron);
+    outfile-&gtPrintf("    e_convergence:             %10.3le\n",e_convergence);
+    outfile-&gtPrintf("    d_convergence:             %10.3le\n",d_convergence);
+    outfile-&gtPrintf("    maxiter:                        %5i\n",maxiter);
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("\n");
+
+    // allocate memory for coefficients, density, fock matrix
+    std::shared_ptr&ltMatrix&gt Ca = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+    std::shared_ptr&ltMatrix&gt Da = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+    std::shared_ptr&ltMatrix&gt Fa = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+
+    // construct the three-index integrals 
+    // since we want the SO-basis integrals, it is fine to pass empty Ca matrix
+    // similarly, the number of active vs inactive orbitals isn't really important here.
+    std::shared_ptr&ltDFTensor&gt DF (new DFTensor(primary,auxiliary,Ca,na,nso-na,na,nso-na,options));
+    std::shared_ptr&ltMatrix&gt Qso = DF-&gtQso();
+    double ** Qp = Qso-&gtpointer();
+
+    // allocate memory for eigenvectors and eigenvalues of the overlap matrix
+    std::shared_ptr&ltMatrix&gt Sevec ( new Matrix(nso,nso) );
+    std::shared_ptr&ltVector&gt Seval ( new Vector(nso) );
+
+    // build S^(-1/2) symmetric orthogonalization matrix
+    S-&gtdiagonalize(Sevec,Seval);
+    for (int mu = 0; mu &lt nso; mu++) {
+        Seval-&gtpointer()[mu] = 1.0 / sqrt(Seval-&gtpointer()[mu]);
+    }
+
+    std::shared_ptr&ltMatrix&gt Shalf = (std::shared_ptr&ltMatrix&gt)( new Matrix(S) );
+    double ** sp = Shalf-&gtpointer();
+    // transform Seval back to nonorthogonal basis
+    for (int mu = 0; mu &lt nso; mu++) {
+        for (int nu = 0; nu &lt nso; nu++) {
+            double dum = 0.0;
+            for (int i = 0; i &lt nso; i++) {
+                dum += Seval-&gtpointer()[i] * Sevec-&gtpointer()[nu][i] * Sevec-&gtpointer()[mu][i];
+            }
+            sp[mu][nu] = dum;
+        }
+    }
+
+    // form F' = ST^(-1/2) F S^(-1/2), where F = h
+    Fa-&gtcopy(h);
+    std::shared_ptr&ltMatrix&gt Fprime ( new Matrix(Fa) );
+
+    double ** fp  = Fa-&gtpointer();
+    double ** fpp = Fprime-&gtpointer();
+
+    for (int i = 0; i &lt nso; i++) {
+        for (int j = 0; j &lt nso; j++) {
+            double dum = 0.0;
+            for (int mu = 0; mu &lt nso; mu++) {
+                for (int nu = 0; nu &lt nso; nu++) {
+                    dum += fp[mu][nu] * sp[mu][i] * sp[nu][j];
+                }
+            }
+            fpp[i][j] = dum;
+        }
+    }
+
+
+    // allocate memory for eigenvectors and eigenvalues of F'
+    std::shared_ptr&ltMatrix&gt Fevec ( new Matrix(nso,nso) );
+    std::shared_ptr&ltVector&gt Feval ( new Vector(nso) );
+
+    // diagonalize F' to obtain C'
+    Fprime-&gtdiagonalize(Fevec,Feval,ascending);
+
+    // Find C = S^(-1/2)C'
+    double ** cp = Ca-&gtpointer();
+    for (int mu = 0; mu &lt nso; mu++) {
+        for (int i = 0; i &lt nso; i++) {
+            double dum = 0.0;
+            for (int nu = 0; nu &lt nso; nu++) {
+                dum += sp[nu][mu] * Fevec-&gtpointer()[nu][i];
+            }
+            cp[mu][i] = dum;
+        }
+    }
+
+    // Construct density from C
+    double ** dp = Da-&gtpointer();
+    for (int mu = 0; mu &lt nso; mu++) {
+        for (int nu = 0; nu &lt nso; nu++) {
+            double dum = 0.0;
+            for (int i = 0; i &lt na; i++) {
+                dum += cp[mu][i] * cp[nu][i];
+            }
+            dp[mu][nu] = dum;
+        }
+    }
+
+    // initial energy, E = D(H+F) + Enuc
+    double e_nuc = mol-&gtnuclear_repulsion_energy({0.0,0.0,0.0});
+
+    double e_current = e_nuc;
+    e_current       += Da-&gtvector_dot(h);
+    e_current       += Da-&gtvector_dot(Fa);
+
+    //  SCF iterations
+
+    double e_last    = 0.0;
+    double dele      = 0.0;
+    double deld      = 0.0;
+
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    Guess energy:  %20.12lf\n",e_current);
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    ==&gt  Begin SCF Iterations &lt==\n");
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    ");
+    outfile-&gtPrintf(" Iter ");
+    outfile-&gtPrintf("              energy ");
+    outfile-&gtPrintf("                  dE ");
+    outfile-&gtPrintf("                  dD ");
+    outfile-&gtPrintf("\n");
+
+    int iter = 0;
+
+    // intermediate tensor for JK construction
+    std::shared_ptr&ltVector&gt JKI (new Vector(nso*nso*nQ) );
+    double * Ip = JKI-&gtpointer();
+
+    do {
+
+        e_last = e_current;
+
+        // form J
+        for (int Q = 0; Q &lt nQ; Q++) {
+            double dum = 0.0;
+            for (int lam = 0; lam &lt nso; lam++) {
+                for (int sig = 0; sig &lt nso; sig++) {
+                    dum += dp[lam][sig] * Qp[Q][lam*nso+sig];
+                }
+            }
+            Ip[Q] = dum;
+        }
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int nu = 0; nu &lt nso; nu++) {
+                double dum = 0.0;
+                for (int Q = 0; Q &lt nQ; Q++) {
+                    dum += Ip[Q] * Qp[Q][mu*nso+nu];
+                }
+                fp[mu][nu] = 2.0 * dum;
+            }
+        }
+
+        // form k
+        for (int nu = 0; nu &lt nso; nu++) {
+            for (int sig = 0; sig &lt nso; sig++) {
+                for (int Q = 0; Q &lt nQ; Q++) {
+                    double dum = 0.0;
+                    for (int lam = 0; lam &lt nso; lam++) {
+                        dum += dp[lam][sig] * Qp[Q][lam*nso+nu];
+                    }
+                    Ip[nu*nso*nQ+sig*nQ+Q] =dum;
+                }
+            }
+        }
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int nu = 0; nu &lt nso; nu++) {
+                double dum = 0.0;
+                for (int sig = 0; sig &lt nso; sig++) {
+                    for (int Q = 0; Q &lt nQ; Q++) {
+                        dum += Ip[nu*nso*nQ+sig*nQ+Q] * Qp[Q][mu*nso+sig];
+                    }
+                }
+                fp[mu][nu] -= dum;
+            }
+        }
+
+        // form F = h + J - K 
+        Fa-&gtadd(h);
+
+        // current energy, E = D(H+F) + Enuc
+        e_current  = e_nuc;
+        e_current += Da-&gtvector_dot(h);
+        e_current += Da-&gtvector_dot(Fa);
+
+        // dele
+        dele = fabs(e_last - e_current);
+
+        // form F' = ST^(-1/2) F S^(-1/2)
+        for (int i = 0; i &lt nso; i++) {
+            for (int j = 0; j &lt nso; j++) {
+                double dum = 0.0;
+                for (int mu = 0; mu &lt nso; mu++) {
+                    for (int nu = 0; nu &lt nso; nu++) {
+                        dum += fp[mu][nu] * sp[mu][i] * sp[nu][j];
+                    }
+                }
+                fpp[i][j] = dum;
+            }
+        }
+
+        // diagonalize F' to obtain C'
+        Fprime-&gtdiagonalize(Fevec,Feval,ascending);
+
+        // Find C = S^(-1/2)C'
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int i = 0; i &lt nso; i++) {
+                double dum = 0.0;
+                for (int nu = 0; nu &lt nso; nu++) {
+                    dum += sp[nu][mu] * Fevec-&gtpointer()[nu][i];
+                }
+                cp[mu][i] = dum;
+            }
+        }
+
+        // Construct density from C
+        deld = 0.0;
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int nu = 0; nu &lt nso; nu++) {
+                double dum = 0.0;
+                for (int i = 0; i &lt na; i++) {
+                    dum += cp[mu][i] * cp[nu][i];
+                }
+                double dum2 = dp[mu][nu] - dum;
+                deld += dum2*dum2;
+                dp[mu][nu] = dum;
+            }
+        }
+        deld = sqrt(deld);
+
+        outfile-&gtPrintf("    %5i %20.12lf %20.12lf %20.12lf\n",iter,e_current,dele,deld); 
+
+        iter++;
+        if ( iter &gt maxiter ) break;
+
+    }while(dele &gt e_convergence || deld &gt d_convergence );
+
+    if ( iter &gt maxiter ) {
+        throw PsiException("Maximum number of iterations exceeded!",__FILE__,__LINE__);
+    }
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    SCF iterations converged!\n");
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    * SCF total energy: %20.12lf\n",e_current);
+    
+    Process::environment.globals["SCF TOTAL ENERGY"] = e_current;
+
+    // Typically you would build a new wavefunction and populate it with data
+    // (note this is just the original wavefunction passed into the module)
+    return ref_wfn;
+}
+
+}} // End namespaces
+
+</pre>
