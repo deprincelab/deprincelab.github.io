@@ -590,12 +590,7 @@ Check your <a href=dmat.txt>density</a>.
 <br>
 You may have noticed that the Fock matrix depends on the density:
 <br>
-<br>
-<center>
-<img src="images/fock.png" width=45%>
-</center>
-<br>
-<br>
+$$F_{\mu\nu} = h_{\mu\nu} + \sum_{\lambda\sigma} D_{\lambda\sigma}[ 2(\mu\nu|\lambda\sigma) - (\mu\sigma|\lambda\nu)]$$
 and the density is determined by diagonalizing the Fock matrix.  If
 this seems a bit circular, you're right;
 we must determine the density for the system <b> self-consistently</b>.  We
@@ -613,12 +608,7 @@ and the density between iterations fall below some threshold.
 Since we're using three-index integrals instead of four-index integrals,
 we rewrite the Fock matrix as
 <br>
-<br>
-<center>
-<img src="images/fock_df.png" width=60%>
-</center>
-<br>
-<br>
+$$F_{\mu\nu} = h_{\mu\nu} + \sum_{\lambda\sigma} D_{\lambda\sigma} \sum_Q [ 2(\mu\nu|Q)(Q|\lambda\sigma) - (\mu\sigma|Q)(Q|\lambda\nu)]$$
 Programming this expression is a little more manageable if 
 we write the Fock
 matrix in terms of the <b> coulomb </b> and <b> exchange </b> 
