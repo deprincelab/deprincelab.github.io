@@ -1,0 +1,253 @@
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+<style>
+.border_gradient {
+border: 8px solid #000;
+padding: 5px 5px 5px 15px;
+width: 300px;
+}
+code {
+    background: hsl(220, 80%, 90%);
+}
+
+pre {
+    padding-bottom: 20px;
+    padding-left:   20px;
+    border:solid;
+    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    width:100%;
+    white-space: pre-wrap;
+    background: rgb(248,248,248);
+    text-indent: 1cm;
+}
+</style>
+
+<div id="content" style="text-align:justify;width:65%">
+
+<br>
+<br>
+<br>
+<br> 
+
+<font size="5">
+Programming Projects: Getting Started <br>
+</font>
+</div>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:100%">
+</div>
+
+<br>
+<br> 
+<div id="content" style="text-align:justify;width:65%">
+<font size="5">
+Creating a Psi4 plugin <br>
+</font>
+</div>
+<br>
+<br>
+
+First, you must download and install Psi4.  See the Psi4 <a href=https://github.com/psi4/psi4public>GitHub</a> page and <a href=http://psicode.org/>psicode.org</a> for detailed instructions.
+
+<br>
+<br>
+<br>
+
+Once you have downloaded and installed Psi4, create a new plugin directory.  I\'m going to call my plugin \'myscf\':
+<br>
+<br>
+
+<pre class="prettyprint">
+
+(13:39 ~/) psi4 --plugin-name myscf
+-- Creating "myscf" with "basic" template. ----------------------
+/Users/deprince/software/psi4/install/share/psi4/plugin/basic/__init__.py.template
+/Users/deprince/software/psi4/install/share/psi4/plugin/basic/CMakeLists.txt.template
+/Users/deprince/software/psi4/install/share/psi4/plugin/basic/doc.rst.template
+/Users/deprince/software/psi4/install/share/psi4/plugin/basic/input.dat.template
+/Users/deprince/software/psi4/install/share/psi4/plugin/basic/plugin.cc.template
+/Users/deprince/software/psi4/install/share/psi4/plugin/basic/pymodule.py.template
+==> Created plugin files (in myscf as basic): 
+  __init__.py, CMakeLists.txt, doc.rst, input.dat, plugin.cc, pymodule.py
+(13:39 ~/) cd myscf
+(13:39 ~/myscf/) ls -lh
+total 48
+-rw-r--r--  1 deprince  staff   1.1K Nov 15 13:39 CMakeLists.txt
+-rw-r--r--  1 deprince  staff   1.2K Nov 15 13:39 __init__.py
+-rw-r--r--  1 deprince  staff   2.2K Nov 15 13:39 doc.rst
+-rw-r--r--  1 deprince  staff   296B Nov 15 13:39 input.dat
+-rw-r--r--  1 deprince  staff   1.7K Nov 15 13:39 plugin.cc
+-rw-r--r--  1 deprince  staff   2.2K Nov 15 13:39 pymodule.py
+</pre>
+<br>
+
+You can see that Psi4 generated several files automatically for you.  Your
+C++ code will reside in plugin.cc, and you can interface with other modules
+in Psi4 through the driver in pymodule.py.  
+
+<br>
+<br>
+
+The closest thing to a \'main()\' function will reside in plugin.cc.  Take a look:
+<br>
+<br>
+
+<pre class="prettyprint">
+
+extern "C" PSI_API
+SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
+{
+    int print = options.get_int("PRINT");
+
+    /* Your code goes here */
+
+    // Typically you would build a new wavefunction and populate it with data
+    return ref_wfn;
+}
+</pre>
+<br>
+
+Like the comment says, you\'re code belongs in the myscf(SharedWavefunction ref_wfn, Options& options) function.  
+The name of this function matches whatever you called your plugin.  
+Let\'s add a print statement using Psi4\'s printer class \'outfile\':
+<br>
+<br>
+<pre class="prettyprint">
+
+    /* Your code goes here */
+    outfile->Printf("Hello from my first psi4 plugin!\n");
+</pre>
+<br>
+
+Next, check out the \'read_options\' function:
+<br>
+<br>
+
+<pre class="prettyprint">
+
+extern "C" PSI_API
+int read_options(std::string name, Options& options)
+{
+    if (name == "MYSCF"|| options.read_globals()) {
+        /*- The amount of information printed to the output file -*/
+        options.add_int("PRINT", 1);
+    }
+
+    return true;
+}
+</pre>
+<br>
+
+This function is where you will define any input options that are
+specific to your plugin.  Note that you can still use any other
+valid Psi4 options, so you may not need to introduce any new ones.   
+<br>
+<br>
+
+Now, let\'s compile and run the plugin.  You can use Psi4 to generate
+a Makefile, which you can then use to compile your plugin with make.
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+(13:40 ~/myscf/) psi4 --plugin-compile | /bin/bash
+loading initial cache file /Users/deprince/software/psi4/install/share/cmake/psi4/psi4PluginCache.cmake
+-- The CXX compiler identification is Clang 4.0.1
+-- Check for working CXX compiler: /Users/deprince/miniconda3/envs/p4dev/bin/x86_64-apple-darwin13.4.0-clang++
+-- Check for working CXX compiler: /Users/deprince/miniconda3/envs/p4dev/bin/x86_64-apple-darwin13.4.0-clang++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Psi4 script:   /Users/deprince/software/psi4/install/bin/psi4
+-- Psi4 headers:  /Users/deprince/software/psi4/install/include
+-- Psi4 library:  /Users/deprince/software/psi4/install/lib//psi4/core.cpython-36m-darwin.so
+-- Psi4 sys.path: /Users/deprince/software/psi4/install/lib/
+-- Psi4 components: ambit;chemps2;dkh;gdma;pcmsolver;simint
+-- Python executable: /Users/deprince/miniconda3/envs/p4dev/bin/python
+-- Found PythonInterp: /Users/deprince/miniconda3/envs/p4dev/bin/python (found version "3.6.8") 
+-- Found PythonLibs: /Users/deprince/miniconda3/envs/p4dev/lib/libpython3.6m.dylib
+-- Detecting MathOpenMP -- ?OpenMP=ON, ?MKL= MKL, LANG=C;CXX;Fortran, C/CXX/Fortran=/Clang/
+-- Found OpenMP_CXX: -fopenmp=libiomp5 (found version "3.1") 
+-- Could NOT find OpenMP (missing: OpenMP_C_FOUND OpenMP_Fortran_FOUND C Fortran) (found version "3.1")
+-- CMake FindOpenMP failed! Trying a custom OpenMP configuration...
+-- Found TargetOpenMP: 1   
+-- Found MathOpenMP: 1  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/deprince/myscf
+(13:40 ~/myscf/) make
+Scanning dependencies of target myscf
+[ 50%] Building CXX object CMakeFiles/myscf.dir/plugin.cc.o
+/Users/deprince/myscf/plugin.cc:52:20: warning: \'myscf\' has C-linkage specified, but returns user-defined type \'SharedWavefunction\' (aka \'shared_ptr<psi::Wavefunction>\') which is incompatible with C [-Wreturn-type-c-linkage]
+SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
+                   ^
+1 warning generated.
+[100%] Linking CXX shared module myscf.so
+[100%] Built target myscf
+</pre>
+<br>
+
+If you look in input.dat,
+you should see a call to energy(\'myscf\') was automatically placed
+there when you created the plugin. So, to run your plugin, you need
+only excecute psi4 using this input file.  
+
+<br>
+<br>
+<pre class="prettyprint">
+
+(13:40 ~/myscf/) psi4
+Attention! This SCF may be density-fitted.
+</pre>
+<br>
+
+After the program is finished, open output.dat and scroll to the bottom.
+
+<br>
+<br> 
+
+<pre class="prettyprint">
+
+      Number of primitives:             15
+      Number of atomic orbitals:         7
+      Number of basis functions:         7
+
+      Number of irreps:                  4
+      Integral cutoff                 0.00e+00
+      Number of functions per irrep: [   4    0    1    2 ]
+
+ OEINTS: Overlap, kinetic, potential, dipole, and quadrupole integrals
+         stored in file 35.
+
+      Computing two-electron integrals...done
+      Computed 138 non-zero two-electron integrals.
+        Stored in file 33.
+
+
+Reading options from the MYSCF block
+Calling plugin myscf.so.
+
+
+Hello from my first psi4 plugin!
+
+    Psi4 stopped on: Friday, 15 November 2019 01:48PM
+    Psi4 wall time for execution: 0:00:00.31
+
+*** Psi4 exiting successfully. Buy a developer a beer!
+</pre>
+<br>
+
+What you should see is some text indicating that Psi4 has generated 
+one- and two-electron integrals and written them to disk, followed by 
+the super-exciting output from your plugin, myscf.so.
+
+<br>
+<br>
+
