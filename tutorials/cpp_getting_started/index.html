@@ -41,14 +41,14 @@ Programming Projects: Getting Started <br>
 <hr>
 
 <br> 
-<u>Creating a Psi4 plugin</u> <br>
+<u>Creating a <span style="font-variant: small-caps;">Psi4</span> plugin</u> <br>
 <br>
 
-First, you must download and install Psi4.  See the Psi4 <a href=https://github.com/psi4/psi4public>GitHub</a> page and <a href=http://psicode.org/>psicode.org</a> for detailed instructions. <br>
+First, you must download and install <span style="font-variant: small-caps;">Psi4</span>.  See the <span style="font-variant: small-caps;">Psi4</span> <a href=https://github.com/psi4/psi4public>GitHub</a> page and <a href=http://psicode.org/>psicode.org</a> for detailed instructions. <br>
 
 <br>
 
-Once you have downloaded and installed Psi4, create a new plugin directory.  I'm going to call my plugin 'myscf': <br>
+Once you have downloaded and installed <span style="font-variant: small-caps;">Psi4</span>, create a new plugin directory.  I'm going to call my plugin 'myscf': <br>
 <br>
 
 <pre>
@@ -77,9 +77,9 @@ total 48
 
 <br>
 
-You can see that Psi4 generated several files automatically for you.  Your
+You can see that <span style="font-variant: small-caps;">Psi4</span> generated several files automatically for you.  Your
 C++ code will reside in plugin.cc, and you can interface with other modules
-in Psi4 through the driver in pymodule.py.  
+in <span style="font-variant: small-caps;">Psi4</span> through the driver in pymodule.py.  
 
 <br>
 <br>
@@ -105,7 +105,7 @@ SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
 
 Like the comment says, you're code belongs in the myscf(SharedWavefunction ref_wfn, Options& options) function.  
 The name of this function matches whatever you called your plugin.  
-Let's add a print statement using Psi4's printer class 'outfile':
+Let's add a print statement using <span style="font-variant: small-caps;">Psi4</span>'s printer class 'outfile':
 <br>
 <br>
 <pre class="prettyprint">
@@ -136,11 +136,11 @@ int read_options(std::string name, Options& options)
 
 This function is where you will define any input options that are
 specific to your plugin.  Note that you can still use any other
-valid Psi4 options, so you may not need to introduce any new ones.   
+valid <span style="font-variant: small-caps;">Psi4</span> options, so you may not need to introduce any new ones.   
 <br>
 <br>
 
-Now, let's compile and run the plugin.  You can use Psi4 to generate
+Now, let's compile and run the plugin.  You can use <span style="font-variant: small-caps;">Psi4</span> to generate
 a Makefile, which you can then use to compile your plugin with make.
 
 <br>
@@ -236,7 +236,7 @@ Hello from my first psi4 plugin!
 </pre>
 <br>
 
-What you should see is some text indicating that Psi4 has generated 
+What you should see is some text indicating that <span style="font-variant: small-caps;">Psi4</span> has generated 
 one- and two-electron integrals and written them to disk, followed by 
 the super-exciting output from your plugin, myscf.so.
 
