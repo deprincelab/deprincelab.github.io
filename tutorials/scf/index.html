@@ -110,31 +110,17 @@ The matrix elements of the kinetic energy are integrals over the real-valued
 AO basis functions,  &chi;, with the quantum-mechanical 
 kinetic energy operator:
 <br>
-<br>
-<center>
-<img src="images/kinetic.png" width=30%> <br>
-</center>
-<br>
-<br>
+$$T_{\mu\nu} = -\frac{1}{2}\int \chi_\mu({\bf r}) \nabla^2_{\bf r} \chi_\nu({\bf r}) d{\bf r}$$
 We should note here that these basis functions are <i> not </i> 
 orthogonal, and we define the <b> overlap matrix </b>, <i>S</i>, as
 <br>
 <br>
-<center>
-<img src="images/overlap.png" width=25%> <br>
-</center>
-<br>
-<br>
+$$S_{\mu\nu} = \int \chi_\mu({\bf r}) \chi_\nu({\bf r}) d{\bf r}$$
 The matrix elements of the electron-nuclear potential energy are integrals 
 over
 basis functions with the potential energy operator (<i>Z/r</i>):
 <br>
-<br>
-<center>
-<img src="images/potential.png" width=35%> <br>
-</center>
-<br>
-<br>
+$$V_{\mu\nu} = -\int \chi_\mu({\bf r}) \left ( \sum_A \frac{Z_A}{r_A} \right ) \chi_\nu({\bf r}) d{\bf r}$$
 Here, there are multiple nuclei, labeled <i>A</i>, with 
 nuclear charge <i>Z<sub>A</sub></i> and a distance from the electron of
 <i>r<sub>A</sub></i>.  The Fock matrix is defined as
