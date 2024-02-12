@@ -574,20 +574,10 @@ file and obtained in your plugin from the "options" object:
 During the SCF procedure, we must monitor the change in the energy between 
 iterations <i>k</i>-1 and <i>k</i>
 <br>
-<br>
-<center>
-<img src="images/dele.png" width=20%>
-</center>
-<br>
-<br>
+$$\Delta E = | E_k - E_{k-1}|$$
 as well as the change in the density
 <br>
-<br>
-<center>
-<img src="images/deld.png" width=32%>
-</center>
-<br>
-<br>
+$$\Delta D = \left ( \sum_{\mu\nu} (D^k_{\mu\nu} - D^{k-1}_{\mu\nu}) \right )^{1/2}
 For the present molecule/basis set, the energy and density 
 should converge to 8 decimal places in about 20 iterations:
 <br>
@@ -628,12 +618,7 @@ should converge to 8 decimal places in about 20 iterations:
 <br>
 Note that the energy here is the total energy
 <br>
-<br>
-<center>
-<img src="images/e_tot.png" width=30%> 
-</center> 
-<br>
-<br>
+$$E_\text{total} = E_\text{electronic} + E_\text{nuclear}$$
 You can grab the nuclear repulsion energy from the molecule object:
 <br>
 <br>
