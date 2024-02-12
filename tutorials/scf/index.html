@@ -380,7 +380,7 @@ primary basis function indices, and nso is the number of primary basis
 functions.  The four-index integrals could be constructed as a contraction of 
 the three-index integrals:
 <br>
-$$(\mu\nu|\lambda\sigma) \approx \sum_Q (\mu\nu|Q)(Q|\lambda\sigma)$$
+$$(\mu\nu|\lambda\sigma) \approx \sum_Q^{N_\text{aux}} (\mu\nu|Q)(Q|\lambda\sigma)$$
 but doing so defeats the purpose of using three-index integrals.  First, the
 cost of that step would scale computationally with the fifth power of the
 system size, whereas the SCF procedure should only scale as the fourth-power.
@@ -432,50 +432,6 @@ the Matrix class.
     // transform Seval back to nonorthogonal basis
     Shalf-&gtback_transform(Sevec);
 </pre>
-<!--
-If the eigenvalues are stored as a vector rather than a matrix,
-then then this expression becomes
-<br>
-<br>
-<center>
-<img src="images/shalf_sum.png" width=25%>
-</center>
-<br>
-<br>
-The following code snippet illustrates how to diagonalize the
-overlap matrix using <span style="font-variant: small-caps;">Psi4</span>'s Matrix class. The back 
-transformation is not performed in the most efficient way,
-just a way that best matches our equations.
-<br>
-<br>
-<pre class="prettyprint">
-
-    // allocate memory for eigenvectors and eigenvalues of the overlap matrix
-    std::shared_ptr&ltMatrix&gt Sevec ( new Matrix(nso,nso) );
-    std::shared_ptr&ltVector&gt Seval ( new Vector(nso) );
-
-    // build S^(-1/2) symmetric orthogonalization matrix
-    S-&gtdiagonalize(Sevec,Seval);
-    for (int mu = 0; mu &lt nso; mu++) {
-        Seval-&gtpointer()[mu] = 1.0 / sqrt(Seval-&gtpointer()[mu]);
-    }
-
-    std::shared_ptr&ltMatrix&gt Shalf = (std::shared_ptr&ltMatrix&gt)( new Matrix(S) );
-    double ** sp = Shalf-&gtpointer();
-    // transform Seval back to nonorthogonal basis
-    for (int mu = 0; mu &lt nso; mu++) {
-        for (int nu = 0; nu &lt nso; nu++) {
-            double dum = 0.0;
-            for (int lam = 0; lam &lt nso; lam++) {
-                dum += Seval-&gtpointer()[lam] 
-                     * Sevec-&gtpointer()[nu][lam] 
-                     * Sevec-&gtpointer()[mu][lam];
-            }
-            sp[mu][nu] = dum;
-        }
-    }
-</pre>
--->
 <br>
 Check your <a href=shalf.txt><b>S</b><sup>-1/2</sup> matrix</a> using the Shalf->print() function.
 <br>
@@ -490,12 +446,7 @@ $$F_{\mu\nu} = h_{\mu\nu}$$
 Next, use the symmetric orthogonalization matrix to bring this
 Fock matrix to a basis of orthonormal functions
 <br>
-<br>
-<center>
-<img src="images/fprime.png" width=22%>
-</center>
-<br>
-<br>
+$${\bf F}^\prime = ({\bf S}^{-1/2})^T {\bf F}{\bf S}^{-1/2}
 Check your <a href=fprime.txt><b>F</b>' matrix</a>.
 <br>
 <br>
@@ -503,24 +454,14 @@ We will now diagonalize this transformed Fock matrix to determine
 its eigenvectors (the molecular orbitals, <b>C</b>') and eigenvalues
 (the molecular orbital energies, <i>&epsilon;</i>)
 <br>
-<br>
-<center>
-<img src="images/fcec.png" width=13%>
-</center>
-<br>
-<br>
+$${\bf F}^\prime {\bf C}^\prime = \epsilone {\bf C}^\prime$$
 The matrix <b>C</b>' represents the molecular orbitals as a linear
 combination of orthonormalized basis functions, but what we really
 want is the linear combination of nonorthogonal AO (or SO) basis functions.
 We need to back transform one index of <b>C</b>' to the original
 AO basis
 <br>
-<br>
-<center>
-<img src="images/shalf_cprime.png" width=14%>
-</center>
-<br>
-<br>
+$${\bf C} = {\bf S}^{-1/2} {\bf C}^\prime$$
 Since you are only transforming one index, don't use the Matrix class back_transform()
 call.  You could use the Matrix class gemm() call
 <br>
@@ -552,12 +493,7 @@ Now, we define the density matrix as the contraction of the
 molecular orbital coefficients over the <i>N/2</i> lowest-energy 
 molecular orbitals (the doubly occupied orbitals):
 <br>
-<br>
-<center>
-<img src="images/d_sum.png" width=19%>
-</center>
-<br>
-<br>
+$$D_{\mu\nu} = \sum_i^{\text{occ}} C_{\mu i} C_{\nu i}$$
 This density can then be used to evaluate the initial electronic energy
 and to obtain a new Fock matrix.
 <br>
