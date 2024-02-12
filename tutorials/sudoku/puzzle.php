@@ -1,0 +1,385 @@
+<?php
+
+echo'
+
+    <style>
+        .given {
+            border:none;
+            color:blue;
+            background-color:white;
+            font-size: 18px;
+            size: 14px;
+            width: 28px;
+            height: 28px;
+            text-indent: 7px;
+            font-family: verdana;
+        }
+    </style>
+
+       <center>
+               <table bgcolor="#D8D8D8" style="border:1px solid gray" cellpadding="0" cellspacing="0" >
+                   <tbody>
+                       <tr>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 2 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 7 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 9 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 8 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 1 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 3 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 2 </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 7 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 4 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 1 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 8 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 5 </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 9 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 4 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 1 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 6 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 4 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 2 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 8 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 3 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 8 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 7 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 3 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 2 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 3 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 2 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 5 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 7 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 6 </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 7 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given"> 6 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 5 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 1 </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                           <td>
+                               <table style="border-collapse:collapse;border:1px solid gray">
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 6 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 8 </p>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given"> 9 </p>
+                                           </td>
+                                           <td>
+                                               <p class = "given">   </p>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                       </tr>
+                   </table>
+               <br>
+
+       </center>
+';
+
+?>

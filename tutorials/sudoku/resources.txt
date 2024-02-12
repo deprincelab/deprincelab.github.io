@@ -1,0 +1,3 @@
+95 hard puzzles (solver can solve 24 of them)
+
+https://norvig.com/sudoku.html

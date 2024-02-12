@@ -2,10 +2,6 @@
 
 echo'
 
----
-layout: page
----
-
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
 .js?lang=css&skin=desert"></script>
 
