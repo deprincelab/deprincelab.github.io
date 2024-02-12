@@ -380,12 +380,7 @@ primary basis function indices, and nso is the number of primary basis
 functions.  The four-index integrals could be constructed as a contraction of 
 the three-index integrals:
 <br>
-<br>
-<center>
-<img src="images/3index.png" width=27%>
-</center>
-<br>
-<br>
+$$(\mu\nu|\lambda\sigma) \approx \sum_Q (\mu\nu|Q)(Q|\lambda\sigma)$$
 but doing so defeats the purpose of using three-index integrals.  First, the
 cost of that step would scale computationally with the fifth power of the
 system size, whereas the SCF procedure should only scale as the fourth-power.
@@ -407,23 +402,13 @@ basis via L&ouml;wdin's symmetric orthogonalization.  One
 first finds a transformation that diagonalizes the overlap
 matrix, <b>S</b>,
 <br>
-<br>
-<center>
-<img src="images/seig.png" width=12%>
-</center>
-<br>
-<br>
+$${\bf s} = {\bf U}^T{\bf S}{\bf U}$$
 where <b>s</b> is a diagonal matrix of eigenvalues.  We then
 construct the symmetric orthogonalization matrix by taking
 the inverse square root of the eigenvalues and backtransforming
 them to the original basis.
 <br>
-<br>
-<center>
-<img src="images/shalf.png" width=18%>
-</center>
-<br>
-<br>
+$${\bf S}^{-1/2} = {\bf U}{\bf s}^{-1/2}{\bf U}^T$$
 The following code snippet illustrates how to diagonalize the
 overlap matrix using <span style="font-variant: small-caps;">Psi4</span>'s Matrix class. The back 
 transformation is performed using a built-in function in 
@@ -501,12 +486,7 @@ Check your <a href=shalf.txt><b>S</b><sup>-1/2</sup> matrix</a> using the Shalf-
 To obtain a set of guess orbitals and an initial density, we approximate
 the initial Fock matrix as the core Hamiltonian
 <br>
-<br>
-<center>
-<img src="images/fcore.png" width=12%>
-</center>
-<br>
-<br>
+$$F_{\mu\nu} = h_{\mu\nu}$$
 Next, use the symmetric orthogonalization matrix to bring this
 Fock matrix to a basis of orthonormal functions
 <br>
