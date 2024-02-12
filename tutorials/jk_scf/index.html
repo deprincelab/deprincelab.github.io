@@ -1,0 +1,659 @@
+<br> 
+<div id="content" style="text-align:justify;width:65%">
+Programming Projects: SCF with the JK object<br>
+</div>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:100%">
+</div>
+
+<br>
+<br> 
+<div id="content" style="text-align:justify;width:50%">
+Overview 
+</div>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+
+In this project, you will learn how to write a restricted Hartree-Fock
+self-consistent field (SCF) solver as a plugin to the 
+<span style="font-variant: small-caps;">Psi4</span> electronic structure
+package.  The solver will make use of the <b> JK object </b> in <span style="font-variant: small-caps;">Psi4</span>, which 
+is capable of building coulomb-like (J) and exchange-like (K) matrices for arbitrary densities.  
+The JK object can also make use of conventional, density-fitted, or Cholesky-decomposed
+electron repulsion integrals.  If you would like to see how J and K can 
+explicitly be built, see <a href="../scf/index.php">this tutorial</a>.
+
+<br>
+<br>
+
+For a 
+tutorial that does not require the use of <span style="font-variant: small-caps;">Psi4</span>, see Daniel Crawford\'s 
+<a href=https://sirius.chem.vt.edu/wiki/doku.php?id=crawdad:programming:project3>SCF project</a> (this project was adapted from that one).  That project
+does not use density fitting, and all required integrals are read from
+text files so that your code can be written independently of any 
+electronic structure package.
+<br>
+<br>
+For additional information about the SCF procedure, I recommend Szabo and
+Ostlund\'s awesome (and cheap!) book <a href=http://www.amazon.com/Modern-Quantum-Chemistry-Introduction-Electronic/dp/0486691861/ref=sr_1_1?ie=UTF8&qid=1434159017&sr=8-1&keywords=szabo+ostlund>Modern Quantum Chemistry</a> or David Sherrill\'s
+<a href=http://vergil.chemistry.gatech.edu/notes/hf-intro/hf-intro.pdf>online notes</a>.
+<br>
+<br>
+
+The C++ code for this SCF plugin can be found 
+<a href=myscf.html>here</a>. 
+
+<br>
+<br>
+<br>
+Background:
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+Note: we use <a href=https://en.wikipedia.org/wiki/Atomic_units>atomic units</a> throughout this tutorial.
+<br>
+<br>
+At the Hartree-Fock level of theory, the <i>N</i>-electron wave function
+is approximated as an antisymmetrized product of <i>N</i> one-electron 
+functions called molecular orbitals (MOs).  We call this type of wave function 
+a Slater
+determinant, and the associated electronic energy can be expressed as
+<br>
+$$E_\text{electronic} = \sum_{\mu\nu} D_{\mu\nu} (h_{\mu\nu} + F_{\mu\nu})$$
+where <i>D</i> represents a <b>density matrix</b> (defined below),
+<i>h</i> represents the <b>core Hamiltonian matrix</b>, and <i>F</i>
+represents the <b>Fock matrix</b>.  Here, Greek indices represent
+<b> atomic orbital (AO)</b> basis functions.  The core Hamiltonian matrix 
+contains integrals that represent the <b>kinetic energy</b> of 
+an electron (<i>T</i>)
+and <b>electron-nuclear potential energy</b> (<i>V</i>):
+<br>
+$$h_{\mu\nu} = T_{\mu\nu} + V_{\mu\nu}$$
+The matrix elements of the kinetic energy are integrals over the real-valued
+AO basis functions,  &chi;, with the quantum-mechanical 
+kinetic energy operator:
+<br>
+$$T_{\mu\nu} = -\frac{1}{2}\int \chi_\mu({\bf r}) \nabla^2_{\bf r} \chi_\nu({\bf r}) d{\bf r}$$
+We should note here that these basis functions are <i> not </i> 
+orthogonal, and we define the <b> overlap matrix </b>, <i>S</i>, as
+<br>
+$$S_{\mu\nu} = \int \chi_\mu({\bf r}) \chi_\nu({\bf r}) d{\bf r}$$
+The matrix elements of the electron-nuclear potential energy are integrals 
+over
+basis functions with the potential energy operator (<i>Z/r</i>):
+<br>
+$$V_{\mu\nu} = -\int \chi_\mu({\bf r}) \left ( \sum_A \frac{Z_A}{r_A} \right ) \chi_\nu({\bf r}) d{\bf r}$$
+Here, there are multiple nuclei, labeled <i>A</i>, with 
+nuclear charge <i>Z<sub>A</sub></i> and a distance from the electron of
+<i>r<sub>A</sub></i>.  The Fock matrix is defined as
+<br>
+$$F_{\mu\nu} = h_{\mu\nu} + \sum_{\lambda\sigma} D_{\lambda\sigma}[ 2(\mu\nu|\lambda\sigma) - (\mu\sigma|\lambda\nu)]$$
+where the symbol, (<i>&mu;&nu;|&lambda;&sigma;</i>) represents a <b>
+two-electron repulsion integral</b>, defined as
+<br>
+$$(\mu\nu|\lambda\sigma) = \int \chi_\mu({\bf r}_1) \chi_\nu({\bf r}_1) \frac{1}{r_{12}} \chi_\lambda({\bf r}_2) \chi_\sigma({\bf r}_2) d{\bf r}_1 d{\bf r}_2 $$
+The actual working equations for Hartree-Fock theory are derived
+by considering a constrained minimization of the electronic energy
+with respect to the shape of the molecular orbitals, <i>&phi;</i>,
+which are expanded as a linear combination of atomic orbitals:
+<br>
+$$\phi_i = \sum_\mu C_{\mu i} \chi_\mu $$
+Using Lagrange\'s method of undetermined multipliers, the electronic
+energy is minimized with respect to the elements of <b>C</b> 
+subject to the constraint that the molecular orbitals form an
+orthonormal set.  Eventually, these considerations lead to an
+eigenvalue problem; the molecular orbitals are the eigenvectors
+of the Fock matrix, and the corresponding eigenvalues (which 
+are the multipliers) are
+interpreted as the molecular orbital energies.
+<br>
+<br>
+We now develop a computational procedure for determining the 
+molecular orbitals
+and the electronic energy with the <span style="font-variant: small-caps;">Psi4</span> electronic structure package.
+<br>
+<br>
+<br>
+Procedure:
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+<br>
+Step 1.  Create a new plugin
+<br>
+<br>
+<br>
+Create a new plugin, as described <a href=http://www.chem.fsu.edu/~deprince/programming_projects/getting_started.php>here</a>.  If you called your plugin 
+"myscf," then all of your code can be placed inside plugin.cc.  Open plugin.cc
+and locate the myscf(Options & options) function:
+<br>
+<br>
+    
+<pre class="prettyprint">
+    
+    extern "C"
+    SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
+    {
+        int print = options.get_int("PRINT");
+
+        /* Your code goes here */
+
+        // Typically you would build a new wavefunction and populate it with data
+        return ref_wfn;
+    }
+</pre>
+<br>
+Like the comment says, your code goes there!
+<br>
+<br>
+Before moving on, open the input file in your plugin directory (input.dat) 
+and look at the molecule block
+<br>
+<br>
+<pre class="prettyprint">
+
+    molecule {
+    O
+    H 1 R
+    H 1 R 2 A
+
+    R = .9
+    A = 104.5
+    # add this line!
+    symmetry c1
+    }
+
+</pre>
+<br>
+This plugin will not make use of point group symmetry, so you 
+should add a line specifying that the computation be performed 
+using C<sub>1</sub> symmetry.  Now, add a flag indicating that the
+computation will use density fitting techniques:
+<br>
+<br>
+<pre class="prettyprint">
+
+set {
+  # add this line!
+  scf_type df
+  basis sto-3g
+}
+</pre>
+<br>
+For the remainder of this 
+project, I\'ve assumed that the rest of the input is unchanged.
+Keep this in mind when comparing to my results.
+<br>
+<br>
+<br>
+
+Step 2.  Obtain 1-electron integrals
+
+<br>
+<br>
+<br>
+Now, close input.dat and open plugin.cc.  In order to use
+<span style="font-variant: small-caps;">Psi4</span>\'s built-in
+integral libraries, matrix classes, etc., we must include the corresponding
+headers at the top of the file.  Add the following headers:
+<br>
+<br>
+<pre class="prettyprint">
+
+#include "psi4/libmints/wavefunction.h"
+#include "psi4/libmints/mintshelper.h"
+#include "psi4/libmints/matrix.h"
+#include "psi4/libmints/vector.h"
+#include "psi4/libmints/basisset.h"
+#include "psi4/libmints/molecule.h"
+#include "psi4/lib3index/dftensor.h"
+#include "psi4/libqt/qt.h"
+
+// blas calls (in addition to those from Matrix/Vector classes)
+#include "psi4/libqt/qt.h"
+
+// jk object
+#include "psi4/libfock/jk.h"
+</pre>
+<br>
+We can now use <span style="font-variant: small-caps;">Psi4</span>\'s 
+MintsHelper class to grab all of the one-electron integrals we\'ll need
+inside the function SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options).
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    // grab the one-electron integrals from MintsHelper:
+    std::shared_ptr&ltMintsHelper&gt mints (new MintsHelper(ref_wfn));
+
+    // one-electron kinetic energy integrals
+    std::shared_ptr&ltMatrix&gt T = mints-&gtso_kinetic();
+
+    // one-electron potential energy integrals
+    std::shared_ptr&ltMatrix&gt V = mints-&gtso_potential();
+
+    // overlap integrals
+    std::shared_ptr&ltMatrix&gt S = mints-&gtso_overlap();
+
+    // build the core hamiltonian
+    std::shared_ptr&ltMatrix&gt h = (std::shared_ptr&ltMatrix&gt)(new Matrix(T));
+    h-&gtadd(V);
+</pre>
+<br>
+
+Note that all of the MintsHelper functions we call all have the prefix "so," 
+which stands for "symmetry orbital."  The SO basis is obtained by transforming
+the AO basis functions so that the SOs belong to a proper irreducible 
+representation in the molecule\'s point group.  If we are
+not using symmetry (which is the case here), then the AO and SO bases are
+equivalent.
+<br>
+<br>
+<br>
+
+Step 3.  Initialize the JK object
+<br>
+<br>
+<br>
+At this point, we need to initialize the JK object, which is 
+responsible for building our coulomb and exchange matrices.
+In order to initialize the JK object, we will need (1) the 
+molecule object, (2) the 
+primary basis set, (3) the auxiliary (or density-fitting) basis set.
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    // grab the molecule from the wavefunction that was passed into the plugin
+    std::shared_ptr&ltMolecule&gt mol = ref_wfn-&gtmolecule();
+
+    // get primary basis:
+    std::shared_ptr&ltBasisSet&gt primary = ref_wfn-&gtget_basisset("ORBITAL");
+
+    // total number of basis functions
+    int nso = primary-&gtnbf();
+
+    // get auxiliary basis:
+    std::shared_ptr&ltBasisSet&gt auxiliary = ref_wfn-&gtget_basisset("DF_BASIS_SCF");
+
+    // total number of auxiliary basis functions
+    int nQ = auxiliary-&gtnbf();
+</pre>
+<br>
+
+Note that we are using the strings "ORBITAL" and "DF_BASIS_SCF" when we
+grab the primary and
+auxiliary basis sets.  What are these?
+<br>
+<br>
+The primary basis set ("ORBITAL") should be set in the input file (e.g. "set basis sto-3g").  It was
+automatically set to STO-3G
+when you generated your plugin (check if you don\'t believe me!).
+The auxiliary basis set ("DF_BASIS_SCF") can be specified in the input file,
+but it was
+not automatically set when the plugin was created.  Fortunately, since we
+requested that the scf_type be "DF",
+<span style="font-variant: small-caps;">Psi4</span> is smart enough to pick a DF basis for you.  If
+no "DF_BASIS_SCF" was specified in the input, then <span style="font-variant: small-caps;">Psi4</span> picks the "JKFIT"
+variant of the primary "ORBITAL" basis that it
+deems appropriate.  For the STO-3G basis, <span style="font-variant: small-caps;">Psi4</span> will choose smallest possible "JK
+FIT" set, def2-svp-jkfit.
+<br>
+<br>
+Moving on!
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    // JK object
+    std::shared_ptr&ltDiskDFJK&gt jk = (std::shared_ptr&ltDiskDFJK&gt)(new DiskDFJK(primary,auxiliary));
+
+    // memory for jk (say, 80% of what is available)
+    jk-&gtset_memory(0.8 * Process::environment.get_memory());
+
+    // integral cutoff
+    jk-&gtset_cutoff(options.get_double("INTS_TOLERANCE"));
+
+    // Do J/K, Not wK 
+    jk-&gtset_do_J(true);
+    jk-&gtset_do_K(true);
+    jk-&gtset_do_wK(false);
+
+    jk-&gtinitialize();
+</pre>
+<br>
+
+Here, we have set up the JK object to build the coulomb and exchange matrices, but we are not building any matrices associated with range-separated DFT (wK). Note that our JK object will use density fitting (DFJK), but you could have initialized the class to use conventional 4-index integrals or Cholesky-decomposed integrals.  See the <a href=https://github.com/psi4/psi4/blob/master/psi4/src/psi4/libfock/jk.h>jk.h</a> header file for more information.
+
+<br>
+<br>
+
+Since this tutorial is designed for closed-shell systems, we should check to
+be sure that the number of electrons is even.
+
+<pre class="prettyprint">
+
+    // use the molecule to determine the total number of electrons
+    int charge     = mol-&gtmolecular_charge();
+    int nelectron  = 0;
+    for (int i = 0; i &lt mol-&gtnatom(); i++) {
+        nelectron += (int)mol-&gtZ(i);
+    }
+    nelectron -= charge;
+
+    // this code only works for closed shells
+    if ( nelectron % 2 != 0 ) {
+        throw PsiException("plugin myscf only works for closed shells",__FILE__,__LINE__);
+    }
+
+    // the number of doubly occupied orbitals (or alpha electrons)
+    int na = nelectron / 2;
+
+</pre>
+<br>
+
+<br>
+<br>
+Step 4.  Symmetric orthogonalization
+<br>
+<br>
+Oftentimes in electronic structure theory, we would prefer to 
+work within a basis of orthonormal functions, which
+simplifies the math.  However, our SO basis functions
+are not orthogonal.  We can generate an orthogonal 
+basis via L&ouml;wdin\'s symmetric orthogonalization.  One
+first finds a transformation that diagonalizes the overlap
+matrix, <b>S</b>,
+<br>
+$${\bf s} = {\bf U}^T{\bf S}{\bf U}$$
+where <b>s</b> is a diagonal matrix of eigenvalues.  We then
+construct the symmetric orthogonalization matrix by taking
+the inverse square root of the eigenvalues and backtransforming
+them to the original basis.
+<br>
+$${\bf S}^{-1/2} = {\bf U}{\bf s}^{-1/2}{\bf U}^T$$
+The following code snippet illustrates how to diagonalize the
+overlap matrix using <span style="font-variant: small-caps;">Psi4</span>\'s Matrix class. The back 
+transformation is performed using a built-in function in 
+the Matrix class.
+<br>
+<br>
+<pre class="prettyprint">
+
+    // allocate memory for eigenvectors and eigenvalues of the overlap matrix
+    std::shared_ptr&ltMatrix&gt Sevec ( new Matrix(nso,nso) );
+    std::shared_ptr&ltVector&gt Seval ( new Vector(nso) );
+
+    // build S^(-1/2) symmetric orthogonalization matrix
+    S->diagonalize(Sevec,Seval);
+
+    std::shared_ptr&ltMatrix&gt Shalf = (std::shared_ptr&ltMatrix&gt)( new Matrix(nso,nso) );
+    for (int mu = 0; mu < nso; mu++) {
+        Shalf->pointer()[mu][mu] = 1.0 / sqrt(Seval->pointer()[mu]);
+    }
+
+    // transform Seval back to nonorthogonal basis
+    Shalf->back_transform(Sevec);
+</pre>
+<br>
+Note that Shalf->pointer() gives you access to the underlying data in the Matrix class.  Check your <a href=shalf.txt><b>S</b><sup>-1/2</sup> matrix</a> using the Shalf->print() function.
+<br>
+<br>
+<br>
+Step 5.  Guess orbitals, density, and energy
+<br>
+<br>
+<br>
+To obtain a set of guess orbitals and an initial density, we approximate
+the initial Fock matrix as the core Hamiltonian
+<br>
+$$F_{\mu\nu} = h_{\mu\nu}$$
+Next, use the symmetric orthogonalization matrix to bring this
+Fock matrix to a basis of orthonormal functions
+<br>
+$${\bf F}^\prime = ({\bf S}^{-1/2})^T {\bf F}{\bf S}^{-1/2}$$
+Check your <a href=fprime.txt><b>F</b>\' matrix</a>.
+<br>
+<br>
+We will now diagonalize this transformed Fock matrix to determine
+its eigenvectors (the molecular orbitals, <b>C</b>\') and eigenvalues
+(the molecular orbital energies, <i>&epsilon;</i>)
+<br>
+$${\bf F}^\prime {\bf C}^\prime = \epsilon {\bf C}^\prime$$
+The matrix <b>C</b>\' represents the molecular orbitals as a linear
+combination of orthonormalized basis functions, but what we really
+want is the linear combination of nonorthogonal AO (or SO) basis functions.
+We need to back transform one index of <b>C</b>\' to the original
+AO basis
+<br>
+$${\bf C} = {\bf S}^{-1/2} {\bf C}^\prime$$
+Since you are only transforming one index, don\'t use the Matrix class back_transform()
+call.  You could use the Matrix class gemm() call
+<br>
+<br>
+<pre class="prettyprint">
+
+        // allocate memory for SO->MO coefficients
+        std::shared_ptr&ltMatrix&gt Ca = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+
+        // Find C = S^(-1/2)C\'
+        Ca->gemm(false,false,1.0,Shalf,Fevec,0.0);
+</pre>
+<br>
+<br>
+where Fevec is a Matrix containing the eigenvectors of <b>F</b>\'.
+Alternatively, you could grab the appropriate pointers 
+<br>
+<br>
+<pre class="prettyprint">
+
+        double ** cp = Ca->pointer();
+        double ** sp = Shalf->pointer();
+        double ** fp = Fprime->pointer();
+</pre>
+<br>
+<br>
+and transform that index using explicit loops.
+Check your <a href=cmat.txt>MO coefficients</a>.
+<br>
+<br>
+Now, we define the density matrix as the contraction of the 
+molecular orbital coefficients over the <i>N/2</i> lowest-energy 
+molecular orbitals (the doubly occupied orbitals):
+<br>
+$$D_{\mu\nu} = \sum_i^{\text{occ}} C_{\mu i} C_{\nu i}$$
+This density can then be used to evaluate the initial electronic energy
+and to obtain a new Fock matrix.
+<br>
+<br>
+Check your <a href=dmat.txt>density</a>.
+<br>
+<br>
+<br>
+Step 6.  The SCF procedure
+<br>
+<br>
+<br>
+You may have noticed that the Fock matrix depends on the density:
+<br>
+$$F_{\mu\nu} = h_{\mu\nu} + \sum_{\lambda\sigma} D_{\lambda\sigma}[ 2(\mu\nu|\lambda\sigma) - (\mu\sigma|\lambda\nu)]$$
+and the density is determined by diagonalizing the Fock matrix.  If
+this seems a bit circular, you\'re right;
+we must determine the density for the system <b> self-consistently</b>.  We
+repeatedly construct and diagonalize the Fock matrix until the electronic
+energy and density matrix cease to change.  The self-consistent nature
+of the solution is the source of the name of the procedure: the 
+Hartree-Fock self-consistent field procedure.  
+<br>
+<br>
+The SCF procedure is quite simple.  Repeat Step 5, but use the correct 
+Fock matrix (rather than the core Hamiltonian), until the changes in the energy
+and the density between iterations fall below some threshold.
+<br>
+<br>
+Programming this expression is a little more manageable if 
+we write the Fock
+matrix in terms of the <b> coulomb </b> and <b> exchange </b> 
+matrices, <i>J</i> and <i>K</i>
+<br>
+$$F_{\mu\nu} = h_{\mu\nu} + 2J_{\mu\nu} - K_{\mu\nu}$$
+where
+<br>
+$$J_{\mu\nu} = \sum_{\lambda\sigma} D_{\lambda\sigma} (\mu\nu|\lambda\sigma)  $$
+and 
+<br>
+$$K_{\mu\nu} = \sum_{\lambda\sigma} D_{\lambda\sigma} (\mu\sigma|\lambda\nu)  $$
+We will use the JK object to build the coulomb and exchange matrices.  The
+JK object expects to build the density itself, so we need to pass the
+molecular orbital coefficients for the <i>N/2</i> lowest-energy orbitals to it.
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        // grab occupied orbitals (the first na)
+        std::shared_ptr&ltMatrix&gt myC (new Matrix(Ca) );
+        myC-&gtzero();
+
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int i = 0; i &lt na; i++) {
+                myC-&gtpointer()[mu][i] = Ca-&gtpointer()[mu][i];
+            }
+        }
+
+        // push occupied orbitals onto JK object
+        std::vector&ltSharedMatrix&gt& C_left  = jk-&gtC_left();
+        C_left.clear();
+        C_left.push_back(myC);
+
+</pre>
+
+<br>
+
+If we only push the left Ca matrix onto the JK object, it will assume
+that the right Ca matrix is the same.  Note that the JK object <i>could</i>
+take different left and right Ca matrices.  Also, it is possible to 
+push more than one set of molecular orbital coefficients onto the JK
+object, in case you ever want to build multiple J and K matrices 
+simultaneously.  
+Now, actually building the J and K matrices is easy:
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        // form J/K
+        jk-&gtcompute();
+
+        // form F = h + 2*J - K
+        Fa-&gtcopy(jk-&gtJ()[0]);
+        Fa-&gtscale(2.0);
+        Fa-&gtsubtract(jk-&gtK()[0]);
+        Fa-&gtadd(h);
+</pre>
+
+<br>
+Check your <a href=coulomb.txt>coulomb</a>, <a href=exchange.txt>exchange</a>,
+and <a href=fock.txt>Fock</a> matrices from the first SCF iteration.
+<br>
+<br>
+<br>
+Step 7. Monitoring convergence
+<br>
+<br>
+<br>
+The SCF procedure is considered converged when the changes in the
+energy and density between iterations fall below some predefined thresholds.
+In <span style="font-variant: small-caps;">Psi4</span>, these convergence thresholds can be specified in the input
+file and obtained in your plugin from the "options" object:
+<br>
+<br>
+<pre class="prettyprint">
+
+    // grab some input options
+    double e_convergence = options.get_double("E_CONVERGENCE");
+    double d_convergence = options.get_double("D_CONVERGENCE");
+</pre>
+<br>
+<br>
+During the SCF procedure, we must monitor the change in the energy between 
+iterations <i>k</i>-1 and <i>k</i>
+<br>
+$$\Delta E = | E_k - E_{k-1}|$$
+as well as the change in the density
+<br>
+$$\Delta D = \left ( \sum_{\mu\nu} (D^k_{\mu\nu} - D^{k-1}_{\mu\nu}) \right )^{1/2}$$
+For the present molecule/basis set, the energy and density 
+should converge to 8 decimal places in about 20 iterations:
+<br>
+<br>
+<pre class="prettyprint">
+
+    Guess energy:     -118.308230720196
+
+    ==>  Begin SCF Iterations <==
+
+     Iter               energy                   dE                   dD
+        0     -73.196938802590      45.111291917606       1.897398367075
+        1     -74.939192979912       1.742254177322       0.112061053541
+        2     -74.944687307723       0.005494327811       0.028486807507
+        3     -74.945047846358       0.000360538636       0.010519702816
+        4     -74.945095717293       0.000047870934       0.004071261334
+        5     -74.945103245231       0.000007527938       0.001631352920
+        6     -74.945104500825       0.000001255594       0.000664268555
+        7     -74.945104714580       0.000000213755       0.000272761967
+        8     -74.945104751219       0.000000036639       0.000112497614
+        9     -74.945104757513       0.000000006294       0.000046510048
+       10     -74.945104758595       0.000000001082       0.000019254367
+       11     -74.945104758781       0.000000000186       0.000007976956
+       12     -74.945104758813       0.000000000032       0.000003306204
+       13     -74.945104758819       0.000000000006       0.000001370652
+       14     -74.945104758820       0.000000000001       0.000000568310
+       15     -74.945104758820       0.000000000000       0.000000235655
+       16     -74.945104758820       0.000000000000       0.000000097721
+       17     -74.945104758820       0.000000000000       0.000000040524
+       18     -74.945104758820       0.000000000000       0.000000016805
+       19     -74.945104758820       0.000000000000       0.000000006969
+
+    SCF iterations converged!
+
+    * SCF total energy:     -74.945104758820
+</pre>
+<br>
+<br>
+Note that the energy here is the total energy
+<br>
+$$E_\text{total} = E_\text{electronic} + E_\text{nuclear}$$
+You can grab the nuclear repulsion energy from the molecule object:
+<br>
+<br>
+<pre class="prettyprint">
+
+    double e_nuc = mol->nuclear_repulsion_energy({0.0,0.0,0.0});
+</pre>
+<br>
+<br>
+<br>
+
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:100%">
+</div>
+<br>
+<br>
+
+<br>
+<br>
+    
+';
+?>
