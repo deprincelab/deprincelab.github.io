@@ -62,7 +62,7 @@ explicitly be built, see <a href="../scf/index.php">this tutorial</a>.
 <br>
 
 For a 
-tutorial that does not require the use of <span style="font-variant: small-caps;">Psi4</span>, see Daniel Crawford\'s 
+tutorial that does not require the use of <span style="font-variant: small-caps;">Psi4</span>, see Daniel Crawford's 
 <a href=https://sirius.chem.vt.edu/wiki/doku.php?id=crawdad:programming:project3>SCF project</a> (this project was adapted from that one).  That project
 does not use density fitting, and all required integrals are read from
 text files so that your code can be written independently of any 
@@ -70,7 +70,7 @@ electronic structure package.
 <br>
 <br>
 For additional information about the SCF procedure, I recommend Szabo and
-Ostlund\'s awesome (and cheap!) book <a href=http://www.amazon.com/Modern-Quantum-Chemistry-Introduction-Electronic/dp/0486691861/ref=sr_1_1?ie=UTF8&qid=1434159017&sr=8-1&keywords=szabo+ostlund>Modern Quantum Chemistry</a> or David Sherrill\'s
+Ostlund's awesome (and cheap!) book <a href=http://www.amazon.com/Modern-Quantum-Chemistry-Introduction-Electronic/dp/0486691861/ref=sr_1_1?ie=UTF8&qid=1434159017&sr=8-1&keywords=szabo+ostlund>Modern Quantum Chemistry</a> or David Sherrill's
 <a href=http://vergil.chemistry.gatech.edu/notes/hf-intro/hf-intro.pdf>online notes</a>.
 <br>
 <br>
@@ -135,7 +135,7 @@ with respect to the shape of the molecular orbitals, <i>&phi;</i>,
 which are expanded as a linear combination of atomic orbitals:
 <br>
 $$\phi_i = \sum_\mu C_{\mu i} \chi_\mu $$
-Using Lagrange\'s method of undetermined multipliers, the electronic
+Using Lagrange's method of undetermined multipliers, the electronic
 energy is minimized with respect to the elements of <b>C</b> 
 subject to the constraint that the molecular orbitals form an
 orthonormal set.  Eventually, these considerations lead to an
@@ -220,7 +220,7 @@ set {
 </pre>
 <br>
 For the remainder of this 
-project, I\'ve assumed that the rest of the input is unchanged.
+project, I've assumed that the rest of the input is unchanged.
 Keep this in mind when comparing to my results.
 <br>
 <br>
@@ -232,7 +232,7 @@ Step 2.  Obtain 1-electron integrals
 <br>
 <br>
 Now, close input.dat and open plugin.cc.  In order to use
-<span style="font-variant: small-caps;">Psi4</span>\'s built-in
+<span style="font-variant: small-caps;">Psi4</span>'s built-in
 integral libraries, matrix classes, etc., we must include the corresponding
 headers at the top of the file.  Add the following headers:
 <br>
@@ -255,8 +255,8 @@ headers at the top of the file.  Add the following headers:
 #include "psi4/libfock/jk.h"
 </pre>
 <br>
-We can now use <span style="font-variant: small-caps;">Psi4</span>\'s 
-MintsHelper class to grab all of the one-electron integrals we\'ll need
+We can now use <span style="font-variant: small-caps;">Psi4</span>'s 
+MintsHelper class to grab all of the one-electron integrals we'll need
 inside the function SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options).
 <br>
 <br>
@@ -284,7 +284,7 @@ inside the function SharedWavefunction myscf(SharedWavefunction ref_wfn, Options
 Note that all of the MintsHelper functions we call all have the prefix "so," 
 which stands for "symmetry orbital."  The SO basis is obtained by transforming
 the AO basis functions so that the SOs belong to a proper irreducible 
-representation in the molecule\'s point group.  If we are
+representation in the molecule's point group.  If we are
 not using symmetry (which is the case here), then the AO and SO bases are
 equivalent.
 <br>
@@ -329,7 +329,7 @@ auxiliary basis sets.  What are these?
 <br>
 The primary basis set ("ORBITAL") should be set in the input file (e.g. "set basis sto-3g").  It was
 automatically set to STO-3G
-when you generated your plugin (check if you don\'t believe me!).
+when you generated your plugin (check if you don't believe me!).
 The auxiliary basis set ("DF_BASIS_SCF") can be specified in the input file,
 but it was
 not automatically set when the plugin was created.  Fortunately, since we
@@ -403,7 +403,7 @@ Oftentimes in electronic structure theory, we would prefer to
 work within a basis of orthonormal functions, which
 simplifies the math.  However, our SO basis functions
 are not orthogonal.  We can generate an orthogonal 
-basis via L&ouml;wdin\'s symmetric orthogonalization.  One
+basis via L&ouml;wdin's symmetric orthogonalization.  One
 first finds a transformation that diagonalizes the overlap
 matrix, <b>S</b>,
 <br>
@@ -415,7 +415,7 @@ them to the original basis.
 <br>
 $${\bf S}^{-1/2} = {\bf U}{\bf s}^{-1/2}{\bf U}^T$$
 The following code snippet illustrates how to diagonalize the
-overlap matrix using <span style="font-variant: small-caps;">Psi4</span>\'s Matrix class. The back 
+overlap matrix using <span style="font-variant: small-caps;">Psi4</span>'s Matrix class. The back 
 transformation is performed using a built-in function in 
 the Matrix class.
 <br>
@@ -454,22 +454,22 @@ Next, use the symmetric orthogonalization matrix to bring this
 Fock matrix to a basis of orthonormal functions
 <br>
 $${\bf F}^\prime = ({\bf S}^{-1/2})^T {\bf F}{\bf S}^{-1/2}$$
-Check your <a href=fprime.txt><b>F</b>\' matrix</a>.
+Check your <a href=fprime.txt><b>F</b>' matrix</a>.
 <br>
 <br>
 We will now diagonalize this transformed Fock matrix to determine
-its eigenvectors (the molecular orbitals, <b>C</b>\') and eigenvalues
+its eigenvectors (the molecular orbitals, <b>C</b>') and eigenvalues
 (the molecular orbital energies, <i>&epsilon;</i>)
 <br>
 $${\bf F}^\prime {\bf C}^\prime = \epsilon {\bf C}^\prime$$
-The matrix <b>C</b>\' represents the molecular orbitals as a linear
+The matrix <b>C</b>' represents the molecular orbitals as a linear
 combination of orthonormalized basis functions, but what we really
 want is the linear combination of nonorthogonal AO (or SO) basis functions.
-We need to back transform one index of <b>C</b>\' to the original
+We need to back transform one index of <b>C</b>' to the original
 AO basis
 <br>
 $${\bf C} = {\bf S}^{-1/2} {\bf C}^\prime$$
-Since you are only transforming one index, don\'t use the Matrix class back_transform()
+Since you are only transforming one index, don't use the Matrix class back_transform()
 call.  You could use the Matrix class gemm() call
 <br>
 <br>
@@ -478,12 +478,12 @@ call.  You could use the Matrix class gemm() call
         // allocate memory for SO->MO coefficients
         std::shared_ptr&ltMatrix&gt Ca = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
 
-        // Find C = S^(-1/2)C\'
+        // Find C = S^(-1/2)C'
         Ca->gemm(false,false,1.0,Shalf,Fevec,0.0);
 </pre>
 <br>
 <br>
-where Fevec is a Matrix containing the eigenvectors of <b>F</b>\'.
+where Fevec is a Matrix containing the eigenvectors of <b>F</b>'.
 Alternatively, you could grab the appropriate pointers 
 <br>
 <br>
@@ -520,7 +520,7 @@ You may have noticed that the Fock matrix depends on the density:
 <br>
 $$F_{\mu\nu} = h_{\mu\nu} + \sum_{\lambda\sigma} D_{\lambda\sigma}[ 2(\mu\nu|\lambda\sigma) - (\mu\sigma|\lambda\nu)]$$
 and the density is determined by diagonalizing the Fock matrix.  If
-this seems a bit circular, you\'re right;
+this seems a bit circular, you're right;
 we must determine the density for the system <b> self-consistently</b>.  We
 repeatedly construct and diagonalize the Fock matrix until the electronic
 energy and density matrix cease to change.  The self-consistent nature
