@@ -181,7 +181,7 @@ must lie to the right of all \(\hat{a}_j\) and \(\hat{a}^{\dagger}_b\).
 Now, we consider the coupled cluster with single and double excitations (CCSD) energy
 expression, which should be evaluated with normal-order defined relative to the Fermi vacuum:
 <br>
-$$E_{\rm {CC}} = <0|e^{-T} H e^{T}|0>$$
+$$E_{\rm {CC}} = \langle 0|e^{-T} H e^{T}|0 \rangle$$
 Here, T=T1+T2 and H represent the cluster operator and Hamiltonian, respectively, and the
 similarity transformation should be carried out using commutators according to the Baker Campbell Hausdorff (BCH) expansion. 
 The following code makes use of the built-in operator string types in pdaggerq (i.e., t1, t2, etc.),
