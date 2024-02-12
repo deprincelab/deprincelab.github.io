@@ -4,9 +4,7 @@ echo'
 
 ---
 layout: page
-math: true
 ---
-
 
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
 .js?lang=css&skin=desert"></script>
@@ -66,7 +64,7 @@ the logic for completing Sudoku puzzles is straightforward and easily encodable 
 <br>
 
 The Sudoku solver described here was developed for
-<a href=https://projecteuler.net/problem=96>Project Euler\'s problem 96</a>,
+<a href=https://projecteuler.net/problem=96>Project Euler's problem 96</a>,
 which involves solving <a href="euler_puzzles.txt">50 Sudoku puzzles</a> of varying difficulty. 
  With the logic outlined below, the solver you develop should be able to complete 49 of the Project
 Euler puzzles,
@@ -202,7 +200,7 @@ Step 2.  Initialize the candidate lists
 <br>
 <br>
 <br>
-For each blank spot in the puzzle (denoted with "0" in Project Euler\'s format), we can
+For each blank spot in the puzzle (denoted with "0" in Project Euler's format), we can
 develop a list of possible candidate values for the solved puzzle. I find that an array of 81 lists representing
 each of the positions in the 9x9 grid is a suitable object that will allow us to add candidates [list.append(candidate)], 
 remove candidates [list.remove(candidate)], or search for candidates within a given list [candidate in list]. Such an object
@@ -669,6 +667,5 @@ if __name__ == "__main__":
 <br>
 
 ';
-
 
 ?>
