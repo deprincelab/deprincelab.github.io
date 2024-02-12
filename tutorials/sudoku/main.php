@@ -1,3 +1,4 @@
+{% raw %}
 <?php
 
 echo'
@@ -665,3 +666,4 @@ if __name__ == "__main__":
 ';
 
 ?>
+{% endraw %}
