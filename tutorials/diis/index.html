@@ -174,13 +174,28 @@ We arrive at the following system of
 equations when we require that the Lagrangian be stationary with respect
 to variations in all of the coefficients and the Lagrange multiplier.
 <br>
-<br>
-<br>
-<center>
-<img src="images/matrix_eqn.png" width=75%>
-</center>
-<br>
-<br>
+$$\begin{pmatrix}
+B_{11} & B_{12} & \cdots & B_{1n} & -1 \\
+B_{21} & B_{22} & \cdots & B_{2n} & -1 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+B_{n1} & B_{n2} & \cdots & B_{nn} & -1 \\
+-1 & -1 & \cdots & -1 & 0 \\
+\end{pmatrix}
+\begin{pmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_n \\
+\lambda \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0 \\
+\vdots \\
+0 \\
+-1 \\
+\end{pmatrix}$$
 In your <span style="font-variant: small-caps;">Psi4</span> plugin, you can solve this system of equations using the
 LAPACK routine DGESV.  To do so, include the following header file:
 <br>
