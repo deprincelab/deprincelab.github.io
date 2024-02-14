@@ -1,0 +1,884 @@
+---
+layout: page
+math: true
+---
+
+
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+<style>
+.border_gradient {
+border: 8px solid #000;
+padding: 5px 5px 5px 15px;
+width: 300px;
+}
+code {
+    background: hsl(220, 80%, 90%);
+}
+
+pre {
+    padding-bottom: 20px;
+    padding-left:   20px;
+    border:solid;
+    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    width:100%;
+    background: #353535;
+    color: white;
+    text-indent: 1cm;
+}
+</style>
+
+<br>
+
+Programming Projects: Unrestricted Kohn-Sham DFT<br>
+<hr>
+
+<br>
+<br> 
+Overview 
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+
+In this project, you will develop an unrestricted Kohn-Sham (UKS) DFT code as a plugin
+to the <span style="font-variant: small-caps;">Psi4</span> electronic structure
+package.  We will first develop an unrestricted Hartree-Fock (UHF) algorithm using
+the JK object in <span style="font-variant: small-caps;">Psi4</span>, which
+is capable of building coulomb-like (J) and exchange-like (K) matrices for arbitrary densities.
+Then, we will use <span style="font-variant: small-caps;">Psi4</span>'s 
+DFT functional and potential objects to turn the UHF code into a UKS DFT code.  This tutorial
+assumes that you are familiar with the SCF procedure in general and have completed
+the previous restricted Hartree-Fock (RHF) tutorial that employed the JK object.
+
+<br>
+<br>
+
+The C++ and Python code for this UKS plugin can be found 
+<a href=mydft.tar.gz>here</a>. 
+
+<br>
+<br>
+<br>
+Unrestricted Hartree Fock
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+Note: we use <a href=https://en.wikipedia.org/wiki/Atomic_units>atomic units</a> throughout this tutorial.
+<br>
+<br>
+The previous Hartree-Fock tutorials introduced the idea of <i>restricted</i> Hartree-Fock theory, 
+where it is assumed that the &alpha;- and &beta;-spin orbitals 
+(and density matrices, Fock matrices, etc.) are
+the same.  These assumptions simplify the self-consistent field (SCF) procedure.
+Here, we lift that assumption and employ 
+<i>unrestricted</i> Hartree-Fock theory, where &alpha;-
+and &beta;-spin orbitals can be different.
+
+At the UHF level of theory, the
+total electronic energy is given by
+<br>
+<br>
+<center>
+<img src="images/e_elec_uhf.png" width=60%> 
+</center> 
+<br>
+<br>
+where <i>h</i> represents the core Hamiltonian matrix, 
+<i>D<sup>&alpha;</sup></i> and <i>D<sup>&beta;</sup></i> represent the density matrices 
+for &alpha;- and &beta;-spin electrons, respectively, and <i>F<sup>&alpha;</sup></i> and 
+<i>F<sup>&beta;</sup></i> represent the Fock matrices for &alpha;- and &beta;-spin electrons, respectively.  
+Here, the indices &mu; and &nu; represent atomic orbital (AO) basis functions.  
+As in the previous
+tutorials, the core Hamiltonian matrix is comprised of integrals that represent both the 
+electron kinetic energy and the electron-nuclear potential energy, and the atomic 
+orbital basis functions are not orthogonal.  
+
+<br>
+<br>
+The &alpha;- and &beta;-spin Fock matrices are defined as
+<br>
+<br>
+<center>
+<img src="images/fock_a.png" width=32%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/fock_b.png" width=32%>
+</center>
+<br>
+<br>
+where J<sup>&alpha;</sup> and J<sup>&beta;</sup> are Coulomb matrices 
+for &alpha;- and &beta;-spin electrons, respectively, defined as
+<br>
+<br>
+<center>
+<img src="images/coulomb_a.png" width=22%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/coulomb_b.png" width=22%>
+</center>
+<br>
+<br>
+Similarly, we define exchange matrices for &alpha;- and &beta;-spin electrons
+as
+<br>
+<br>
+<center>
+<img src="images/exchange_a.png" width=22%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/exchange_b.png" width=22%>
+</center>
+<br>
+<br>
+As in RHF, the UHF wave function
+is an antisymmetrized product of <i>N</i> molecular 
+orbitals (MOs), and the energy is minimized with respect to 
+variations in the shape of these MOs.  We separately 
+expand the &alpha;- and &beta;-spin orbitals as linear
+combinations of atomic orbitals as
+<br>
+<br>
+<center>
+<img src="images/lcao_a.png" width=16%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/lcao_b.png" width=16%>
+</center>
+<br>
+<br>
+where &chi;<sub>&mu;</sub> is an atomic orbital basis function, and the 
+orbital expansion coefficients, C<sup>&alpha;</sup> and 
+C<sup>&beta;</sup>, are the variable parameters in the SCF procedure.  
+These orbitals then define the &alpha;- and &beta;-spin density 
+matrices that are used to construct the Coulomb and exchange 
+matrices.  The UHF density matrices are defined as
+<br>
+<br>
+<center>
+<img src="images/d_sum_a.png" width=16%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/d_sum_b.png" width=16%>
+</center>
+<br>
+<br>
+Here, <i>N<sub>&alpha;</sub></i> and <i>N<sub>&beta;</sub></i> represent
+the number of electrons of &alpha; and &beta; spin, respectively.  In the previous
+RHF tutorials, the number of doubly occupied orbitals were determined 
+from the molecule object.  Here, we will determine <i>N<sub>&alpha;</sub></i> and 
+<i>N<sub>&beta;</sub></i> in a similar way:
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    // use the molecule to determine the total number of electrons
+    int charge     = mol-&gtmolecular_charge();
+    int nelectron  = 0;
+    for (int i = 0; i &lt mol-&gtnatom(); i++) {
+        nelectron += (int)mol-&gtZ(i);
+    }
+    nelectron -= charge;
+
+    // use the molecule to determine the multiplicity
+    int multiplicity = mol-&gtmultiplicity();
+
+    // assuming Ms = S, multiplicity = 2 * Ms + 1
+    double ms = (multiplicity - 1 ) / 2;
+
+    // Ms = 1/2 ( Na - Nb )
+    // N  = Na + Nb
+
+    int nalpha = ( nelectron + (int)(2 * ms) ) / 2;
+    int nbeta  = nelectron - na;
+
+</pre>
+<br>
+
+
+
+The UHF SCF procedure
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+The UHF SCF procedure is similar to the RHF procedure outlined
+in the previous tutorials. We begin with
+some guess for the initial orbitals.  In the simplest guess, we approximate
+the &alpha;- and &beta;-spin Fock matrices with the core Hamiltonian:
+<br>
+<br>
+<center>
+<img src="images/fcore_ab.png" width=18%>
+</center>
+<br>
+<br>
+We then transform the Fock matrices to the orthogonal basis 
+defined by L&ouml;wdin's symmetric orthogonalization, giving
+<br>
+<br>
+<center>
+<img src="images/fprime_a.png" width=26%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/fprime_b.png" width=26%>
+</center>
+<br>
+<br>
+Here, <b>S</b> represents the matrix of overlap integrals.  We diagonalize
+the Fock matrices in the orthogonal basis to determine the eigenvectors
+<br>
+<br>
+<center>
+<img src="images/fcec_a.png" width=16%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/fcec_b.png" width=16%>
+</center>
+<br>
+<br>
+which are related to the orbital coefficients by a partial
+back transformation to the original non-orthogonal basis, giving
+<br>
+<br>
+<center>
+<img src="images/shalf_cprime_a.png" width=17%>
+</center>
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/shalf_cprime_b.png" width=17%>
+</center>
+<br>
+<br>
+
+When developing your code, you can check your results against
+some reference data for a modified version of the input file
+we used in the previous tutorials.  Here, we specify that the
+molecule is a water molecule with a +1 charge.  
+<br>
+<br>
+<pre class="prettyprint">
+
+    molecule {
+    1 2
+    O
+    H 1 R
+    H 1 R 2 A
+  
+    R = .9
+    A = 104.5
+    # add this line!
+    symmetry c1
+    }
+
+    set {
+      basis sto-3g
+      # add these lines!
+      scf_type df
+      reference uhf
+    }
+
+    energy('myscf')
+
+</pre>
+
+<br>
+Note that the reference has been specified as UHF. Check your initial 
+<a href=cmat_a.txt>&alpha;-spin</a> and 
+<a href=cmat_b.txt>&beta;-spin</a> guess orbitals for this case.
+<br>
+<br>
+
+Now that we have a guess for the orbitals, we can build the &alpha;- and
+&beta;-spin Fock matrices, which can be transformed to the orthogonal
+basis and diagonalized to determine new orbitals.  The construction of the
+Coulomb and exchange matrices is simplified when 
+using <span style="font-variant: small-caps;">Psi4</span>'s JK object.  For
+UHF, the JK object is initialized in the same way as it was in the case of RHF.
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    // JK object
+    std::shared_ptr&ltDiskDFJK&gt jk = (std::shared_ptr&ltDiskDFJK&gt)(new DiskDFJK(primary,auxiliary));
+
+    // memory for jk (say, 80% of what is available)
+    jk-&gtset_memory(0.8 * Process::environment.get_memory());
+
+    // integral cutoff
+    jk-&gtset_cutoff(options.get_double("INTS_TOLERANCE"));
+
+    // Do J/K, Not wK 
+    jk-&gtset_do_J(true);
+    jk-&gtset_do_K(true);
+    jk-&gtset_do_wK(false);
+
+    jk-&gtinitialize();
+</pre>
+<br>
+
+Since we do not (yet) require the wK matrices for range-separated DFT, we
+initialize the JK object to compute only Coulomb and exchange matrices.  During
+the SCF iterations, the JK object can build both &alpha;- and &beta;-spin
+matrices; the way we achieve this is by passing both &alpha;- and &beta;-spin
+orbital coefficients to the object:
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        // grab occupied alpha orbitals (the first nalpha)
+        std::shared_ptr&ltMatrix&gt myCa (new Matrix(Ca) );
+        myCa-&gtzero();
+
+        // grab occupied beta orbitals (the first nbeta)
+        std::shared_ptr&ltMatrix&gt myCb (new Matrix(Cb) );
+        myCb-&gtzero();
+
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int i = 0; i &lt nalpha; i++) {
+                myCa-&gtpointer()[mu][i] = Ca-&gtpointer()[mu][i];
+            }
+            for (int i = 0; i &lt nbeta; i++) {
+                myCb-&gtpointer()[mu][i] = Cb-&gtpointer()[mu][i];
+            }
+        }
+
+        // push occupied orbitals onto JK object
+        std::vector&lt std::shared_ptr&ltMatrix&gt &gt& C_left  = jk-&gtC_left();
+        C_left.clear();
+        C_left.push_back(myCa);
+        C_left.push_back(myCb);
+
+        // form J/K
+        jk-&gtcompute();
+
+        // form Fa = h + Ja + Jb - Ka
+        Fa-&gtcopy(h);
+        Fa-&gtadd(jk-&gtJ()[0]);
+        Fa-&gtadd(jk-&gtJ()[1]);
+        Fa-&gtsubtract(jk-&gtK()[0]);
+
+        // form Fb = h + Ja + Jb - Kb
+        Fb-&gtcopy(h);
+        Fb-&gtadd(jk-&gtJ()[0]);
+        Fb-&gtadd(jk-&gtJ()[1]);
+        Fb-&gtsubtract(jk-&gtK()[1]);
+</pre>
+
+<br>
+
+The jk->J() and jk->K() functions return standard vectors of matrices; if two 
+sets of orbitals are pushed onto the JK object as was done above, then the 
+first matrix in each standard vector correspondes to &alpha; spin, and the 
+second matrix in each vector corresponds to &beta; spin.  You can check your
+<a href=coulomb_a.txt>&alpha;-spin</a> and 
+<a href=coulomb_b.txt>&beta;-spin</a> Coulomb matrices for the first SCF
+iteration using the input file given above.
+
+<br>
+<br>
+Convergence is monitored in UHF in the same way that it is monitored in 
+RHF.  The UHF SCF procedure is considered converged when the energy 
+and orbitals cease to change between iterations or when the orbital
+gradient becomes sufficiently small.
+Further, as was done in the <a href=https://www.chem.fsu.edu/~deprince/programming_projects/diis/>previous tutorial</a>, the convergence can be accelerated 
+using the direct inversion of the iterative subspace (DIIS) procedure.  If 
+you want to use DIIS here, do not extrapolate the &alpha; and &beta; Fock
+matrices separately.  Instead, use a single DIIS extrapolation with vectors
+of twice the dimension of those used in the RHF-based DIIS tutorial.
+
+For the input file given above, the UHF procedure with DIIS should converge
+the energy and RMS orbital gradient to 12 decimal places in 14 iterations.
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    Guess energy:     -110.799510649867
+
+    ==&gt  Begin SCF Iterations &lt==
+
+     Iter               energy                   dE          RMS |[F,P]| 
+        0     -73.388214249092      37.411296400775       0.149136560077
+        1     -74.619566509198      -1.231352260106       0.012961155955
+        2     -74.624038516225      -0.004472007027       0.001632520945
+        3     -74.624158762636      -0.000120246411       0.000744873168
+        4     -74.624194647106      -0.000035884471       0.000218448493
+        5     -74.624198166251      -0.000003519145       0.000047323689
+        6     -74.624198335373      -0.000000169121       0.000007498921
+        7     -74.624198339078      -0.000000003706       0.000000402856
+        8     -74.624198339087      -0.000000000009       0.000000042562
+        9     -74.624198339087      -0.000000000000       0.000000015816
+       10     -74.624198339087       0.000000000000       0.000000010050
+       11     -74.624198339087       0.000000000000       0.000000000650
+       12     -74.624198339087      -0.000000000000       0.000000000006
+       13     -74.624198339087       0.000000000000       0.000000000000
+
+    SCF iterations converged!
+
+    * SCF total energy:     -74.624198339087
+</pre>
+
+<br>
+Unrestricted Kohn-Sham DFT
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+
+In Kohn-Sham DFT, we hold that the electronic energy is a universal functional 
+of the one-electron density and, further, there exists a fictitious 
+noninteracting system of electrons that has the same density as the true set 
+of electrons.  The states of the fictitious system are determined in a manner
+that is similar to Hartree-Fock theory; the Kohn-Sham wave function is
+a single antisymmetrized product of Kohn-Sham orbitals, and these orbitals
+are determined as the eigenvectors of an effective one-electron operator
+that accounts for true many-body effects.  The unrestricted Kohn-Sham (UKS)
+energy is
+
+<br>
+<br>
+<center>
+<img src="images/e_elec_uks.png" width=85%> 
+</center> 
+<br>
+<br>
+
+where E<sub>xc</sub> represents the exchange-correlation energy functional, and
+&rho;<sub>&alpha;</sub> and &rho;<sub>&beta;</sub> represent the &alpha; and
+&beta; spin densities, respectively.  These spin densities are the real-space
+representation of the densities, defined as
+
+<br>
+<br>
+<center>
+<img src="images/spin_density_a.png" width=27%> 
+</center> 
+<br>
+<br>
+and
+<br>
+<br>
+<center>
+<img src="images/spin_density_b.png" width=27%> 
+</center> 
+<br>
+<br>
+
+The simplest exchange-correlation functionals depend only on the
+spin densities; these functionals are categorized as Local Spin-Density
+Approximations (LSDA).  Generalized Gradient Approximation (GGA) functionals
+also depend on the gradient of the spin densities.  More complicated
+functionals can be developed by considering also the second derivative of the
+spin density (these are meta GGA functionals).  Kohn-Sham functionals can be 
+further generalized
+to include some percentage (usually denoted by &alpha;) 
+of "exact" Hartree-Fock exchange; in such "hybrid"
+functionals, the electronic energy also includes contributions from the usual
+Hartree-Fock exchange matrices.  Lastly, one can also devise so-called 
+long-range corrected (LRC) functionals that use Hartree-Fock exchange at 
+long range and the density functional approximation to exchange at short range; 
+of course, in this
+case, one much choose some scheme to partition space to distinguish between
+"short-" and "long-range" interactions.  The usual choice is the error function,
+erf(&omega;r<sub>12</sub>), where &omega; is the range-separation parameter.  
+The general form of the exchange-correlation energy then involves integrals
+over the exchange-correlation functional and the short/long-range components
+of the exchange; see the section of the <span style="font-variant: small-caps;">Psi4</span> manual on <a href=http://www.psicode.org/psi4manual/master/dft.html>DFT</a> for more detail.
+
+<br>
+<br>
+
+In practice, the unrestricted Kohn-Sham DFT orbitals are optimized in a way
+that is very similar to the UHF procedure.  Rather than diagonalizing the
+UHF Fock matrices to determine our orbitals, we diagonalize Kohn-Sham
+matrices, which have a similar form
+
+<br>
+<br>
+<center>
+<img src="images/kohn_sham_matrix.png" width=60%> 
+</center> 
+<br>
+<br>
+
+Here, &sigma; represents the spin for the electron (&alpha; or &beta;), &alpha;
+represents the percentage of exact Hartree-Fock exchange, 
+K<sup>&sigma;,&omega;</sup> represents an exchange matrix generated with the 
+operator erf(&omega;r<sub>12</sub>)/r<sub>12</sub>, as opposed to the usual 
+Coulomb operator, 1/r<sub>12</sub>, and V<sup>xc,&alpha;</sup> represents
+the exchange-correlation potential matrix, which is comprised of integrals over
+derivatives of the exchange-correlation functional.  For more detail as
+to what actually goes into V<sup>xc,&alpha;</sup>, 
+see <a href=http://www.psicode.org/psi4manual/master/dft.html>here</a>.
+
+<br>
+<br>
+So!  All we need to do to turn our UHF code into a UKS code is figure out how
+to grab from <span style="font-variant: small-caps;">Psi4</span> each of 
+the DFT-specific quantities that comprise the Kohn-Sham 
+matrices and energy.  
+<br>
+<br>
+
+Modifying your UHF code
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;width:50%">
+</div>
+
+<br>
+<br>
+
+The first thing we need to do is modify the Python sequence that calls 
+the UHF/UKS plugin in order to be sure that the plugin knows which DFT
+functional to use.  Open the file pymodule.py.  Comment out the portions
+that compute the SCF reference wave function that is passed to the plugin.
+This reference will not contain any information about the DFT functional
+for the UKS procedure, so we must create a reference wave function
+that contains this information.  Modify your Python run sequence to
+match the one given below.  
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    # Your plugin's psi4 run sequence goes here
+
+    # determine dft functional from options
+    func = psi4.core.get_option('MYSCF','FUNCTIONAL')
+
+    # comment out or remove the lines below that compute the
+    # scf reference.  we will construct our own wave function.
+
+    # Compute a SCF reference, a wavefunction is return which holds the molecule used, orbitals
+    # Fock matrices, and more
+    #print('Attention! This SCF may be density-fitted.')
+
+    #ref_wfn = kwargs.get('ref_wfn', None)
+    #if ref_wfn is None:
+    #    ref_wfn = psi4.driver.scf_helper(name, **kwargs)
+
+    # add these lines below to create a wave function to pass to the plugin
+
+    scf_molecule = kwargs.get('molecule', psi4.core.get_active_molecule())
+    base_wfn = psi4.core.Wavefunction.build(scf_molecule, psi4.core.get_global_option('BASIS'))
+    scf_wfn = proc.scf_wavefunction_factory(psi4.core.get_option('SCF', 'REFERENCE'), base_wfn, func)
+
+
+    # Ensure IWL files have been written when not using DF/CD
+    proc_util.check_iwl_file_from_scf_type(psi4.core.get_option('SCF', 'SCF_TYPE'), scf_wfn)
+
+    # Call the Psi4 plugin
+    # Please note that setting the reference wavefunction in this way is ONLY for plugins
+    myscf_wfn = psi4.core.plugin('myscf.so', scf_wfn)
+</pre>
+
+<br>
+Note that the proc.scf_wavefunction_factory.build() call is not accessible using the
+standard plugin template generated via "psi4 --plugin-name mydft".  At the top
+of pymodule.py, you must import an additional library as
+
+<br>
+<br>
+<pre class="prettyprint">
+
+from psi4.driver.procrouting import proc
+</pre>
+
+<br>
+
+Note also that there is a line above asking the options object for information about 
+the functional.  This option will be specific to your plugin and needs to 
+be added to the C++ code in the function int read_options(std::string name, Options& options):
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        /*- DFT functional -*/
+        options.add_str("FUNCTIONAL", "B3LYP");
+</pre>
+<br>
+
+The default functional will be B3LYP.  You will also need to include two additional headers
+in order to use the DFT functional and potential objects.  Add the following headers to 
+your C++ code containing your UHF procedure:
+<br>
+<br>
+
+<pre class="prettyprint">
+
+// for dft
+#include "psi4/libfock/v.h"
+#include "psi4/libfunctional/superfunctional.h"
+</pre>
+
+<br>
+
+Find the portion of your code where you initialized your JK object, and 
+add the following lines to determine the functional and to initialize 
+the DFT potential object, <i>before</i>
+you initialize the JK object:
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    // determine the DFT functional and initialize the potential object
+    scf::HF* scfwfn = (scf::HF*)ref_wfn.get();
+    std::shared_ptr&ltSuperFunctional&gt functional = scfwfn-&gtfunctional();
+    std::shared_ptr&ltVBase&gt potential = 
+        VBase::build_V(primary,functional,options,
+        (options.get_str("REFERENCE") == "RKS" ? "RV" : "UV"));
+
+    potential-&gtinitialize();
+
+    // print the ks information
+    potential-&gtprint_header();
+</pre>
+
+<br>
+Now, when initializing the JK object, the functional object can
+tell us whether or not the JK object needs to compute the 
+exchange matrices necessary for hybrid or LRC functionals:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+    // JK object
+    std::shared_ptr&ltDiskDFJK&gt jk = (std::shared_ptr&ltDiskDFJK&gt)(new DiskDFJK(primary,auxiliary));
+
+    // memory for jk (say, 80% of what is available)
+    jk-&gtset_memory(0.8 * Process::environment.get_memory());
+
+    // integral cutoff
+    jk-&gtset_cutoff(options.get_double("INTS_TOLERANCE"));
+
+    // Do J.
+    jk-&gtset_do_J(true);
+
+    // Do K?
+    jk-&gtset_do_K(functional-&gtis_x_hybrid());
+
+    // Do wK?
+    jk-&gtset_do_wK(functional-&gtis_x_lrc());
+    jk-&gtset_omega(functional-&gtx_omega());
+
+    jk-&gtinitialize();
+</pre>
+
+<br>
+
+With the JK and potential objects properly initialized, we are ready
+to modify the UHF procedure.  Locate the portion of your UHF 
+procedure where the J and K matrices are formed
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        // form J/K
+        jk-&gtcompute();
+</pre>
+
+<br>
+
+For every DFT functional, the Fock matrices will
+include the core Hamiltonian and Coulomb matrices.  Ask your functional
+object if you need to include exact exchange, and do so, if necessary
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        // exact exchange?
+        if (functional-&gtis_x_hybrid()) {
+            // form F -= alpha K
+            double alpha = functional-&gtx_alpha();
+            Fa-&gtaxpy(-alpha,jk-&gtK()[0]);
+            Fb-&gtaxpy(-alpha,jk-&gtK()[1]);
+        }
+</pre>
+
+<br>
+
+If you are using a LRC functional, you must also include the exchange matrix 
+generated with the modified erf integrals:
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        // LRC functional?
+        if (functional-&gtis_x_lrc()) {
+            // form Fa/b -= beta wKa/b
+            double beta = 1.0 - functional-&gtx_alpha();
+            Fa-&gtaxpy(-beta,jk-&gtwK()[0]);
+            Fb-&gtaxpy(-beta,jk-&gtwK()[1]);
+        }
+</pre>
+
+<br>
+
+Lastly, we will need to include
+the exchange-correlation potential, which is computed by the potential object.
+The potential object needs to know the current &alpha; and &beta; densities;
+once you have built these from your occupied &alpha; and &beta; orbitals,
+you can pass them to the potential object using its "set_D" function.
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        if (functional-&gtneeds_xc()) {
+
+            // set a/b densities in potential object
+            potential-&gtset_D({Da_, Db_});
+
+            // evaluate a/b potentials
+            potential-&gtcompute_V({Va_,Vb_});
+
+            // form Fa/b = h + Ja + Jb + Va/b
+            Fa_-&gtadd(Va_);
+            Fb_-&gtadd(Vb_);
+
+        }
+</pre>
+
+<br>
+
+Note that Va_ and Vb_ are not members of the Wavefunction class, so you 
+will need to declare and allocate memory for them somewhere.  
+Check your <a href=potential_a.txt>&alpha;-</a> and <a href=potential_b.txt>&beta;-spin</a> 
+exchange correlation
+potential matrices from the first UKS iteration (these matrices 
+correspond to the same molecule and basis set given above 
+and the B3LYP functional).
+
+<br>
+<br>
+
+The remaining steps of the UKS procedure are identical to those 
+of the UHF procedure, with one minor exception.  When computing
+the energy, be sure to check whether or not your functional
+requires exact exchange or is a range-separated functional, and
+include those contributions as necessary.  The exchange-correlation
+energy can be grabbed from the potential object as
+
+<br>
+<br>
+
+<pre class="prettyprint">
+
+        double exchange_correlation_energy = 0.0;
+        if (functional-&gtneeds_xc()) {
+            exchange_correlation_energy = potential-&gtquadrature_values()["FUNCTIONAL"];
+        }
+</pre>
+
+<br>
+If everything is working correctly, and you are using DIIS extrapolation, then
+the UKS procedure should converge to 12 decimal places in 14 iterations:
+<br>
+<br>
+
+<pre class="prettyprint">
+
+    Guess energy:     -110.799510649867
+
+    ==>  Begin SCF Iterations <==
+
+     Iter               energy                   dE          RMS |[F,P]|
+        0     -73.676857884422      37.122652765444       0.147303908685
+        1     -74.626297789124      -0.949439904702       0.096024656906
+        2     -74.850040394365      -0.223742605242       0.045441021403
+        3     -74.900520282450      -0.050479888085       0.022996151165
+        4     -74.916288934361      -0.015768651911       0.000125554060
+        5     -74.916289544491      -0.000000610129       0.000014399112
+        6     -74.916289560314      -0.000000015823       0.000002548860
+        7     -74.916289560844      -0.000000000530       0.000000148231
+        8     -74.916289560844      -0.000000000001       0.000000017916
+        9     -74.916289560844       0.000000000000       0.000000005593
+       10     -74.916289560844       0.000000000000       0.000000004605
+       11     -74.916289560844       0.000000000000       0.000000000068
+       12     -74.916289560844       0.000000000000       0.000000000006
+       13     -74.916289560844      -0.000000000000       0.000000000000
+
+    SCF iterations converged!
+
+    * SCF total energy:     -74.916289560844
+</pre>
+
+<br>
+<br>
+
+This energy should match that from <span style="font-variant: small-caps;">Psi4</span>'s 
+DFT using the "energy('b3lyp')" call in your input file.
+
+<br>
+<br>
+
+<hr>
+
+<br>
