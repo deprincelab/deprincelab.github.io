@@ -1,0 +1,418 @@
+---
+layout: page
+math: true
+---
+
+
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+<style>
+.border_gradient {
+border: 8px solid #000;
+padding: 5px 5px 5px 15px;
+width: 300px;
+}
+code {
+    background: hsl(220, 80%, 90%);
+}
+
+pre {
+    padding-bottom: 20px;
+    padding-left:   20px;
+    border:solid;
+    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    width:100%;
+    background: #353535;
+    color: white;
+    text-indent: 1cm;
+}
+</style>
+
+<br>
+
+Python Projects: Configuration Interaction Singles (CIS)<br>
+<hr>
+
+<br>
+<br> 
+Overview <br>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+
+In this project, you will learn how to write a restricted configuration interaction with single excitations (CIS)
+code using the Python interface to the <span style="font-variant: small-caps;">Psi4</span> electronic structure
+package.  Most of Psi4's core libraries (integral generation, SCF solver, etc.) are exposed to Python, which
+facilitates the development of short, easy to understand codes for complex electronic structure methods.  For
+example, you will soon find that it is possible to write a working CIS code in Python in less than 100 lines! <br><br>
+
+The Python code for this tutorial can be found <a href=cis.py>here</a>.
+
+<br>
+<br>
+<br>
+Background:
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+Note: we use <a href=https://en.wikipedia.org/wiki/Atomic_units>atomic units</a> throughout this tutorial.
+<br>
+<br>
+
+At the Hartree-Fock level of theory, the <i>N</i>-electron wave function
+is approximated as an antisymmetrized product of <i>N</i> one-electron
+functions called molecular orbitals (MOs) (a Slater determinant). The
+simplest representation of an excited-state wave function would be a
+single Slater determinant comprised of a different set of molecular
+orbitals, but we can obtain a slightly better description of the
+excited state by expressing it as a linear combination of Slater
+determinants that differ by the ground-state configuration by
+one electron.  What we are describing here is a configuration
+interaction with single excitations (CIS) wave function; the
+CIS wave function for the <i>n</i><sup>th</sup> excited
+state can be expressed as
+<br>
+<br>
+<center>
+<img src="images/cis_wfn.png" width=20%> <br>
+</center>
+<br>
+<br>
+Here, the symbol <i>&phi;<sub>i</sub><sup>a</sup></i> represents a Slater
+determinant that is singly excited relative to the reference determinant,
+and the indices <i>i</i> and <i>a</i> represent a spin orbitals that are
+occupied and unoccupied (virtual) in the reference, respectively.
+<br>
+<br>
+The expansion coefficients and energy of the excited state can be 
+determined by testing the Schr&ouml;dinger equation with one of the
+singly-excited configurations to obtain:
+<br>
+<br>
+<center>
+<img src="images/se1.png" width=28%> <br>
+</center>
+<br>
+<br>
+We can form similar expressions for all excited states, and, taken together,
+these expressions become an eigenvalue equation
+<br>
+<br>
+<center>
+<img src="images/se_mat.png" width=18%> <br>
+</center>
+<br>
+<br>
+where <b>H</b> is the matrix representation of the Hamiltonian in the basis
+of singly-excited determinants.  The elements of this matrix are given 
+by
+<br>
+<br>
+<center>
+<img src="images/H_elements1.png" width=30%> <br>
+</center>
+<br>
+<br>
+where <i>F</i> represents the Fock matrix, and &lang;<i>aj</i>||<i>ib</i>&rang; represents
+an antisymmetrized electron-repulsion integral in physicists' notation.  Recall that the
+Fock matrix for restricted Hartree-Fock theory is diagonal in the MO basis, so this expression
+simplifies sligthly:
+<br>
+<br>
+<center>
+<img src="images/H_elements2.png" width=30%> <br>
+</center>
+<br>
+<br>
+where &epsilon;<sub><i>i</i></sub> and &epsilon;<sub><i>a</i></sub> represent orbital energies.
+<br>
+<br>
+It turns out that when the eigenvalues of the CIS Hamiltonian represented in this spin-orbital
+basis correspond to energies for CIS states of two different spin symmetries: singlets and
+triplets.  If we are only interested in the singlet states, then we can <b>spin adapt</b>
+our basis functions and represent the Hamiltonian matrix in this new spin-adapted basis.
+The singlet spin-adapted basis functions are given by
+<br>
+<br>
+<center>
+<img src="images/spin_adapt_phi.png" width=22%> <br>
+</center>
+<br>
+<br>
+and the corresponding matrix elements of the Hamiltonian are
+<br>
+<br>
+<center>
+<img src="images/H_spin_adapt1.png" width=37%> <br>
+</center>
+<br>
+<br>
+Using chemists' notation, these matrix elements are
+<br>
+<br>
+<center>
+<img src="images/H_spin_adapt2.png" width=37%> <br>
+</center>
+<br>
+<br>
+Note that the orbital labels <i>i, j, a,</i> and <i>b</i> no longer represent
+spin orbitals; they represent spatial orbitals.  The benefits of spin-adaptation here
+are two-fold.  First, the dimension of the Hamiltonian is reduced by a factor of two.
+Second, because matrix diagonalization scales as the third power of matrix size, the
+cost of the diagonalization procedure is reduced by a factor of eight!
+
+<br>
+<br>
+<br>
+Procedure:
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+<br>
+<u>Step 1. Singlet excitation energies</u>
+<br>
+<br>
+<br>
+
+Working with <span style="font-variant: small-caps;">Psi4</span> through Python is quite simple.  
+The first thing we should do is tell Python where the <span style="font-variant: small-caps;">Psi4</span> libraries reside.
+I installed <span style="font-variant: small-caps;">Psi4</span> from source using conda (see <a href=http://vergil.chemistry.gatech.edu/nu-psicode/install-v1.2.1.html>here</a>). Once <span style="font-variant: small-caps;">Psi4</span> is in my path, I can run
+run
+<br>
+<br>
+    
+<pre class="prettyprint">
+
+(08:14 ~/) psi4 --psiapi
+export PATH=/Users/deprince/miniconda3/envs/p4dev/bin:$PATH  # python interpreter
+export PATH=/Users/deprince/edeprince3/psi4/install/master/bin:$PATH  # psi4 executable
+export PYTHONPATH=/Users/deprince/edeprince3/psi4/install/master/lib//:$PYTHONPATH  # psi4 pymodule    
+</pre>
+<br>
+
+Once I add these lines to my ~/.bashrc file and reload my bash environment,  I am 
+ready to interface with <span style="font-variant: small-caps;">Psi4</span> through Python. <br> <br>
+
+Now, open a file (e.g. cis.py) using your
+favorite text editor. You should import both <span style="font-variant: small-caps;">Psi4</span> and numpy libraries; 
+the latter contain some useful features for
+linear algebra and tensory manipulation:
+
+<br>
+<br>
+<pre class="prettyprint">
+    
+import psi4
+import numpy as np
+</pre>
+<br>
+
+Next, you should create a molecule.  In the usual <span style="font-variant: small-caps;">Psi4</span>
+input file, the molecule is designated in the molecule block.  From within Python, the syntax
+looks only slightly different:
+<br>
+<br>
+<pre class="prettyprint">
+
+# set molecule
+mol = psi4.geometry("""
+o
+h 1 1.0
+h 1 1.0 2 104.5
+symmetry c1
+""")    
+</pre>
+<br>
+
+The way you set options through Python is similar to how you would set
+them in a <span style="font-variant: small-caps;">Psi4</span> input file,
+but the syntax is, again, slightly different:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+psi4.set_options({'basis': 'sto-3g',
+                  'scf_type': 'pk',
+                  'e_convergence': 1e-8,
+                  'd_convergence': 1e-8})
+</pre>
+<br>
+
+Now, we are ready to perform a Hartree-Fock computation to determine our
+reference electronic configuration:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+# compute the Hartree-Fock energy and wavefunction
+scf_e, wfn = psi4.energy('SCF', return_wfn=True)
+</pre>
+<br>
+
+Note that we asked the energy routine to return a wavefunction.  This object 
+contains all of the important information from the Hartree-Fock computation,
+including the number of electrons, the number of orbitals, the AO/MO 
+transformation matrices, and more!  We will need some of this information
+for our CIS routine:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+# Grab data from wavfunction
+
+# number of doubly occupied orbitals
+ndocc   = wfn.nalpha()
+
+# total number of orbitals
+nmo     = wfn.nmo()
+
+# number of virtual orbitals
+nvirt   = nmo - ndocc
+
+# orbital energies
+eps     = np.asarray(wfn.epsilon_a())
+
+# occupied orbitals:
+Co = wfn.Ca_subset("AO", "OCC")
+
+# virtual orbitals:
+Cv = wfn.Ca_subset("AO", "VIR")
+</pre>
+<br>
+
+Now, we can use <span style="font-variant: small-caps;">Psi4</span>'s 
+MintsHelper class to generate the two-electron integrals that we 
+need.  The CIS Hamiltonian requires two classes of integrals of the
+type (ov|ov) and (oo|vv), where "o" represents an orbital that 
+is occupied in the reference function, and "v" represents a virtual
+orbital.  The MintsHelper class can construct tensors containing
+these specific classes of orbitals, provided we provide to it the
+corresponding definitions of the molecular orbitals (given by the
+Co and Cv matrices above):
+
+<br>
+<br>
+<pre class="prettyprint">
+
+# use Psi4's MintsHelper to generate ERIs
+mints = psi4.core.MintsHelper(wfn.basisset())
+
+# build the (ov|ov) integrals:
+ovov = np.asarray(mints.mo_eri(Co, Cv, Co, Cv))
+
+# build the (oo|vv) integrals:
+oovv = np.asarray(mints.mo_eri(Co, Co, Cv, Cv))
+</pre>
+<br>
+
+Given these tensors, you can access the element (ij|ab) in Python
+as oovv[i,j,a,b].  Here, the indices <i>i</i> and <i>j</i> could
+run from 0 to ndocc-1, and the indices <i>a</i> and <i>b</i> could
+run from 0 to nvirt-1.
+<br>
+
+For convenience, we can also strip out the occupied and virtual
+orbital energies from the full list of orbital energies that
+we obtained from the wave function object above:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+# strip out occupied orbital energies, eps_o spans 0..ndocc-1
+eps_o = eps[:ndocc]
+
+# strip out virtual orbital energies, eps_v spans 0..nvirt-1
+eps_v = eps[ndocc:]
+</pre>
+<br>
+
+Now, we have all of the ingredients to build the CIS Hamiltonian! 
+Using the expressions above, build the matrix representation of
+the Hamiltonian in the basis of spin-adapted singly-excited functions.
+The dimensions of this Hamiltonian should be ndocc*nvirt by ndocc*nvirt:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+Ham = np.zeros((ndocc*nvirt,ndocc*nvirt))
+</pre>
+<br>
+
+The composite index that represents each basis function 
+(<i>&phi;<sub>i</sub><sup>a</sup></i>),
+can be expressed in terms of the orbitals that define that basis function.
+For example, the index ia = i*nvirt + a, where i=0..ndocc-1, and a=0..nvirt-1.
+Check your <a href=hamiltonian.txt>Hamiltonian matrix</a>.
+<br>
+<br>
+
+Once you have your Hamiltonian, you can diagonalize it using numpy's
+"eigvals" function:
+
+<br>
+<br>
+<pre class="prettyprint">
+
+    # diagonalize Hamiltonian
+    eig = np.linalg.eigvals(Ham)
+</pre>
+<br>
+
+Note that the eigenvalues this function returns will not be 
+sorted.  You should write a small bit of code in Python that
+sorts them from low to high.  Once you have done that,
+you can check your 
+<a href=cis_energies.txt>CIS excitation energies</a>. (Note
+that these reference energies are given in eV, not Hartrees).
+
+<br>
+<br>
+<br>
+<u>Step 2. Triplet excitation energies</u>
+<br>
+<br>
+<br>
+
+We can also define spin-adapted basis functions for triplet spin states.
+The triplet spin-adapted basis functions are given by
+<br>
+<br>
+<center>
+<img src="images/spin_adapt_phi_triplet.png" width=22%> <br>
+</center>
+<br>
+<br>
+and the corresponding matrix elements of the Hamiltonian are
+<br>
+<br>
+<center>
+<img src="images/H_spin_adapt_triplet.png" width=32%> <br>
+</center>
+<br>
+<br>
+Repeat this exercise and check your triplet
+<a href=cis_energies_triplet.txt>CIS excitation energies</a>, which, 
+again, are given in units of eV.
+
+<br>
+<br>
+
+<hr>
+
+<br>
+    
