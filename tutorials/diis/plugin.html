@@ -1,0 +1,375 @@
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+<pre class="prettyprint">
+/*
+ * @BEGIN LICENSE
+ *
+ * myscf by Psi4 Developer, a plugin to:
+ *
+ * Psi4: an open-source quantum chemistry software package
+ *
+ * Copyright (c) 2007-2016 The Psi4 Developers.
+ *
+ * The copyrights for code used from other parties are included in
+ * the corresponding files.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * @END LICENSE
+ */
+
+#include "psi4/psi4-dec.h"
+#include "psi4/liboptions/liboptions.h"
+#include "psi4/libpsio/psio.hpp"
+
+#include "psi4/libmints/wavefunction.h"
+#include "psi4/libmints/mintshelper.h"
+#include "psi4/libmints/matrix.h"
+#include "psi4/libmints/vector.h"
+#include "psi4/libmints/basisset.h"
+#include "psi4/libmints/molecule.h"
+#include "psi4/lib3index/dftensor.h"
+#include "psi4/libqt/qt.h"
+// jk object
+#include "psi4/libfock/jk.h"
+
+// diis solver
+#include "diis.h"
+
+namespace psi{ namespace myscf {
+
+extern "C" PSI_API
+int read_options(std::string name, Options& options)
+{
+    if (name == "MYSCF"|| options.read_globals()) {
+        /*- The amount of information printed to the output file -*/
+        options.add_int("PRINT", 1);
+        /*- Do use DIIS extrapolation? -*/
+        options.add_bool("DIIS", true);
+    }
+
+    return true;
+}
+
+extern "C" PSI_API
+SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
+{
+    int print = options.get_int("PRINT");
+
+    /* Your code goes here */
+
+    outfile-&gtPrintf("\n\n");
+    outfile-&gtPrintf( "        *******************************************************\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *    myscf                                            *\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *    A restricted Hartree-Fock plugin to Psi4         *\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *    Eugene DePrince                                  *\n");
+    outfile-&gtPrintf( "        *                                                     *\n");
+    outfile-&gtPrintf( "        *******************************************************\n");
+
+    // make sure we are running in c1 symmetry
+    if ( ref_wfn-&gtnirrep() &gt 1 ) {
+        throw PsiException("plugin myscf only works with c1 symmetry. Set symmetry c1 in the molecule group in your input file.",__FILE__,__LINE__);
+    }
+
+    // grab the one-electron integrals from MintsHelper:
+    std::shared_ptr&ltMintsHelper&gt mints (new MintsHelper(ref_wfn));
+
+    // one-electron kinetic energy integrals
+    std::shared_ptr&ltMatrix&gt T = mints-&gtso_kinetic();
+
+    // one-electron potential energy integrals
+    std::shared_ptr&ltMatrix&gt V = mints-&gtso_potential();
+
+    // overlap integrals
+    std::shared_ptr&ltMatrix&gt S = mints-&gtso_overlap();
+
+    // build the core hamiltonian
+    std::shared_ptr&ltMatrix&gt h = (std::shared_ptr&ltMatrix&gt)(new Matrix(T));
+    h-&gtadd(V);
+
+    // grab the molecule from the wavefunction that was passed into the plugin
+    std::shared_ptr&ltMolecule&gt mol = ref_wfn-&gtmolecule();
+
+    // get primary basis:
+    std::shared_ptr&ltBasisSet&gt primary = ref_wfn-&gtget_basisset("ORBITAL");
+
+    // total number of basis functions
+    int nso = primary-&gtnbf();
+
+    // get auxiliary basis:
+    std::shared_ptr&ltBasisSet&gt auxiliary = ref_wfn-&gtget_basisset("DF_BASIS_SCF");
+
+    // total number of auxiliary basis functions
+    int nQ = auxiliary-&gtnbf();
+
+    // JK object
+    std::shared_ptr&ltDiskDFJK&gt jk = (std::shared_ptr&ltDiskDFJK&gt)(new DiskDFJK(primary,auxiliary));
+
+    // memory for jk (say, 80% of what is available)
+    jk-&gtset_memory(0.8 * Process::environment.get_memory());
+
+    // integral cutoff
+    jk-&gtset_cutoff(options.get_double("INTS_TOLERANCE"));
+
+    // Do J/K, Not wK 
+    jk-&gtset_do_J(true);
+    jk-&gtset_do_K(true);
+    jk-&gtset_do_wK(false);
+
+    jk-&gtinitialize();
+
+    // grab some input options
+    double e_convergence = options.get_double("E_CONVERGENCE");
+    double d_convergence = options.get_double("D_CONVERGENCE");
+    int maxiter          = options.get_int("MAXITER");
+
+    // use the molecule to determine the total number of electrons
+    int charge     = mol-&gtmolecular_charge();
+    int nelectron  = 0; 
+    for (int i = 0; i &lt mol-&gtnatom(); i++) {
+        nelectron += (int)mol-&gtZ(i);
+    }
+    nelectron -= charge;
+
+    int multiplicity = mol-&gtmultiplicity();
+    double ms = ( multiplicity - 1 ) / 2.0;
+    int nalpha = ( nelectron + (int)(2 * ms) ) / 2;
+    int nbeta  = nelectron - nalpha;
+
+    // this code only works for closed shells
+    if ( nelectron % 2 != 0 ) {
+        throw PsiException("plugin myscf only works for closed shells",__FILE__,__LINE__);
+    }
+
+    // the number of alpha electrons
+    int na = nelectron / 2;
+
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    No. basis functions:            %5i\n",nso);
+    outfile-&gtPrintf("    No. auxiliary basis functions:  %5i\n",nQ);
+    outfile-&gtPrintf("    No. electrons:                  %5i\n",nelectron);
+    outfile-&gtPrintf("    e_convergence:             %10.3le\n",e_convergence);
+    outfile-&gtPrintf("    d_convergence:             %10.3le\n",d_convergence);
+    outfile-&gtPrintf("    maxiter:                        %5i\n",maxiter);
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("\n");
+
+    // allocate memory for coefficients, density, fock matrix
+    std::shared_ptr&ltMatrix&gt Ca = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+    std::shared_ptr&ltMatrix&gt Da = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+    std::shared_ptr&ltMatrix&gt Fa = (std::shared_ptr&ltMatrix&gt)(new Matrix(nso,nso));
+
+    // allocate memory for eigenvectors and eigenvalues of the overlap matrix
+    std::shared_ptr&ltMatrix&gt Sevec ( new Matrix(nso,nso) );
+    std::shared_ptr&ltVector&gt Seval ( new Vector(nso) );
+
+    // build S^(-1/2) symmetric orthogonalization matrix
+    S-&gtdiagonalize(Sevec,Seval);
+
+    std::shared_ptr&ltMatrix&gt Shalf = (std::shared_ptr&ltMatrix&gt)( new Matrix(nso,nso) );
+    for (int mu = 0; mu &lt nso; mu++) {
+        Shalf-&gtpointer()[mu][mu] = 1.0 / sqrt(Seval-&gtpointer()[mu]);
+    }
+
+    // transform Seval back to nonorthogonal basis
+    Shalf-&gtback_transform(Sevec);
+
+    // form F' = ST^(-1/2) F S^(-1/2), where F = h
+    Fa-&gtcopy(h);
+    std::shared_ptr&ltMatrix&gt Fprime ( new Matrix(Fa) );
+    Fprime-&gttransform(Shalf);
+
+    // allocate memory for eigenvectors and eigenvalues of F'
+    std::shared_ptr&ltMatrix&gt Fevec ( new Matrix(nso,nso) );
+    std::shared_ptr&ltVector&gt Feval ( new Vector(nso) );
+
+    // diagonalize F' to obtain C'
+    Fprime-&gtdiagonalize(Fevec,Feval,ascending);
+
+    // Find C = S^(-1/2)C'
+    Ca-&gtgemm(false,false,1.0,Shalf,Fevec,0.0);
+
+    // Construct density from C
+    C_DGEMM('n','t',nso,nso,na,1.0,&(Ca-&gtpointer()[0][0]),nso,&(Ca-&gtpointer()[0][0]),nso,0.0,&(Fprime-&gtpointer()[0][0]),nso);
+    Da-&gtcopy(Fprime);
+
+    // initial energy, E = D(H+F) + Enuc
+    double e_nuc = mol-&gtnuclear_repulsion_energy({0.0,0.0,0.0});
+
+    double e_current = e_nuc;
+    e_current       += Da-&gtvector_dot(h);
+    e_current       += Da-&gtvector_dot(Fa);
+
+    // SCF iterations
+
+    double e_last    = 0.0;
+    double dele      = 0.0;
+    double gnorm     = 0.0;
+
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    Guess energy:  %20.12lf\n",e_current);
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    ==&gt  Begin SCF Iterations &lt==\n");
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    ");
+    outfile-&gtPrintf(" Iter ");
+    outfile-&gtPrintf("              energy ");
+    outfile-&gtPrintf("                  dE ");
+    outfile-&gtPrintf("         RMS |[F,P]| ");
+    outfile-&gtPrintf("\n");
+
+    bool do_diis = options.get_bool("DIIS");
+
+    // Initialize our diis extrapolation manager.  Note that,
+    // in this implemenation, the DIIS managar allocates 
+    // memory for two buffers of the size of the Fock matrix.
+    std::shared_ptr&ltDIIS&gt diis (new DIIS(nso*nso));
+
+    int iter = 0;
+    do {
+
+        e_last = e_current;
+
+        // grab occupied orbitals (the first na)
+        std::shared_ptr&ltMatrix&gt myC (new Matrix(Ca) );
+        myC-&gtzero();
+
+        for (int mu = 0; mu &lt nso; mu++) {
+            for (int i = 0; i &lt na; i++) {
+                myC-&gtpointer()[mu][i] = Ca-&gtpointer()[mu][i];
+            }
+        }
+
+        // push occupied orbitals onto JK object
+        std::vector&lt std::shared_ptr&ltMatrix&gt &gt& C_left  = jk-&gtC_left();
+        C_left.clear();
+        C_left.push_back(myC);
+
+        // form J/K
+        jk-&gtcompute();
+
+        // form F = h + 2*J - K 
+        Fa-&gtcopy(jk-&gtJ()[0]);
+        Fa-&gtscale(2.0);
+        Fa-&gtsubtract(jk-&gtK()[0]);
+        Fa-&gtadd(h);
+
+        // Construct density from C
+        C_DGEMM('n','t',nso,nso,na,1.0,&(Ca-&gtpointer()[0][0]),nso,&(Ca-&gtpointer()[0][0]),nso,0.0,&(Da-&gtpointer()[0][0]),nso);
+
+        // evaluate the current energy, E = D(H+F) + Enuc
+        e_current  = e_nuc;
+        e_current += Da-&gtvector_dot(h);
+        e_current += Da-&gtvector_dot(Fa);
+
+        // dele
+        dele = e_current - e_last;
+
+        // form F' = ST^(-1/2) F S^(-1/2)
+        Fprime-&gtcopy(Fa);
+        Fprime-&gttransform(Shalf);
+
+        // Now, we add a few steps for the DIIS procedure.
+
+        // The extrapolated parameter in DIIS for SCF
+        // is the Fock matrix, F', in the orthonormal basis.
+        // This DIIS manager will write the current F' to
+        // disk to avoid storing multiple copies in main
+        // memory.
+
+        if ( do_diis ) {
+            diis-&gtWriteVector(&(Fprime-&gtpointer()[0][0]));
+        }
+
+        // The error vector in DIIS for SCF is defined as 
+        // the orbital gradient, in the orthonormal basis:
+        // 
+        // ST^{-1/2} [FDS - SDF] S^{-1/2}
+        
+        std::shared_ptr&ltMatrix&gt FDSmSDF(new Matrix("FDS-SDF", nso, nso));
+        std::shared_ptr&ltMatrix&gt DS(new Matrix("DS", nso, nso));
+
+        DS-&gtgemm(false,false,1.0,Da,S,0.0);
+        FDSmSDF-&gtgemm(false,false,1.0,Fa,DS,0.0);
+
+        DS.reset();
+
+        std::shared_ptr&ltMatrix&gt SDF(FDSmSDF-&gttranspose());
+        FDSmSDF-&gtsubtract(SDF);
+
+        SDF.reset();
+
+        std::shared_ptr&ltMatrix&gt ShalfGrad(new Matrix("ST^{-1/2}(FDS - SDF)", nso, nso));
+        ShalfGrad-&gtgemm(true,false,1.0,Shalf,FDSmSDF,0.0);
+        FDSmSDF.reset();
+
+        std::shared_ptr&ltMatrix&gt ShalfGradShalf(new Matrix("ST^{-1/2}(FDS - SDF)S^{-1/2}", nso, nso));
+        ShalfGradShalf-&gtgemm(false,false,1.0,ShalfGrad,Shalf,0.0);
+
+        ShalfGrad.reset();
+
+        // We will use the RMS of the orbital gradient 
+        // to monitor convergence.
+        gnorm = ShalfGradShalf-&gtrms();
+
+        // The DIIS manager will write the current error vector to disk.
+        if ( do_diis ) {
+            diis-&gtWriteErrorVector(&(ShalfGradShalf-&gtpointer()[0][0]));
+        }
+
+        // The DIIS manager extrapolates the Fock matrix, using
+        // the Fock matrices and error vectors generated in this
+        // and previous iterations.
+        if ( do_diis ) {
+            diis-&gtExtrapolate(&(Fprime-&gtpointer()[0][0]));
+        }
+
+        // Now, we resume the usual SCF procedure, using the
+        // extrapolated Fock matrix, F'.
+
+        // Diagonalize F' to obtain C'
+        Fprime-&gtdiagonalize(Fevec,Feval,ascending);
+
+        // Find C = S^(-1/2)C'
+        Ca-&gtgemm(false,false,1.0,Shalf,Fevec,0.0);
+
+        outfile-&gtPrintf("    %5i %20.12lf %20.12lf %20.12lf\n",iter,e_current,dele,gnorm); 
+
+        iter++;
+        if ( iter &gt maxiter ) break;
+
+    }while(fabs(dele) &gt e_convergence || gnorm &gt d_convergence );
+
+    if ( iter &gt maxiter ) {
+        throw PsiException("Maximum number of iterations exceeded!",__FILE__,__LINE__);
+    }
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    SCF iterations converged!\n");
+    outfile-&gtPrintf("\n");
+    outfile-&gtPrintf("    * SCF total energy: %20.12lf\n",e_current);
+    
+    Process::environment.globals["SCF TOTAL ENERGY"] = e_current;
+
+    // Typically you would build a new wavefunction and populate it with data
+    // (note this is just the original wavefunction passed into the module)
+    return ref_wfn;
+}
+
+}} // End namespaces
+</pre>
