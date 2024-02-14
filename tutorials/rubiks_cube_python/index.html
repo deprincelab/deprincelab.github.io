@@ -1,0 +1,253 @@
+---
+layout: page
+math: true
+---
+
+
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+<style>
+.border_gradient {
+border: 8px solid #000;
+padding: 5px 5px 5px 15px;
+width: 300px;
+}
+code {
+    background: hsl(220, 80%, 90%);
+}
+
+pre {
+    padding-bottom: 20px;
+    padding-left:   20px;
+    border:solid;
+    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    width:100%;
+    background: #353535;
+    color: white;
+    text-indent: 1cm;
+}
+</style>
+
+<br>
+
+Fun Stuff: Solving a Rubik's Cube<br>
+<hr>
+
+<br>
+<br>
+What is more satisfying than solving a Rubik's cube? 
+Making a computer solve 
+one for you. 
+
+<br>
+<br> 
+Background <br>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+
+
+In graduate school, one of my lab mates and I had a competition see
+who could first develop a working code to solve
+a Rubik's cube. I think I won, but seeing as the other party is not here 
+to defend himself, yes, I definitely won. 
+<br>
+<br>
+In this tutorial, we will develop an interactive Rubik's cube in Python using VPython (Visual Python), and
+develop enough infrastructure that you can implement code to solve the cube.
+<br>
+<br>
+The Python code for my interactive Rubik's cube and solver can be found <a href=https://github.com/edeprince3/super_coding_fun_time/tree/main/rubiks_cube>here</a>. 
+<br>
+<br>
+Now, the basic design process:
+<br>
+<br>
+Step 1. Develop a framework that allows you to represent and visualize the cube. In
+rubiks_cube.py, you will find the rubiks_cube class with member varibles
+and functions that represent the elements of the cube and to manipulate the 
+cube. Aside from an internal representation of the data, you will want to
+have some way of actually visualizing the cube. For this tutorial, we will use VPython.
+<br>
+<br>
+Step 2. Develop functions to perform basic operations to manipulate the cube. 
+These include all of the standard operations you might find in any online 
+Rubik's cube tutorials (right face: clockwise rotation, etc.). Each of these
+operations are implemented in the rubiks_cube class in rubiks_cube.py.
+<br>
+<br>
+Step 3. Develop algorithms that can recognize the current state of the cube 
+and 
+apply appropriate operations to work toward the solution. In principle, you 
+can apply any 
+algorithm you want.  Just google "how to solve a Rubik's cube" for some examples.
+You can find the components of my algorithm in the rubiks_cube_solver class
+in rubiks_cube_solver.py. 
+<br>
+<br>
+Interactive Rubik's Cube  <br>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+
+The first thing we need to do is establish an internal representation for the cube.
+Here is the indexing scheme I use for the faces and the elements of the faces:
+
+<pre class="prettyprint">
+
+      b           3
+    l u r       2 0 4
+      f   d       1    5
+
+
+    the origin (0, 0, 0) should be the back
+    left corner, indicated by the arrows
+
+    x increases toward the front of the cube
+    y increases to the right
+    z increases toward the top of the cube
+
+             -> 0|1|2                            
+                3|4|5                            
+                6|7|8                            
+                                                 
+      -> 0|1|2  0|1|2  0|1|2                     
+         3|4|5  3|4|5  3|4|5                     
+         6|7|8  6|7|8  6|7|8                     
+                                                 
+                0|1|2         -> 0|1|2        
+                3|4|5            3|4|5        
+                6|7|8            6|7|8  
+                                                
+</pre>
+
+Here, u, l, r, f, b, and d refer to the top (up), left, right, front, back, and bottom (down) faces.
+We will need to visualize this representation in three-dimensional space. The origin is defined
+as the back left corner, and we use a right-handed coordinate system where the
+x increases toward the front of the cube, y increases to the right, and z increases toward the 
+top of the cube. 
+
+<br>
+<br>
+More coming soon!
+<br>
+<br>
+<!--
+
+
+As an example, here is my solution, as executed with the RubiksCubeSolverClass:
+<pre class="prettyprint">
+
+void display(void){
+
+  // clear
+  glClear (GL_COLOR_BUFFER_BIT);
+  glTranslatef(-.05,0.05,0);
+
+  // your solution goes here!
+  std::shared_ptr&ltRubiksCubeSolver&gt cube (new RubiksCubeSolver());
+
+  cube-&gtLocateOrigin();
+  cube-&gtFormCross();
+  cube-&gtSolveTopLayer();
+  cube-&gtSolveMiddleLayer();
+  cube-&gtFormBottomCross();
+  cube-&gtPermuteBottomCorners();
+  cube-&gtOrientBottomCorners();
+  cube-&gtPermuteBottomEdges();
+
+  printf("\n moves to solution: %3i\n",cube->total_moves());
+
+}
+</pre>
+
+Obviously I've hidden all of the complexity of actually assessing the state
+of the cube at any given step, but the overall algorithm just looks
+like any other one you might find online.
+Here you can see the step-by-step progression my 
+code takes, along with the visualization of the cube. 
+
+<pre class="prettyprint">
+
+  cube-&gtLocateOrigin();
+</pre>
+<img src=rubiks1.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtFormCross();
+</pre>
+<img src=rubiks2.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtSolveTopLayer();
+</pre>
+<img src=rubiks3.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtSolveMiddleLayer();
+</pre>
+<img src=rubiks4.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtFormBottomCross();
+</pre>
+<img src=rubiks5.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtPermuteBottomCorners();
+</pre>
+<img src=rubiks7.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtOrientBottomCorners();
+</pre>
+<img src=rubiks8.png width=65%> <br>
+<pre class="prettyprint">
+
+  cube-&gtPermuteBottomEdges();
+</pre>
+<img src=rubiks9.png width=65%> <br>
+<br>
+Your Rubik's cube solver  <br>
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+Your challenge is to develop a solver that can assess the 
+state of the cube and apply appropriate algorithms to work
+toward the solution. The majority of the complexity will be in
+assessing the state of the cube. Once you understand the 
+state of the cube, manipulating it is straghtforward. For example,
+in the last step above (permute bottom edges), the cube is identified
+to be in "edge state 1" (what that state is, precisely, is irrelevent for 
+the moment). Given that state, a specific algorithm can bring the cube
+to full solution:
+<pre class="prettyprint">
+
+void RubiksCubeSolver::EdgeState1Algorithm(){
+
+    MoveR2();
+    MoveU();
+    MoveF();
+    MoveBprime();
+    MoveR2();
+    MoveFprime();
+    MoveB();
+    MoveU();
+    MoveR2();
+}
+</pre>
+<rb>
+Good luck!
+
+-->
+
+';
+?>
