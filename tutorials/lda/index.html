@@ -100,10 +100,10 @@ where &sigma; represents the spin for the electron (&alpha; or &beta;),
 representation of the densities, defined as
 
 <br>
-$$D_{\mu\nu}^\alpha = \sum_{i=1}^{N_\alpha} C_{\mu i}^\alpha C_{\nu i}^\alpha$$
+$$\rho_\alpha({\bf r}) = \sum_{\mu\nu}D_{\mu\nu}^\alpha \chi_\mu({\bf r}) \chi_\nu({\bf r})$$
 and
 <br>
-$$D_{\mu\nu}^\beta = \sum_{i=1}^{N_\beta} C_{\mu i}^\beta C_{\nu i}^\beta$$
+$$\rho_\beta({\bf r}) = \sum_{\mu\nu}D_{\mu\nu}^\beta \chi_\mu({\bf r}) \chi_\nu({\bf r})$$
 
 As briefly mentioned in the introduction, the simplest class of functionals are the 
 LSDA XC functionals. One of the most popular XC functionals in the literature is
@@ -121,10 +121,10 @@ is defined as sum of the individual exchange contribution from each spin-density
 <i>&rho;</i><sub>&sigma;</sub> where &sigma; can represent &alpha; or &beta; spin 
 
 <br>
-$$E_\text{x}^\text{S}[\rho_\sigma({\bf r}) = 2^{1/3} C \int [\rho_\sigma({\bf r})]^{4/3} d{\bf r}$$
+$$E_\text{x}^\text{S}[\rho_\sigma({\bf r})] = 2^{1/3} C \int [\rho_\sigma({\bf r})]^{4/3} d{\bf r}$$
 where the coefficient C is defined as
 <br>
-$$C = (\frac{9}{8})(\frac{3}{\pi})^{1/3}\alpha$$
+$$C = \left (\frac{9}{8} \right ) \left (\frac{3}{\pi} \right )^{1/3}\alpha$$
 in which, &alpha; is equal to (2/3). Therefore, the Slater exchange functional 
 <i>E</i><sup>S</sup><sub style="position:relative; left: -.6em;">x</sub>[<i>&rho;</i><sub>&alpha;</sub>(<b>r</b>),<i>&rho;</i><sub>&beta;</sub>(<b>r</b>)]
 can be expressed as
@@ -149,8 +149,8 @@ can adopt the quadrature approach to come up with an approximation to recast the
 expression into
 
 <br>
-$$E_\text{x}^\text{S}[\rho_\sigma({\bf r})] \approx 2^{1/3} C \sum_{p=i}^{N} \omega_p [\rho_\sigma({\bf r}_p)]^{4/3} $$
-where, <i>&omega;</i><sub>p</sub> is the weight factor at each point <b>r</b><sub>i</sub>. 
+$$E_\text{x}^\text{S}[\rho_\sigma({\bf r})] \approx 2^{1/3} C \sum_{p=1}^{N} \omega_p [\rho_\sigma({\bf r}_p)]^{4/3} $$
+where, <i>&omega;</i><sub>p</sub> is the weight factor at each point <b>r</b><sub>p</sub>. 
 In simple terms, we have broken the integral into a sum of <i>N</i> instances 
 of the function, calculated at each of the <i>N</i> points, <b>r</b><sub>p</sub> weighted
 by <i>&omega;</i><sub>p</sub>. For this reason, this technique is often called an <i>N</i>-point
@@ -504,12 +504,14 @@ water molecule within the STO-3G basis
     * LDA total energy:     -74.032592742491
 </pre>
 
+<!--
 <br>
 In the present tutorial, We did not talk about the details of the implementation
 of the correlation functional <i>EC_VWN3_RPA_III()</i>.
 Therefore, the next challenge would be to refer to the literature and try
 to understand the fundamentals and the details of the implementation
 of the VWN3 correlation functional included in the plugin's code.
+-->
 
 <br>
 <br>
