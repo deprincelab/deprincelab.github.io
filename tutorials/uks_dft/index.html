@@ -400,12 +400,12 @@ are determined as the eigenvectors of an effective one-electron operator
 that accounts for true many-body effects.  The unrestricted Kohn-Sham (UKS)
 energy is
 <br>
-$$E_\text{Kohn-Sham} = \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + E_{\rm xc}[\rho_\alpha, \rho_\beta]$$
-where \(E_\text{xc}\) represents the exchange-correlation energy functional, and
+<!--$$E_\text{Kohn-Sham} = \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + E_{\rm xc}[\rho_\alpha, \rho_\beta]$$-->
+$$E_\text{Kohn-Sham} = \sum_\sigma \sum_{\mu\nu} D_{\mu\nu}^\simga(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + E_{\rm xc}[\rho_\alpha, \rho_\beta]$$
+where &sigma; represents the spin for the electron (&alpha; or &beta;), \(E_\text{xc}\) represents the exchange-correlation energy functional, and
 &rho;<sub>&alpha;</sub> and &rho;<sub>&beta;</sub> represent the &alpha; and
 &beta; spin densities, respectively.  These spin densities are the real-space
 representation of the densities, defined as
-
 <br>
 $$\rho_\alpha({\bf r}) = \sum_{\mu\nu}D_{\mu\nu}^\alpha \chi_\mu({\bf r}) \chi_\nu({\bf r})$$
 and
