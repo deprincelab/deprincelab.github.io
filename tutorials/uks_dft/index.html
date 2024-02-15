@@ -85,7 +85,7 @@ and &beta;-spin orbitals can be different.
 At the UHF level of theory, the
 total electronic energy is given by
 <br>
-$$E_\text{electronic} = \frac{1}{2} \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + F^\alpha_{\mu\nu}) + \frac{1}{2} \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + F^\beta{\mu\nu})$$
+$$E_\text{electronic} = \frac{1}{2} \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + F^\alpha_{\mu\nu}) + \frac{1}{2} \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + F^\beta_{\mu\nu})$$
 where <i>h</i> represents the core Hamiltonian matrix, 
 <i>D<sup>&alpha;</sup></i> and <i>D<sup>&beta;</sup></i> represent the density matrices 
 for &alpha;- and &beta;-spin electrons, respectively, and <i>F<sup>&alpha;</sup></i> and 
@@ -190,17 +190,17 @@ $$F_{\mu\nu}^\alpha = F_{\mu\nu}^\beta = h_{\mu\nu}$$
 We then transform the Fock matrices to the orthogonal basis 
 defined by L&ouml;wdin's symmetric orthogonalization, giving
 <br>
-$${\bf F}^\alpha\prime} = ({\bf S}^{-1/2})^T {\bf F}^\alpha {\bf S}^{-1/2}$$
+$${\bf F}^{\alpha\prime} = ({\bf S}^{-1/2})^T {\bf F}^\alpha {\bf S}^{-1/2}$$
 and
 <br>
-$${\bf F}^\beta\prime} = ({\bf S}^{-1/2})^T {\bf F}^\beta {\bf S}^{-1/2}$$
+$${\bf F}^{\beta\prime} = ({\bf S}^{-1/2})^T {\bf F}^\beta {\bf S}^{-1/2}$$
 Here, <b>S</b> represents the matrix of overlap integrals.  We diagonalize
 the Fock matrices in the orthogonal basis to determine the eigenvectors
 <br>
-$${\bf F}^\alpha\prime}{\bf C}^{\alpha \prime} = \epsilon_\alpha {\bf C}^{\alpha \prime}
+$${\bf F}^{\alpha\prime}{\bf C}^{\alpha \prime} = \epsilon_\alpha {\bf C}^{\alpha \prime}$$
 and
 <br>
-$${\bf F}^\beta\prime}{\bf C}^{\beta \prime} = \epsilon_\beta {\bf C}^{\beta \prime}
+$${\bf F}^{\beta\prime}{\bf C}^{\beta \prime} = \epsilon_\beta {\bf C}^{\beta \prime}$$
 which are related to the orbital coefficients by a partial
 back transformation to the original non-orthogonal basis, giving
 <br>
@@ -399,15 +399,8 @@ a single antisymmetrized product of Kohn-Sham orbitals, and these orbitals
 are determined as the eigenvectors of an effective one-electron operator
 that accounts for true many-body effects.  The unrestricted Kohn-Sham (UKS)
 energy is
-
 <br>
-<br>
-<center>
-<img src="images/e_elec_uks.png" width=85%> 
-</center> 
-<br>
-<br>
-
+$$E_\text{Kohn-Sham} = \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + E_{\rm xc}[\rho_\alpha, \rho_\beta]$$
 where E<sub>xc</sub> represents the exchange-correlation energy functional, and
 &rho;<sub>&alpha;</sub> and &rho;<sub>&beta;</sub> represent the &alpha; and
 &beta; spin densities, respectively.  These spin densities are the real-space
