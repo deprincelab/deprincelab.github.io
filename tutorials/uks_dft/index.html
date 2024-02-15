@@ -401,26 +401,16 @@ that accounts for true many-body effects.  The unrestricted Kohn-Sham (UKS)
 energy is
 <br>
 $$E_\text{Kohn-Sham} = \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + E_{\rm xc}[\rho_\alpha, \rho_\beta]$$
-where E<sub>xc</sub> represents the exchange-correlation energy functional, and
+where \(E_\text{xc}\) represents the exchange-correlation energy functional, and
 &rho;<sub>&alpha;</sub> and &rho;<sub>&beta;</sub> represent the &alpha; and
 &beta; spin densities, respectively.  These spin densities are the real-space
 representation of the densities, defined as
 
 <br>
-<br>
-<center>
-<img src="images/spin_density_a.png" width=27%> 
-</center> 
-<br>
-<br>
+$$\rho_\alpha({\bf r}) = \sum_{\mu\nu}D_{\mu\nu}^\alpha \chi_\mu({\bf r}) \chi_\nu({\bf r})$$
 and
 <br>
-<br>
-<center>
-<img src="images/spin_density_b.png" width=27%> 
-</center> 
-<br>
-<br>
+$$\rho_\beta({\bf r}) = \sum_{\mu\nu}D_{\mu\nu}^\beta \chi_\mu({\bf r}) \chi_\nu({\bf r})$$
 
 The simplest exchange-correlation functionals depend only on the
 spin densities; these functionals are categorized as Local Spin-Density
@@ -450,15 +440,8 @@ In practice, the unrestricted Kohn-Sham DFT orbitals are optimized in a way
 that is very similar to the UHF procedure.  Rather than diagonalizing the
 UHF Fock matrices to determine our orbitals, we diagonalize Kohn-Sham
 matrices, which have a similar form
-
 <br>
-<br>
-<center>
-<img src="images/kohn_sham_matrix.png" width=60%> 
-</center> 
-<br>
-<br>
-
+$$F_{\mu\nu}^\sigma = h_{\mu\nu} + J_{\mu\nu}^\alpha + J_{\mu\nu}^\beta -\alpha K_{\mu\nu}^\sigma - (1-\alpha)K_{\mu\nu}^{\sigma,\omega} + V_{\mu\nu}^{\text{xc},\alpha}$$
 Here, &sigma; represents the spin for the electron (&alpha; or &beta;), &alpha;
 represents the percentage of exact Hartree-Fock exchange, 
 K<sup>&sigma;,&omega;</sup> represents an exchange matrix generated with the 
