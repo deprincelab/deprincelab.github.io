@@ -92,33 +92,18 @@ are determined as the eigenvectors of an effective one-electron operator
 that accounts for true many-body effects. The UKS energy is
 
 <br>
-<br>
-<center>
-<img src="images/e_elec_uks.png" width=85%> 
-</center> 
-<br>
-<br>
-
-where <i>E</i><sub>xc</sub> represents the XC energy functional, and
+$$E_\text{Kohn-Sham} = \sum_\sigma \sum_{\mu\nu} D_{\mu\nu}^\sigma(h_{\mu\nu} + \frac{1}{2}[J^\alpha_{\mu\nu} + J^\beta_{\mu\nu}] ) + E_{\rm xc}[\rho_\alpha, \rho_\beta]$$
+where &sigma; represents the spin for the electron (&alpha; or &beta;),
+<i>E</i><sub>xc</sub> represents the XC energy functional, and
 <i>&rho;</i><sub>&alpha;</sub> and <i>&rho;</i><sub>&beta;</sub> represent the &alpha; and
 &beta; spin densities, respectively.  These spin densities are the real-space
 representation of the densities, defined as
 
 <br>
-<br>
-<center>
-<img src="images/spin_density_a.png" width=27%> 
-</center> 
-<br>
-<br>
+$$D_{\mu\nu}^\alpha = \sum_{i=1}^{N_\alpha} C_{\mu i}^\alpha C_{\nu i}^\alpha$$
 and
 <br>
-<br>
-<center>
-<img src="images/spin_density_b.png" width=27%> 
-</center> 
-<br>
-<br>
+$$D_{\mu\nu}^\beta = \sum_{i=1}^{N_\beta} C_{\mu i}^\beta C_{\nu i}^\beta$$
 
 As briefly mentioned in the introduction, the simplest class of functionals are the 
 LSDA XC functionals. One of the most popular XC functionals in the literature is
@@ -136,35 +121,15 @@ is defined as sum of the individual exchange contribution from each spin-density
 <i>&rho;</i><sub>&sigma;</sub> where &sigma; can represent &alpha; or &beta; spin 
 
 <br>
-<br>
-<center>
-<img src="images/ExS_sig.png" width=35%> 
-</center> 
-<br>
-<br>
-
+$$E_\text{x}^\text{S}[\rho_\sigma({\bf r}) = 2^{1/3} C \int [\rho_\sigma({\bf r})]^{4/3} d{\bf r}$$
 where the coefficient C is defined as
-
 <br>
-<br>
-<center>
-<img src="images/C.png" width=20%> 
-</center> 
-<br>
-<br>
-
+$$C = (\frac{9}{8})(\frac{3}{\pi})^{1/3}\alpha$$
 in which, &alpha; is equal to (2/3). Therefore, the Slater exchange functional 
 <i>E</i><sup>S</sup><sub style="position:relative; left: -.6em;">x</sub>[<i>&rho;</i><sub>&alpha;</sub>(<b>r</b>),<i>&rho;</i><sub>&beta;</sub>(<b>r</b>)]
 can be expressed as
-
 <br>
-<br>
-<center>
-<img src="images/ExS_total.png" width=60%> 
-</center> 
-<br>
-<br>
-<br>
+$$E_\text{x}^\text{S}[\rho_\alpha({\bf r}), \rho_\beta({\bf r})] = 2^{1/3} C \int \left \{ [\rho_\alpha({\bf r})]^{4/3} + [\rho_\beta({\bf r})]^{4/3} \right \} d{\bf r}$$
 Calculating the Integrals: Quadrature Methods
 <div id="content" style="background-color:#000000;text-align:justify;height:1px;
 width:50%">
@@ -184,16 +149,11 @@ can adopt the quadrature approach to come up with an approximation to recast the
 expression into
 
 <br>
-<br>
-<center>
-<img src="images/quadrature.png" width=35%> 
-</center> 
-<br>
-<br>
-where, <i>&omega;</i><sub>i</sub> is the weight factor at each point <b>r</b><sub>i</sub>. 
+$$E_\text{x}^\text{S}[\rho_\sigma({\bf r})] \approx 2^{1/3} C \sum_{p=i}^{N} \omega_p [\rho_\sigma({\bf r}_p)]^{4/3} $$
+where, <i>&omega;</i><sub>p</sub> is the weight factor at each point <b>r</b><sub>i</sub>. 
 In simple terms, we have broken the integral into a sum of <i>N</i> instances 
-of the function, calculated at each of the <i>N</i> points, <b>r</b><sub>i</sub> weighted
-by <i>&omega;</i><sub>i</sub>. For this reason, this technique is often called an <i>N</i>-point
+of the function, calculated at each of the <i>N</i> points, <b>r</b><sub>p</sub> weighted
+by <i>&omega;</i><sub>p</sub>. For this reason, this technique is often called an <i>N</i>-point
 quadrature.
 
 <br>
