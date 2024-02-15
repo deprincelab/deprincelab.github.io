@@ -441,15 +441,15 @@ that is very similar to the UHF procedure.  Rather than diagonalizing the
 UHF Fock matrices to determine our orbitals, we diagonalize Kohn-Sham
 matrices, which have a similar form
 <br>
-$$F_{\mu\nu}^\sigma = h_{\mu\nu} + J_{\mu\nu}^\alpha + J_{\mu\nu}^\beta -\alpha K_{\mu\nu}^\sigma - (1-\alpha)K_{\mu\nu}^{\sigma,\omega} + V_{\mu\nu}^{\text{xc},\alpha}$$
+$$F_{\mu\nu}^\sigma = h_{\mu\nu} + J_{\mu\nu}^\alpha + J_{\mu\nu}^\beta -\alpha K_{\mu\nu}^\sigma - (1-\alpha)K_{\mu\nu}^{\sigma,\omega} + V_{\mu\nu}^{\text{xc},\sigma}$$
 Here, &sigma; represents the spin for the electron (&alpha; or &beta;), &alpha;
 represents the percentage of exact Hartree-Fock exchange, 
 K<sup>&sigma;,&omega;</sup> represents an exchange matrix generated with the 
 operator erf(&omega;r<sub>12</sub>)/r<sub>12</sub>, as opposed to the usual 
-Coulomb operator, 1/r<sub>12</sub>, and V<sup>xc,&alpha;</sup> represents
+Coulomb operator, 1/r<sub>12</sub>, and V<sup>xc,&sigma;</sup> represents
 the exchange-correlation potential matrix, which is comprised of integrals over
 derivatives of the exchange-correlation functional.  For more detail as
-to what actually goes into V<sup>xc,&alpha;</sup>, 
+to what actually goes into V<sup>xc,&sigma;</sup>, 
 see <a href=http://www.psicode.org/psi4manual/master/dft.html>here</a>.
 
 <br>
