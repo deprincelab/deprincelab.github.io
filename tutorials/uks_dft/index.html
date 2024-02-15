@@ -85,12 +85,7 @@ and &beta;-spin orbitals can be different.
 At the UHF level of theory, the
 total electronic energy is given by
 <br>
-<br>
-<center>
-<img src="images/e_elec_uhf.png" width=60%> 
-</center> 
-<br>
-<br>
+$$E_\text{electronic} = \frac{1}{2} \sum_{\mu\nu} D_{\mu\nu}^\alpha(h_{\mu\nu} + F^\alpha_{\mu\nu}) + \frac{1}{2} \sum_{\mu\nu} D_{\mu\nu}^\beta(h_{\mu\nu} + F^\beta{\mu\nu})$$
 where <i>h</i> represents the core Hamiltonian matrix, 
 <i>D<sup>&alpha;</sup></i> and <i>D<sup>&beta;</sup></i> represent the density matrices 
 for &alpha;- and &beta;-spin electrons, respectively, and <i>F<sup>&alpha;</sup></i> and 
@@ -105,54 +100,24 @@ orbital basis functions are not orthogonal.
 <br>
 The &alpha;- and &beta;-spin Fock matrices are defined as
 <br>
-<br>
-<center>
-<img src="images/fock_a.png" width=32%>
-</center>
-<br>
-<br>
+$$F_{\mu\nu}^\alpha = h_{\mu\nu} + J_{\mu\nu}^\alpha + J_{\mu\nu}^\beta - K_{\mu\nu}^\alpha$$
 and
 <br>
-<br>
-<center>
-<img src="images/fock_b.png" width=32%>
-</center>
-<br>
-<br>
+$$F_{\mu\nu}^\beta = h_{\mu\nu} + J_{\mu\nu}^\alpha + J_{\mu\nu}^\beta - K_{\mu\nu}^\beta$$
 where J<sup>&alpha;</sup> and J<sup>&beta;</sup> are Coulomb matrices 
 for &alpha;- and &beta;-spin electrons, respectively, defined as
 <br>
-<br>
-<center>
-<img src="images/coulomb_a.png" width=22%>
-</center>
-<br>
-<br>
+$$J_{\mu\nu}^\alpha = \sum_{\lambda\sigma} D_{\lambda\sigma}^\alpha (\mu\nu|\lambda\sigma)$$
 and
 <br>
-<br>
-<center>
-<img src="images/coulomb_b.png" width=22%>
-</center>
-<br>
-<br>
+$$J_{\mu\nu}^\beta = \sum_{\lambda\sigma} D_{\lambda\sigma}^\beta (\mu\nu|\lambda\sigma)$$
 Similarly, we define exchange matrices for &alpha;- and &beta;-spin electrons
 as
 <br>
-<br>
-<center>
-<img src="images/exchange_a.png" width=22%>
-</center>
-<br>
-<br>
+$$K_{\mu\nu}^\alpha = \sum_{\lambda\sigma} D_{\lambda\sigma}^\alpha (\mu\sigma|\lambda\nu)$$
 and
 <br>
-<br>
-<center>
-<img src="images/exchange_b.png" width=22%>
-</center>
-<br>
-<br>
+$$K_{\mu\nu}^\beta = \sum_{\lambda\sigma} D_{\lambda\sigma}^\beta (\mu\sigma|\lambda\nu)$$
 As in RHF, the UHF wave function
 is an antisymmetrized product of <i>N</i> molecular 
 orbitals (MOs), and the energy is minimized with respect to 
@@ -160,20 +125,10 @@ variations in the shape of these MOs.  We separately
 expand the &alpha;- and &beta;-spin orbitals as linear
 combinations of atomic orbitals as
 <br>
-<br>
-<center>
-<img src="images/lcao_a.png" width=16%>
-</center>
-<br>
-<br>
+$$\phi_i^\alpha = \sum_\mu C_{\mu i}^\alpha \chi_\mu$$
 and
 <br>
-<br>
-<center>
-<img src="images/lcao_b.png" width=16%>
-</center>
-<br>
-<br>
+$$\phi_i^\beta = \sum_\mu C_{\mu i}^\beta \chi_\mu$$
 where &chi;<sub>&mu;</sub> is an atomic orbital basis function, and the 
 orbital expansion coefficients, C<sup>&alpha;</sup> and 
 C<sup>&beta;</sup>, are the variable parameters in the SCF procedure.  
@@ -181,20 +136,10 @@ These orbitals then define the &alpha;- and &beta;-spin density
 matrices that are used to construct the Coulomb and exchange 
 matrices.  The UHF density matrices are defined as
 <br>
-<br>
-<center>
-<img src="images/d_sum_a.png" width=16%>
-</center>
-<br>
-<br>
+$$D_{\mu\nu}^\alpha = \sum_{i=1}^{N_\alpha} C_{\mu i}^\alpha C_{\nu i}^\alpha$$
 and
 <br>
-<br>
-<center>
-<img src="images/d_sum_b.png" width=16%>
-</center>
-<br>
-<br>
+$$D_{\mu\nu}^\beta = \sum_{i=1}^{N_\beta} C_{\mu i}^\beta C_{\nu i}^\beta$$
 Here, <i>N<sub>&alpha;</sub></i> and <i>N<sub>&beta;</sub></i> represent
 the number of electrons of &alpha; and &beta; spin, respectively.  In the previous
 RHF tutorials, the number of doubly occupied orbitals were determined 
@@ -241,63 +186,28 @@ in the previous tutorials. We begin with
 some guess for the initial orbitals.  In the simplest guess, we approximate
 the &alpha;- and &beta;-spin Fock matrices with the core Hamiltonian:
 <br>
-<br>
-<center>
-<img src="images/fcore_ab.png" width=18%>
-</center>
-<br>
-<br>
+$$F_{\mu\nu}^\alpha = F_{\mu\nu}^\beta = h_{\mu\nu}$$
 We then transform the Fock matrices to the orthogonal basis 
 defined by L&ouml;wdin's symmetric orthogonalization, giving
 <br>
-<br>
-<center>
-<img src="images/fprime_a.png" width=26%>
-</center>
-<br>
-<br>
+$${\bf F}^\alpha\prime} = ({\bf S}^{-1/2})^T {\bf F}^\alpha {\bf S}^{-1/2}$$
 and
 <br>
-<br>
-<center>
-<img src="images/fprime_b.png" width=26%>
-</center>
-<br>
-<br>
+$${\bf F}^\beta\prime} = ({\bf S}^{-1/2})^T {\bf F}^\beta {\bf S}^{-1/2}$$
 Here, <b>S</b> represents the matrix of overlap integrals.  We diagonalize
 the Fock matrices in the orthogonal basis to determine the eigenvectors
 <br>
-<br>
-<center>
-<img src="images/fcec_a.png" width=16%>
-</center>
-<br>
-<br>
+$${\bf F}^\alpha\prime}{\bf C}^{\alpha \prime} = \epsilon_\alpha {\bf C}^{\alpha \prime}
 and
 <br>
-<br>
-<center>
-<img src="images/fcec_b.png" width=16%>
-</center>
-<br>
-<br>
+$${\bf F}^\beta\prime}{\bf C}^{\beta \prime} = \epsilon_\beta {\bf C}^{\beta \prime}
 which are related to the orbital coefficients by a partial
 back transformation to the original non-orthogonal basis, giving
 <br>
-<br>
-<center>
-<img src="images/shalf_cprime_a.png" width=17%>
-</center>
-<br>
-<br>
+$${\bf C}^\alpha = {\bf S}^{-1/2} {\bf C}^{\alpha \prime}$$
 and
 <br>
-<br>
-<center>
-<img src="images/shalf_cprime_b.png" width=17%>
-</center>
-<br>
-<br>
+$${\bf C}^\beta = {\bf S}^{-1/2} {\bf C}^{\beta \prime}$$
 
 When developing your code, you can check your results against
 some reference data for a modified version of the input file
