@@ -1,0 +1,292 @@
+---
+layout: page
+---
+
+<b>Research</b>
+
+<br>
+<br>
+
+Two-electron reduced-density-matrix-based methods
+
+<hr>
+
+<br>
+<br>
+The standard approach for capturing nondynamic correlation effects in quantum
+chemical computations is the complete active space self-consistent field (CASSCF)
+method. In most implementations of CASSCF, the electronic structure of the active space is
+described by a configuration interaction (CI) wave function.  Because the size of the CI
+wave function grows exponentially with the size of the active space, the application of
+CASSCF to large actives spaces is nontrivial. The treatment of large active spaces
+requires one to either (i) abandon CI in favor of some other wave function expansion
+that scales polynomially with system size or (ii) abandon the wave function altogether.
+Methods that employ the two-electron reduced-density matrix (2-RDM) as the central variable,
+such as the variational 2-RDM method (v2RDM), facilitate the design of polynomially-scaling
+CASSCF. The challenge in working directly with the 2-RDM is in ensuring that
+that an optimized 2-RDM actually corresponds to an antisymmetric <i>N</i>-electron
+wave function; a 2-RDM that satisfies this condition is said to be <i>N</i>-representable. 
+The webinar below gives an overview of the v2RDM approach to the nondynamic correlation
+problem and demonstrates how to execute v2RDM calculations in the Q-Chem electronic
+structure package.
+
+<br>
+<br>
+<br>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8Wf2PKqyB9c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+<br>
+
+<br>
+<br>
+
+<u>
+Codes for large-scale v2RDM-driven CASSCF 
+</u>
+<br>
+<br>
+
+We have developed two implementations of the v2RDM-driven CASSCF method. First,
+highly-efficient CPU and GPU-based v2RDM-CASSCF calculations can be carried 
+out using the Q-Chem package (version 5.4 or greater). The GPU implementation is
+currently only available in a development version of this package. Second, we have
+developed free and open-source version of v2RDM-CASSCF in a plugin to the 
+<span style="font-variant: small-caps;">Psi4</span> electronic structure package. 
+This plugin (called hilbert) can be found on <a href="https://github.com/edeprince3/hilbert">GitHub</a>.
+In both codes, the
+active-space 2-RDM is obtained from a semidefinite optimization procedure, 
+without the use of the N-electron wave function. These approximate CASSCF implementations
+can be applied to systems with active spaces as large or larger than 50 electrons 
+in 50 orbitals [a (50e,50o) active space] and thousands of external orbitals (see Fig. 1).  
+
+<br>
+
+<center>
+<!--<img src="images/v2RDM/acene2.png" width=40%> <br>-->
+<img src="images/v2RDM/v2rdm_casscf_toc.png" width=65%> <br>
+<font size="1">
+Figure 1. The singlet/triplet state splitting at the v2RDM CASSCF/cc-pVXZ (X=D,T) level of theory. Experimental and DMRG values are taken from J. Hachmann, J. J. Dorando, M. Aviles, and G. K.-L. Chan, J. Chem. Phys. <b>127</b>, 134309 (2007).  The 2-RDMs satisfy the PQG two-particle N-representability conditions.  Figure reproduced from <i> J. Chem. Theory Comput. </i> <b>12</b>, 2260-2271 (2016).
+</font>
+</center>
+<br>
+
+<!--
+<center>
+<img src="images/v2RDM/acene3.png" width=80%> <br>
+<font size="1">
+Figure 2. (a) Natural orbital occupation numbers convey the emergence of polyradical behavior in the linear acene series. (b) The
+highest occupied and lowest unoccupied natural orbitals become nearly degenerate at 10-acene and cross at 11-acene.
+</font>
+</center>
+-->
+
+You can read more about v2RDM methods, their properties, and our implementations here:
+
+<br>
+<br>
+
+<ul>
+
+ <li> R. R. Li, N. C. Rubin, and A. E. DePrince III, <i>J. Chem. Theory Comput.</i> <b>18</b>, 5966-5977 (2022). <br>
+<a  href=https://doi.org/10.1021/acs.jctc.2c00402 style="color: rgb(100,149,237); text-decoration: none">Challenges for variational reduced-density-matrix theory: Total angular momentum constraints</a><br>
+<br></li>
+
+ <li> J. D. Mallory and A. E. DePrince III, <i>Phys. Rev. A</i>, <b>106</b>, 053710 (2022). <br>
+<a  href=https://link.aps.org/doi/10.1103/PhysRevA.106.053710 style="color: rgb(100,149,237); text-decoration: none">Reduced-density-matrix-based <i>ab initio</i> cavity quantum electrodynamics</a><br>
+<br></li>
+
+  <li> R. R. Li, M. D. Liebenthal, and A. E. DePrince III, <i>J. Chem. Phys.</i> <b>155</b>, 174110 (2021).<br>
+<a  href=https://doi.org/10.1063/5.0066404 style="color: rgb(100,149,237); text-decoration: none">Challenges for variational reduced-density-matrix theory with three-particle <i>N</i>-representability conditions</a><br>
+</li><br>
+
+  <li> R. R. Li and A. E. DePrince III, <i>Phys. Rev. A</i> <b>100</b>, 032509 (2019).  <br>
+<a  href=https://doi.org/10.1103/PhysRevA.100.032509 style="color: rgb(100,149,237); text-decoration: none">Orbital angular momentum constraints in the variational optimization of the two-electron reduced-density matrix</a></li>
+
+  <br>
+
+  <li> J. W. Mullinax, L. N. Koulias, E. Maradzike, M. Mostafanejad, E. Epifanovsky, G. Gidofalvi, and A. E. DePrince III, <i>J. Chem. Theory Comput.</i> <b>15</b>, 6164-6178 (2019).  <br>
+
+<a href=https://doi.org/10.1021/acs.jctc.9b00768 style="color: rgb(100,149,237); text-decoration: none">A heterogeneous CPU + GPU algorithm for variational two-electron reduced-density matrix driven complete active space self-consistent field theory</a> </li>
+
+         <br> 
+
+  <li> J. Fosso-Tande, T.-S. Nguyen, G. Gidofalvi, and A. E. DePrince, III, <i> J. Chem. Theory Comput. </i> <b>12</b>, 2260-2271 (2016).  <br>
+        <a href=http://dx.doi.org/10.1021/acs.jctc.6b00190 style="color: rgb(100,149,237); text-decoration: none">Large-scale variational two-electron reduced-density-matrix-driven complete active space self-consistent field methods</a> </li>
+
+         <br> 
+
+  <li> J. Fosso-Tande, D. R. Nascimento, and A. E. DePrince, III, <i> Mol. Phys. </i> <b> 114</b>, 423-430 (2016).   <br>
+        <a href=http://dx.doi.org/10.1080/00268976.2015.1078008 style="color: rgb(100,149,237); text-decoration: none">Accuracy of two-particle <i> N</i>-representability conditions for describing different spin states and the singlet-triplet gap in the linear acene series</a> </li>
+
+</ul>
+
+<br>
+<u>
+Analytic energy gradients for v2RDM-CASSCF
+</u>
+<br>
+<br>
+
+The direct optimization of the 2-RDM in the v2RDM approach
+is a semidefinite programming (SDP) problem, and the SDP solver
+we employ
+is built upon an augmented Lagrangian formalism.
+Because the Lagrangian is stationary with respect to variations
+in both the primal and dual solutions to the SDP problem, it can
+be shown that expressions for v2RDM-CASSCF analytic energy gradients
+are identical to those that arise in conventional, 
+CI-based CASSCF methods.  
+
+We have implemented analytic energy gradients for v2RDM-CASSCF
+which can be used for geometry optimizations and, in principle
+<i>ab initio</i> molecular dynamics simulations.  As an example,
+we have 
+used our gradient implementation benchmark v2RDM-CASSCF-obtained 
+equilibrium geometries for 
+a collection of small molecules against conventional, CI-based CASSCF.
+For these systems,
+the two-particle (PQG) <i>N</i>-representability conditions yield
+bond lengths that deviate from those from CI-CASSCF by about 0.6 pm,
+and the application of three-particle (T2) conditions reduces the 
+average error by an order of magnitude.  Figure 2 illustrates
+bond lengths for the pentacene molecule computed at the v2RDM-CASSCF/cc-pVDZ
+level of theory [using a (22,22) active space], 
+which differ from those derived from a crystal structure on average by 1.5 pm.
+<br>
+<br>
+
+<center>
+<img src="images/v2RDM/pentacene_equilibrium_structure.png" width=60%> <br>
+<font size="1">
+Figure 2.  Symmetry-unique carbon
+carbon bond lengths (&#8491;)
+obtained at the v2RDM-CASSCF/cc-pVDZ level of theory (red)
+and derived from experiment
+[<i>J. Am. Chem. Soc.</i> <b>129</b>, 10316-10317 (2007), blue]. The RDMs in the v2RDM-CASSCF optimization satisfied the PQG <i>N</i>-representability conditions.  Figure reproduced from <i>J. Chem. Theory Comput.</i> <b>19</b>, 4113-4122 (2017). 
+</font>
+</center>
+
+<br>
+<br>
+
+Analytic gradients are available with conventional four-index electron repulsion integrals (ERIs) 
+in our open-source package 
+<a href="https://github.com/edeprince3/hilbert">hilbert</a>. Analytic gradients are available
+with the resolution-of-the-identity approximation to the ERI tensor in Q-Chem 5.4. You can
+read more about our derivation and implementation of analytic energy gradients for v2RDM-CASSCF
+here:
+
+<br>
+<br>
+
+<ul>
+  <li> J. W. Mullinax, E. Epifanovsky, G. Gidofalvi, and A. E. DePrince III, <i>J. Chem. Theory Comput.</i> <b>15</b>, 276-289 (2019).  <br>
+        <a href=http://dx.doi.org/10.1021/acs.jctc.8b00973 style="color: rgb(100,149,237); text-decoration: none">Analytic energy gradients for variational two-electron reduced-density-matrix methods within the density fitting approximation</a></li><br>
+
+  <li> E. Maradzike, G. Gidofalvi, J. M. Turney, H. F. Schaefer III, and A. E. DePrince III, <i>J. Chem. Theory Comput.</i> <b>19</b>, 4113-4122 (2017).  <br>
+        <a href=http://dx.doi.org/10.1021/acs.jctc.7b00366 style="color: rgb(100,149,237); text-decoration: none">Analytic energy gradients for variational two-electron reduced-density-matrix-driven complete active space self-consistent field theory</a> </li>
+</ul>
+
+<br> 
+
+<u>
+Excitation energies from the extended random phase approximation
+</u>
+<br>
+<br>
+
+The ground-state <i>N</i>-representabilty problem is well understood, 
+but the direct optimization of an excited-state 2-RDM is much more 
+complicated.  
+In fact, without additional conditions that differentiate ground- and 
+excited-state 2-RDMs (which do not exist), a v2RDM-based procedure can
+only ever yield the ground-state 2-RDM of a given spin symmetry.
+<br>
+<br>
+So, to model excited states in strongly-correlated systems, we employ
+and approach known as the extended random phase approximation (ERPA).
+In the simplest form of the ERPA, excited states are approximated as
+single excitations out of the ground state.  In this case, one
+can determine excited-state energies and wave functions with knowledge
+of only ground-state 1- and 2-RDMs, the natural variables of the
+v2RDM method!
+<br>
+<br>
+
+You can read about the application of v2RDM/ERPA to the problem of core-level excitations here:
+        <br>
+<br>
+
+<ul>
+  <li>E. Maradzike and A. E. DePrince III, <i>J. Chem. Phys.</i> <b>149</b>, 234101 (2018). <br>
+<a href=https://doi.org/10.1063/1.5048924 style="color: rgb(100,149,237); text-decoration: none">Modeling core-level excitations
+with variationally optimized reduced-density matrices and the extended random phase approximation.</a> </li>
+</ul>
+
+<br>
+
+You can also read about pure-state <i>N</i>-representability 
+conditions and their consequences within v2RDM/ERPA here:
+
+<br>
+<br>
+
+<ul>
+   <li> A. E. DePrince, III, <i> J. Chem. Phys. </i> <b> 145</b>, 164109 (2016).<br>
+        <a href=http://dx.doi.org/10.1063/1.4965888 style="color: rgb(100,149,237); text-decoration: none">Variational optimization of the two-electron reduced-density matrix under pure-state <i>N</i>-representability conditions</a> </li>
+</ul>
+
+        <br> 
+
+<u>
+Time-dependent RDM methods 
+</u>
+<br>
+<br>
+
+We have developed a method to extract excitation energies from the time-evolution of a one-electron reduced-density matrix (1-RDM) obtained from variational 2-RDM methods.  The equation of motion (EOM) for the 1-RDM depends on the 2-RDM.  In our method, the 2-RDM at a given time is obtained by a ground-state-like minimization of the energy with respect to the elements of the 2-RDM, subject to a subset of known <i>N</i>-representability conditions.  
+<br> 
+<br>
+
+
+The method provides a good description of excitations to states of a different symmetry than the ground state.  For H<sub>2</sub> described by a 6-31G basis set, the &Sigma;<sub>g</sub><sup>+</sup> and &Sigma;<sub>u</sub><sup>+</sup> curves are indistinguishable from those obtained from full configuration interaction (CI) theory. <br> <br>
+
+<center>
+<img src="images/v2RDM/h2_tdv2rdm.png" width=50%> <br>
+</center>
+<br>
+
+The method also predicts accurate excitation energies to the first excited state of different symmetry than the ground state in 4-electron systems like the set of ions that are isoelectronic with beryllium and the molecule, LiH. <br> <br>
+
+<center>
+<img src="images/v2RDM/be_tdv2rdm.png" width=40%>
+<img src="images/v2RDM/lih_tdv2rdm.png" width=45%> <br>
+</center>
+
+
+
+<br>
+
+You can read more about time-dependent RDM methods here:
+
+<br>
+<br>
+
+<ul>
+
+  <li> D. B. Jeffcoat and A. E. DePrince III,
+        <i> J. Chem. Phys. </i> <b> 141</b>, 214104 (2014). <br>
+        <a href=http://dx.doi.org/10.1063/1.4902757 style="color: rgb(100,149,237); text-decoration: none"><i>N</i>-representability-driven reconstruction of the two-electron reduced-density matrix for a real-time time-dependent electronic structure method</a> </li>
+</ul>
+
+
+<br><br>
+
+
+</div>
+
+
+</body>
+</html>
+
