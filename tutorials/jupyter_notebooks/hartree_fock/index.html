@@ -1,0 +1,80 @@
+---
+layout: page
+math: true
+---
+
+
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
+.js?lang=css&skin=desert"></script>
+
+<style>
+.border_gradient {
+border: 8px solid #000;
+padding: 5px 5px 5px 15px;
+width: 300px;
+}
+code {
+    background: hsl(220, 80%, 90%);
+}
+
+pre {
+    padding-bottom: 20px;
+    padding-left:   20px;
+    border:solid;
+    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
+    width:100%;
+    background: #353535;
+    color: white;
+    text-indent: 1cm;
+}
+</style>
+
+<br>
+
+The Hartree-Fock Self-Consistent Field Procedure<br>
+<hr>
+
+<br>
+<br>
+Overview 
+<div id="content" style="background-color:#000000;text-align:justify;height:1px;
+width:50%">
+</div>
+<br>
+<br>
+
+In this project, we will write an unrestricted Hartree-Fock
+self-consistent field (SCF) solver in Python. Technically, we will solve
+the Roothaan equations, which are a representation of the Hartree-Fock
+approach within a basis of non-orthogonal orbitals. We will obtain all of
+the required integrals over these orbitals from the <span style="font-variant: small-caps;">Psi4</span> electronic
+structure package.
+<br>
+<br>
+
+For a tutorial that does not require the use of <span style="font-variant: small-caps;">Psi4</span>, see Daniel
+Crawford's <a href=https://github.com/CrawfordGroup/ProgrammingProjects/tree/master/Project%2303>SCF project</a>. In that project, all required integrals are read
+from text files so that your code can be written independently of any
+electronic structure package.
+<br>
+<br>
+
+For additional information about the SCF procedure, I recommend Szabo and
+Ostlund's book, 
+<a href=http://www.amazon.com/Modern-Quantum-Chemistry-Introduction-Electronic/dp/0486691861/ref=sr_1_1?ie=UTF8&qid=1434159017&sr=8-1&keywords=szabo+ostlund>Modern Quantum Chemistry</a>, or David Sherrill's
+<a href=http://vergil.chemistry.gatech.edu/notes/hf-intro/hf-intro.pdf>online notes</a>.
+<br>
+<br>
+
+You can download the Jupyter notebook for this project <a href=hartree_fock.ipynb>here</a>.
+
+<br>
+<br>
+
+<hr>
+
+<br>
+    
