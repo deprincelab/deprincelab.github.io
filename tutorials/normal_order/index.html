@@ -108,11 +108,10 @@ expression \( \hat{a}_i^{\dagger}\hat{a}_j \hat{a}_l^{\dagger} \hat{a}_k \)
 
     pq.set_print_level(1)
 
-    pq.set_string(['i*','j','l*','k'])
-    pq.add_new_string()
-
+    pq.add_operator_product(1.0, ['a*(i)','a(j)','a*(l)','a(k)'])
     pq.simplify()
-    pq.print()
+    
+    pq.print('all')
 </pre>
 <br>
 which when executed prints
@@ -121,11 +120,11 @@ which when executed prints
 <pre class="prettyprint">
 
     // starting string:
-    //     + 1.00000 i* j l* k 
+    //     +     1.00000000000000 i* j l* k 
 
     // normal-ordered strings:
-    //     + 1.00000 i* k d(jl) 
-    //     - 1.00000 i* l* j k 
+    //     +     1.00000000000000 i* k d(j,l) 
+    //     -     1.00000000000000 i* l* j k 
 </pre>
 <br>
 This simple example can be verified by hand.  Other more complicated strings are much more
