@@ -181,46 +181,49 @@ specific definitions of these operators and functions, see <a href=https://githu
 
 <pre class="prettyprint">
 
-    import pdaggerq
-
+import pdaggerq
+    
     pq = pdaggerq.pq_helper('fermi')
-
+    
     pq.set_print_level(0)
-
+    
     print('')
-    print('    < 0 | e(-T) H e(T) | 0> :')
+    print('# < 0 | e(-T) H e(T) | 0> :')
     print('')
-
+    
     # H = f + v (fock operator plus fluctuation potential)
-
+    
     # one-electron part: 
+    
     # f
     pq.add_operator_product(1.0,['f'])
-
+    
     # [f, T1]
     pq.add_commutator(1.0,['f'],['t1'])
-
+    
     # [f, T2]
     pq.add_commutator(1.0,['f'],['t2'])
-
+    
     # two-electron part: 
-
+    
     # v
     pq.add_operator_product(1.0,['v'])
-
+    
     # [v, T1]
     pq.add_commutator(1.0,['v'],['t1'])
-
+    
     # [v, T2]
     pq.add_commutator(1.0,['v'],['t2'])
-
+    
     # [[v, T1], T1]]
     pq.add_double_commutator(0.5, ['v'],['t1'],['t1'])
-
+    
     pq.simplify()
-
-    pq.print_fully_contracted()
-
+    
+    terms = pq.strings()
+    for term in terms:
+        print(term)
+    
     pq.clear()
 </pre>
 <br>
@@ -229,15 +232,13 @@ The output of this code will be
 
 <pre class="prettyprint">
 
-    < 0 | e(-T) H e(T) | 0> :
+    # < 0 | e(-T) H e(T) | 0> :
 
-
-    // fully-contracted strings:
-    //     +     1.00000000000000 f(i,i) 
-    //     +     1.00000000000000 f(i,a) t1(a,i) 
-    //     -     0.50000000000000 &lt;j,i||j,i&gt; 
-    //     +     0.25000000000000 &lt;j,i||a,b&gt; t2(a,b,j,i) 
-    //     -     0.50000000000000 &lt;j,i||a,b&gt; t1(a,i) t1(b,j)
+    ['+1.00000000000000', 'f(i,i)']
+    ['+1.00000000000000', 'f(i,a)', 't1(a,i)']
+    ['-0.50000000000000', '<j,i||j,i>']
+    ['+0.25000000000000', '<j,i||a,b>', 't2(a,b,j,i)']
+    ['-0.50000000000000', '<j,i||a,b>', 't1(a,i)', 't1(b,j)']
 </pre>
 <br>
 <br>
@@ -252,7 +253,7 @@ that arise in the BCH expansion (up to four nested commutators), which greatly s
     pq.set_print_level(0)
 
     print('')
-    print('    < 0 | e(-T) H e(T) | 0> :')
+    print('# < 0 | e(-T) H e(T) | 0> :')
     print('')
 
     # H = f + v (fock operator plus fluctuation potential)
@@ -261,7 +262,11 @@ that arise in the BCH expansion (up to four nested commutators), which greatly s
     pq.add_st_operator(1.0,['v'],['t1','t2'])
 
     pq.simplify()
-    pq.print_fully_contracted()
+
+    terms = pq.strings()
+    for term in terms:
+        print(term)
+        
     pq.clear()
 </pre>
 <br>
