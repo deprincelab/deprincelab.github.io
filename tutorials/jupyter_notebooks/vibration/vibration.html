@@ -1,9 +1,7 @@
-<!--
 ---
 layout: page
 math: true
 ---
--->
 
 <!DOCTYPE html>
 
@@ -7942,7 +7940,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Power-Series-Solution-to-the-Schr%C3%B6dinger-Equation">Power Series Solution to the Schrödinger Equation<a class="anchor-link" href="#Power-Series-Solution-to-the-Schr%C3%B6dinger-Equation">¶</a></h3><p>The basic idea of a power series solution to a differential equation is to assume that the function, in this case, the wave function, $\psi(x)$, can be expanded as a power series</p>
 <p>$$ \psi(x) = \sum_{n=0}^{\infty} a_n x^n = a_0 + a_1 x + a_2 x^2 + ...$$</p>
-<p>This form can then be substituted back into the differential equation so that we can solve for the unknown expansion coefficients, $a_n$. Doing so, in this case, would lead to a three-term recursion relation amongst the coefficients. It turns out that a simpler, two-term recursion relation can be obtained by instead making a clever choice for the functional form of $\psi(x)$ before invoking the concept of the power series. Armed with the $\textbf{{\color{red}i}{\color{orange}n}{\color{yellow}f}{\color{green}i}{\color{blue}n}{\color{purple}i}{\color{violet}t}{\color{red}e}}$ $\textbf{{\color{orange}w}{\color{yellow}i}{\color{green}s}{\color{blue}d}{\color{purple}o}{\color{violet}m}}$ of already knowing the right answer, we will try</p>
+<p>This form can then be substituted back into the differential equation so that we can solve for the unknown expansion coefficients, $a_n$. Doing so, in this case, would lead to a three-term recursion relation amongst the coefficients. It turns out that a simpler, two-term recursion relation can be obtained by instead making a clever choice for the functional form of $\psi(x)$ before invoking the concept of the power series. Armed with the infinite wisdom of already knowing the right answer, we will try</p>
 <p>$$ \psi(x) = e^{-\alpha x^2/2} f(x)$$</p>
 <p>and expand $f(x)$ as a power series, rather than $\psi(x)$. So, we have</p>
 <p>$$ f(x) = \sum_{n=0}^\infty c_n x^n$$</p>
@@ -8007,7 +8005,7 @@ f^{\prime\prime}(x) &amp;= \sum_{n = 0} (n+2)(n+1) c_{n+2} x^n
 <p>$$ \frac{c_{2l+2}}{c_{2l}} = \frac{\alpha + 4 \alpha l - 2mE/\hbar^2}{(2l+1))(2l+2)}$$</p>
 <p>In the limit of large $l$, we have</p>
 <p>$$ \lim_{l\to\text{large}} \frac{c_{2l+2}}{c_{2l}} = \frac{\alpha}{l}$$</p>
-<p>Performing this exercise on the odd series leads to the same result. Again, armed with the $\textbf{{\color{red}i}{\color{orange}n}{\color{yellow}f}{\color{green}i}{\color{blue}n}{\color{purple}i}{\color{violet}t}{\color{red}e}}$ $\textbf{{\color{orange}w}{\color{yellow}i}{\color{green}s}{\color{blue}d}{\color{purple}o}{\color{violet}m}}$ of already knowing the right answer, let us attempt to find a Taylor series expansion that looks similar in the limit of large $l$. Consider the Taylor series expansion for the Gaussian function</p>
+<p>Performing this exercise on the odd series leads to the same result. Again, armed with the infinite wisdom of already knowing the right answer, let us attempt to find a Taylor series expansion that looks similar in the limit of large $l$. Consider the Taylor series expansion for the Gaussian function</p>
 <p>$$\begin{align}
 e^{\alpha x^2} &amp;= \sum_{n=0} \frac{(\alpha x^2)^n}{n!} \\
 &amp;= 1 + \alpha x^2 + ... + \frac{\alpha^lx^{2l}}{l!} + \frac{\alpha^{l+1}x^{2l+1}}{(l+1)!}
