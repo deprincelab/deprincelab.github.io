@@ -7663,10 +7663,10 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Near the equilibrium H-H distance, the potential in which the nuclei live looks harmonic, i.e., it could be approximated by a quadratic function. How can we extract an appropriate force constant, $k$, from this potential? Well, if</p>
 <p>$$ V(x) = \frac{1}{2} k(x-x_e)^2$$</p>
-<p>where $x$ is the H-H distance, and $x_e$ is the equilibrium H-H distance$, then</p>
+<p>where $x$ is the H-H distance, and $x_e$ is the equilibrium H-H distance, then</p>
 <p>$$ k = \frac{d^2}{dx^2} V(x) $$</p>
 <p>So, we take $k$ to be the second derivative of the potential with respect to the H-H distance, evaluated at the equilibrium geometry. The second derivative of the potential can be calculated numerically, via the centered <a href="https://en.wikipedia.org/wiki/Finite_difference">finite difference</a> formula</p>
-<p>$$k \approx \frac{V(x_e + h) - 2 V(x_e) + V(x_e - h)}{h} $$</p>
+<p>$$k \approx \frac{V(x_e + h) - 2 V(x_e) + V(x_e - h)}{h^2} $$</p>
 <p>where $h$ is a displacement from the equilbrium H-H distance, $x_e$. Here, we calculate $k$ in this way and visualize the harmonic and Hartree-Fock potentials together.</p>
 </div>
 </div>
