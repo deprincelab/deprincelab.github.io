@@ -8244,7 +8244,50 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Selection-Rules">Selection Rules<a class="anchor-link" href="#Selection-Rules">¶</a></h3><p>coming soon!</p>
+<h3 id="Selection-Rules">Selection Rules<a class="anchor-link" href="#Selection-Rules">¶</a></h3><p>The rigid rotor model is a model for molecular rotations. As such, we can use it to predict  rotational energy levels and spectra. Here, we derive rules for which rotational transitions will be "allowed" or "forbidden."</p>
+<h4 id="Fermi's-Golden-Rule-for-Molecular-Rotations">Fermi's Golden Rule for Molecular Rotations<a class="anchor-link" href="#Fermi's-Golden-Rule-for-Molecular-Rotations">¶</a></h4><p>Recall that Fermi's Golden Rule allows us to predict the probability that a system will transition between energy states when interacting with a time-dependent external perturbation. For a rigid rotor interacting with an oscillating electric field, a transition between states characterized by the wave functions $Y^m_l(\theta, \phi)$ and $Y^{m^\prime}_{l^\prime}(\theta, \phi)$ will be proportional to the square modulus of the transition dipole moment involving these wave functions,</p>
+<p>$$\begin{align}
+P_{m,l \to m^\prime, l^\prime} \propto |\langle Y^m_l(\theta, \phi) | \hat{\mu} | Y^{m^\prime}_{l^\prime}(\theta, \phi) \rangle |^2
+\end{align}$$</p>
+<p>For the quantum harmonic oscillator model, we were able to derive selection rules from the recursion relations for Hermite polynomials. It turns out that we can derive selection rules on the change in $m,$ $\Delta m = m - m^{\prime},$ from commutator relations involving the operators $\hat{L}_z$, $x,$, $y,$ and $z.$</p>
+<blockquote>
+<p>Practice</p>
+<blockquote>
+<p>Question 5. Show that $[\hat{L}_z, x] = i\hbar y$</p>
+</blockquote>
+<blockquote>
+<p>Question 6. Show that $[\hat{L}_z, y] = -i\hbar x$</p>
+</blockquote>
+<blockquote>
+<p>Question 7. Show that $[\hat{L}_z, z] = 0$</p>
+</blockquote>
+</blockquote>
+<p>Let us insert $[\hat{L}_z, z] = 0$ into an integral involving the states $Y^m_l$ and $Y^{m^\prime}_{l^\prime}$, where we suppress the notation for the dependence on the coordinates $\theta$ and $\phi$</p>
+<p>$$\begin{align}
+\langle Y^m_l | [\hat{L}_z, z] | Y^{m^\prime}_{l^\prime} \rangle &amp;= 0 \\
+&amp;= \langle Y^m_l | \hat{L}_z z | Y^{m^\prime}_{l^\prime} \rangle - \langle Y^m_l | z\hat{L}_z | Y^{m^\prime}_{l^\prime} \rangle \\
+&amp;= \langle Y^m_l | \hat{L}_z | f \rangle - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
+&amp;= \langle f | \hat{L}_z | Y^m_l \rangle^* - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
+&amp;= m^* \hbar \langle f | Y^m_l \rangle^* - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
+&amp;= m \hbar \langle Y^m_l | f \rangle - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
+&amp;= (m - m^\prime) \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle 
+\end{align}$$</p>
+<p>Where, on the third line, we have introduced a function, $|f\rangle = z|Y^{m^\prime}_{l^\prime}\rangle$ to make the manipulation in the fourth line, based on the Hermiticity of the operator $\hat{L}_z$ a little easier to see. Note also that we also took advantage of the fact that $m$ is a real number, i.e., $m = m^*.$ Now, we are left with</p>
+<p>$$\begin{align}
+(m - m^\prime) \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle = 0
+\end{align}$$</p>
+<p>For $z$ polarized light, a transition between states $Y^m_l$ and $Y^{m^\prime}_{l^\prime}$ will only occur if the integral $\langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle$ is non-zero. If this integral is non-zero, then this equation can only be satisfied if</p>
+<p>$$\begin{align}
+\Delta m =  m - m^\prime = 0
+\end{align}$$</p>
+<p>If we perform a similar exercise involving the commutators $[\hat{L}_z, x]$ and $[\hat{L}_z, y],$ we would find two additional selection rules. So, in total, we have three selection rules on the change in the $m$ quantum number:</p>
+<p>$$ \Delta m = 0, \pm 1 $$</p>
+<blockquote>
+<p>Practice</p>
+<blockquote>
+<p>Question 8: Derive the $\Delta m = \pm 1$ selection rules from the commutators $[\hat{L}_z, x]$ and $[\hat{L}_z, y]$</p>
+</blockquote>
+</blockquote>
 </div>
 </div>
 </div>
