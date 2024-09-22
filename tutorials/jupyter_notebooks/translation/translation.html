@@ -7905,11 +7905,17 @@ $$\begin{align}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Mathematically, we define this potential in a piecewise way as</p>
 <p><strong>Region I</strong>:</p>
-<p>$V(x) = \infty$, $x &lt; 0$</p>
+<p>$$\begin{align}
+V(x) = \infty\text{, }~~~x &lt; 0
+\end{align}$$</p>
 <p><strong>Region II</strong>:</p>
-<p>$V(x) = 0$, $0 \le x \le L$</p>
+<p>$$\begin{align}
+V(x) = 0\text{, }~~~0 \le x \le L
+\end{align}$$</p>
 <p><strong>Region III</strong>:</p>
-<p>$V(x) = \infty$, $x &gt; L$</p>
+<p>$$\begin{align}
+V(x) = \infty\text{, }~~~x &gt; L
+\end{align}$$</p>
 <p>As such, the TISE should be solved in a piecewise way, i.e., for each region of space. We have</p>
 <p>$$\begin{align}
 \psi(x) = \psi_I(x) ~~~ &amp;\text{if } x &lt; 0 \\
@@ -7943,7 +7949,9 @@ $$\begin{align}
 <p>$$ \psi_I(x) = \lim_{V(x)\to \infty} \frac{1}{V(x)-E}\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi_I(x) = 0$$</p>
 <p>From this simple analysis, we can conlude that the wave function must go to zero as $V(x)$ approaches infinity. Therefor the probability of finding a particle at $x \le 0$ is zero ($|\psi_I(x)|^2 = 0$). This result makes sense because the particle would need infinite kinetic energy to overcome the infinite potential energy barrier required to enter that region of space.</p>
 <p>A similar analysis for region III leads to</p>
-<p>$$ \psi_{III}(x) = 0 $$</p>
+<p>$$ \begin{align}
+\psi_{III}(x) = 0 
+\end{align}$$</p>
 </div>
 </div>
 </div>
@@ -8013,7 +8021,7 @@ e^{\pm ikx} = \text{cos}(kx) \pm i \text{sin}(kx)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -8088,7 +8096,6 @@ E_n = \frac{h^2 n^2}{8 m L^2}
 <p>After applying two boundary conditions, we have yet to determine the constant $D$. This constant can be determined by normalization:</p>
 <p>$$\begin{align}
 \int_{-\infty}^{\infty} |\psi(x)|^2 dx &amp;= 1 \\
-&amp;= \int_{-\infty}^{0} |\psi_I(x)|^2 dx + \int_{0}^{L} |\psi_{II}(x)|^2 dx + \int_{L}^{\infty} |\psi_{III}(x)|^2 dx
 &amp;= \int_{0}^{L} |\psi_{II}(x)|^2 dx
 \end{align}$$</p>
 <p>because the integrals over $|\psi(x)|^2$ in regions I and III are zero. Now,</p>
@@ -8101,8 +8108,8 @@ D &amp;= \left ( \frac{2}{L} \right ) ^{1/2}
 \end{align}$$</p>
 <p>where, in the second line, we assumed that $D$ is real-valued, and made use of the double angle formula $[2 \text{sin}^2(t) = 1 - \text{cos}(2t)].$ Now, we have fully defined the spatial wave function for the one-dimensional PIB problem:</p>
 <p>$$ \begin{align}
-\psi_n(x) &amp;= \left ( \frac{2}{L} \right)^{1/2} \text{sin}\left ( \frac{n\pi x}{L}\right)\text{, if } 0 \le x \le L \\
-&amp;= 0\text{, otherwise}
+\psi_n(x) &amp;= \left ( \frac{2}{L} \right)^{1/2} \text{sin}\left ( \frac{n\pi x}{L}\right)\text{, if }~~~0 \le x \le L \\
+&amp;= 0\text{, }~~~\text{otherwise}
 \end{align}$$</p>
 <p>and the energy of the state represented by this wave function is $E_n$.</p>
 <p>Let's visualize the wave functions and probability densities for the first few $n$. For simplicity, we will take the particle to be an electron with mass, $m = m_e$, and we will use atomic units, where $\hbar = 1$ and $m_e = 1$. The length of the box will be $L = 1 a_0$.</p>
@@ -8480,7 +8487,7 @@ E_z &amp;= \frac{n_z^2 h^2}{8mc^2}
 <p>and</p>
 <p>$$ \begin{align}
 E = \frac{h^2}{8m}\left ( \frac{n_x^2}{a^2} + \frac{n_y^2}{b^2} + \frac{n_z^2}{c^2} \right ) 
-\ebd{align}$$</p>
+\end{align}$$</p>
 <p>The ground state (the lowest-energy state) will have $n_x = n_y = n_z = 1.$</p>
 </div>
 </div>
@@ -8798,11 +8805,17 @@ $$ \begin{align}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Mathematically, we define this potential in a piecewise way as</p>
 <p><strong>Region I</strong> ($x &lt; 0$):</p>
-<p>$V(x) = V_0$</p>
+<p>$$\begin{align}
+V(x) = V_0
+\end{align}$$</p>
 <p><strong>Region II</strong> ($0 \le x \le L$):</p>
-<p>$V(x) = 0$</p>
+<p>$$\begin{align}
+V(x) = 0
+\end{align}$$</p>
 <p><strong>Region III</strong> ($x &gt; L$):</p>
-<p>$V(x) = V_0$</p>
+<p>$$\begin{align}
+V(x) = V_0
+\end{align}$$</p>
 </div>
 </div>
 </div>
@@ -8815,21 +8828,37 @@ $$ \begin{align}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Wavefunctions">Wavefunctions<a class="anchor-link" href="#Wavefunctions">¶</a></h3><p>As for the PIB problem, the TISE for the finite square well potential problem should be solved in a piecewise way, i.e., for each region of space. We have</p>
 <p><strong>Region I</strong> ($x &lt; 0$):</p>
-<p>$(\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_I(x) = E \psi_I(x)$</p>
+<p>$$\begin{align}
+\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_I(x) = E \psi_I(x)
+\end{align}$$</p>
 <p>which has solutions of the form</p>
-<p>$\psi_I(x) = C~e^{\alpha x} + D~e^{-\alpha x}$</p>
+<p>$$\begin{align}
+\psi_I(x) = C~e^{\alpha x} + D~e^{-\alpha x}
+\end{align}$$</p>
 <p><strong>Region II</strong> ($0 \le x \le L$):</p>
-<p>$\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_{II}(x) = E \psi_{II}(x)$</p>
+<p>$$\begin{align}
+\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_{II}(x) = E \psi_{II}(x)
+\end{align}$$</p>
 <p>which has solutions of the form</p>
-<p>$\psi_{II}(x) = A~{\rm cos}(\beta x) + B~{\rm sin}(\beta x)$</p>
+<p>$$\begin{align}
+\psi_{II}(x) = A~{\rm cos}(\beta x) + B~{\rm sin}(\beta x)
+\end{align}$$</p>
 <p>and</p>
 <p><strong>Region III</strong> ($x &gt; l$):</p>
-<p>$(\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_{III}(x) = E \psi_{III}(x)$</p>
+<p>$$
+\begin{align}(\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_{III}(x) = E \psi_{III}(x)
+\end{align}$$</p>
 <p>which has solutions of the form</p>
-<p>$\psi_{III}(x) = F~e^{\alpha x} + G~e^{-\alpha x}$</p>
+<p>$$\begin{align}
+\psi_{III}(x) = F~e^{\alpha x} + G~e^{-\alpha x}
+\end{align}$$</p>
 <p>Above, $\alpha$ and $\beta$ are real numbers, defined by</p>
-<p>$\alpha = ( 2 m [V_0 - E] / \hbar^2)^{1/2}$</p>
-<p>$\beta = (2 m E / \hbar^2)^{1/2}$</p>
+<p>$$\begin{align}
+\alpha = ( 2 m [V_0 - E] / \hbar^2)^{1/2}
+\end{align}$$</p>
+<p>$$\begin{align}
+\beta = (2 m E / \hbar^2)^{1/2}
+\end{align}$$</p>
 <p>Note that the solutions in regions I and III involve <strong>real</strong>-valued exponential functions, as opposed to complex exponential functions.</p>
 </div>
 </div>
@@ -8864,26 +8893,50 @@ E - V(x) &amp;= T_x \\
 <p>We can determine the remaining unknown coefficients through the application of additional boundary conditions:</p>
 <ol>
 <li><p>The wavefunction should be continuous between regions I and II (at $x=0$):</p>
-<p>$ \psi_I(x=0) = \psi_{II}(x=0) $</p>
-<p>$ C e^{0} = A \text{cos}(0) + B\text{sin}(0)$</p>
-<p>$C = A$</p>
+<p>$$\begin{align}
+ \psi_I(x=0) = \psi_{II}(x=0)
+ \end{align}$$</p>
+<p>$$\begin{align}
+ C e^{0} = A \text{cos}(0) + B\text{sin}(0)
+ \end{align}$$</p>
+<p>$$\begin{align}
+ C = A
+ \end{align}$$</p>
 </li>
 <li><p>The derivative of the wavefunction should be continuous between regions I and II (at $x=0$):</p>
-<p>$\left . \psi_I(x)^\prime \right |_{x=0} = \left . \psi_{II}(x)^\prime \right |_{x=0}$</p>
-<p>$\left .C \alpha e^{\alpha x} \right |_{x=0} = \left . \left [ -\beta A \text{sin}(\beta x) + \beta B \text{cos}(\beta x) \right ] \right |_{x=0}$</p>
-<p>$C \alpha e^{0}  =  -\beta A \text{sin}(0) + \beta B \text{cos}(0)$</p>
+<p>$$\begin{align}
+ \left . \psi_I(x)^\prime \right |_{x=0} = \left . \psi_{II}(x)^\prime \right |_{x=0}
+ \end{align}$$</p>
+<p>$$\begin{align}
+ \left .C \alpha e^{\alpha x} \right |_{x=0} = \left . \left [ -\beta A \text{sin}(\beta x) + \beta B \text{cos}(\beta x) \right ] \right |_{x=0}
+ \end{align}$$</p>
+<p>$$\begin{align}
+ C \alpha e^{0}  =  -\beta A \text{sin}(0) + \beta B \text{cos}(0)
+ \end{align}$$</p>
 <p>Inserting $C = A$ and solving for $B$, we have</p>
-<p>$B = \frac{\alpha}{\beta} A$</p>
+<p>$$\begin{align}
+ B = \frac{\alpha}{\beta} A
+ \end{align}$$</p>
 <p>or</p>
-<p>$B = [(V_0 - E)^{1/2} / (E)^{1/2}] A$</p>
+<p>$$\begin{align}
+ B = [(V_0 - E)^{1/2} / (E)^{1/2}] A
+ \end{align}$$</p>
 </li>
 <li><p>The wavefunction should be continuous between regions II and III (at $x=L):$</p>
-<p>$\psi_{II}(x=L) = \psi_{III}(x=L) $</p>
-<p>$A\text{cos}(\beta L) + \frac{\alpha}{\beta}  A \text{sin}(\beta L) = G e^{-\alpha L}$</p>
-<p>$G = A ~[ {\rm cos}(\beta L) + \alpha~ / \beta ~{\rm sin}(\beta L) ] ~e^{\alpha L}$</p>
+<p>$$\begin{align}
+ \psi_{II}(x=L) = \psi_{III}(x=L) 
+ \end{align}$$</p>
+<p>$$\begin{align}
+ A\text{cos}(\beta L) + \frac{\alpha}{\beta}  A \text{sin}(\beta L) = G e^{-\alpha L}
+ \end{align}$$</p>
+<p>$$\begin{align}
+ G = A ~[ {\rm cos}(\beta L) + \alpha~ / \beta ~{\rm sin}(\beta L) ] ~e^{\alpha L}
+ \end{align}$$</p>
 </li>
 <li><p>The derivative of the wavefunction should be continuous between regions II and III (at $x=L).$ Omitting the algebra, this condition leads us to a trancendental equation for the energy:</p>
-<p>${\rm tan}[(2mE/\hbar^2)^{1/2} L] = 2 (V_0-E)(E)^{1/2}/(2 E-V_0)$</p>
+<p>$$\begin{align}
+ {\rm tan}[(2mE/\hbar^2)^{1/2} L] = 2 (V_0-E)(E)^{1/2}/(2 E-V_0)
+ \end{align}$$</p>
 </li>
 </ol>
 <p>Lastly, the coefficent A can be determined by normalization.</p>
@@ -8918,7 +8971,7 @@ E - V(x) &amp;= T_x \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># set some parameters (in atomic units, where hbar = 1)</span>
@@ -8935,7 +8988,7 @@ E - V(x) &amp;= T_x \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dE</span> <span class="o">=</span> <span class="mf">0.01</span>
@@ -8997,7 +9050,7 @@ E - V(x) &amp;= T_x \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">allowable_energies</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
@@ -9354,24 +9407,46 @@ No, the minimum number of bound states is one, no matter what values we have for
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Region I</strong> ($x &lt; 0$):</p>
-<p>$V(x) = 0$</p>
-<p>$\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_I(x) = E \psi_I(x)$</p>
+<p>$$\begin{align}
+V(x) = 0
+\end{align}$$</p>
+<p>$$\begin{align}
+\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_I(x) = E \psi_I(x)\begin{align}
+\end{align}$$</p>
 <p>which has solutions of the form</p>
-<p>$\psi_I(x) = A~e^{ikx} + B~e^{-ikx}$</p>
+<p>$$\begin{align}
+\psi_I(x) = A~e^{ikx} + B~e^{-ikx}
+\end{align}$$</p>
 <p><strong>Region II</strong> ($0 \le x \le L$):</p>
-<p>$V(x) = V_0$</p>
-<p>$(\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_{II}(x) = E \psi_{II}(x)$</p>
+<p>$$\begin{align}
+V(x) = V_0
+\end{align}$$</p>
+<p>$$\begin{align}
+(\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_{II}(x) = E \psi_{II}(x)
+\end{align}$$</p>
 <p>which has solutions of the form</p>
-<p>$\psi_{II}(x) = C~e^{\lambda x} + D~e^{-\lambda x}$</p>
+<p>$$\begin{align}
+\psi_{II}(x) = C~e^{\lambda x} + D~e^{-\lambda x}
+\end{align}$$</p>
 <p>and</p>
 <p><strong>Region III</strong> ($x &gt; L$):</p>
-<p>$V(x) = 0$</p>
-<p>$\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_{III}(x) = E \psi_{III}(x)$</p>
+<p>$$\begin{align}
+V(x) = 0
+\end{align}$$</p>
+<p>$$\begin{align}
+\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_{III}(x) = E \psi_{III}(x)
+\end{align}$$</p>
 <p>which has solutions of the form</p>
-<p>$\psi_{III}(x) = F~e^{i k x} + G~e^{-i k x}$</p>
+<p>$$\begin{align}
+\psi_{III}(x) = F~e^{i k x} + G~e^{-i k x}
+\end{align}$$</p>
 <p>Above, $k$ and $\lambda$ are real numbers, defined by</p>
-<p>$k = (2 m E / \hbar^2)^{1/2}$</p>
-<p>$\lambda = ( 2 m [V_0 - E] / \hbar^2)^{1/2}$</p>
+<p>$$\begin{align}
+k = (2 m E / \hbar^2)^{1/2}
+\end{align}$$</p>
+<p>$$\begin{align}
+\lambda = ( 2 m [V_0 - E] / \hbar^2)^{1/2}
+\end{align}$$</p>
 <p>Similar to the finite square well potential problem, the solutions in regions I and III (where $V(x) = 0$) involve complex exponential functions, while the solution in region II (where $V(x) = V_0 &gt; E$) involves real-valued exponential functions.</p>
 </div>
 </div>
