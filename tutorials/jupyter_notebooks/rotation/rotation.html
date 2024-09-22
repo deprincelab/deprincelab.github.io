@@ -26,7 +26,6 @@ Jupyter Notebook Tutorials: Introduction to Quantum Mechanics
 
 <hr>
 
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -8549,7 +8548,102 @@ c = j(j+1)\hbar^2
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Spin-Angular-Momentum">Spin Angular Momentum<a class="anchor-link" href="#Spin-Angular-Momentum">¶</a></h2><p>Coming soon!</p>
+<h2 id="Spin-Angular-Momentum">Spin Angular Momentum<a class="anchor-link" href="#Spin-Angular-Momentum">¶</a></h2><p>Spin angular momentum is an intrinsic property of microscopic particles, like their mass and charge. The concept of spin emerges in Dirac's relativistic extension of the Schrödinger equation. In non-relativistic quantum mechanics, spin is incorporated into a wave function because we know, from experiment, that quantum particles possess this property. Fundamental particles can be chategorized in one of two ways, based on their spin. <strong>Fermions</strong> have half-integer spin; for example, electrons are fermions with a spin quantum number, $s = \frac{1}{2}.$ <strong>Bosons</strong> have integer spin; for example, photons are bosons with $s = 1.$</p>
+<p>Let us consider the spin of an electron, which is a fermion. All electrons have $s = \frac{1}{2},$ which determins the magnitude of the spin angular momentum, $s(s+1)\hbar^2 = \frac{3}{4}\hbar^2.$ From general chemistry, we learn that electrons can half $\alpha$ or $\beta$ spin, and we also refer to these electrons has having spin up or down. The terms "up" and "down" refer to the $z$ projection of the spin angular momentum, $m_s \hbar.$. From the analysis in the previous section, we know $m_s$ for an electron can take on two values. $alpha$ spin electrons have $m_s = + \frac{1}{2},$ while $\beta$ spin electrons have $m_s = - \frac{1}{2}.$</p>
+<p>The operators for spin angular momentum are analogous to those we considered above for orbital angular momentum. We have</p>
+<p>$$\begin{align}
+\vec{S} &amp;= \hat{S}_x \vec{i} + \hat{S}_y \vec{j} + \hat{S}_z \vec{k} \\
+\hat{S}^2 &amp;= \hat{S}_x^2 + \hat{S}_y^2 + \hat{S}_z^2 \\
+\end{align}$$</p>
+<p>These operators have the same commutator properties as we derived above for orbital angular momentum, so</p>
+<p>$$\begin{align}
+[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
+[\hat{S}^2, \hat{S}_y] &amp;= 0 \\
+[\hat{S}^2, \hat{S}_z] &amp;= 0 \\
+[\hat{S}_x, \hat{S}_y] &amp;= i\hbar \hat{S}_z \\
+[\hat{S}_z, \hat{S}_x] &amp;= i\hbar \hat{S}_y \\
+[\hat{S}_y, \hat{S}_z] &amp;= i\hbar \hat{S}_x \\
+\end{align}$$</p>
+<p>Mathematically, we represent spin operators as</p>
+<p>$$\begin{align}
+\hat{S}_x &amp;= \frac{\hbar}{2} \sigma_x \\
+\hat{S}_y &amp;= \frac{\hbar}{2} \sigma_y \\
+\hat{S}_z &amp;= \frac{\hbar}{2} \sigma_z
+\end{align}$$</p>
+<p>where $\sigma_x,$ $\sigma_y,$ and $\sigma_z$ are $2 \times 2$ Hermitian matrices called "Pauli spin matrices" and are defined by</p>
+<p>$$\begin{align}
+\sigma_x &amp;= \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \\ \end{pmatrix} \\
+\sigma_y &amp;= \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \\ \end{pmatrix} \\
+\sigma_z &amp;= \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \\
+\end{align}$$</p>
+<p>The spin state of an electron can then be represented as a two-component vector quantity. We have</p>
+<p>$$\begin{align}
+|\alpha \rangle &amp;= \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+|\beta \rangle &amp;= \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+\end{align}$$</p>
+<p>Are $|\alpha\rangle$ and $|\beta \rangle$ eigenfunctions (or eigenvectors) of the spin matrices? For $\hat{S}_x,$ we have</p>
+<p>$$\begin{align}
+\hat{S}_x | \alpha \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+&amp;= \frac{\hbar}{2} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+&amp;=  \frac{\hbar}{2} |\beta\rangle \\
+\hat{S}_x | \beta \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+&amp;= \frac{\hbar}{2} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+&amp;=  \frac{\hbar}{2} |\alpha\rangle
+\end{align}$$</p>
+<p>For $\hat{S}_y,$ we have</p>
+<p>$$\begin{align}
+\hat{S}_y | \alpha \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+&amp;= \frac{\hbar}{2} \begin{pmatrix} 0 \\ i \end{pmatrix} \\
+&amp;=  \frac{i\hbar}{2} |\beta\rangle \\
+\hat{S}_y | \beta \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+&amp;= \frac{\hbar}{2} \begin{pmatrix} -i \\ 0 \end{pmatrix} \\
+&amp;=  -\frac{i\hbar}{2} |\alpha\rangle
+\end{align}$$</p>
+<p>For $\hat{S}_z,$ we have</p>
+<p>$$\begin{align}
+\hat{S}_z | \alpha \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+&amp;= \frac{\hbar}{2} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+&amp;=  \frac{\hbar}{2} |\alpha\rangle \\
+\hat{S}_z | \beta \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+&amp;= \frac{\hbar}{2} \begin{pmatrix} 0 \\ -1 \end{pmatrix} \\
+&amp;=  -\frac{\hbar}{2} |\beta\rangle
+\end{align}$$</p>
+<p>So, $|\alpha\rangle$ and $|\beta\rangle$ are not eigenfunctions of $\hat{S}_x$ or $\hat{S}_y,$ but they are eigenfunctions of $\hat{S}_z,$ with eigenvalues equal to $\frac{\hbar}{2}$ and $-\frac{\hbar}{2},$ respectively.</p>
+<p>Are $|\alpha\rangle$ and $|\beta\rangle$ are eigenfunctions of $\hat{S}^2$? We have</p>
+<p>$$\begin{align}
+\hat{S}^2|\alpha\rangle &amp;= \hat{S}_x^2|\alpha\rangle + \hat{S}_y^2|\alpha\rangle + \hat{S}_z^2|\alpha\rangle \\
+ &amp;= \frac{\hbar}{2}\hat{S}_x|\beta\rangle + \frac{i\hbar}{2}\hat{S}_y|\beta\rangle + \frac{\hbar}{2}\hat{S}_z|\alpha\rangle \\
+ &amp;= \frac{\hbar^2}{4}|\alpha\rangle + \frac{\hbar^2}{4}|\alpha\rangle + \frac{\hbar^2}{4}|\alpha\rangle \\
+ &amp;= \frac{3\hbar^2}{4}|\alpha\rangle
+\end{align}$$
+and, similarly,</p>
+<p>$$\begin{align}
+\hat{S}^2|\beta\rangle &amp;= \frac{3\hbar^2}{4}|\beta\rangle
+\end{align}$$</p>
+<p>So, both $|\alpha\rangle$ and $|\beta\rangle$ are eigenfunctions of $\hat{S}^2$, with eigenvalue $\frac{3\hbar^2}{4}.$</p>
+<blockquote>
+<p>Practice</p>
+<blockquote>
+<p>Question 10.</p>
+<p>Show that
+$$\begin{align}[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
+[\hat{S}^2, \hat{S}_y] &amp;= 0 \\
+[\hat{S}^2, \hat{S}_z] &amp;= 0 \\
+[\hat{S}_x, \hat{S}_y] &amp;= i\hbar \hat{S}_z \\
+[\hat{S}_z, \hat{S}_x] &amp;= i\hbar \hat{S}_y \\
+[\hat{S}_y, \hat{S}_z] &amp;= i\hbar \hat{S}_x \\
+\end{align}$$</p>
+</blockquote>
+<blockquote>
+<p>Question 11.</p>
+<p>Find spin eigenfunctions of $\hat{S}_x$ and $\hat{S}_y.$ Are these eigenfunctions also eigenfunctions of $\hat{S}^2$?</p>
+</blockquote>
+</blockquote>
+<p>Lastly, note that a general spin function for an electron could be a linear combination of the $|\alpha\rangle$ and $|\beta\rangle$ spin functions, i.e.,</p>
+<p>$$\begin{align}
+|g\rangle = c_1 |\alpha \rangle + c_2 |\beta\rangle
+\end{align}$$</p>
+<p>where $c_1$ and $c_2$ are probability amplitudes whose square moduli are the respective probabilities that the electron would be found to have either spin up or down, if this property was measured.</p>
 </div>
 </div>
 </div>
