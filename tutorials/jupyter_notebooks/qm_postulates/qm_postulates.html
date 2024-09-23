@@ -7568,13 +7568,21 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">¶</a></h2><h3 id="Dirac-Notation">Dirac Notation<a class="anchor-link" href="#Dirac-Notation">¶</a></h3><p>Consider a function, $f_n$. In Dirac notation, we write this function as</p>
-<p>$$ f_n = |f_n \rangle$$</p>
+<p>$$\begin{align}
+f_n = |f_n \rangle
+\end{align}$$</p>
 <p>This function is referred to as a "ket". The complex conjugate of this function is called a "bra":</p>
-<p>$$ f_n^* = \langle f_n | $$</p>
+<p>$$\begin{align}
+f_n^* = \langle f_n | 
+\end{align}$$</p>
 <p>Dirac (or "bracket") notation gives us a compact way to represent integrals over functions and operators. For example,</p>
-<p>$$\langle f_n | f_m \rangle = \int f_n^* f_m d\tau$$</p>
+<p>$$\begin{align}
+\langle f_n | f_m \rangle = \int f_n^* f_m d\tau
+\end{align}$$</p>
 <p>or</p>
-<p>$$\langle f_n |\hat{A}| f_m \rangle = \int f_n^* \hat{A} f_m d\tau$$</p>
+<p>$$\begin{align}
+\langle f_n |\hat{A}| f_m \rangle = \int f_n^* \hat{A} f_m d\tau
+\end{align}$$</p>
 <p>where $\tau$ refers to all space and $\hat{A}$ is an operator. We can see that any time a bra and a key are used together in this way, an integral over all space is implied.</p>
 </div>
 </div>
@@ -7605,34 +7613,50 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Operators">Operators<a class="anchor-link" href="#Operators">¶</a></h3><p>Operators are important objects in quantum mechanics. Mathematically, an operator is a rule that transforms a function into another function. As an example, consider the differential operator, $\frac{d}{dx}$:</p>
-<p>$$ \frac{d}{dx}f(x) = f^\prime(x)$$</p>
+<p>$$\begin{align}
+\frac{d}{dx}f(x) = f^\prime(x)
+\end{align}$$</p>
 <p>The operator, $\frac{d}{dx}$, acts on the function, $f(x)$ to give another function, $f^\prime(x)$. As an explicit example, if</p>
-<p>$$f(x) = x^2 + 3e^x$$</p>
+<p>$$\begin{align}
+f(x) = x^2 + 3e^x
+\end{align}$$</p>
 <p>then</p>
-<p>$$ \frac{d}{dx}(x^2 + 3e^x) = 2x + 3e^x$$</p>
+<p>$$\begin{align}
+\frac{d}{dx}(x^2 + 3e^x) = 2x + 3e^x
+\end{align}$$</p>
 <p>In this case, it is clear that the operator $\frac{d}{dx}$ has transformed the function $f(x)$ into a <em>different</em> function of $x$. Oftentimes in quantum mechanics we deal with cases in which an operator acts on the function and the function is unchanged, except for a constant value, like</p>
-<p>$$ \hat{\Omega} f_i = \omega_i f_i $$</p>
+<p>$$\begin{align}
+\hat{\Omega} f_i = \omega_i f_i 
+\end{align}$$</p>
 <p>where $\hat{\Omega}$ is an operator, $f_i$ is a function, and $\omega_i$ is a constant. This equation is an example of an eigenvalue equation. The function, $f_i$, is referred to as an eigenfunction of $\hat{\Omega}$, and $\omega_i$ is the associated eigenvalue. The subscript $i$ is meant to imply that there could be many different eigenfunctions of $\Omega$, with (possibly) different eigenvalues.</p>
 <blockquote>
 <h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Which of the following functions are eigenfunctions of $\frac{d}{dx}$? If they are eigenfunctions, what are the associated eigenvalues?</p>
 <blockquote>
 <p>Question 1</p>
-<p>$$f(x) = e^{ax}$$</p>
+<p>$$\begin{align}
+f(x) = e^{ax}
+\end{align}$$</p>
 <details>
 <summary>Answer 1</summary> 
 Well,
 
-<p>$$ \frac{d}{dx} e^{ax} = a e^{ax}$$</p>
+<p>$$\begin{align}
+\frac{d}{dx} e^{ax} = a e^{ax}
+\end{align}$$</p>
 <p>so, yes, $f(x) = e^{ax}$ is an eigenfunction of $\frac{d}{dx}$, and the eigenvalue is $a$.</p>
 </details>
 </blockquote>
 <blockquote>
 <p>Question 2</p>
-<p>$$f(x) = e^{ax^2}$$</p>
+<p>$$\begin{align}
+f(x) = e^{ax^2}
+\end{align}$$</p>
 <details>
 <summary>Answer 2</summary>
 <p>Well,</p>
-<p>$$ \frac{d}{dx} e^{ax^2} = 2 a x e^{ax^2}$$</p>
+<p>$$\begin{align}
+\frac{d}{dx} e^{ax^2} = 2 a x e^{ax^2}
+\end{align}$$</p>
 <p>so, no, $f(x) = e^{ax^2}$ is not an eigenfunction of $\frac{d}{dx}$.</p>
 </details>
 </blockquote>
@@ -7640,17 +7664,27 @@ Well,
 <p>Operators are defined by how they act on functions, so, when describing properties of operators, it is important to consider the function on which they act.</p>
 <p><strong>Equality of operators:</strong></p>
 <p>Operators $\hat{A}$ and $\hat{B}$ are equal to one another if they return the same result when acting on the same function, as</p>
-<p>$$ \hat{A} f(x) = \hat{B} f(x)$$</p>
+<p>$$\begin{align}
+\hat{A} f(x) = \hat{B} f(x)
+\end{align}$$</p>
 <p><strong>Sums / differences of operators:</strong></p>
-<p>$$ (\hat{A} \pm \hat{B})f(x) = \hat{A}f(x) \pm \hat{B}f(x)$$</p>
+<p>$$\begin{align}
+(\hat{A} \pm \hat{B})f(x) = \hat{A}f(x) \pm \hat{B}f(x)
+\end{align}$$</p>
 <p><strong>Products of operators:</strong></p>
-<p>$$ \hat{A}\hat{B}f(x) = \hat{A} [ \hat{B}f(x) ]$$</p>
+<p>$$\begin{align}
+\hat{A}\hat{B}f(x) = \hat{A} [ \hat{B}f(x) ]
+\end{align}$$</p>
 <p>Here, the square brackets are meant to emphasize that the result of the action of operator $\hat{B}$ on $f(x)$ must be evaluated first, followed by the action of operator $\hat{A}$ on the result of $\hat{B}f(x)$.</p>
 <p><strong>Commutative property:</strong></p>
 <p>When considering products of operators, the order of operations matters. This property of operator algebra differs from regular algebra, where we expect scalar numbers to commute with one another, i.e.,</p>
-<p>$$ab = ba$$</p>
+<p>$$\begin{align}
+ab = ba
+\end{align}$$</p>
 <p>For general operators, $\hat{A}$ and $\hat{B}$, however, $\hat{A}\hat{B}f(x)$ might not equal $\hat{B}\hat{A}f(x)$. For example, consider how products of the operators $\hat{A} = x$ and $\hat{B} = \frac{d}{dx}$ act on a function, $f(x)$. We have</p>
-<p>$$ \hat{A}\hat{B}f(x) = x\frac{d}{dx}f(x) = xf^\prime(x)$$</p>
+<p>$$\begin{align}
+\hat{A}\hat{B}f(x) = x\frac{d}{dx}f(x) = xf^\prime(x)
+\end{align}$$</p>
 <p>and</p>
 <p>$$ 
 \begin{align}
@@ -7659,21 +7693,35 @@ Well,
 \end{align}
 $$</p>
 <p>Clearly,</p>
-<p>$$ xf^\prime(x) \neq f(x) + xf^\prime(x)$$</p>
+<p>$$\begin{align}
+xf^\prime(x) \neq f(x) + xf^\prime(x)
+\end{align}$$</p>
 <p>Put another way,</p>
-<p>$$ x\frac{d}{dx} f(x) \neq \frac{d}{dx} x f(x)$$</p>
+<p>$$\begin{align}
+x\frac{d}{dx} f(x) \neq \frac{d}{dx} x f(x)
+\end{align}$$</p>
 <p>which implies that</p>
-<p>$$ x \frac{d}{dx} \neq \frac{d}{dx} x $$</p>
+<p>$$\begin{align}
+x \frac{d}{dx} \neq \frac{d}{dx} x
+\end{align}$$</p>
 <p>Note that, in order to say that the operators $x \frac{d}{dx}$ and $\frac{d}{dx} x$ do not equal one another, we <em>must</em> consider the action of these operators on a function. Note also that this function should be a function of the same variables that are involved in the operators.</p>
 <p>This example demonstrates that the order of operations can matter in operator algebra. Because the results of $x \frac{d}{dx}$ and $\frac{d}{dx} x$ acting on a function differ, we say that the operators $x$ and $\frac{d}{dx}$ <em>do not commute</em>. We will see later that the commutative properties of operators have significant implications in quantum mechanics.</p>
 <p>The commutative properties of operators are described by the commutator</p>
-<p>$$ [\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}$$</p>
+<p>$$\begin{align}
+[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}
+\end{align}$$</p>
 <p>In order to evaluate a commutator, you must consider how the commutator acts on a function, as</p>
-<p>$$ [\hat{A}, \hat{B}]f(x, y, ...) = \hat{A}\hat{B}f(x, y, ...) - \hat{B}\hat{A}f(x, y, ...)$$</p>
+<p>$$\begin{align}
+[\hat{A}, \hat{B}]f(x, y, ...) = \hat{A}\hat{B}f(x, y, ...) - \hat{B}\hat{A}f(x, y, ...)
+\end{align}$$</p>
 <p>and this function should be a function of the same variables that arrise in the operators. If</p>
-<p>$$ [\hat{A}, \hat{B}] = 0 $$</p>
+<p>$$\begin{align}
+[\hat{A}, \hat{B}] = 0 
+\end{align}$$</p>
 <p>then we say that $\hat{A}$ and $\hat{B}$ commute. If</p>
-<p>$$ [\hat{A}, \hat{B}] \neq 0 $$</p>
+<p>$$\begin{align}
+[\hat{A}, \hat{B}] \neq 0 
+\end{align}$$</p>
 <p>then we say that $\hat{A}$ and $\hat{B}$ do not commute.</p>
 <blockquote>
 <h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Evaluate the commutators of the following pairs of operators. Which pairs of operators commute?</p>
@@ -7713,27 +7761,41 @@ $$</p>
 \end{align}
 $$</p>
 <p>Therefore,
-$$ [x, \frac{d}{dx}] = -1$$
+$$ \begin{align}
+[x, \frac{d}{dx}] = -1
+\end{align}$$
 and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 </details>
 </blockquote>
 </blockquote>
 <p><strong>Powers of Operators</strong></p>
 <p>The square of an operator is simply the product of the operator with itself:</p>
-<p>$$ \hat{A}^2 = \hat{A} \hat{A} $$</p>
+<p>$$\begin{align}
+\hat{A}^2 = \hat{A} \hat{A} 
+\end{align}$$</p>
 <p>More generally, the $n$th power of an operator is</p>
-<p>$$ \hat{A}^n = \prod_i^n \hat{A} $$</p>
+<p>$$\begin{align}
+\hat{A}^n = \prod_i^n \hat{A} 
+\end{align}$$</p>
 <p>The commutator of an operator with any power of itself is zero, so</p>
-<p>$$ [\hat{A}^m, \hat{A}^n] = 0$$</p>
+<p>$$\begin{align}
+[\hat{A}^m, \hat{A}^n] = 0
+\end{align}$$</p>
 <p><strong>Functions of Operators</strong></p>
 <p>Occasionally in quantum mechanics, we encounter functions of operators, such as $e^{\hat{A}}$. Such an expression can be evaluated using the Taylor series expansion for the function in question. For example,</p>
-<p>$$ e^{\hat{A}} = 1 + \hat{A} + \frac{1}{2!}\hat{A}^2 + \frac{1}{3!}\hat{A}^3 + ...$$</p>
+<p>$$\begin{align}
+e^{\hat{A}} = 1 + \hat{A} + \frac{1}{2!}\hat{A}^2 + \frac{1}{3!}\hat{A}^3 + ...
+\end{align}$$</p>
 <p>Later, when we introduce the concept of a basis and the matrix representations of an operator within a basis, we will discuss a numerical procedure for evaluating functions of operators that does not require the Taylor series expansion.</p>
 <p><strong>Linear Operators</strong></p>
 <p>As we will see shortly, every physical observable has a corresponding linear, Hermitian operator. Linear operators have the following properties</p>
-<p>$$ \hat{A}[f(x) + g(x)] = \hat{A}f(x) + \hat{A}g(x)$$</p>
+<p>$$\begin{align}
+\hat{A}[f(x) + g(x)] = \hat{A}f(x) + \hat{A}g(x)
+\end{align}$$</p>
 <p>and</p>
-<p>$$ \hat{A}[cf(x)] = c \hat{A}f(x)$$</p>
+<p>$$\begin{align}
+\hat{A}[cf(x)] = c \hat{A}f(x)
+\end{align}$$</p>
 <p>for any constant, $c$. Examples of linear operators include the differential operator, $\frac{d}{dx}$, and the position operator $x$. Examples of non-linear operators include the square operator, $()^2$, and trigonometric functions such as sin().</p>
 </div>
 </div>
@@ -7747,9 +7809,13 @@ and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Hermitian Operators</strong></p>
 <p>As mentioned above, quantum mehcanical operators that represent physical observables are Hermitian. For well-behaved functions, $f_m$ and $f_n$, the operator $\hat{\Omega}$ satisfies</p>
-<p>$$ \int f_m^* \hat{\Omega} f_n d\tau = \left ( \int f_n^* \hat{\Omega} f_m d\tau \right )^* = \int f_n \left ( \hat{\Omega} f_m \right) ^* d\tau $$</p>
+<p>$$ \begin{align}
+\int f_m^* \hat{\Omega} f_n d\tau = \left ( \int f_n^* \hat{\Omega} f_m d\tau \right )^* = \int f_n \left ( \hat{\Omega} f_m \right) ^* d\tau 
+\end{align}$$</p>
 <p>or, in Dirac notation,</p>
-<p>$$ \langle f_m | \hat{\Omega} | f_n \rangle = \langle f_n | \hat{\Omega} | f_m \rangle^*$$</p>
+<p>$$ \begin{align}
+\langle f_m | \hat{\Omega} | f_n \rangle = \langle f_n | \hat{\Omega} | f_m \rangle^*
+\end{align}$$</p>
 <p>Hermitian operators have a variety of nice properties that we will discuss in detail soon.</p>
 </div>
 </div>
@@ -7774,13 +7840,21 @@ and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Postulate-1:-The-Wave-Function">Postulate 1: The Wave Function<a class="anchor-link" href="#Postulate-1:-The-Wave-Function">¶</a></h3><p>In classical mechanics, the state of a system is specified by the positions $\{q_i\}$ and momenta $\{p_i\}$ of all of the particles that make up the system. As we will soon see, it is impossible for one to know both the position and momentum of a quantum mechanical particles simultaneously (this is one manifestation of the Heisenberge uncertainty principle). As such, it is impossible to specify the state of a quantum mechanical system in the same way that the state is specified in classical mechanics. Rather, the state of a quantum mechanical system is specified by the wave function, $\Psi(\{q_i\}, t)$, which is a function of the positions of all of the partitcles that make up the system and time.</p>
 <p>The wave function must be well-behaved. Above, we learned that a well-behaved function should be continuous, single-valued, square integrable (finite), and it should have a continuous first derivative. For the wave function, these properties will generally hold, with two exceptions. First, the requirement of a continuous first derivative is lifted if the potential experienced by the particle is not finite. As an example, consider the interaction between an electron and a proton in a hydrogen atom. The potential experienced by the particles is the Coulomb potential. If the proton's position is fixed at the origin, then this potential can be expressed in terms of the position of the electron, $\vec{r} = (x, y, z)$, i.e.,</p>
-<p>$$ V(\vec{r}) = -\frac{e^2}{4\pi\epsilon_0 |r|}$$</p>
+<p>$$ \begin{align}
+V(\vec{r}) = -\frac{e^2}{4\pi\epsilon_0 |r|}
+\end{align}$$</p>
 <p>where $e$ is the charge of the electron, $\epsilon_0$ is the permittivity of free space, and $|r| = \sqrt{x^2 + y^2 + z^2}$. This diverges at small $|r|$:</p>
-<p>$$ \lim_{|r|\to 0} V(\vec{r}) = -\infty $$</p>
+<p>$$ \begin{align}
+\lim_{|r|\to 0} V(\vec{r}) = -\infty 
+\end{align}$$</p>
 <p>As such, the wave function for a hydrogen atom might not be smooth at $|r| = 0$. Indeed, this is the case for the ground-state wave function for the hydrogen atom (a $1s$ orbital), the spatial part of which is</p>
-<p>$$\psi_{1s}(\vec{r}) = N_{1s} e^{-\alpha |r|}$$</p>
+<p>$$\begin{align}
+\psi_{1s}(\vec{r}) = N_{1s} e^{-\alpha |r|}
+\end{align}$$</p>
 <p>where $N_{1s}$ and $\alpha$ are constants. Consider a slice in the $z$ direction, where $x=0$ and $y=0$. Then</p>
-<p>$$\psi_{1s}(0, 0, z) = N_{1s} e^{-\alpha |z|}$$</p>
+<p>$$\begin{align}
+\psi_{1s}(0, 0, z) = N_{1s} e^{-\alpha |z|}
+\end{align}$$</p>
 <p>Let's plot an exponential function like this to get an idea of what the wave function looks like.</p>
 </div>
 </div>
@@ -7850,10 +7924,14 @@ and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 <li><p>For a single microscopic particle traveling in one dimension, in a state described by the wave function $\Psi(x, t),$ the quantity $|\Psi(x,t)|^2 dx$ is proportional to the probability of finding the particle between $x$ and $x+dx$ at time $t$. For a particle traveling in three dimensions, in a state described by the wave function $\Psi(x, y, z, t),$ the quantity $|\Psi(x, y, z, t)|^2 dx~ dy~ dz$ is proportional the probability of finding the particle in the region $x$ and $x+dx$, $y$ and $y+dy$, and $z$ and $z + dz$.</p>
 </li>
 <li><p>For a single microscopic particle traveling in one dimension, in a state described by the wave function $\Psi(x, t),$ the probabilty of finding the particle between $x=a$ and $x=b$ is proportional to the integral</p>
-<p>$$ \int_a^b |\Psi(x, t)|^2 dx$$</p>
+<p>$$ \begin{align}
+\int_a^b |\Psi(x, t)|^2 dx
+\end{align}$$</p>
 </li>
 <li><p>The probability of finding the particle anywhere in space should be one. This idea is related to the concept of "normalization." We say that a wave function, $\Psi$ is normalized if</p>
-<p>$$\int |\Psi|^2 d\tau = 1$$</p>
+<p>$$\begin{align}
+\int |\Psi|^2 d\tau = 1
+\end{align}$$</p>
 </li>
 </ol>
 </div>
@@ -7867,7 +7945,9 @@ and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Normalizing-the-Wave-Function">Normalizing the Wave Function<a class="anchor-link" href="#Normalizing-the-Wave-Function">¶</a></h4><p>A function that is not normalized can be normalized by the following procedure. First, scale the wave function by some constant, $N$,</p>
-<p>$$ \Psi \to N\Psi$$</p>
+<p>$$ \begin{align}
+   \Psi \to N\Psi
+   \end{align}$$</p>
 <p>Second, choose $N$ such that the new wave function is normalized. In which case we have</p>
 <p>$$\begin{align}
 \int |N\Psi|^2 d\tau &amp;= 1 \\
@@ -7875,12 +7955,18 @@ and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 &amp; = N^2 \int |\Psi|^2 d\tau
 \end{align}$$</p>
 <p>In the third line, we have assumed that $N$ is real valued ($N=N^*$). Now, we simply solve for the normalization constant, $N$:</p>
-<p>$$N = \left ( \frac{1}{\int |\Psi^2| d\tau} \right )^{1/2}$$</p>
+<p>$$\begin{align}
+N = \left ( \frac{1}{\int |\Psi^2| d\tau} \right )^{1/2}
+\end{align}$$</p>
 <p>and the wave function $N\Psi$ is guaranteed to be normalized. Once the wave function is normalized, we can modify some of the statements given above. For example, for a normalized wave function describing the state of a particle traveling in one dimension, the quantity $|\Psi(x, t)|^2 dx$ is <strong>equal</strong> to the probability of finding the particle between $x$ and $x+dx$. If the wave function is not normalized, then we can only say that $|\Psi(x, t)|^2 dx$ is <strong>proportional</strong> to the probability of finding the particle between $x$ and $x+dx$.</p>
 <p>Does normalizing a wave function change anything about the state it represents? No, scaling a wave function by a constant does not change anything about the state that the wave function represents. Put another way, two wave functions that differ by only a constant factor represent the same state. As an example, consider the function</p>
-<p>$$ f(\phi) = e^{i m \phi}$$</p>
+<p>$$ \begin{align}
+f(\phi) = e^{i m \phi}
+\end{align}$$</p>
 <p>where $m$ is an integer, and $\phi$ is the azimuthal angle in a spherical coordinate representation,</p>
-<p>$$ \vec{r} = (r, \theta, \phi) $$</p>
+<p>$$ \begin{align}
+\vec{r} = (r, \theta, \phi) 
+\end{align}$$</p>
 <p>with</p>
 <p>$$\begin{align}
 0 &amp;\le r &lt; \infty\\ 
@@ -7908,7 +7994,9 @@ Normalize $f(\phi)$. What is the normalization constant, $N$?</p>
 <details>
 <summary>Answer 6</summary>
 <p>First, scale $f(\phi)$ by a constant, $N$.
-$$ f(\phi) \to N f(\phi)$$
+$$ \begin{align}
+f(\phi) \to N f(\phi)
+\end{align}$$
 Now, determine $N$ such that the scaled function is normalized
 $$
     \begin{align} 
@@ -7944,9 +8032,13 @@ $$</p>
 </blockquote>
 <p>As these practice problems showed us, normalizing the function $f(\phi)$ does not change the fact that it is an eigenfunction of the operator $\frac{d}{d\phi}$.</p>
 <p>As a more general example, consider a function $f_i$ that is an eigenfunction of a linear operator $\hat{\Omega}$</p>
-<p>$$ \hat{\Omega} f_i = \omega_i f_i$$</p>
+<p>$$ \begin{align}
+\hat{\Omega} f_i = \omega_i f_i
+\end{align}$$</p>
 <p>If we scale the function by a scalar factor</p>
-<p>$$ f_i \to N f_i $$</p>
+<p>$$ \begin{align}
+f_i \to N f_i 
+\end{align}$$</p>
 <p>then the new function is still an eigenfunction of $\hat{\Omega}$</p>
 <p>$$\begin{align}
 \hat{\Omega} (N f_i) &amp;= N \omega_i f_i \\
@@ -7989,7 +8081,9 @@ $$\begin{align}
 <details>
 <summary>Answer 8</summary>
 <p>The classical expression for $T_x$ is</p>
-<p>$$T_x = \frac{p_x^2}{2m}$$</p>
+<p>$$\begin{align}
+T_x = \frac{p_x^2}{2m}
+\end{align}$$</p>
 <p>Given Rule 2 above, the quantum mechanical operator, $\hat{T}_x$ should be</p>
 <p>$$ \begin{align}
 \hat{T}_x &amp;= \frac{\hat{p}_x^2}{2m} \\
@@ -8004,7 +8098,9 @@ $$\begin{align}
 <details>
 <summary>Answer 9</summary>
 <p>The classical expression for the total energy</p>
-<p>$$ E = \frac{p_x^2}{2m} + V(x)  $$</p>
+<p>$$ \begin{align}
+E = \frac{p_x^2}{2m} + V(x)  
+\end{align}$$</p>
 <p>Given Rules 1 and 2 above, the quantum mechanical operator energy operator (the Hamiltonian), $\hat{H}$, should be</p>
 <p>$$ \begin{align}
 \hat{H} &amp;= \hat{T}_x + V(x) \\
@@ -8018,7 +8114,9 @@ $$\begin{align}
 <details>
 <summary>Answer 10</summary> 
 The classical expression for the kinetic energy, $T$, is
-$$ T = \frac{1}{2m}\left ( p_x^2 + p_y^2 + p_z^2 \right ) $$
+$$ \begin{align}
+T = \frac{1}{2m}\left ( p_x^2 + p_y^2 + p_z^2 \right ) 
+\end{align}$$
 Given Rule 2 above, the quantum mechanical operator, $\hat{T}$ should be
 
 <p>$$ 
@@ -8037,7 +8135,9 @@ where $\nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y
 <details>
 <summary>Answer 11</summary> 
 The classical expression for the kinetic energy, $T$, is
-$$ T = \sum_i^N \frac{1}{2m_i}\left ( p_{x_i}^2 + p_{y_i}^2 + p_{z_i}^2 \right ) $$
+$$ \begin{align}
+T = \sum_i^N \frac{1}{2m_i}\left ( p_{x_i}^2 + p_{y_i}^2 + p_{z_i}^2 \right ) 
+\end{align}$$
 Given the result of Question 10, the quantum mechanical operator, $\hat{T}$ should be
 
 <p>$$ 
@@ -8060,11 +8160,18 @@ where $m_i$ is the mass of particle $i$, and $\nabla_i^2 = \frac{\partial^2}{\pa
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Postulate-3:-Results-of-Measurements">Postulate 3: Results of Measurements<a class="anchor-link" href="#Postulate-3:-Results-of-Measurements">¶</a></h3><p>The only possible values that result from measurement of observable $\Omega$ are the eigenvalues, $\omega_i$, that satisfy</p>
-<p>$$ \hat{\Omega} f_i = \omega_i f_i $$</p>
+<p>$$ \begin{align}
+\hat{\Omega} f_i = \omega_i f_i 
+\end{align}$$</p>
 <p>where $\hat{\Omega}$ is the linear Hermitian operator corresponding to obvervable, $\Omega$, and $f_i$ are well-behaved functions. The fact that $\hat{\Omega}$ is Hermitian has important implications for this postulate. Recall that, for well-behaved functions $f_m$ and $f_n$ and Hermitian operator $\hat{A}$</p>
-<p>$$ \langle f_m | \hat{A} | f_n \rangle = \langle f_n | \hat{A} | f_m \rangle^*$$</p>
+<p>$$ 
+\begin{align}\langle f_m | \hat{A} | f_n \rangle = \langle f_n | \hat{A} | f_m \rangle^*
+\end{align}$$</p>
 <h4 id="Properties-of-Hermitian-Operators">Properties of Hermitian Operators<a class="anchor-link" href="#Properties-of-Hermitian-Operators">¶</a></h4><p>Now, consider the case where $f_m = f_n$ and $f_n$ is an eigenfunction of $\hat{A}$, i.e.,</p>
-<p>$$ \hat{A} f_n = a_n f_n$$</p>
+<p>$$ 
+\begin{align}
+\hat{A} f_n = a_n f_n
+\end{align}$$</p>
 <p>In this case, we have</p>
 <p>$$ 
 \begin{align}
@@ -8080,9 +8187,13 @@ Therefore, $a_n$ must be real-valued. We have just proved a theorem related to t
 <p>The eigenfunctions of Hermitian operators also have some nice properties. Let us prove the following theorem:</p>
 <p><strong>Theorem 2</strong>: The eigenfunctions of Hermitian operators with different eigenvalues or orthogonal.</p>
 <p>Let us consider an operator $\hat{B}$, with eigenfunctions that satisfy</p>
-<p>$$ \hat{B} g_i = b_i g_i$$</p>
+<p>$$ \begin{align}
+\hat{B} g_i = b_i g_i
+\end{align}$$</p>
 <p>If eigenfunctions $g_i$ and $g_j$ are orthogonal, then they should satisfy</p>
-<p>$$ \langle g_i | g_j \rangle  = 0 ~~~~\text{(if $i\neq j$)}$$</p>
+<p>$$ \begin{align}
+\langle g_i | g_j \rangle  = 0 ~~~~\text{(if $i\neq j$)}
+\end{align}$$</p>
 <p><strong>Proof</strong>:</p>
 <p>Consider two eigenfunctions of $\hat{B}$, $g_i$ and $g_j$, with eigenvalues $b_i\neq b_j$. Since $\hat{B}$ is Hermitian, the following relationship should hold</p>
 <p>$$ \begin{align}
@@ -8093,9 +8204,13 @@ b_j \langle g_i| g_j \rangle &amp;= b_i \langle g_i| g_j \rangle \\
 (b_j - b_i)\langle g_i| g_j \rangle = 0
 \end{align}$$
 where, in the second-to-last line, we have used the fact that $b_i = b_i^*$, as proved above. The last line can be satisfied if</p>
-<p>$$b_i = b_j$$
+<p>$$\begin{align}
+b_i = b_j
+\end{align}$$
 or
-$$\langle g_i | g_j \rangle = 0$$</p>
+$$\begin{align}
+\langle g_i | g_j \rangle = 0
+\end{align}$$</p>
 <p>We reject the first option because because $b_i \neq b_j$ by definition. Hence, $\langle g_i | g_j \rangle = 0 $.</p>
 </div>
 </div>
@@ -8108,13 +8223,21 @@ $$\langle g_i | g_j \rangle = 0$$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>If two functions are orthogonal, we often say that they have zero overlap. The following example illustrates the orthogonality of wave functions for a hydrogen atom. Recall that the lowest-energy wave function (a $1s$ orbital) looks like</p>
-<p>$$\psi_{1s}(\vec{r}) = N_{1s} e^{-\alpha |r|}$$</p>
+<p>$$\begin{align}
+\psi_{1s}(\vec{r}) = N_{1s} e^{-\alpha |r|}
+\end{align}$$</p>
 <p>The $2p_z$ orbital is the wave function for a higher-energy state (an excited state) and has the form</p>
-<p>$$\psi_{2p_z}(\vec{r}) = N_{2p_z} z e^{-\alpha |r|/2}$$</p>
+<p>$$\begin{align}
+\psi_{2p_z}(\vec{r}) = N_{2p_z} z e^{-\alpha |r|/2}
+\end{align}$$</p>
 <p>If, like above, we consider the slice along the $z$-axis where $x=y=0$, then we have</p>
-<p>$$\psi_{1s}(0, 0, z) = N_{1s} e^{-\alpha |z|}$$</p>
+<p>$$\begin{align}
+\psi_{1s}(0, 0, z) = N_{1s} e^{-\alpha |z|}
+\end{align}$$</p>
 <p>and</p>
-<p>$$\psi_{2p_z}(0, 0, z) = N_{2p_z} z e^{-\alpha |z|/2}$$</p>
+<p>$$\begin{align}
+\psi_{2p_z}(0, 0, z) = N_{2p_z} z e^{-\alpha |z|/2}
+\end{align}$$</p>
 <p>Let us visualize these wave functions with Python.</p>
 </div>
 </div>
@@ -8168,7 +8291,9 @@ $$\langle g_i | g_j \rangle = 0$$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Clearly, $\psi_{1s}$ and $\psi_{2p_z}$ are even and odd functions in $z$, respectively. For this reason, the integral of their product over the $z$-direction will be zero, and, thus</p>
-<p>$$\langle \psi_{1s} | \psi_{2p_z} \rangle = \int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} dy \int_{-\infty}^{\infty} dz ~\psi_{1s}^*(x, y, z) \psi_{2p_z}(x, y, z) = 0 $$</p>
+<p>$$\begin{align}
+\langle \psi_{1s} | \psi_{2p_z} \rangle = \int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} dy \int_{-\infty}^{\infty} dz ~\psi_{1s}^*(x, y, z) \psi_{2p_z}(x, y, z) = 0 
+\end{align}$$</p>
 <p>We can use Python to verify that the integral over the $z$-direction is indeed zero.</p>
 </div>
 </div>
@@ -8232,7 +8357,9 @@ g_2 &amp;= G + c F
 &amp; = \langle F | G \rangle + c \langle F | F \rangle
 \end{align}$$</p>
 <p>Solving for $c$ gives us</p>
-<p>$$ c = - \frac{\langle F | G \rangle}{\langle F | F \rangle} $$</p>
+<p>$$ \begin{align}
+c = - \frac{\langle F | G \rangle}{\langle F | F \rangle} 
+\end{align}$$</p>
 <p>which is just a number. Now, our orthogonal functions are</p>
 <p>$$ \begin{align}
 g_1 &amp;= F \\
@@ -8301,12 +8428,13 @@ Because $(h_+ + h_-) \neq ( h_+ - h_-)$, we can say that $(h_+ + h_-)$ is not an
 ... &amp;
 \end{align}$$</p>
 <p>Based on Theorems 2 and 3 defined above, the eigenfunctions of Hermitian operators are either already orthogonal to one another, or they can be chosen such that they are orthogonal. We have also seen while discussing Postulate 1 that we are always free to normalize functions, and normalizing them does not change their properties. As such, unless otherwise noted, we often assume that eigenfunctions of Hermitian operators are orthonormalized. A set of orthonormal functions, $\{g_i\}$, satisfies</p>
-<p>$$ \langle g_i | g_j \rangle = \delta_{ij} =
+<p>$$ \begin{align}
+\langle g_i | g_j \rangle = \delta_{ij} =
 \begin{cases}
     1, &amp; \text{if } i = j\\
     0, &amp; \text{otherwise}
 \end{cases}
-$$</p>
+\end{align}$$</p>
 <p>where $\delta_{ij}$ is the Kronecker delta function.</p>
 <p>We will soon develop Python code to orthogonalize a set of non-orthogonal functions using the Gram-Schmidt procedure, but, first, it will be useful to learn a little bit more about the eigenfunctions of Hermitian operators and the properties of sets of orthonormal functions.</p>
 </div>
@@ -8320,9 +8448,13 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Postulate-4:-Eigenfunctions-Form-a-Complete-Set">Postulate 4: Eigenfunctions Form a Complete Set<a class="anchor-link" href="#Postulate-4:-Eigenfunctions-Form-a-Complete-Set">¶</a></h3><p>If $\hat{B}$ is a linear Hermitian operator that represents a physical observable property, then the eigenfunctions, $g_i$, that satisfy</p>
-<p>$$\hat{B} g_i = b_i g_i$$</p>
+<p>$$\begin{align}
+\hat{B} g_i = b_i g_i
+\end{align}$$</p>
 <p>form a complete set. This completeness means that these eigenfunctions completely span the space in which the operator is represented. As a result, we can expand the wave function for any state as a superposition or linear combination of these eigenfunctions (as long as the wave function satisfies the same boundary conditions as the eigenfunctions). Mathematically, we have</p>
-<p>$$ |\psi\rangle = \sum_i c_i | g_i \rangle$$</p>
+<p>$$ \begin{align}
+|\psi\rangle = \sum_i c_i | g_i \rangle
+\end{align}$$</p>
 <p>where $c_i$ is an expansion coefficient and $g_i$ is referred to as a basis function. We say that the set of functions $\{g_i\}$ form the basis in which $\psi$ is expanded.</p>
 <p>How does one determine the expansion coefficients, $c_i$? Assuming that the basis functions, $\{g_i\}$, are orthonormalized, we can determine $c_i$ by projecting $\psi$ onto the associated basis function as</p>
 <p>$$ \begin{align}
@@ -8332,7 +8464,9 @@ $$</p>
 &amp;= c_i
 \end{align}$$</p>
 <p>where, in the third line, we used the fact that $\langle g_i | g_j \rangle = \delta_{ij}$, and in the fourth line, because of the Kronecker delta function, the only term that survived the sum is the one where $i=j$. From this simple exercise, we see that the expansion coefficients are defined by</p>
-<p>$$ c_i = \langle g_i | \psi \rangle$$</p>
+<p>$$ \begin{align}
+c_i = \langle g_i | \psi \rangle
+\end{align}$$</p>
 <p>Reinserting this definition into the original expansion for $\psi$, we have</p>
 <p>$$\begin{align}
 |\psi\rangle &amp;= \sum_i c_i | g_i \rangle \\
@@ -8340,7 +8474,9 @@ $$</p>
 &amp;= \sum_i | g_i \rangle \langle g_i | \psi \rangle
 \end{align}$$</p>
 <p>where we have now stumbled upon a very useful operator, the identity or unit operator ($\hat{I}$ or $\hat{1}$), which is defined by</p>
-<p>$$ \hat{I} = \sum_i | g_i \rangle \langle g_i | $$</p>
+<p>$$ \begin{align}
+\hat{I} = \sum_i | g_i \rangle \langle g_i | 
+\end{align}$$</p>
 <p>Note one subtlety of the identity operator is that this equality only holds if the basis set is complete.</p>
 </div>
 </div>
@@ -8353,16 +8489,26 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Postulate-5:-The-Expectation-Value">Postulate 5: The Expectation Value<a class="anchor-link" href="#Postulate-5:-The-Expectation-Value">¶</a></h3><p>If $\Psi(\vec{q}, t)$ is a normalized wave function representing the state of a quantum mechanical systet at time, $t$, then the <em>average</em> value of a physical observable, $B$, at time, $t$, is given by the "expectation value"</p>
-<p>$$ \langle B \rangle = \langle \Psi | \hat{B} | \Psi \rangle$$</p>
+<p>$$ \begin{align}
+\langle B \rangle = \langle \Psi | \hat{B} | \Psi \rangle
+\end{align}$$</p>
 <p>If $\Psi(\vec{q}, t)$ is not normalized, then the expectation value is</p>
-<p>$$ \langle B \rangle = \frac{\langle \Psi | \hat{B} | \Psi \rangle}{\langle \Psi | \Psi \rangle}$$</p>
+<p>$$ \begin{align}
+\langle B \rangle = \frac{\langle \Psi | \hat{B} | \Psi \rangle}{\langle \Psi | \Psi \rangle}
+\end{align}$$</p>
 <p>The expectation value is an average value for the observable, $B$, accumulated after many measurements of $B$ that are carried out on idential systems. Recall, Postulate 3 states that the result of any measurement of observable $B$ will result in one of the eigenvalues of $\hat{B}$ that satisfy</p>
-<p>$$ \hat{B}|g_i \rangle = b_i |g_i \rangle$$</p>
+<p>$$ \begin{align}
+\hat{B}|g_i \rangle = b_i |g_i \rangle
+\end{align}$$</p>
 <p>where $b_i$ is the eigenvalue and $g_i$ is the associated eigenfunction. Unfortunately, except in certain circumstances that will be discussed soon,  we do not generally know ahead of time which eigenvalue of $\hat{B}$ we will observe. However, if we know the wave function, we can at least calculate the expected result of many averaged measurements - this quantity is what the the expectation value represents.</p>
 <p>In order to draw some meaning from these expressions, first recall that Postulate 4 states that the eigenfunctions of $\hat{B}$ form a complete set, so we can expand $\Psi$ in terms of its eigenfunctions as</p>
-<p>$$ |\Psi \rangle = \sum_i c_i |g_i\rangle$$</p>
+<p>$$ \begin{align}
+|\Psi \rangle = \sum_i c_i |g_i\rangle
+\end{align}$$</p>
 <p>We will assume that the eigenfunctions of $\hat{B}$ are orthonormalized. Given this expansion for the wave function, let's evaluate the expecation value, using</p>
-<p>$$ \langle B \rangle = \frac{\langle \Psi | \hat{B} | \Psi \rangle}{\langle \Psi | \Psi \rangle}$$</p>
+<p>$$ \begin{align}
+\langle B \rangle = \frac{\langle \Psi | \hat{B} | \Psi \rangle}{\langle \Psi | \Psi \rangle}
+\end{align}$$</p>
 <p>First, consider the denominator,</p>
 <p>$$\begin{align}
 \langle \Psi | \Psi \rangle &amp;= \langle \sum_i c_i g_i | \sum_j c_j g_j \rangle \\
@@ -8373,7 +8519,9 @@ $$</p>
 \end{align}
 $$</p>
 <p>For simplicity, let's assume that the wave function is already normalized, in which case</p>
-<p>$$ \langle \Psi | \Psi \rangle = \sum_i |c_i|^2 = 1$$</p>
+<p>$$ \begin{align}
+\langle \Psi | \Psi \rangle = \sum_i |c_i|^2 = 1
+\end{align}$$</p>
 <p>Now, consider the numerator,</p>
 <p>$$ \begin{align}
 \langle \Psi | \hat{B} | \Psi \rangle &amp;= \langle \sum_i c_i g_i |\hat{B}| \sum_j c_j g_j \rangle \\
@@ -8385,7 +8533,9 @@ $$</p>
 \end{align}$$</p>
 <p>In the third line, we made use of the fact that $g_j$ is an eigenfunction of $\hat{B}$, with eigenvalue $b_j$. Now, it appears that the expectation value is a weighted sum of the eigenvalues of $\hat{B}$.</p>
 <p>Again, from Postulate 3, we know that the result of a measurement of observable $B$ will be one of the eigenvalues of the operator, $\hat{B}$. Now, we also know that, after infinitely many measurements on identical systems, we can build up an average value for $B$ that is expressible as a weighted sum of eigenvalues of $\hat{B}$. The weights in the average ($|c_i|^2$) are interpreted as the probability that we will observe the eigenvalue $b_i$ on any given measurement. For this reason, the expansion coefficients, $c_i$, are often referred to as "probability amplitudes." Recall that, for a normalized wave function,</p>
-<p>$$ \sum_i |c_i|^2 = 1 $$</p>
+<p>$$ \begin{align}
+\sum_i |c_i|^2 = 1 
+\end{align}$$</p>
 <p>The fact that all $|c_i|^2$ sum to one is consistent with the interpretation of $|c_i|^2$ as a probality.</p>
 <p>What happens to the expectation value if $\Psi$ is equal to a single, normalized eigenfunction of $\hat{B}$? In this case</p>
 <p>$$\begin{align}
@@ -8412,13 +8562,19 @@ $$\begin{align}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Postulate-6:-The-Time-Dependent-Schr%C3%B6dinger-Equation">Postulate 6: The Time-Dependent Schrödinger Equation<a class="anchor-link" href="#Postulate-6:-The-Time-Dependent-Schr%C3%B6dinger-Equation">¶</a></h3><p>Time time-evolution of an isolated quantum system is governed by the time-dependent Schrödinger equation (TDSE):</p>
-<p>$$ i\hbar \frac{\partial}{\partial t} | \Psi(\vec{q}, t) \rangle = \hat{H} | \Psi(\vec{q}, t) \rangle$$</p>
+<p>$$ \begin{align}
+i\hbar \frac{\partial}{\partial t} | \Psi(\vec{q}, t) \rangle = \hat{H} | \Psi(\vec{q}, t) \rangle
+\end{align}$$</p>
 <p>where $\hat{H} = \hat{T} + \hat{V}(\vec{q}, t)$ is the Hamiltonian operator (the energy operator), $\hat{T}$ is the kinetic energy operator, and $\hat{V}(\vec{q}, t)$ is the potential energy operator, which may or may not depend on time. The TDSE is the quantum mechanical analogue of Newton's second law or Hamilton's equations in classical mechanics. A crucial difference between the quantum mechanical and classical equations of motion is that, in the quantum mechanical case, we can only predict probabilities of outcomes of measurements.</p>
 <p>If the Hamiltonian is independent of time (in the absence of any time-varying external fields), then the TDSE is separable in the sense that, the operators on the left-hand size of the equation involve time, while the operators on the right-hand side depend only on the spatial coordinates of the particles. In such a situation, we can use a mathematical technique known as "separation of variables" to state</p>
-<p>$$ \Psi(\vec{q}, t) = \psi(\vec{q}) \phi(t)$$</p>
+<p>$$ \begin{align}
+\Psi(\vec{q}, t) = \psi(\vec{q}) \phi(t)
+\end{align}$$</p>
 <p>That is, the wave function is separable into a product of a spatial component ($\psi$) and a temporal component ($\phi$). If the Hamiltonian does not depend on time then factorizing the wave function in this way is not an approximation.</p>
 <p>Let us consider a particle of mass $m$ moving in one-dimension, subject to a time-independent potential. The Hamiltonian for such a system is time-independent, so we are free to factorize the wave function as above</p>
-<p>$$ \Psi(x, t) = \psi(x) \phi(t)$$</p>
+<p>$$ \begin{align}
+\Psi(x, t) = \psi(x) \phi(t)
+\end{align}$$</p>
 <p>Now, we can insert this definition for $\Psi(x,t)$ into the TDSE</p>
 <p>$$ \begin{align}
 i\hbar \frac{\partial}{\partial t} \psi(x) \phi(t) &amp;= \hat{H} \psi(x) \phi(t) \\
@@ -8429,21 +8585,35 @@ i\hbar \psi(x) \frac{\partial}{\partial t} \phi(t) &amp;= \phi(t) \hat{H} \psi(x
 \frac{1}{\psi(x)\phi(t)}\left [ i\hbar  \psi(x) \frac{\partial}{\partial t} \phi(t) = \frac{1}{\psi(x)\phi(t)}\phi(t) \hat{H} \psi(x) \right ]\\
 \end{align}$$</p>
 <p>and we can cancel terms with $\psi(x)$ on the left-hand side and terms with $\phi(t)$ on the right-hand side leaving</p>
-<p>$$i\hbar \frac{1}{\phi(t)} \frac{\partial}{\partial t} \phi(t) = \frac{1}{\psi(x)} \hat{H} \psi(x)$$</p>
+<p>$$\begin{align}
+i\hbar \frac{1}{\phi(t)} \frac{\partial}{\partial t} \phi(t) = \frac{1}{\psi(x)} \hat{H} \psi(x)
+\end{align}$$</p>
 <p>Now, all of the temporal variables are isolated on the left-hand side, and the spatial variables are isolated on the right-hand side. Now, think about holding $t$ fixed and varying $x$. The left-hand side must be constant because time is fixed, which implies that the right-hand side is equal to a constant for all $x$. Next, think about holding $x$ fixed and varying $t$. The right-hand side must be constant because position is fixed, which implies that the left-hand side is equal to a constant for all $t$. So, we can set both sides equal to a constant, which we will call $E$ (for energy, since the right-hand side has units of energy), giving</p>
-<p>$$i\hbar \frac{1}{\phi(t)} \frac{\partial}{\partial t} \phi(t) = \frac{1}{\psi(x)} \hat{H} \psi(x) = E$$</p>
+<p>$$\begin{align}
+i\hbar \frac{1}{\phi(t)} \frac{\partial}{\partial t} \phi(t) = \frac{1}{\psi(x)} \hat{H} \psi(x) = E
+\end{align}$$</p>
 <p>We now have two separate equations involving this constant that we could solve. First, consider the temporal part. We have</p>
-<p>$$\frac{\partial}{\partial t} \phi(t) = \frac{-i E}{\hbar} \phi(t)$$</p>
+<p>$$\begin{align}
+\frac{\partial}{\partial t} \phi(t) = \frac{-i E}{\hbar} \phi(t)
+\end{align}$$</p>
 <p>which is a first-order ordinary differential equation (ODE) with a solution</p>
-<p>$$ \phi(t) = e^{-iEt / \hbar}$$</p>
+<p>$$\begin{align}
+\phi(t) = e^{-iEt / \hbar}
+\end{align}$$</p>
 <p>Now, consider the spatial part, which has the form of an eigenvalue problem</p>
-<p>$$\hat{H} \psi(x) = E \psi(x)$$</p>
+<p>$$\begin{align}
+\hat{H} \psi(x) = E \psi(x)
+\end{align}$$</p>
 <p>This equation is the time-independent Schrödinger equation (TISE). Much of the following notebooks will be dedicated to finding analytic or numerical solutions to the TISE for various problems.</p>
 <p>Given Postulate 4, we are free to expand any spatial wave function in terms of the eigenfunctions of the Hamiltonian</p>
-<p>$$\hat{H} \psi_n(\vec{q}) = E_n \psi_n(\vec{q})$$</p>
+<p>$$\begin{align}
+\hat{H} \psi_n(\vec{q}) = E_n \psi_n(\vec{q})
+\end{align}$$</p>
 <p>where we have introduced the subscript $n$ to emphasize that there are multiple solutions to this equation, or, in other words, that $\hat{H}$ has multiple eigenfunctions. Based on the discussion in the last section, if the spatial wave function is exactly equal to one of the eigenfunctions, $\psi_n$, then the associated state has a well-defined (or fixed) energy, $E_n$. If the wave function is not an eigenfunction of the Hamiltonian, then we cannot make such a statement, but we should still be able to evaluate the expectation value of the energy, which we would expect to be a weighted average of the eigenvalues, $E_n$.</p>
 <p>For a state with a definite value of the energy, the total wave function is</p>
-<p>$$\Psi_n(\vec{q}, t) = e^{-iE_nt/\hbar} \psi_n(\vec{q})$$</p>
+<p>$$\begin{align}
+\Psi_n(\vec{q}, t) = e^{-iE_nt/\hbar} \psi_n(\vec{q})
+\end{align}$$</p>
 <p>What is the probability distribution, $|\Psi|^2$? We have</p>
 <p>$$\begin{align}
 |\Psi_n(\vec{q}, t)|^2 &amp;= |e^{-iE_nt/\hbar} \psi_n(\vec{q})|^2 \\
@@ -8452,7 +8622,9 @@ i\hbar \psi(x) \frac{\partial}{\partial t} \phi(t) &amp;= \phi(t) \hat{H} \psi(x
 \end{align}$$</p>
 <p>which is independent of time! We refer to such a state a "stationary state." This name does not imply that the particles themselves are stationary. Rather, the probability density is stationary in time.</p>
 <p>What if the wave function is not a stationary state? Well, by Postulate 4, we could expand the spatial part of any wave function as</p>
-<p>$$ \psi(\vec{q}) = \sum_i c_i \psi_i(\vec{q}) $$</p>
+<p>$$ \begin{align}
+\psi(\vec{q}) = \sum_i c_i \psi_i(\vec{q}) 
+\end{align}$$</p>
 <p>where $\psi_i$ are eigenfunctions of the Hamiltonian with energy, $E_i$. Similarly, a general total wave function can be expanded in the basis of stationary states, $\Psi_k$, as</p>
 <p>$$ \begin{align}
 \Psi(\vec{q}, t) &amp;= \sum_k c_k \Psi_k(\vec{q}, t) \\
@@ -8465,16 +8637,19 @@ i\hbar \psi(x) \frac{\partial}{\partial t} \phi(t) &amp;= \phi(t) \hat{H} \psi(x
 \end{align}$$</p>
 <p>Unlike for the stationary state, the time-dependent parts of $|\Psi|^2$ for the non-stationary state will not cancel, in general, so the probability distribution varies in time. This time-dependence is the reason such a state is referred to as non-stationary.</p>
 <p>The following code demonstrates the time evolution of stationary and non-stationary states using eigenfunctions of the Hamiltonian for the "particle-in-a-box" problem, which is a model problem that we will explore in detail in the next notebook. For now, we simply take the spatial parts of the PIB wave functions to have the form</p>
-<p>$$\psi_n(x) = 
+<p>$$\begin{align}
+\psi_n(x) = 
 \begin{cases}
     0, &amp; x &lt; 0 \\
     \left ( \frac{2}{l} \right ) ^{1/2} \text{sin}\left (\frac{n\pi x}{l} \right ), &amp; 0 \le x \le l \\
     0, &amp; x &gt; l \\
 \end{cases}
-$$</p>
+\end{align}$$</p>
 <p>where $l$ is the width of the box in which the particle resides, and $n=1,2,3...$.</p>
 <p>The energy associated with each PIB state is</p>
-<p>$$ E_n = \frac{\hbar^2\pi^2n^2}{2ml^2}$$</p>
+<p>$$\begin{align}
+E_n = \frac{\hbar^2\pi^2n^2}{2ml^2}
+\end{align}$$</p>
 <p>where $m = m_e$ is the mass of the particle, which we take to be an electron. We will consider the time evolution of probability densities and the real and imaginary components of the stationary states, $\Psi_1$ and $\Psi_2$, as well as the same quantities for the non-stationary state $\frac{1}{2^{1/2}}(\Psi_1 + \Psi_2)$. For simplicity, we will work with "atomic units", which have $\hbar = 1$, and $m_e = 1$. We will also take $l = 1 a_0$, where $a_0$ is the "bohr", the atomic unit for distance.</p>
 </div>
 </div>
@@ -14808,13 +14983,17 @@ AAAAAAAAACxpbHN0AAAAJKl0b28AAAAcZGF0YQAAAAEAAAAATGF2ZjYxLjEuMTAw
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
 <h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Consider a non-stationary state of the form
-$$ \Psi(\vec{q}, t) = \sum_k c_k e^{-iE_kt/\hbar} \psi_k(\vec{q})$$</p>
+$$ \begin{align}
+\Psi(\vec{q}, t) = \sum_k c_k e^{-iE_kt/\hbar} \psi_k(\vec{q})
+\end{align}$$</p>
 <blockquote>
 <p>Question 13: Does this state have a definite energy?</p>
 <details>
 <summary>Answer 13</summary>
 <p>No! When measuring the energy of this state, the probability of observing $E_k$ is proportional to (or equal to if $\Psi$ is normalized)
-$$|c_k e^{-iE_kt/\hbar}|^2 = |c_k|^2$$</p>
+$$\begin{align}
+|c_k e^{-iE_kt/\hbar}|^2 = |c_k|^2
+\end{align}$$</p>
 </details>
 </blockquote>
 <blockquote>
@@ -14845,17 +15024,29 @@ where, on the fifth line, we have assumed that the set of eigenfunctions of $\ha
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="More-Examples">More Examples<a class="anchor-link" href="#More-Examples">¶</a></h2><h3 id="Additional-Proofs">Additional Proofs<a class="anchor-link" href="#Additional-Proofs">¶</a></h3><h4 id="The-Momentum-Operator-is-Hermitian">The Momentum Operator is Hermitian<a class="anchor-link" href="#The-Momentum-Operator-is-Hermitian">¶</a></h4><p>The linear momentum operator in the $x$-direction is</p>
-<p>$$ \hat{p}_x = -i\hbar \frac{d}{dx}$$</p>
+<p>$$ \begin{align}
+\hat{p}_x = -i\hbar \frac{d}{dx}
+\end{align}$$</p>
 <p>This operator is Hermitian, meaning that, given two well-behaved functions $f(x)$ and $g(x)$, it satisfies</p>
-<p>$$ \langle f(x) | \hat{p}_x | g(x) \rangle = \langle g(x) | \hat{p}_x | f(x) \rangle ^*$$</p>
+<p>$$ \begin{align}
+\langle f(x) | \hat{p}_x | g(x) \rangle = \langle g(x) | \hat{p}_x | f(x) \rangle ^*
+\end{align}$$</p>
 <p>or, without Dirac notation</p>
-<p>$$ \int_{-\infty}^\infty f^*(x) \hat{p}_x g(x) dx = \left ( \int_{-\infty}^\infty g^*(x) \hat{p}_x f(x) dx \right )^*$$</p>
+<p>$$ \begin{align}
+\int_{-\infty}^\infty f^*(x) \hat{p}_x g(x) dx = \left ( \int_{-\infty}^\infty g^*(x) \hat{p}_x f(x) dx \right )^*
+\end{align}$$</p>
 <p>Inserting the definition for the momentum operator on the left-hand side, we have</p>
-<p>$$ \int_{-\infty}^\infty f^*(x) \left ( -i\hbar \frac{d}{dx} \right ) g(x) dx = \left ( \int_{-\infty}^\infty g^*(x) \hat{p}_x f(x) dx \right )^*$$</p>
+<p>$$ \begin{align}
+\int_{-\infty}^\infty f^*(x) \left ( -i\hbar \frac{d}{dx} \right ) g(x) dx = \left ( \int_{-\infty}^\infty g^*(x) \hat{p}_x f(x) dx \right )^*
+\end{align}$$</p>
 <p>or</p>
-<p>$$ -i\hbar \int_{-\infty}^\infty f^*(x)   \frac{dg(x)}{dx} dx = \left ( \int_{-\infty}^\infty g^*(x) \hat{p}_x f(x) dx \right )^*$$</p>
+<p>$$ \begin{align}
+-i\hbar \int_{-\infty}^\infty f^*(x)   \frac{dg(x)}{dx} dx = \left ( \int_{-\infty}^\infty g^*(x) \hat{p}_x f(x) dx \right )^*
+\end{align}$$</p>
 <p>In order to prove that this is true, we should dust off our calculus hats and remind ourselves of integration by parts:</p>
-<p>$$ \int u dv = uv - \int v du$$</p>
+<p>$$ \begin{align}
+\int u dv = uv - \int v du
+\end{align}$$</p>
 <p>Here, we can assign</p>
 <p>$$\begin{align}
 u &amp;= f^*(x) \\
@@ -14864,7 +15055,9 @@ v &amp;= g(x) \\
 dv &amp;= \frac{dg(x)}{dx}dx
 \end{align}$$</p>
 <p>So, the left-hand side of the equation above becomes</p>
-<p>$$ -i\hbar \int_{-\infty}^\infty f^*(x)   \frac{dg(x)}{dx} dx = -i\hbar \left [ f^*(x) g(x) |^\infty_{-\infty} - \int_{-\infty}^\infty g(x) \frac{df^*(x)}{dx} dx\right ]$$</p>
+<p>$$ \begin{align}
+-i\hbar \int_{-\infty}^\infty f^*(x)   \frac{dg(x)}{dx} dx = -i\hbar \left [ f^*(x) g(x) |^\infty_{-\infty} - \int_{-\infty}^\infty g(x) \frac{df^*(x)}{dx} dx\right ]
+\end{align}$$</p>
 <p>The product $f^*(x) g(x) |^\infty_{-\infty}$ should be evaluated at $x = \pm \infty$. Because $f(x)$ and $g(x)$ are well-behaved, we can assume that</p>
 <p>$$\begin{align}
 \lim_{x\to\pm \infty} f(x) &amp;= 0 \\
@@ -14889,7 +15082,9 @@ dv &amp;= \frac{dg(x)}{dx}dx
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Numerical-Examples">Numerical Examples<a class="anchor-link" href="#Numerical-Examples">¶</a></h3><h4 id="Gram-Schmidt-Orthogonalization">Gram-Schmidt Orthogonalization<a class="anchor-link" href="#Gram-Schmidt-Orthogonalization">¶</a></h4><p>Consider four non-orthogonal functions that are expanded in a basis of orthonormal basis functions, $\{f_i\}$, as</p>
-<p>$$ |g_i \rangle = \sum_j c_{ij} |f_j\rangle$$</p>
+<p>$$ \begin{align}
+|g_i \rangle = \sum_j c_{ij} |f_j\rangle
+\end{align}$$</p>
 <p>where $c_{ij}$ are expansion coefficients.  As a numerical example, let's consider four specific functions expanded in this way:</p>
 <p>$$\begin{align}
 |g_0\rangle &amp;= -0.1 |f_0\rangle +0.2 |f_1\rangle +0.3 |f_2\rangle +0.4 |f_3\rangle \\
@@ -15000,26 +15195,32 @@ dv &amp;= \frac{dg(x)}{dx}dx
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Expanding-a-Function-in-a-Basis-of-Eigenfunctions">Expanding a Function in a Basis of Eigenfunctions<a class="anchor-link" href="#Expanding-a-Function-in-a-Basis-of-Eigenfunctions">¶</a></h4><p>Postulate 4 tells us that we can expand any function in terms of the eigenfunctions of a quantum mechanical operator that represents a physical observable, provided that the function satisfies the same boundary conditions as the eigenfunctions of the operator. Here, we consider eigenfunctions of the "particle-in-a-box" (PIB) Hamiltonian, which will be discussed in detail in the next notebook. For a one-dimensional PIB, we have</p>
-<p>$$\psi_n(x) = 
+<p>$$\begin{align}
+\psi_n(x) = 
 \begin{cases}
     0, &amp; x &lt; 0 \\
     \left ( \frac{2}{l} \right ) ^{1/2} \text{sin}\left (\frac{n\pi x}{l} \right ), &amp; 0 \le x \le l \\
     0, &amp; x &gt; l \\
 \end{cases}
-$$</p>
+\end{align}$$</p>
 <p>Let's try to expand a function that does not satisfy the boundary conditions for the PIB problem. PIB functions should go to zero at the edges of the box (i.e., at $x=0$ and $x=l$) and should be continuous and have a continuous derivative within the box (i.e., for $0 \le x \le l$). We will chose a function that does go to zero at the edges of the box, but it will be discontinuous in the middle of the box. In this case, we could never <em>exactly</em> represent this function with PIB functions, but the description should be better as we increase the number of functions used in the expansion. Consider the following function</p>
-<p>$$f(x) = 
+<p>$$\begin{align}
+f(x) = 
 \begin{cases}
     0, &amp; x &lt; 0 \\
     x, &amp; 0 \le x \le 0.5 \\
     1-x, &amp; 0.5 \le x \le 1 \\
     0, &amp; x &gt; 1 \\
 \end{cases}
-$$</p>
+\end{align}$$</p>
 <p>If we expand $f(x)$ as</p>
-<p>$$ f(x) = \sum_i c_i \psi_i(x)$$</p>
+<p>$$ \begin{align}
+f(x) = \sum_i c_i \psi_i(x)
+\end{align}$$</p>
 <p>then the expansion coefficients, $c_i$, can be evaluated as</p>
-<p>$$ c_i = \langle \psi_i | f \rangle $$</p>
+<p>$$ \begin{align}
+c_i = \langle \psi_i | f \rangle 
+\end{align}$$</p>
 <p>The following Python code approximates $f(x)$ with linear combinations of 1, 2, 4, 8, or 16 PIB wave functions. Note that, because the function being approximated is even about the middle of the box, only PIB wave functions that are even about the middle of the box will contribute non-zero expansion coefficients, $c_i$. It turns out these are the PIB functions with odd $n$. The integrals to evaluate the expansion coefficients are carried out numerically.</p>
 </div>
 </div>
