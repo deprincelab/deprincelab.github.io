@@ -1,3 +1,31 @@
+---
+layout: page
+math: true
+---
+
+Jupyter Notebook Tutorials: Introduction to Quantum Mechanics
+<br>
+
+<ol>
+<li>
+<a href=../qm_postulates/qm_postulates.html style="color:#e65100;">The Postulates of Quantum Mechanics</a> (<a href=../qm_postulates/qm_postulates.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../translation/translation.html style="color:#e65100;">Translational Motion</a> (<a href=../translation/translation.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../vibration/vibration.html style="color:#e65100;">Vibrational Motion</a> (<a href=../vibration/vibration.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../rotation/rotation.html style="color:#e65100;">Angular Momentum, Rotational Motion, and Spin</a> (<a href=../rotation/rotation.ipynb style="color:#e65100;">notebook</a>)<br>
+</li>
+<li>The Hydrogen Atom</li>
+<li>The Variation Theorem</li>
+<li>Perturbation Theory</li>
+</ol>
+
+<hr>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -8173,7 +8201,7 @@ Therefore, $a_n$ must be real-valued. We have just proved a theorem related to t
 \langle g_i | b_j | g_j \rangle &amp;= \langle g_j | b_i | g_i \rangle^* \\
 b_j \langle g_i| g_j \rangle &amp;= b_i^* \langle g_j| g_i \rangle^* \\
 b_j \langle g_i| g_j \rangle &amp;= b_i \langle g_i| g_j \rangle \\
-(b_j - b_i)\langle g_i| g_j \rangle = 0
+(b_j - b_i)\langle g_i| g_j \rangle &amp;= 0
 \end{align}$$
 where, in the second-to-last line, we have used the fact that $b_i = b_i^*$, as proved above. The last line can be satisfied if</p>
 <p>$$\begin{align}
@@ -8322,7 +8350,7 @@ g_2 &amp;= G + c F
 <p>where $c$ is a constant chosen such that $\langle g_1 | g_2 \rangle = 0$.</p>
 <p>We have</p>
 <p>$$ \begin{align}
-\langle g_1 | g_2 \rangle &amp;= 0
+\langle g_1 | g_2 \rangle &amp;= 0 \\
 &amp;= \langle F | G + c F\rangle \\
 &amp;= \int F^* ( G + c F) d\tau \\
 &amp;= \int F^* Gd\tau + c\int F^* F d\tau \\
@@ -8397,7 +8425,7 @@ Because $(h_+ + h_-) \neq ( h_+ - h_-)$, we can say that $(h_+ + h_-)$ is not an
 |g_0\rangle &amp;= |f_0\rangle \\
 |g_1\rangle &amp;= |f_1\rangle - \frac{\langle f_1 | g_0\rangle}{\langle g_0 | g_0 \rangle} |g_0\rangle \\
 |g_2\rangle &amp;= |f_2\rangle - \frac{\langle f_2 | g_0\rangle}{\langle g_0 | g_0 \rangle} |g_0\rangle - \frac{\langle f_2 | g_1\rangle}{\langle g_1 | g_1 \rangle} |g_1\rangle \\
-... &amp;
+... &amp; \nonumber
 \end{align}$$</p>
 <p>Based on Theorems 2 and 3 defined above, the eigenfunctions of Hermitian operators are either already orthogonal to one another, or they can be chosen such that they are orthogonal. We have also seen while discussing Postulate 1 that we are always free to normalize functions, and normalizing them does not change their properties. As such, unless otherwise noted, we often assume that eigenfunctions of Hermitian operators are orthonormalized. A set of orthonormal functions, $\{g_i\}$, satisfies</p>
 <p>$$ \begin{align}
