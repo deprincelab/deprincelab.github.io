@@ -33,7 +33,7 @@ Jupyter Notebook Tutorials: Introduction to Quantum Mechanics
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>rotation</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>hydrogen</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7540,756 +7540,45 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=86cf25b5-d130-4860-b267-93a901c0a3ab">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4b304b3-5bb6-499f-aea1-dccadbfb3170">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Angular-Momentum,-Rotational-Motion,-and-Spin">Angular Momentum, Rotational Motion, and Spin<a class="anchor-link" href="#Angular-Momentum,-Rotational-Motion,-and-Spin">¶</a></h1><p>In the previous notebooks, we discussed quantum mechanical problems involving translational and vibrational motion. In this notebook, we explore the properties of the operators corresponding to the angular momentum of a microscopic particle and model problems for rotational motion. We will find analytic solutions the Schrödinger equation for the particle-on-a-ring and particle-on-a-sphere models, which are models for rotational in two or three dimensions, respectively. The particle-on-a-sphere model is also known as the rigid rotor. We will also use an alternative approach based on "ladder" operators to find eigenvalues of some angular momentum operators. We close with a discussion of spin angular momentum and the associated spin operators and eigenfunctions.</p>
+<h1 id="The-Hydrogen-Atom">The Hydrogen Atom<a class="anchor-link" href="#The-Hydrogen-Atom">¶</a></h1><p>The last few notebooks have considered analytically solvable model problems involving translational, vibrational, and rotational motion of quantum particles. Here, we consider the hydrogen atom, which is the most complicated problem for which we can find a closed-form analytic solution. This notebook outlines the solution to the time-independent Schrödinger equation for the hydrogen atom and provides Python code to visualize and interpret the resulting wave functions.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=045df904-11c7-4cfb-8c35-a432ab3225e1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=89e7f66d-63d3-430a-b59f-4a9fd3a79a57">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Angular-Momentum">Angular Momentum<a class="anchor-link" href="#Angular-Momentum">¶</a></h2><p>Consider a particle of mass, $m$, with position $\vec{r} = (x, y, z)$ and linear momentum $\vec{p} = (p_x, p_y, p_z).$ The angular momentum for this particle is given by the cross product of the position and momentum vectors, i.e.,</p>
-<p>$$ 
-\begin{align}
-\vec{L} = (L_x, L_y, L_z) = \vec{r} \times \vec{p}
-\end{align}
-$$</p>
-<p>The $x$, $y$, and $z$ components of the angular momentum are</p>
-<p>$$ \begin{align}
-L_x &amp;= y p_z - z p_y \\
-L_y &amp;= z p_x - x p_z \\
-L_z &amp;= x p_y - y p_x
-\end{align}$$</p>
-<p>Given that $\hat{p}_x = -i\hbar \frac{\partial}{\partial x},$ etc., the corresponding angular momentum operators are</p>
+<h2 id="The-Hamiltonian">The Hamiltonian<a class="anchor-link" href="#The-Hamiltonian">¶</a></h2><p>Consider the Hamiltonian for an electron interacting with a proton</p>
 <p>$$\begin{align}
-\hat{L}_x &amp;= -i\hbar \left ( y \frac{\partial}{\partial z} - z \frac{\partial}{\partial y}\right ) \\
-\hat{L}_y &amp;= -i\hbar \left ( z \frac{\partial}{\partial x} - x \frac{\partial}{\partial z}\right ) \\
-\hat{L}_z &amp;= -i\hbar \left ( x \frac{\partial}{\partial y} - y \frac{\partial}{\partial x}\right )
+\hat{H} = -\frac{\hbar^2}{2m_\text{e}}\nabla_\text{e}^2  - \frac{\hbar^2}{2m_\text{p}}\nabla_\text{p}^2 + V(r)
 \end{align}$$</p>
-<p>We can also define an operator for the square of the angular momentum as</p>
-<p>$$\begin{align} 
-\hat{L}^2 = \hat{L} \cdot \hat{L} = \hat{L}_x^2 + \hat{L}_y^2 + \hat{L}_z^2
-\end{align}$$</p>
-<p>It will be useful to consider the commutator properties of these operators. If any commute, then it will be possible to determine simultaneous eigenfunctions of the operators, and, as a result, it will be possible to specify the corresponding observables simultaneously, with arbitrary precision. Let us begin with the commutator of $\hat{L}_x$ and $\hat{L}_z$:</p>
-<p>$$ \begin{align}
-[\hat{L}_x, \hat{L}_y] f(x, y, z) = \hat{L}_x \hat{L}_y f(x, y, z) - \hat{L}_y \hat{L}_x f(x, y, z)
-\end{align}$$</p>
-<p>For the first term on the right-hand side of this equation, we have</p>
+<p>where the subscripts "e" and "p" refer to the electron and proton, respectively, $r$ refers to the distance between the electron an proton</p>
 <p>$$\begin{align}
-\hat{L}_y f &amp;= -i\hbar \left ( z \frac{\partial f}{\partial x} - x\frac{\partial f}{\partial z} \right ) \\
-\hat{L}_x \hat{L}_y f &amp;= -\hbar^2 \left ( y \frac{\partial}{\partial z} - z \frac{\partial}{\partial y} \right ) \left ( z \frac{\partial f}{\partial x} - x\frac{\partial f}{\partial z} \right ) \\
-&amp;= -\hbar^2 \left ( y\frac{\partial f}{\partial x} + yz \frac{\partial^2 f}{\partial x \partial z} - xy \frac{\partial^2 f}{\partial z^2} - z^2 \frac{\partial^2 f}{\partial x \partial y} + xz \frac{\partial^2 f}{\partial y \partial z} \right )
+\vec{r} &amp;= \vec{r}_\text{p} - \vec{r}_\text{e} \\
+r &amp;= |\vec{r}|
 \end{align}$$</p>
-<p>For the second term, we have</p>
+<p>The potential is the Coulomb potential</p>
 <p>$$\begin{align}
-\hat{L}_x f &amp;= -i\hbar \left ( y \frac{\partial f}{\partial z} - z\frac{\partial f}{\partial y} \right ) \\
-\hat{L}_y \hat{L}_x &amp;= -\hbar^2 \left ( z \frac{\partial}{\partial x} - x \frac{\partial }{\partial z}\right ) \left ( y \frac{\partial f}{\partial z} - z\frac{\partial f}{\partial y} \right )  \\
-&amp;= -\hbar^2 \left ( yz \frac{\partial^2 f}{\partial x \partial z} - z^2 \frac{\partial^2 f}{\partial x \partial y} - xy \frac{\partial^2 f}{\partial z^2} + x \frac{\partial f}{\partial y} + xz \frac{\partial^2 f}{\partial y \partial z} \right ) 
+V(r) = -\frac{e^2}{4 \pi \epsilon_0 r}
 \end{align}$$</p>
-<p>Combining these results, most of the terms cancel, and the action of the commutator on $f(x,y,z)$ is simply</p>
+<p>where $e$ represents the magnitude of the charge of an electron, and $\epsilon_0$ is the permittivity of free space. As written, this Hamiltonian is not separable, but, as discussed in the previous notebook, we can re-express it in a separable form by performing a coordinate transformation. Specifically, we represent the Hamiltonian using the inter-particle coordinate, $\vec{r},$ and the center-of-mass coordinate, defined by</p>
 <p>$$\begin{align}
-[\hat{L}_x, \hat{L}_y] f &amp;= -\hbar^2 \left ( y \frac{\partial f }{\partial x} - x \frac{\partial f}{\partial y} \right ) \\
-&amp;= -\hbar^2 \left ( y \frac{\partial }{\partial x} - x \frac{\partial }{\partial y} \right ) f \\
-&amp;= i\hbar \hat{L}_z f
+\vec{R} = \frac{m_\text{e} \vec{r}_\text{e} + m_\text{p} \vec{r}_\text{p}}{m_\text{e} + m_\text{p}}
 \end{align}$$</p>
-<p>Therefore,</p>
-<p>$$ \begin{align}
-[\hat{L}_x, \hat{L}_y] = i\hbar \hat{L}_z
-\end{align}$$</p>
-<p>Similarly, one could show that</p>
-<p>$$ \begin{align}
-[\hat{L}_y, \hat{L}_z] &amp;= i\hbar \hat{L}_x \\
-[\hat{L}_z, \hat{L}_x] &amp;= i\hbar \hat{L}_y
-\end{align}$$</p>
-<p>Because these operators do not commute with one another, the Heisenberg uncertainty principle states that we cannot specify $L_x$ and $L_y$, $L_x$ and $L_z$, or $L_y$ and $L_z$ simultaneously, with arbitrary precision. Similarly, we cannot find a complete set of eigenfunctions of any pair of these operators.</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 1. Show that
-$$ \begin{align}
-[\hat{L}_y, \hat{L}_z] = i\hbar \hat{L}_x 
-\end{align}$$
-and
-$$ \begin{align}
-[\hat{L}_z, \hat{L}_x] = i\hbar \hat{L}_y 
-\end{align}$$</p>
-</blockquote>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=68beceb7-3402-4b20-8554-4bdeff0b980c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Now, consider the commutator of $\hat{L}^2$ and $\hat{L}_x$.</p>
-<p>We have</p>
-<p>$$ \begin{align}
-[\hat{L}^2, \hat{L}_x ] &amp;= [\hat{L}_x^2 + \hat{L}_y^2 + \hat{L}_z^2, \hat{L}_x] \\
-&amp;= [\hat{L}_x^2, \hat{L}_x] + [\hat{L}_y^2, \hat{L}_x] + [\hat{L}_z^2, \hat{L}_x] \\
-&amp;= [\hat{L}_y^2, \hat{L}_x] + [\hat{L}_z^2, \hat{L}_x]
-\end{align}$$</p>
-<p>where we are able to eliminate the first term because the commutator of an operator with itself is zero. It turns out that we can evaluate the remaining commutators with knowledge of the identity</p>
-<p>$$ \begin{align}
-[\hat{A}\hat{B}, \hat{C}] = [\hat{A}, \hat{C}]\hat{B} + \hat{A}[\hat{B}, \hat{C}]
-\end{align}$$</p>
-<p>For the commutator involving $\hat{L}_y^2$, we have</p>
-<p>$$ \begin{align}
-[\hat{L}_y\hat{L}_y, \hat{L}_x] &amp;= [\hat{L}_y, \hat{L}_x]\hat{L}_y + \hat{L}_y[\hat{L}_y, \hat{L}_x] \\
-&amp;= -i\hbar\hat{L}_z\hat{L}_y - i\hbar \hat{L}_y \hat{L}_z
-\end{align}$$</p>
-<p>Similarly, the commutator involving $\hat{L}_z^2$ evaluates to</p>
-<p>$$ \begin{align}
-[\hat{L}_z\hat{L}_z, \hat{L}_x] &amp;= [\hat{L}_z, \hat{L}_x]\hat{L}_z + \hat{L}_z[\hat{L}_z, \hat{L}_x] \\
-&amp;= +i\hbar\hat{L}_y\hat{L}_z + i\hbar \hat{L}_z \hat{L}_y
-\end{align}$$</p>
-<p>As a result,</p>
-<p>$$ \begin{align}
-[\hat{L}^2, \hat{L}_x ] = 0 
-\end{align}$$</p>
-<p>It turns out that $\hat{L}^2$ will commute with any cartesian component of the angular momentum operator, i.e.,</p>
-<p>$$ \begin{align}
-[\hat{L}^2, \hat{L}_x ] = [\hat{L}^2, \hat{L}_y ] = [\hat{L}^2, \hat{L}_z ] = 0 
-\end{align}$$</p>
-<p>As a result, there exists a complete set of eigenfunctions of both $\hat{L}^2$ and one cartesian component of the angular momentum operator. According to the Heisenberg uncertainty principle, this result also suggests that it is possible to specify simultaneously, with arbitrary precision, both the square of the angular momentum ($L^2$) and the $x$-component of the angular momentum vector, $L_x$ (or $L^2$ and $L_y$ or $L^2$ and $L_z$).</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 2. Show that
-$$ \begin{align}
-[\hat{L}^2, \hat{L}_y] = 0 
-\end{align}$$
-and
-$$ \begin{align}
-[\hat{L}^2, \hat{L}_z] = 0 
-\end{align}$$</p>
-</blockquote>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87b4a484-1ddd-451c-ad4d-3f30510c1926">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Spherical-Polar-Coordinates">Spherical Polar Coordinates<a class="anchor-link" href="#Spherical-Polar-Coordinates">¶</a></h2><p>The spherical polar coordinate depicted below is the most natural coordinate system for describing rotational motion.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=696f1fb0-aec4-47bc-8b53-d1a3e0014fe1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/deprincelab/deprincelab.github.io/main/tutorials/jupyter_notebooks/rotation/spherical_polar_coordinates.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<img alt="No description has been provided for this image" src="https://raw.githubusercontent.com/deprincelab/deprincelab.github.io/main/tutorials/jupyter_notebooks/rotation/spherical_polar_coordinates.png" width="300"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2c70fa4f-b86a-4623-b6e7-18d1d500f870">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Here, $r$, represents the distance from the origin and spans the range $r = [0, \infty]$. The angle, $\phi$, is the azimuthal angle, which spans the range $\phi = [0, 2\pi]$ radians. The angle, $\theta$, is the polar angle, which spanse the range $\theta = [0, \pi]$ radians. The spherical polar coordinates are related to the usual Cartesian coordinates by</p>
+<p>With these coordinates, the Hamiltonian is expressible as</p>
 <p>$$\begin{align}
-x &amp;= r \sin(\theta)\cos(\phi) \\
-y &amp;= r \sin(\theta)\sin(\phi) \\
-z &amp;= r \cos(\theta) \\
-r &amp;= \left ( x^2 + y^2 + z^2 \right )^{1/2}
+\hat{H} = -\frac{\hbar^2}{2M}\nabla_M^2  - \frac{\hbar^2}{2\mu}\nabla_\mu^2 + V(r)
 \end{align}$$</p>
-<p>In order to represent quantum mechanical operators in spherical polar coordinates, we first write down the operator in Cartesian coordinates and then use the relations above, as well as the chain rule to transform any derivatives. For the partial derivative with respect to $x$, we have</p>
-<p>$$ \begin{align}
-\frac{\partial }{\partial x} &amp;= \left (\frac{\partial r}{\partial x} \right )_{y,z} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial x} \right )_{y,z} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial x} \right )_{y,z} \frac{\partial }{\partial \phi} \\
-&amp;= \sin(\theta)\cos(\phi)\frac{\partial}{\partial r} + \frac{\cos(\theta)\cos(\phi)}{r}\frac{\partial}{\partial\theta}-\frac{\sin(\theta)}{r\sin(\theta)}\frac{\partial}{\partial \phi}
-\end{align}$$</p>
-<p>Similarly, for the partial derivative with respect to $y$, we have</p>
-<p>$$ \begin{align}
-\frac{\partial }{\partial y} &amp;= \left (\frac{\partial r}{\partial y} \right )_{x,z} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial y} \right )_{x,z} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial y} \right )_{x,z} \frac{\partial }{\partial \phi} \\
-&amp;= \sin(\theta)\sin(\phi)\frac{\partial}{\partial r} + \frac{\cos(\theta)\sin(\phi)}{r}\frac{\partial}{\partial\theta}+\frac{\cos(\theta)}{r\sin(\theta)}\frac{\partial}{\partial \phi}
-\end{align}$$</p>
-<p>Lastly, for the partial derivative with respect to $y$, we have</p>
-<p>$$ \begin{align}
-\frac{\partial }{\partial z} &amp;= \left (\frac{\partial r}{\partial z} \right )_{y,z} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial z} \right )_{y,z} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial z} \right )_{y,z} \frac{\partial }{\partial \phi} \\
-&amp;= \cos(\theta)\frac{\partial}{\partial r} - \frac{\sin(\theta)}{r}\frac{\partial}{\partial \theta}
-\end{align}$$</p>
-<p>Given these results, we can express the angular momentum operators in spherical coordinates as</p>
-<p>$$\begin{align} 
-\hat{L}_x &amp;= i\hbar \left [ \sin(\phi)\frac{\partial}{\partial \theta} + \cot(\theta)\cos(\phi)\frac{\partial}{\partial\phi} \right ]\\
-\hat{L}_y &amp;= -i\hbar \left [ \cos(\phi)\frac{\partial}{\partial \theta} - \cot(\theta)\sin(\phi)\frac{\partial}{\partial\phi} \right ]\\
-\hat{L}_z &amp;= -i\hbar \frac{\partial}{\partial \phi}
-\end{align}$$</p>
-<p>and
-$$\begin{align}
-\hat{L}^2 = -\hbar^2 \left [ \frac{\partial^2}{\partial \theta^2} + \cot(\theta)\frac{\partial}{\partial \theta} + \frac{1}{\sin^2(\theta)}\frac{\partial^2}{\partial \phi^2} \right ]
-\end{align}$$</p>
-<p>Recall that, based on the commutator relations given above, we will be able to select simultaneous eigenfunctions of $\hat{L}^2$ and at most one of the cartesian components of the angular momentum operator. The simplicity of the operator $\hat{L}_z$, relative to $\hat{L}_x$ and $\hat{L}_y$, makes this operator a desirable target for the following analyses.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3e67f4ca-7013-42a4-bb21-2d29cd5ebf05">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Particle-on-a-Ring-Model">The Particle-on-a-Ring Model<a class="anchor-link" href="#The-Particle-on-a-Ring-Model">¶</a></h2><p>Consider a particle of mass, $m$, constrained to move on a ring of fixed radius, $r$, in the $xy$ plane.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a382e7c2-17d0-4723-8ad3-5f0d583bdade">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/deprincelab/deprincelab.github.io/main/tutorials/jupyter_notebooks/rotation/particle_on_a_ring.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<img alt="No description has been provided for this image" src="https://raw.githubusercontent.com/deprincelab/deprincelab.github.io/main/tutorials/jupyter_notebooks/rotation/particle_on_a_ring.png" width="300"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=80d50f08-8a37-461b-a260-8d6a54d59967">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>What would the angular momentum of a classical particle traveling on a ring be? Because the motion is constrained to the $xy$ plane, the $z$-components of the position, $\vec{r}$, and momentum, $\vec{p}$, are zero, and the angular momentum of the classical particle would thus be</p>
-<p>$$\begin{align}
-\vec{L} = \vec{r} \times \vec{p} = (0, 0, L_z)
-\end{align}$$</p>
-<p>where $L_z = x p_y - y p_x$</p>
-<p>Let us determine the energy eigenfunctions for the quantum-mechanical particle on a ring. In order to do so, we must consider what sort of potential will constrain the particle to remain on the ring. We choose the potential such that it is zero when the particle is on the ring and infinite otherwise, so this problem resembles an angular version of the particle-in-a-box (PIB) problem. Like the PIB, the wave function will be zero in all regions of space where the potential is infinite, so we only consider the "region" of space corresponding to the ring. The Hamiltonian on the ring will be most compactly represented in spherical polar coordinates. Again, by applying the chain rule, we obtain</p>
-<p>$$
-\begin{align}
-\hat{H} &amp;= \hat{T} \\
-&amp;= -\frac{\hbar^2}{2m} \nabla^2 \\
-&amp;= -\frac{\hbar^2}{2m}\left ( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \right ) \\
-&amp;= -\frac{\hbar^2}{2m}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\left [ \frac{1}{\sin^2(\theta)}\frac{\partial^2}{\partial \phi^2} + \frac{1}{\sin(\theta)}\frac{\partial}{\partial \theta} \sin(\theta)\frac{\partial}{\partial \theta} \right ] \right )
-\end{align}
-$$</p>
-<p>The particle-on-a-rign energy eigenfunctions will be functions of the azimuthal angle, $\phi,$ only, so we can safely ignore all derivatives involving $r$ or $\theta$. The Laplacian, $\nabla^2$, then simplifies to</p>
-<p>$$ 
-\begin{align}
-\nabla^2 = \frac{1}{r^2}\left [ \frac{1}{\sin^2(\theta)}\frac{\partial^2}{\partial \phi^2} \right ]
-\end{align}
-$$</p>
-<p>In the $xy$ plane, the polar angle, $\theta = \frac{\pi}{2}$, so $\sin^2(\theta) = 1$ and the Hamiltonian reduces to</p>
-<p>$$ \begin{align}
-\hat{H} &amp;= -\frac{\hbar^2}{2m} \frac{1}{r^2} \frac{\partial^2}{\partial \phi^2} \\
-&amp;= -\frac{\hbar^2}{2I} \frac{\partial^2}{\partial \phi^2}
-\end{align}$$</p>
-<p>where we have introduced the moment of inertia, $I = mr^2.$ Interestingly, this Hamiltonian could also be expressed in terms of the operator for the $z$ component of the angular momentum, i.e.,</p>
-<p>$$ \begin{align}
-\hat{H} = \frac{\hat{L}^2_z}{2I}
-\end{align}$$</p>
-<p>Given this form for the Hamiltonian, is is clear that $\hat{H}$ and $\hat{L}_z$ will commute and we should thus be able to obtain simultaneous eigenfunctions of both operators.</p>
-<p>Now, let us find solutions to the Schrödinger equation. We have</p>
-<p>$$\begin{align}
-\hat{H} \psi(\phi) &amp;= E \psi(\phi) \\
--\frac{\hbar^2}{2I} \frac{\partial^2}{\partial \phi^2} \psi(\phi) &amp;= E \psi(\phi) \\
-\frac{\partial^2}{\partial \phi^2} \psi(\phi) &amp;= -\frac{2IE}{\hbar^2} \psi(\phi)
-\end{align}$$</p>
-<p>A possible solution to this equation is</p>
-<p>$$\begin{align}
-\psi(\phi) = A e^{ib\phi/\hbar}
-\end{align}$$</p>
-<p>with $b = \left ( 2EI \right)^{1/2}$ or $E = \frac{b^2}{2I}$. This wave function is also an eigenfunction of $\hat{L}_z$</p>
-<p>$$\begin{align}
-\hat{L}_z \psi(\phi) &amp;= -i\hbar \frac{\partial}{\partial \phi} A e^{ib\phi/\hbar} \\
-&amp;= b A e^{ib\phi/\hbar}
-\end{align}$$</p>
-<p>So, we have $L_z = b$ and $E = \frac{b^2}{2I} = \frac{L_z^2}{2I}.$ Note that the sign of $b$ provides information regarding the direction of rotation. A positive value of $b$ indicates that the rotation is clockwise, when viewing the ring from below. A negative value of $b$ indicates that the rotation is counter-clockwise, when viewing the ring from below.</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 3. Show that $\psi(\phi) = C e^{ib\phi/\hbar} + D e^{-ib\phi/\hbar}$ is a solution to the Schrödinger equation for the particle-on-a-ring problem. What is the energy?</p>
-</blockquote>
-<blockquote>
-<p>Question 4. Show that $\psi(\phi) = C e^{ib\phi/\hbar} + D e^{-ib\phi/\hbar}$ is not an eigenfunction of the operator, $\hat{L}_z$.</p>
-</blockquote>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b3846706-6d79-4bb8-911a-b92eff618d26">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>What boundary conditions should be satisfied by $\psi(\phi) = A e^{ib\phi/\hbar}$? Because the coordinate system is periodic in $\phi$, we must be careful to ensure that the wave function is <strong>single valued</strong>. We have</p>
-<p>$$
-\begin{align}
-\psi(\phi) &amp;= \psi(\phi + 2\pi) \\
-Ae^{ib\phi/\hbar} &amp;=Ae^{ib(\phi + 2\pi)/\hbar} \\
-&amp;= Ae^{ib\phi/\hbar} e^{i 2\pi b/\hbar}
-\end{align}
-$$</p>
-<p>or</p>
-<p>$$
-\begin{align}
-1 &amp;= e^{i 2\pi b/\hbar} \\
-&amp;= \cos\left(\frac{2\pi b}{\hbar}\right ) + i\sin\left(\frac{2\pi b}{\hbar}\right )
-\end{align}
-$$</p>
-<p>To satisfy this equation, the cosine term must be equal to one, and the sine term must be equal to zero. These conditions are satisfied by the choice</p>
-<p>$$
-\begin{align}
-\frac{2\pi b}{\hbar} = m 2 \pi
-\end{align}
-$$
-or $b = m\hbar$, where $m = 0, \pm 1, \pm 2,$ etc. Now, after the application of this boundary condition, we can see that the energy  for a particle-on-a-ring system in the state</p>
-<p>$$ 
-\begin{align}
-\psi_m(\phi) = A e^{im\phi}
-\end{align}$$</p>
-<p>is quantized</p>
-<p>$$ \begin{align}
-E_m = \frac{m^2\hbar^2}{2I} 
-\end{align}$$</p>
-<p>where we have added the subscripts to indicate that the state can be characterized by the quantum number $m$. In addition to the energy, the $z$ component of the angular momentum is also quantized</p>
-<p>$$ \begin{align} 
-L_z = m \hbar 
-\end{align}$$</p>
-<p>The quantization of a spatial quantity such as $L_z$ is called <strong>space quantization</strong>.</p>
-<p>Before moving on, we note that we can determine the unknown coefficient, $A$, via normalization:</p>
-<p>$$
-\begin{align}
-1 &amp;= \int_0^{2\pi} |\psi_m(\phi)|^2 d\phi \\
-&amp;= |A|^2 \int_0^{2\pi} e^{-im\phi} e^{im\phi} d\phi \\
-&amp;= |A|^2 \int_0^{2\pi} d\phi \\
-&amp;= |A|^2 2\pi
-\end{align}
-$$</p>
-<p>Taking $A$ to be real-valued, we have $A = (\frac{1}{2\pi})^{1/2}$ and</p>
-<p>$$ \begin{align}
-\psi(\phi) = \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi}
-\end{align}$$</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=53094c05-8d6c-449a-9a85-ee8d178888d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Particle-on-a-Sphere-Model">The Particle-on-a-Sphere Model<a class="anchor-link" href="#The-Particle-on-a-Sphere-Model">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8fc1cc4e-c760-4b56-b39a-8cecbb049b69">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Energies-and-Wave-Functions">Energies and Wave Functions<a class="anchor-link" href="#Energies-and-Wave-Functions">¶</a></h3><p>Consider a particle of mass, $m,$ confined to rotate on the surface of a sphere of fixed radius, $r$. Like in the particle-on-a-ring problem, the motion of the particle is constrained by a potential that is zero on the surface of the sphere and infinite elsewhere. The Hamiltonian in the region of space corresponding to the surface of the sphere is</p>
-<p>$$
-\begin{align}
-\hat{H} &amp;= -\frac{\hbar^2}{2m} \nabla^2 \\
-&amp;= -\frac{\hbar^2}{2m}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\left [ \frac{1}{\sin^2(\theta)}\frac{\partial^2}{\partial \phi^2} + \frac{1}{\sin(\theta)}\frac{\partial}{\partial \theta} \sin(\theta)\frac{\partial}{\partial \theta} \right ] \right )
-\end{align}
-$$</p>
-<p>This Hamiltonian can be expressed more compactly by recognizing that the parts involving the angular derivatives are actually related to $\hat{L}^2$, i.e,</p>
-<p>$$
-\begin{align}
-\hat{H} = -\frac{\hbar^2}{2m}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r} \right ) + \frac{1}{2m r^2}\hat{L}^2
-\end{align}
-$$</p>
-<p>Like in the particle-on-a-ring problem, we ignore derivatives with respect to $r$ because the radius is fixed, and we are left with</p>
-<p>$$
-\begin{align}
-\hat{H} =  \frac{1}{2I}\hat{L}^2
-\end{align}
-$$</p>
-<p>Now, it is evident that the eigenfunctions of the particle-on-a-sphere Hamiltonian are also eigenfunctions of the operator corresponding to the square of the angular momentum.</p>
-<p>Recall that $\hat{L}^2$ commutes with $\hat{L}_z$. As such, we could choose to find solutions to the Schrödinger equation for the particle-on-a-sphere model that are simultaneous eigenfunctions of $\hat{L}^2$ and $\hat{L}_z$ that satisfy</p>
-<p>$$
-\begin{align}
-\hat{L}^2 Y(\theta,\phi) &amp;= c Y(\theta,\phi) \\
-\hat{L}_z Y(\theta,\phi) &amp;= b Y(\theta,\phi)
-\end{align}
-$$</p>
-<p>With <b><font color="red">i</font><font color="orange">n</font><font color="yellow">f</font><font color="green">i</font><font color="blue">n</font><font color="indigo">i</font><font color="violet">t</font><font color="red">e</font> <font color="orange">w</font><font color="yellow">i</font><font color="green">s</font><font color="blue">d</font><font color="indigo">o</font><font color="violet">m</font></b>, we note that there is no $\theta$ dependence in $\hat{L}_z$, so it seems reasonable to expect that $Y(\theta, \phi)$ is factorizable into a product of functions that depend only on $\theta$ or $\phi.$ Let's try the form</p>
-<p>$$
-\begin{align}
-Y(\theta, \phi) = f(\theta) g(\phi)
-\end{align}
-$$</p>
-<p>If we insert this form into the eigenvalue equation for $\hat{L}_z$, we obtain</p>
-<p>$$
-\begin{align}
-\hat{L}_z Y(\theta,\phi) &amp;= b Y(\theta,\phi)\\
--i\hbar\frac{\partial}{\partial \phi} f(\theta) g(\phi) &amp;= b f(\theta) g(\phi)\\
--i\hbar f(\theta) \frac{\partial}{\partial \phi} g(\phi) &amp;= b f(\theta) g(\phi)\\
--i\hbar \frac{d g(\phi)}{d \phi}  &amp;= b g(\phi)\\
-\end{align}
-$$</p>
-<p>which, not surprisingly, is just an eigenvalue equation for $\hat{L}_z$, without any $\theta$ component. In the previous section, we found that the particle-on-a-ring energy eigenfunctions were also eigenfunctions of the $\hat{L}_z$, so we choose</p>
-<p>$$ 
-\begin{align}
-g(\phi) = \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi}
-\end{align}
-$$</p>
-<p>and</p>
-<p>$$
-\begin{align}
-Y(\theta, \phi) = \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta)
-\end{align}
-$$</p>
-<p>with $m = 0, \pm 1, \pm 2$, etc. Without the restriction on $m,$ the $phi$ component of $Y(\theta, \phi)$ would not be well behaved. Like we found for the particle-on-a-ring model, the eigenvalue $b$ is equal to $m\hbar$.</p>
-<p>To find $f(\theta)$, we consider the eigenvalue equation for $\hat{L}^2$</p>
-<p>$$
-\begin{align}
-\hat{L}^2 \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta) = c \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta)
-\end{align}
-$$</p>
-<p>which, after evaluating the action of $\hat{L}^2$ on $g(\theta)$ and collecting terms, gives</p>
-<p>$$\begin{align}
-\frac{d^2}{d\theta^2} f(\theta) + \cot(\theta) \frac{d}{d\theta} f(\theta) - \frac{m^2}{\sin^2(\theta)}f(\theta) = -\frac{c}{\hbar^2} f(\theta)
-\end{align}$$</p>
-<p>Solving this differential equation is quite complicated, so we will discuss the main points in the process. A detailed solution is given in Chapter 5 of Levine's <a href="https://www.amazon.com/Quantum-Chemistry-7th-Ira-Levine/dp/0321803450">Quantum Chemistry textbook</a>. That text outlines several clever choices along the way to the solution, including a change of variables</p>
-<p>$$\begin{align}
-\cos(\theta)&amp;  \to w\\
-f(\theta) &amp;\to f(w)
-\end{align}
-$$</p>
-<p>and the introduction of an auxiliary function, $h(w)$, which is related to $f(w)$ by</p>
-<p>$$\begin{align}
-f(w) = \left ( 1 - w^2 \right ) ^{|m|/2} h(w)
-\end{align}$$</p>
-<p>The function $h(w)$ is expanded as a power series</p>
-<p>$$ \begin{align}
-h(w) = \sum_{k=0}^\infty c_k w^k
-\end{align}$$</p>
-<p>Inserting this form for $h(w)$ into the eigenvalue equation for $\hat{L}^2$ eventually leads to a two-term recursion relation for the expansion coefficients</p>
-<p>$$\begin{align}
-c_{k+2} = \frac{\left [ (k + |m|)(k + |m| + 1) - \frac{c}{\hbar^2}\right ] }{(k+1)(k+2)} c_k
-\end{align}$$</p>
-<p>Like in the quantum harmonic oscillator, inspection of various limits reveals that the $\hat{L}^2$ eigenfunctions are only well-behaved if the series expansion for $h(w)$ truncates (at $k_\text{max}$, for example). Then, we have</p>
-<p>$$\begin{align}
-c = \hbar^2(k_\text{max} + |m|)(k_\text{max} + |m| + 1)
-\end{align}$$</p>
-<p>$k_\text{max}$ corresponds to the upper limit in the series summation, so it must be a non-negative integer. Because $|m| = 0, 1, 2,$ etc. is also non-negative, the sum of these two quantities is non-negative and is a quantum number that characterizes the eigenfunctions of $\hat{L}^2$:</p>
-<p>$$\begin{align}
-l = k_\text{max} + |m| = 0, 1, 2, ...
-\end{align}$$</p>
-<p>and thus the square of the angular momentum for a particle confined to move on a sphere is quantized,</p>
-<p>Note that this relationship also implies that $m$ is bounded by $l$, i.e.,</p>
-<p>$$\begin{align}
-m = 0, \pm 1, \pm 2, ..., \pm l
-\end{align}$$</p>
-<p>Now, we have</p>
-<p>$$\begin{align}
-\hat{L}^2 Y(\theta, \phi) &amp; =  l(l+1) \hbar^2 Y(\theta, \phi)\\
-\hat{L}_z Y(\theta, \phi) &amp;=  m \hbar Y(\theta, \phi)\text{, }\\
-\end{align}$$</p>
-<p>and, inserting this result into the Schrödinger equation, we have</p>
-<p>$$
-\begin{align}
-\hat{H} Y(\theta, \phi) &amp;= E Y(\theta, \phi) \\
- &amp;= \frac{1}{2I} \hat{L}^2 Y(\theta, \phi)\\
- &amp;= \frac{l(l+1)\hbar^2}{2I}  Y(\theta, \phi)\\
-\end{align}
-$$</p>
-<p>At this point, it is clear that the energy, the square of the angular momentum, and the $z$ projection of the angular momentum for a particle constrained to move on the surface of a sphere are all quantized, with</p>
-<p>$$ \begin{align}
-E &amp;= \frac{l(l+1)\hbar^2}{2I} \\
-L^2 &amp;= l(l+1)\hbar^2 \\
-L_z &amp;= m\hbar \\
-\end{align}
-$$</p>
-<p>From these results, we can see that the energy depends only on the quantum number, $l,$ and, each energy level is $(2l+1)$-fold degenerate because, for each $l$, there are $2l+1$ possible values of the quantum number, $m.$</p>
-<p>Because the states can be characterized $l$ and $m,$ we label the wave functions for these states as $Y(\theta, \phi) \to Y^m_l(\theta, \phi).$ What is the form of these functions? We have</p>
-<p>$$\begin{align}
-Y^m_l(\theta, \phi) &amp;= \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta)
-\end{align}$$</p>
-<p>with</p>
-<p>$$\begin{align}
-f(\theta) &amp;= \sin^{|m|}(\theta)\sum_{j \in \{\text{odd or even}\}}^{l - |m|} c_j \cos^j(\theta)
-\end{align}$$
-where the series expansion coefficients are determined by recursion. Note that the sum runs over even or odd non-negative integers depending on whether $k_\text{max} = l - |m|$ is even or odd. The sum must be restricted in this way to guarantee that the series truncates at $k_\text{max}.$ It turns out that $f(\theta)$ can be expressed in terms of special functions called <strong>associated Legendre polynomials</strong>, $\rho_l^{|m|},$</p>
-<p>$$\begin{align}
-f(\theta) &amp;= \left [ \frac{2l+1}{2}\frac{(l-|m|)!}{(l+|m|)!}\right ] \rho_l^{|m|}(\cos(\theta))
-\end{align}$$</p>
-<p>so the wave function is</p>
-<p>$$\begin{align}
-Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\right ] \rho_l^{|m|}(\cos(\theta))e^{im\phi} f(\theta)
-\end{align}$$</p>
-<p>These special functions are known as the <strong>spherical harmonics</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=11afc9c4-201c-47fd-a7f3-6432b794db25">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Vector-Diagrams">Vector Diagrams<a class="anchor-link" href="#Vector-Diagrams">¶</a></h3><p>Vector diagrams allow us to visualize how the angular momentum vector is oriented in space. Consider a particle in a state represented by $Y^m_l(\theta, \phi).$ The magnitude of the total angular momentum is determined by the quantum number, $l$, i.e., $|L| = [l(l+1)\hbar^2]^{1/2},$ while the $z$ projection of the angular momentum is determined by the quantum number, $m.$ These quantities can be visualized for the $l=0, 1, 2, 3$ states with the following Python code</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=15f18130-6c02-4d8e-8f4b-d7d3822843f5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ax0</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ax1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ax2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ax3</span><span class="p">)</span>
-
-<span class="c1"># l = 0, 1, 2, 3</span>
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-    <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">l</span> <span class="o">*</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="c1"># m = -l ... l</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> 
-        <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">magnitude</span><span class="o">*</span><span class="n">magnitude</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">dy</span> <span class="o">=</span> <span class="n">m</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">head_width</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">length_includes_head</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">'dotted'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    
-<span class="n">ax0</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'z (units of $\hbar$)'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>Text(0, 0.5, 'z (units of $\\hbar$)')</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
-<img alt="No description has been provided for this image" class="" src="data:image/png;base64,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
-"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a7801a8-dc70-4eac-91c5-92f3fb023c79">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>From this figure, we can make the following observations:</p>
-<ol>
-<li>The ground state ($l=0$) is a state for which the particle has zero angular momentum.</li>
-<li>For all states with $l&gt;0,$, there are $2l+1$ different states with different $m$ values. The magnitude of the angular momentum is the same for each of these states (as is the energy), but the direction in which the angular momentum vector points is different.</li>
-<li>The $z$ projection of the angular momentum is quantized. This space quantization is at odds with the classical picture of angular momentum in a classical rotating body. However, we can see that the number of possible $z$ projections increases with $l$. In the limit that $l$ becomes large, the $z$ projection of the angular momentum becomes effectively continuous. This result is another manifestation of the <strong>Bohr Correspondence Principle</strong>.</li>
-</ol>
-<p>This vector diagram is informative, but it is misleading in the sense that it makes it appear as though, in addition to knowledge regarding the magnitude and $z$ projection of the angular momentum vector, we also know something about its $x$ or $y$ component, depending on what the $x$ axis in the figure above is meant to represent. In reality, we can know <strong>nothing</strong> about the $x$ and $y$ components of the angular momentum vector because we know exactly what the $z$ component is and the relevant operators do not commute (although, the $l=0$ state is a special case which we will consider below). In reality, the angular momentum vector should lie on the edge of a <strong>cone</strong> with known magnitude and $z$ projection, as the following Python code illustrates for the $l=1$ states.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9766a0b7-cc6c-414b-a3f7-831447991b8b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">"3d"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">azim</span><span class="o">=-</span><span class="mi">72</span><span class="p">)</span>
-
-<span class="n">l</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-    <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">l</span><span class="o">*</span><span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">m</span> <span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span> 
-        <span class="n">val</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_pane_color</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_pane_color</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">zaxis</span><span class="o">.</span><span class="n">set_pane_color</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">zaxis</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'z (units of $\hbar$)'</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span> <span class="o">=</span> <span class="p">[])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span> <span class="o">=</span> <span class="p">[])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
-<img alt="No description has been provided for this image" class="" src="data:image/png;base64,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
-"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55c1f8e1-f7eb-4243-b036-5e540b2d3061">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="A-Note-Regarding-Uncertainty">A Note Regarding Uncertainty<a class="anchor-link" href="#A-Note-Regarding-Uncertainty">¶</a></h3><p>The general form of the <strong>Heisenberg Uncertainty Principle</strong> states that the product of the uncertainties in observables $A$ and $B$ is bounded by an expectation value involving the commutators of the corresponding operators. Specifically, we have</p>
-<p>$$\begin{align}
-\Delta A \Delta B \ge \frac{1}{2} | \langle [\hat{A}, \hat{B} ] \rangle|
-\end{align}$$</p>
-<p>If this commutator is zero, then it is possible to specify a complete set of common eigenfunctions of $\hat{A}$ and $\hat{B}$. Conversely, if these operators do not commute, then no such set of eigenfunctions exist, and it will not be possible, in general, to specify both $A$ and $B$ exactly, simultaneously.</p>
-<p>For a particle constrained to move on a sphere in a state described by $Y^m_l(\theta, \phi),$ the product of the uncertainties in the $x$ and $y$ projections of the angular momentum would be</p>
-<p>$$\begin{align}
-\Delta L_x \Delta L_y &amp;\ge \frac{1}{2} \left | \langle Y^m_l(\theta, \phi) | [\hat{L}_x, \hat{L}_y] | Y^m_l(\theta, \phi) \rangle \right | \\
-&amp;= \frac{\hbar}{2} \left | \langle Y^m_l(\theta, \phi) | \hat{L}_z | Y^m_l(\theta, \phi) \rangle \right |
-\end{align}$$</p>
-<p>Because $\hat{L}_x$ and $\hat{L}_y$ do not commute, it is impossible to find a complete set of common eigenfunctions for both operators. Is it ever possible to specify the $x$ and $y$ components of the angular momentum, simultaneously, with arbitrary precision? Surprisingly, the answer to this question is yes, but only in a single special case. Consider the state with $l=0$ and $m=0$. This is a state with zero total angular momentum and, obviously, zero $z$ projection of angular momentum. Because the total angular momentum is zero, the $x$ and $y$ projections must be exactly equal to zero, too! This result implies that the function $Y^0_0(\theta, \phi)$ is an eigenfunction of all four operators, $\hat{L}^2$, $\hat{L}_x$, $\hat{L}_y$, and $\hat{L}_z.$ The existence of a single common eigenfunction of these operators does not contradict the Heisenberg Uncertainty Principle, though. It is still impossible to specify a <strong>complete</strong> set of common eigenfunctions for these operators.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=672f5b4f-9d30-481e-b0e0-9b3ae3b9459f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Rigid-Rotor">The Rigid Rotor<a class="anchor-link" href="#The-Rigid-Rotor">¶</a></h2><p>The particle-on-a-sphere model is equivalent to a model for molecular rotations known as the rigid rotor. In this section, we derive the Hamiltonian for the rigid-rotor problem and show the equivalence of these two models.</p>
-<p>Consider two particles of mass $m_1$ and $m_2$ moving in three dimensions with coordinates $\vec{r}_1$ and $\vec{r}_2.$ The Hamiltonian for this system depends on the coordinates of both particles</p>
-<p>$$\begin{align}
-\hat{H} = -\frac{\hbar^2}{2m_1}\nabla_1^2  - \frac{\hbar^2}{2m_1}\nabla_2^2 + V(\vec{r})
-\end{align}$$</p>
-<p>where $V(\vec{r})$ is a potenial that depends on the inter-particle separation</p>
-<p>$$\begin{align}
-\vec{r} = \vec{r}_2 - \vec{r}_1
-\end{align}$$</p>
-<p>As written, this Hamiltonian is not separable in the coordinates of the particles, but we can obtain a separable Hamiltonian through a coordinate transformation. First, we introduce the center-of-mass coordinate, $\vec{R},$ defined as</p>
-<p>$$\begin{align}
-\vec{R} = \frac{m_1 \vec{r}_1 + m_2 \vec{r}_2}{m_1 + m_2}
-\end{align}$$</p>
-<p>which can be re-expressed in terms of the coordinates of one of the particles and $\vec{r}$ as</p>
-<p>$$\begin{align}
-\vec{R} = \frac{m_1 \vec{r}_1 + m_2 (\vec{r}+\vec{r}_1)}{m_1 + m_2}
-\end{align}$$</p>
-<p>Now, we introduce the total and reduced masses, $M$ and $\mu,$ respectively, which are defined by</p>
-<p>$$\begin{align}
-M &amp;= m_1 + m_2 \\
-\mu &amp;= \frac{m_1 m_2}{m_1 + m_2}
-\end{align}$$</p>
-<p>From the expression for the center-of-mass cordinate, we have</p>
-<p>$$\begin{align}
-M \vec{R} = M \vec{r}_1 + m_2 \vec{r} 
-\end{align}$$</p>
-<p>We can also express $\vec{r}_1$ and $\vec{r}_2$ in terms of $\vec{R}$ and $\vec{r}$ as</p>
-<p>$$\begin{align}
-\vec{r}_1 &amp;= \vec{R} - \frac{m_2}{M} \vec{r} \\
-\vec{r}_2 &amp;= \vec{R} + \frac{m_1}{M} \vec{r}
-\end{align}$$</p>
-<p>Now, what happens to the classical expression for the kinetic energy with these new coordinates? We begin with the momenta for these particles, defined by</p>
-<p>$$\begin{align}
-\vec{p}_i = m_i \frac{d \vec{r}_i}{dt} = m_i \dot{r}_i
-\end{align}$$</p>
-<p>The kinetic energy is then</p>
-<p>$$\begin{align}
-T &amp;= \frac{\vec{p}_1\cdot \vec{p}_1}{2 m_1} + \frac{\vec{p}_2 \cdot \vec{p}_2}{2 m_2}\\
-&amp;= \frac{m_1}{2} \dot{\vec{r}}_1 \cdot \dot{\vec{r}}_1 + \frac{m_2}{2} \dot{\vec{r}}_2 \cdot \dot{\vec{r}}_2 \\
-&amp;= \frac{m_1}{2} \left ( \dot{\vec{R}} - \frac{m_2}{M}\dot{\vec{r}} \right ) \cdot \left ( \dot{\vec{R}} - \frac{m_2}{M}\dot{\vec{r}} \right ) \nonumber \\
-&amp;+ \frac{m_2}{2} \left ( \dot{\vec{R}} + \frac{m_1}{M}\dot{\vec{r}} \right ) \cdot \left ( \dot{\vec{R}} + \frac{m_1}{M}\dot{\vec{r}} \right ) \\
-&amp;= \frac{m_1 + m_2}{2} \dot{\vec{R}} \cdot \dot{\vec{R}} + \frac{m_1 m_2}{2 M} \dot{\vec{r}}\cdot \dot{\vec{r}} \\
-&amp;= \frac{M}{2} \dot{\vec{R}} \cdot \dot{\vec{R}} + \frac{\mu}{2} \dot{\vec{r}}\cdot \dot{\vec{r}} \\
-&amp;= \frac{\vec{p}_M \cdot \vec{p}_M}{2M}  + \frac{\vec{p}_\mu \cdot \vec{p}_\mu}{2\mu}
-\end{align}$$</p>
-<p>where $\vec{p}_M$ and $\vec{p}_\mu$ are momenta for effective particles of mass $M$ and $\mu$ that depend on the coordinates $\vec{R}$ and $\vec{r},$ respectively. We can define quantum mechanical operators for these momenta and insert them into the Hamiltonian to obtain</p>
-<p>$$\begin{align}
-\hat{H} = \frac{\hat{p}_M^2}{2M} + \left [ \frac{\hat{p}_\mu^2}{2\mu} + V(\vec{r}) \right ]
-\end{align}$$</p>
-<p>The first term depends on the center-of-mass coordinate $(\vec{R}),$  while the second and third terms depend on the inter-particle separation coordinate $(\vec{r}).$ With this choice of coordinates, the Hamiltonian is additively separable. As a result, the wave function can be expressed as a product of wave functions for effective particles of mass $M$ and $\mu$</p>
+<p>where $\nabla_M^2$ and $\nabla_\mu^2$ are Laplacians for the center-of-mass and inter-particle coordinates, respectively. This Hamiltonian is separable in $\vec{R}$ (the first term) and $\vec{r}$ (the second and third terms). As discussed in the previous notebook, this structure implies that the wave function will be a product wave function</p>
 <p>$$ \begin{align}
 \psi(\vec{R}, \vec{r}) = \psi_M(\vec{R}) \psi_\mu(\vec{r})
 \end{align}$$</p>
@@ -8297,491 +7586,90 @@ T &amp;= \frac{\vec{p}_1\cdot \vec{p}_1}{2 m_1} + \frac{\vec{p}_2 \cdot \vec{p}_
 <p>$$ \begin{align}
 E = E_M + E_\mu
 \end{align}$$</p>
-<p>Because the Hamiltonian is separable, these wave function and energy components can be obtained by solving separate Schrödinger equations that involve only one coordinate, i.e.,</p>
+<p>We are free to determine these wave functions and energies from separate one-particle Schrödinger equations</p>
 <p>$$\begin{align}
 \hat{H}_M \psi_M(\vec{R}) &amp;= E_M \psi_M(\vec{R}) \\
 \hat{H}_\mu \psi_\mu(\vec{r}) &amp;= E_\mu \psi_\mu(\vec{r})
 \end{align}$$</p>
 <p>where</p>
 <p>$$\begin{align}
-\hat{H}_M  &amp;= \frac{\hat{p}_M^2}{2M}  \\
-\hat{H}_\mu &amp;= \frac{\hat{p}_\mu^2}{2\mu} + V(\vec{r}) 
+\hat{H}_M  &amp;= -\frac{\hbar^2}{2M}\nabla_M^2  \\
+\hat{H}_\mu &amp;= - \frac{\hbar^2}{2\mu}\nabla_\mu^2 + V(r) 
 \end{align}$$</p>
-<p>The first of these equations resembles the Schrödinger equation for a free-particle of mass, $M.$ As such, the energy, $E_M,$ corresponds to the translational energy of the entire system traveling through space and will not be quantized. The Schrödinger equation for the effective particle of mass, $\mu,$ is more complicated, and its solution will depend on the precise form of $V(\vec{r}).$ Depending on the form of this potential, $E_\mu$ may be quantized.</p>
-<p>To this point, this analysis has been completely general. The Hamiltonian for any two-particle system with a potential that depends on the inter-particle distance can be separated in this way. The $\vec{R}$-dependent part of the wave function will always look like that for a free-particle, where as the $\vec{r}$-dependent part will be more interesting.  Here, we are specifically concerned with the case where $\psi(\vec{r})$ is a wave function characterizing the rotational motion of a molecular system (specifically, a diatomic molecule). In the <strong>rigid rotor</strong> model, the atoms in this molecular are assumed to rotate about their center of mass, at a fixed distance, $d$ from one-another. As a result $V(\vec{r})$ is chosen to be zero when $|\vec{r}|=d$ and infinite otherwise. This potential is <strong>sperically symmetrical</strong>, meaning that it depends on the magnitude but not the orientation of $\vec{r}.$  For a particle experiencing such a potential, the force experienced by the particle is radially directed. For this reason, this type of a problem is called a <strong>central force problem</strong>.</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 5.</p>
-<p>Show that the force for a central force problem is</p>
-<p>$$\begin{align}\vec{f} = -\frac{d V(r)}{dr} \frac{\vec{r}}{r}\end{align}$$</p>
-<p>where $r = |\vec{r}|.$</p>
-</blockquote>
-</blockquote>
-<p>It turns out that the wave function for a central force problem is separable as</p>
+<p>The center-of-mass problem resembles the free-particle problem and $E_M$ is simply the non-quantized translational energy for the hydrogen atom as a whole. The inter-particle part of the problem is much more interesting and is the source of the quantization of the energy levels for the hydrogen atom. Thus, for the remainder of this notebook, we focus only on the $\mu$ dependent part of the problem and suppress the subscript $\mu,$ for simplicity. We have</p>
 <p>$$\begin{align}
-\psi_\mu(\vec{r}) &amp;= \psi_\mu(r, \theta, \phi) \\
-&amp;= R(r) Y^m_l(\theta, \phi)
+\hat{H} &amp;= - \frac{\hbar^2}{2\mu}\nabla^2 - \frac{e^2}{4\pi\epsilon_0 r}
 \end{align}$$</p>
-<p>where $R(r)$ is a <strong>radial wave function</strong>, and $Y^m_l(\theta, \phi)$ are the same <strong>spherical harmonics</strong> that are eigenfunctions of the orbital angular momentum operators, $\hat{L}^2$ and $\hat{L}_z.$ Now, because $r$ is fixed in the rigid rotor problem, the function $R(r)$ has no meaning and is ignored. We are left with</p>
+<p>Note that the Coulomb potential is <strong>spherically symmetrical</strong>, i.e., it depends only on the distance between the electron and proton, so the hydrogen atom problem is thus a <strong>central force problem</strong>. As discussed in the previous notebook, the wave function for a central force problem is factorizable as</p>
 <p>$$\begin{align}
-\psi_\mu(\theta, \phi) &amp;= Y^m_l(\theta, \phi)
+\psi(r, \theta, \phi) = R(r) Y^l_m(\theta, \phi)
 \end{align}$$</p>
-<p>The Hamiltonian for the rigid rotor is the $\mu$-dependent part of the Hamiltonian above. If we consider only the region of space where $|\vec{r}| = r = d,$ where the potential, $V(\vec{r}),$ vanishes, then we have</p>
-<p>$$
-\begin{align}
-\hat{H}_\mu = -\frac{\hbar^2}{2\mu}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{d}\frac{\partial}{\partial r} \right ) + \frac{1}{2\mu d^2}\hat{L}^2
-\end{align}
-$$</p>
-<p>Note that, because $r$ is fixed, we have replaced it with $d$ in this expression. Moreover, with $r$ being fixed, derivatives with respect to $r$ carry no meaning, so we ignore these terms and are left with</p>
-<p>$$
-\begin{align}
-\hat{H}_\mu = \frac{1}{2\mu d^2}\hat{L}^2
-\end{align}
-$$</p>
-<p>The corresponding Schrödinger equation is</p>
-<p>$$\begin{align}
-\hat{H}_\mu \psi_\mu &amp;= E_\mu \psi_\mu \\
-\frac{1}{2\mu d^2}\hat{L}^2 Y^m_l &amp;= E_\mu Y^l_m \\
-&amp;= \frac{l(l+1)\hbar^2}{2\mu d^2} Y^l_m
-\end{align}$$</p>
-<p>So, the energy for a two-particle rigid rotor is quantized and given by</p>
-<p>$$\begin{align}
-E &amp;= \frac{l(l+1)\hbar^2}{2\mu d^2} \\
-&amp;= \frac{l(l+1)\hbar^2}{2I}
-\end{align}
-$$</p>
-<p>where $I = \mu d^2$ is the moment of inertia for the molecule. As was the case for the particle-on-a-sphere model, the rotational quantum number, $l,$ can take on any non-negative integer, and $m$ is bounded by $l$</p>
-<p>$$ \begin{align}
-l &amp;= 0, 1, 2, ... \\
-m &amp;= 0, \pm 1, \pm 2, ... \pm l
-\end{align}$$</p>
-<p>As such, each energy level is $(2l+1)$-fold degenerate.</p>
-<p>Note that this result is generalizable to rotating molecules with more than two atoms. Rotational energy levels are given by the energy expression above, augmented by the appropriate moment of inertia.</p>
+<p>where $R(r)$ is a radial wave function and the functions $Y^l_m(\theta, \phi)$ are spherical harmonics.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65e79b12-3676-47a3-b6e9-3a1010b86681">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=06b391ff-4da2-4859-80db-fa916c5e1d69">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Selection-Rules">Selection Rules<a class="anchor-link" href="#Selection-Rules">¶</a></h3><p>The rigid rotor model can be used to predict both rotational energy levels and spectra for rotations in molecules. Here, we derive rules for which rotational transitions will be "allowed" or "forbidden."</p>
-<p><strong>Fermi's Golden Rule for Molecular Rotations</strong></p>
-<p>Recall that Fermi's Golden Rule allows us to predict the probability that a system will transition between energy states when interacting with a time-dependent external perturbation. For a rigid rotor interacting with an oscillating electric field, a transition between states characterized by the wave functions $Y^m_l(\theta, \phi)$ and $Y^{m^\prime}_{l^\prime}(\theta, \phi)$ will be proportional to the square modulus of the transition dipole moment involving these wave functions,</p>
-<p>$$\begin{align}
-P_{m,l \to m^\prime, l^\prime} \propto |\langle Y^m_l(\theta, \phi) | \hat{\mu} | Y^{m^\prime}_{l^\prime}(\theta, \phi) \rangle |^2
-\end{align}$$</p>
-<p>For the quantum harmonic oscillator model, we were able to derive selection rules from the recursion relations for Hermite polynomials. It turns out that we can derive selection rules for the rigid rotor that are related to the change in $m,$ $\Delta m = m - m^{\prime},$ from commutator relations involving the operators $\hat{L}_z$, $x,$, $y,$ and $z.$</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 6.</p>
-<p>Show that $[\hat{L}_z, x] = i\hbar y$</p>
-</blockquote>
-<blockquote>
-<p>Question 7.</p>
-<p>Show that $[\hat{L}_z, y] = -i\hbar x$</p>
-</blockquote>
-<blockquote>
-<p>Question 8.</p>
-<p>Show that $[\hat{L}_z, z] = 0$</p>
-</blockquote>
-</blockquote>
-<p>Let us insert $[\hat{L}_z, z] = 0$ into an integral involving the states $Y^m_l$ and $Y^{m^\prime}_{l^\prime}$, where we suppress the notation for the dependence on the coordinates $\theta$ and $\phi$</p>
-<p>$$\begin{align}
-\langle Y^m_l | [\hat{L}_z, z] | Y^{m^\prime}_{l^\prime} \rangle &amp;= 0 \\
-&amp;= \langle Y^m_l | \hat{L}_z z | Y^{m^\prime}_{l^\prime} \rangle - \langle Y^m_l | z\hat{L}_z | Y^{m^\prime}_{l^\prime} \rangle \\
-&amp;= \langle Y^m_l | \hat{L}_z | f \rangle - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
-&amp;= \langle f | \hat{L}_z | Y^m_l \rangle^* - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
-&amp;= m^* \hbar \langle f | Y^m_l \rangle^* - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
-&amp;= m \hbar \langle Y^m_l | f \rangle - m^\prime \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle \\
-&amp;= (m - m^\prime) \hbar \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle 
-\end{align}$$</p>
-<p>Where, on the third line, we have introduced a function, $|f\rangle = z|Y^{m^\prime}_{l^\prime}\rangle$ to make the manipulation in the fourth line, based on the Hermiticity of the operator $\hat{L}_z$ a little easier to see. Note also that we also took advantage of the fact that $m$ is a real number, i.e., $m = m^*.$ Now, we are left with</p>
-<p>$$\begin{align}
-(m - m^\prime) \langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle = 0
-\end{align}$$</p>
-<p>For $z$ polarized light, a transition between states $Y^m_l$ and $Y^{m^\prime}_{l^\prime}$ will only occur if the integral $\langle Y^m_l | z | Y^{m^\prime}_{l^\prime} \rangle$ is non-zero. If this integral is non-zero, then this equation can only be satisfied if</p>
-<p>$$\begin{align}
-\Delta m =  m - m^\prime = 0
-\end{align}$$</p>
-<p>If we perform a similar exercise involving the commutators $[\hat{L}_z, x]$ and $[\hat{L}_z, y],$ we would find two additional selection rules. In total, we have three selection rules for allowed changes in the $m$ quantum number:</p>
-<p>$$\begin{align}
-\Delta m = 0, \pm 1 
-\end{align}$$</p>
-<p>There is also a selection rule on the change in the quantum number, $l,$ that we will not derive:</p>
-<p>$$\begin{align}
-\Delta l = \pm 1
-\end{align}$$</p>
-<p>In addition to these rules, non-zero transitions in "pure" rotational spectra (with no changes in vibrational energy levels) require that the molecule have a permanent dipole moment.</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 9:</p>
-<p>Derive the $\Delta m = \pm 1$ selection rules from the commutators $[\hat{L}_z, x]$ and $[\hat{L}_z, y]$</p>
-</blockquote>
-</blockquote>
+<h2 id="The-Radial-Equation">The Radial Equation<a class="anchor-link" href="#The-Radial-Equation">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a3c967f4-6dd0-4e9d-96ad-e2fb20b797c1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a496a452-7860-466e-b618-4ad92338720e">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=24d56784-3e82-4ff7-9f19-2f616becbcc4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Ladder-Operators">Ladder Operators<a class="anchor-link" href="#Ladder-Operators">¶</a></h2><p>Above, we derived the eigenfunctions and eigenvalues of $\hat{L}^2$ and $\hat{L}_z$ by solving the respective eigenvalue equations. It turns out that we can also derive the eigenvalues for these operators using only their commutator properties. These results will also apply to other types of angular momentum whose operators have the same commutator properties, like spin angular momentum, so let us consider the following general angular momentum operators</p>
-<p>$$\begin{align}
-\vec{M} &amp;= \hat{M}_x \vec{i} + \hat{M}_y \vec{j} + \hat{M}_z \vec{k} \\
-\hat{M}^2 &amp;= \hat{M}_x^2 + \hat{M}_y^2 + \hat{M}_z^2 \\
-\end{align}$$</p>
-<p>We assume that these operators have similar commutator properties as we derived above, so</p>
-<p>$$\begin{align}
-[\hat{M}^2, \hat{M}_x] &amp;= 0 \\
-[\hat{M}^2, \hat{M}_y] &amp;= 0 \\
-[\hat{M}^2, \hat{M}_z] &amp;= 0 \\
-[\hat{M}_x, \hat{M}_y] &amp;= i\hbar \hat{M}_z \\
-[\hat{M}_z, \hat{M}_x] &amp;= i\hbar \hat{M}_y \\
-[\hat{M}_y, \hat{M}_z] &amp;= i\hbar \hat{M}_x \\
-\end{align}$$</p>
-<p>Now, we introduce "raising" and "lowering" operators, $\hat{M}_-$ and $\hat{M}_+,$ respectively, whose names will become clear soon.</p>
-<p>$$\begin{align}
-\hat{M}_+ &amp;= \hat{M}_x + i \hat{M}_y \\
-\hat{M}_- &amp;= \hat{M}_x - i \hat{M}_y \\
-\end{align}$$</p>
-<p>Do these operators commute with $\hat{M}_z$? Let's check.</p>
-<p>$$\begin{align}
-[\hat{M}_+, \hat{M}_z ] &amp;= [\hat{M}_+, \hat{M}_x + i \hat{M}_y] \\
-&amp;= [\hat{M}_+, \hat{M}_x] + i [\hat{M}_+, \hat{M}_y] \\
-&amp;= -i\hbar \hat{M}_y - \hbar\hat{M}_x \\
-&amp;= -\hbar \hat{M}_+
-\end{align}$$</p>
-<p>No! These operators do not commute, and neither do $\hat{M}_-$ and $\hat{M}_z.$ For that case, we have</p>
-<p>$$\begin{align}
-[\hat{M}_-, \hat{M}_z ] &amp;= +\hbar \hat{M}_-
-\end{align}$$</p>
-<p>We can reexpress these commutator relations in a form that will soon become useful as</p>
-<p>$$\begin{align}
-\hat{M}_+ \hat{M}_z &amp;= \hat{M}_z \hat{M}_+ - \hbar \hat{M}_+ \\
-\hat{M}_- \hat{M}_z &amp;= \hat{M}_z \hat{M}_- + \hbar \hat{M}_-
-\end{align}$$</p>
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 10.</p>
-<p>Show that $[\hat{M}_-, \hat{M}_z] = +\hbar \hat{M}_-$</p>
-</blockquote>
-</blockquote>
-<p>Now, consider the eigenvalue equation for $\hat{M}_z$</p>
-<p>$$\begin{align}
-\hat{M}_z Y = b Y
-\end{align}$$</p>
-<p>and let us apply $\hat{M}_+$ on the left to both sides of this equation</p>
-<p>$$\begin{align}
-\hat{M}_+ \hat{M}_z Y &amp;= b \hat{M}_+ Y \\
-\hat{M}_z \hat{M}_+ Y  - \hbar \hat{M}_+ Y &amp;=  b \hat{M}_+ Y\\
-\hat{M}_z (\hat{M}_+ Y)   &amp;=  (b+\hbar) (\hat{M}_+ Y)
-\end{align}$$</p>
-<p>Now, we see that the function $\hat{M}_+ Y$ is an eigenfunction of $\hat{M}_z$, with eigenvalue one unit of $\hbar$ higher than that for $Y,$ which is why we call $\hat{M}_+$ a "raising" operator. We could repeat this process multiple times to obtain</p>
-<p>$$\begin{align}
-\hat{M}_z (\hat{M}^k_+ Y)   &amp;=  (b+k\hbar) (\hat{M}^k_+ Y)
-\end{align}$$</p>
-<p>A similar analysis involving $\hat{M}_-$ leads to</p>
-<p>$$\begin{align}
-\hat{M}_z (\hat{M}^k_- Y)   &amp;=  (b-k\hbar) (\hat{M}^k_- Y)
-\end{align}$$</p>
-<p>Hence, $\hat{M}_\pm$ generate a "ladder" of eigenfunctions of $\hat{M}_z$, which is why we call such operators "ladder operators."</p>
-<p>Now, does $\hat{M}^2$ commute with the raising and lowering operators? We have</p>
-<p>$$\begin{align}
-[\hat{M}^2, \hat{M}_\pm ] = [\hat{M}^2, \hat{M}_x ] \pm i [\hat{M}^2, \hat{M}_y ] = 0
-\end{align}$$</p>
-<p>So, yes, these operators commute, and we thus have</p>
-<p>$$\begin{align}
-\hat{M}^2 \hat{M}_\pm = \hat{M}_\pm \hat{M}^2
-\end{align}$$</p>
-<p>Now, consider the eigenvalue equation for $\hat{M}^2$</p>
-<p>$$\begin{align}
-\hat{M}^2 Y = c Y
-\end{align}$$</p>
-<p>Let us act on this equation with $\hat{M}_\pm^k$ on both sides</p>
-<p>$$\begin{align}
-\hat{M}_\pm^k \hat{M}^2 Y &amp;= c \hat{M}_\pm^k Y \\
-\hat{M}^2(\hat{M}_\pm^k Y) &amp;= c (\hat{M}_\pm^k Y)
-\end{align}$$</p>
-<p>This result indicates that the function $\hat{M}_+ Y$ is an eigenfunction of $\hat{M}^2$ with the same eigenvalue as $Y.$ As such, each "rung" on the ladder generated by $\hat{M}_\pm^k$ is an eigenfunction of both $\hat{M}_z$ and $\hat{M}^2$.</p>
+<h2 id="Wave-Functions-and-Radial-Distribution-Functions">Wave Functions and Radial Distribution Functions<a class="anchor-link" href="#Wave-Functions-and-Radial-Distribution-Functions">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0a6a08df-fef5-4d9e-b390-02a48ba0823f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c045e5d3-3444-49f5-bcfe-fd75d0083545">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3ebdc458-876a-4788-a778-e1f0eb286bd4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Is there a limit to the number of times $\hat{M}_\pm$ can be applied to a state? Let us define a family of functions satisfying</p>
-<p>$$\begin{align}
-\hat{M}_z Y_k = b_k Y_k
-\end{align}$$</p>
-<p>where</p>
-<p>$$\begin{align}
-Y_k &amp;= \hat{M}^k_\pm Y_k \\
-b_k &amp;= b \pm k \hbar
-\end{align}$$</p>
-<p>Now, if we act on the state $Y_k$ with the operator $\hat{M}^2 - \hat{M}_z$ we have</p>
-<p>$$\begin{align}
-(\hat{M}^2 - \hat{M}_z)Y_k &amp;= (c - b_k^2)Y_k \\
-\end{align}$$</p>
-<p>or, equivalently, based on how $\hat{M}^2$ was defined above</p>
-<p>$$\begin{align}
-(\hat{M}_x^2 + \hat{M}^2_y)Y_k &amp;= (c - b_k^2)Y_k \\
-\end{align}$$</p>
-<p>Multiplying this expression on the left by $Y_k^*$ and integrating over all space yields</p>
-<p>$$\begin{align}
-\langle Y_k | \hat{M}_x^2 | Y_k \rangle + \langle Y_k | \hat{M}^2_y | Y_k\rangle &amp;= (c - b_k^2)\langle Y_k | Y_k \rangle \\
-\end{align}$$</p>
-<p>The two integrals on the left-hand side of this equation represent expectation values of the square of an operator, the results of which much be non-negative. Similarly, the integral on the right-hand side of this expression is also non-negative. As such, we expect that the quantity $c-b_k^2$ must also be non-negative, which implies that</p>
-<p>$$\begin{align}
--c^{1/2} \le b_k \le c^{1/2} 
-\end{align}$$</p>
-<p>This result indicates that $b_k$ is bounded by $c.$ In other words, the ladder of functions $Y_k$ is finite!</p>
-<p>If a bound on $b_k$ exists, our next goal should be to find the maximum / minimum allowed values of $b_k$ that satisfy</p>
-<p>$$\begin{align}
-\hat{M}_z Y_\text{max} &amp;= b_\text{max} Y_\text{max} \\
-\hat{M}_z Y_\text{min} &amp;= b_\text{min} Y_\text{min}
-\end{align}$$</p>
-<p>To do so, we can consider the application of the raising operator to the top rung of the ladder:</p>
-<p>$$\begin{align}
-\hat{M}_z (\hat{M}_+ Y_\text{max}) = (b_\text{max} + \hbar)(\hat{M}_+ Y_\text{max})
-\end{align}$$</p>
-<p>This result suggests that the state $\hat{M}_+ Y_\text{max}$ has a larger $z$ projection of the angular momentum than the state $Y_\text{max}$, which contradicts our assertion that $Y_\text{max}$ represents the top rung of the ladder of functions. To avoid this contridiction, the application of $\hat{M}_+$ to $Y_\text{max}$ must be zero:</p>
-<p>$$\begin{align}
-\hat{M}_+Y_\text{max} = 0
-\end{align}$$</p>
-<p>We obtain a useful result if we probe this zero state with $\hat{M}_-$ as</p>
-<p>$$\begin{align}
-\hat{M}_-\hat{M}_+Y_\text{max} &amp;= 0 \\
-&amp;= (\hat{M}_x - i \hat{M}_y)(\hat{M}_x + i\hat{M}_y) Y_\text{max} \\
-&amp;= (\hat{M}_x^2 + \hat{M}_y^2 + i [M_x, M_y]) Y_\text{max} \\
-&amp;= (\hat{M}^2 - \hat{M}_z^2 - \hbar \hat{M}_z ) Y_\text{max} \\
-&amp;= (c - b_\text{max}^2 - \hbar b_\text{max}) Y_\text{max}
-\end{align}$$</p>
-<p>where on the fourth line, we have made use of the commutator relation given above. Now, we can see that $c$ and $b_\text{max}$ should satisfy</p>
-<p>$$\begin{align}
-c - b_\text{max}^2 - \hbar b_\text{max} = 0
-\end{align}$$</p>
-<p>or</p>
-<p>$$\begin{align}
-c = b_\text{max}(b_\text{max} + \hbar)
-\end{align}$$</p>
-<p>If we repeat this exercise starting with</p>
-<p>$$\begin{align} 
-\hat{M}_- Y_\text{min} = 0
-\end{align}$$</p>
-<p>which must be true to avoid a similar contradition as we encountered above, we obtain</p>
-<p>$$\begin{align}
-\hat{M}_+\hat{M}_- Y_\text{min} &amp;= 0 \\
-&amp;= (\hat{M}_x + i \hat{M}_y)(\hat{M}_x - i\hat{M}_y) Y_\text{min} \\
-&amp;= (\hat{M}_x^2 + \hat{M}_y^2 - i [M_x, M_y]) Y_\text{min} \\
-&amp;= (\hat{M}^2 - \hat{M}_z^2 + \hbar \hat{M}_z ) Y_\text{min} \\
-&amp;= (c - b_\text{min}^2 + \hbar b_\text{min}) Y_\text{min}
-\end{align}$$</p>
-<p>which suggests</p>
-<p>$$\begin{align}
-c = b_\text{min}^2 - \hbar b_\text{min}
-\end{align}$$</p>
-<p>Subtracting this result from the other expression for $c$ in terms of $b_\text{max}$ gives</p>
-<p>$$\begin{align}
-b_\text{max}^2 + \hbar b_\text{max} - b_\text{min}^2 + \hbar b_\text{min} = 0
-\end{align}$$</p>
-<p>which we can solve as a quadratic equation in $b_\text{max}$. This equation has two solutions</p>
-<p>$$\begin{align}
-b_\text{max} &amp;= \frac{-\hbar \pm \sqrt{\hbar^2 - 4(\hbar b_\text{min} - b_\text{min}^2)}}{2} \\
-&amp;= \frac{-\hbar \pm(\hbar - 2b_\text{min})}{2}
-\end{align}$$</p>
-<p>which simplify to</p>
-<p>$$\begin{align}
-b_\text{max} = -b_\text{min}
-\end{align}$$</p>
-<p>and</p>
-<p>$$\begin{align}
-b_\text{max} = b_\text{min} - \hbar
-\end{align}$$</p>
-<p>We reject the second solution because $b_\text{max}$ must be greater than $b_\text{min}.$ Recall that</p>
-<p>$$\begin{align}
-b_k = b \pm k\hbar
-\end{align}$$</p>
-<p>where $k$ is an integer, which suggests that</p>
-<p>$$\begin{align}
-b_\text{max} - b_\text{min} = n\hbar \hbar\text{, }~~~n = 0, 1, 2...
-\end{align}$$</p>
-<p>Given that $b_\text{max} = -b_\text{min},$ we now see that</p>
-<p>$$\begin{align}
-b_\text{max} - (-b_\text{max}) &amp;= n\hbar \\
-2 b_\text{max} &amp;= n \hbar\\
-\end{align}$$</p>
-<p>and</p>
-<p>$$\begin{align}
-b_\text{max} &amp;= \frac{n\hbar}{2} \\
-b_\text{min} &amp;= -\frac{n\hbar}{2}
-\end{align}$$</p>
-<p>or</p>
-<p>$$\begin{align}
-b_\text{max} &amp;= j\hbar \\
-b_\text{min} &amp;= -j\hbar
-\end{align}$$</p>
-<p>where $j = 0, \frac{1}{2}, 1, \frac{3}{2}, ...$ Recall that</p>
-<p>$$\begin{align}
-c = b_\text{max}(b_\text{max}+\hbar)
-\end{align}$$</p>
-<p>so we also have</p>
-<p>$$\begin{align}
-c = j(j+1)\hbar^2
-\end{align}$$</p>
-<p>Now, we can insert these results back into the original eigenvalue equations for $\hat{M}^2$ and $\hat{M}_z$ to give</p>
-<p>$$\begin{align}
-\hat{M}^2Y &amp;= j(j+1)\hbar^2 Y\text{, }~~~j = 0, \frac{1}{2}, 1, \frac{3}{2}, ... \\
-\hat{M}_z Y &amp;= m_j \hbar Y\text{, }~~~m_j = -j, -j+1, ..., j-1, j
-\end{align}$$</p>
-<p>Note that this is the same result as we obtained from explicitly solving the eigenvalue equations for the orbital angular momentum operators $\hat{L}^2$ and $\hat{L}_z,$ except that the quantum numbers $j$ and $m_j$ can take on half-integer values. The half-integer values would be rejected in the orbital angular momentum case because the associated wave functions would not satisfy the boundary conditions for the particle-on-a-sphere problem. It turns out that the half-integer quantum numbers are relevant for a different type of angular momentum, <strong>spin angular momentum</strong>, which is an intrinsic property of quantum mechanical particles.</p>
+<h2 id="Real-Valued-Hydrogenic-Orbitals">Real-Valued Hydrogenic Orbitals<a class="anchor-link" href="#Real-Valued-Hydrogenic-Orbitals">¶</a></h2>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c4fa7ea9-1b04-4e24-825c-ef6a743a9c16">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Spin-Angular-Momentum">Spin Angular Momentum<a class="anchor-link" href="#Spin-Angular-Momentum">¶</a></h2><p>Spin angular momentum is an intrinsic property of microscopic particles, like their mass and charge. The concept of spin emerges in Dirac's relativistic extension of the Schrödinger equation. In non-relativistic quantum mechanics, spin is incorporated into a wave function because we know, from experiment, that quantum particles possess this property. Fundamental particles can be chategorized in one of two ways, based on their spin. <strong>Fermions</strong> have half-integer spin; for example, electrons are fermions with a spin quantum number, $s = \frac{1}{2}.$ <strong>Bosons</strong> have integer spin; for example, photons are bosons with $s = 1.$</p>
-<p>Let us consider the spin of an electron, which is a fermion. All electrons have $s = \frac{1}{2},$ which determins the magnitude of the spin angular momentum, $s(s+1)\hbar^2 = \frac{3}{4}\hbar^2.$ From general chemistry, we learn that electrons can have $\alpha$ or $\beta$ spin, and we also refer to these electrons has having spin up or down. The terms "up" and "down" refer to the $z$ projection of the spin angular momentum, $m_s \hbar.$ From the analysis in the previous section, we know $m_s$ for an electron can take on two values. $\alpha$ spin electrons have $m_s = + \frac{1}{2},$ while $\beta$ spin electrons have $m_s = - \frac{1}{2}.$</p>
-<p>The operators for spin angular momentum are analogous to those we considered above for orbital angular momentum. We have</p>
-<p>$$\begin{align}
-\vec{S} &amp;= \hat{S}_x \vec{i} + \hat{S}_y \vec{j} + \hat{S}_z \vec{k} \\
-\hat{S}^2 &amp;= \hat{S}_x^2 + \hat{S}_y^2 + \hat{S}_z^2 \\
-\end{align}$$</p>
-<p>These operators have the same commutator properties as we derived above for orbital angular momentum, so</p>
-<p>$$\begin{align}
-[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
-[\hat{S}^2, \hat{S}_y] &amp;= 0 \\
-[\hat{S}^2, \hat{S}_z] &amp;= 0 \\
-[\hat{S}_x, \hat{S}_y] &amp;= i\hbar \hat{S}_z \\
-[\hat{S}_z, \hat{S}_x] &amp;= i\hbar \hat{S}_y \\
-[\hat{S}_y, \hat{S}_z] &amp;= i\hbar \hat{S}_x \\
-\end{align}$$</p>
-<p>Mathematically, we represent spin operators as</p>
-<p>$$\begin{align}
-\hat{S}_x &amp;= \frac{\hbar}{2} \sigma_x \\
-\hat{S}_y &amp;= \frac{\hbar}{2} \sigma_y \\
-\hat{S}_z &amp;= \frac{\hbar}{2} \sigma_z
-\end{align}$$</p>
-<p>where $\sigma_x,$ $\sigma_y,$ and $\sigma_z$ are $2 \times 2$ Hermitian matrices called "Pauli spin matrices" and are defined by</p>
-<p>$$\begin{align}
-\sigma_x &amp;= \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \\ \end{pmatrix} \\
-\sigma_y &amp;= \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \\ \end{pmatrix} \\
-\sigma_z &amp;= \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \\
-\end{align}$$</p>
-<p>The spin state of an electron can then be represented as a two-component vector quantity. We have</p>
-<p>$$\begin{align}
-|\alpha \rangle &amp;= \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
-|\beta \rangle &amp;= \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
-\end{align}$$</p>
-<p>Are $|\alpha\rangle$ and $|\beta \rangle$ eigenfunctions (or eigenvectors) of the spin matrices? For $\hat{S}_x,$ we have</p>
-<p>$$\begin{align}
-\hat{S}_x | \alpha \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
-&amp;= \frac{\hbar}{2} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
-&amp;=  \frac{\hbar}{2} |\beta\rangle \\
-\hat{S}_x | \beta \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
-&amp;= \frac{\hbar}{2} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
-&amp;=  \frac{\hbar}{2} |\alpha\rangle
-\end{align}$$</p>
-<p>For $\hat{S}_y,$ we have</p>
-<p>$$\begin{align}
-\hat{S}_y | \alpha \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
-&amp;= \frac{\hbar}{2} \begin{pmatrix} 0 \\ i \end{pmatrix} \\
-&amp;=  \frac{i\hbar}{2} |\beta\rangle \\
-\hat{S}_y | \beta \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \\ \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
-&amp;= \frac{\hbar}{2} \begin{pmatrix} -i \\ 0 \end{pmatrix} \\
-&amp;=  -\frac{i\hbar}{2} |\alpha\rangle
-\end{align}$$</p>
-<p>For $\hat{S}_z,$ we have</p>
-<p>$$\begin{align}
-\hat{S}_z | \alpha \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
-&amp;= \frac{\hbar}{2} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
-&amp;=  \frac{\hbar}{2} |\alpha\rangle \\
-\hat{S}_z | \beta \rangle &amp;= \frac{\hbar}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
-&amp;= \frac{\hbar}{2} \begin{pmatrix} 0 \\ -1 \end{pmatrix} \\
-&amp;=  -\frac{\hbar}{2} |\beta\rangle
-\end{align}$$</p>
-<p>So, $|\alpha\rangle$ and $|\beta\rangle$ are not eigenfunctions of $\hat{S}_x$ or $\hat{S}_y,$ but they are eigenfunctions of $\hat{S}_z,$ with eigenvalues equal to $\frac{\hbar}{2}$ and $-\frac{\hbar}{2},$ respectively.</p>
-<p>Are $|\alpha\rangle$ and $|\beta\rangle$ are eigenfunctions of $\hat{S}^2$? We have</p>
-<p>$$\begin{align}
-\hat{S}^2|\alpha\rangle &amp;= \hat{S}_x^2|\alpha\rangle + \hat{S}_y^2|\alpha\rangle + \hat{S}_z^2|\alpha\rangle \\
- &amp;= \frac{\hbar}{2}\hat{S}_x|\beta\rangle + \frac{i\hbar}{2}\hat{S}_y|\beta\rangle + \frac{\hbar}{2}\hat{S}_z|\alpha\rangle \\
- &amp;= \frac{\hbar^2}{4}|\alpha\rangle + \frac{\hbar^2}{4}|\alpha\rangle + \frac{\hbar^2}{4}|\alpha\rangle \\
- &amp;= \frac{3\hbar^2}{4}|\alpha\rangle
-\end{align}$$
-and, similarly,</p>
-<p>$$\begin{align}
-\hat{S}^2|\beta\rangle &amp;= \frac{3\hbar^2}{4}|\beta\rangle
-\end{align}$$</p>
-<p>So, both $|\alpha\rangle$ and $|\beta\rangle$ are eigenfunctions of $\hat{S}^2$, with eigenvalue $\frac{3\hbar^2}{4}.$</p>
-<p>Lastly, note that a general spin function for an electron could be a linear combination of the $|\alpha\rangle$ and $|\beta\rangle$ spin functions, i.e.,</p>
-<p>$$\begin{align}
-|g\rangle = c_1 |\alpha \rangle + c_2 |\beta\rangle
-\end{align}$$</p>
-<p>where $c_1$ and $c_2$ are probability amplitudes whose square moduli are the respective probabilities that the electron would be found to have either spin up or down, if this property was measured.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2f41d272-b676-4a55-a56a-c257e0842ad2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 11.</p>
-<p>Show that
-$$\begin{align}[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
-[\hat{S}^2, \hat{S}_y] &amp;= 0 \\
-[\hat{S}^2, \hat{S}_z] &amp;= 0 \\
-[\hat{S}_x, \hat{S}_y] &amp;= i\hbar \hat{S}_z \\
-[\hat{S}_z, \hat{S}_x] &amp;= i\hbar \hat{S}_y \\
-[\hat{S}_y, \hat{S}_z] &amp;= i\hbar \hat{S}_x \\
-\end{align}$$</p>
-</blockquote>
-<blockquote>
-<p>Question 12.</p>
-<p>Find spin eigenfunctions of $\hat{S}_x$ and $\hat{S}_y.$ Are these eigenfunctions also eigenfunctions of $\hat{S}^2$?</p>
-</blockquote>
-<blockquote>
-<p>Question 13.</p>
-<p>Consider rasing and lowering spin operators</p>
-<p>$$\begin{align}
-\hat{S}_\pm &amp;= \hat{S}_x \pm i\hat{S}_y \\
-\end{align}$$</p>
-<p>Show that
-$$\begin{align}
-\hat{S}_+|\alpha\rangle &amp;= 0 \\
-\hat{S}_+|\beta\rangle &amp;= \hbar|\alpha\rangle \\
-\hat{S}_-|\alpha\rangle &amp;= \hbar|\beta\rangle \\
-\hat{S}_-|\beta\rangle &amp;= 0
-\end{align}$$</p>
-</blockquote>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6d683552-d09d-4735-9ce8-7a4bd22e56ac">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c315b6bd-1033-4b68-a0a5-3bb815db41a0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
