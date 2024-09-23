@@ -7964,7 +7964,7 @@ $$</p>
 \hat{L}_z Y(\theta,\phi) &amp;= b Y(\theta,\phi)
 \end{align}
 $$</p>
-<p>Because there is no $\theta$ dependence in $\hat{L}_z$, it seems reasonable to expect that $Y(\theta, \phi)$ is factorizable into a product of functions that depend only on $\theta$ or $\phi$, so let's try the form</p>
+<p>With <b><font color="red">i</font><font color="orange">n</font><font color="yellow">f</font><font color="green">i</font><font color="blue">n</font><font color="indigo">i</font><font color="violet">t</font><font color="red">e</font> <font color="orange">w</font><font color="yellow">i</font><font color="green">s</font><font color="blue">d</font><font color="indigo">o</font><font color="violet">m</font></b>, we note that there is no $\theta$ dependence in $\hat{L}_z$, so it seems reasonable to expect that $Y(\theta, \phi)$ is factorizable into a product of functions that depend only on $\theta$ or $\phi.$ Let's try the form</p>
 <p>$$
 \begin{align}
 Y(\theta, \phi) = f(\theta) g(\phi)
@@ -8241,17 +8241,17 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 <h2 id="The-Rigid-Rotor">The Rigid Rotor<a class="anchor-link" href="#The-Rigid-Rotor">¶</a></h2><p>The particle-on-a-sphere model is equivalent to a model for molecular rotations known as the rigid rotor. In this section, we derive the Hamiltonian for the rigid-rotor problem and show the equivalence of these two models.</p>
 <p>Consider two particles of mass $m_1$ and $m_2$ moving in three dimensions with coordinates $\vec{r}_1$ and $\vec{r}_2.$ The Hamiltonian for this system depends on the coordinates of both particles</p>
 <p>$$\begin{align}
-\hat{H} = -\frac{\hbar^2}{2m_1}\nabla_1^2  - \frac{\hbar^2}{2m_1}\nabla_2^2 + V(r)
+\hat{H} = -\frac{\hbar^2}{2m_1}\nabla_1^2  - \frac{\hbar^2}{2m_1}\nabla_2^2 + V(\vec{r})
 \end{align}$$</p>
-<p>where $V(r)$ is a potenial that depends on the distance between the particle, $r,$ with</p>
+<p>where $V(\vec{r})$ is a potenial that depends on the inter-particle separation</p>
 <p>$$\begin{align}
-r = |\vec{r}_2 - \vec{r}_1|
+\vec{r} = \vec{r}_2 - \vec{r}_1
 \end{align}$$</p>
 <p>As written, this Hamiltonian is not separable in the coordinates of the particles, but we can obtain a separable Hamiltonian through a coordinate transformation. First, we introduce the center-of-mass coordinate, $\vec{R},$ defined as</p>
 <p>$$\begin{align}
 \vec{R} = \frac{m_1 \vec{r}_1 + m_2 \vec{r}_2}{m_1 + m_2}
 \end{align}$$</p>
-<p>which can be re-expressed in terms of the coordinates of one of the particles and the interparticle separation vector, $\vec{r} = \vec{r}_2 - \vec{r}_1$</p>
+<p>which can be re-expressed in terms of the coordinates of one of the particles and $\vec{r}$ as</p>
 <p>$$\begin{align}
 \vec{R} = \frac{m_1 \vec{r}_1 + m_2 (\vec{r}+\vec{r}_1)}{m_1 + m_2}
 \end{align}$$</p>
@@ -8264,7 +8264,7 @@ M &amp;= m_1 + m_2 \\
 <p>$$\begin{align}
 M \vec{R} = M \vec{r}_1 + m_2 \vec{r} 
 \end{align}$$</p>
-<p>We can also express $r_1$ and $_2$ in terms of $\vec{R}$ and $\vec{r}$ as</p>
+<p>We can also express $\vec{r}_1$ and $\vec{r}_2$ in terms of $\vec{R}$ and $\vec{r}$ as</p>
 <p>$$\begin{align}
 \vec{r}_1 &amp;= \vec{R} - \frac{m_2}{M} \vec{r} \\
 \vec{r}_2 &amp;= \vec{R} + \frac{m_1}{M} \vec{r}
@@ -8285,7 +8285,7 @@ T &amp;= \frac{\vec{p}_1\cdot \vec{p}_1}{2 m_1} + \frac{\vec{p}_2 \cdot \vec{p}_
 \end{align}$$</p>
 <p>where $\vec{p}_M$ and $\vec{p}_\mu$ are momenta for effective particles of mass $M$ and $\mu$ that depend on the coordinates $\vec{R}$ and $\vec{r},$ respectively. We can define quantum mechanical operators for these momenta and insert them into the Hamiltonian to obtain</p>
 <p>$$\begin{align}
-\hat{H} = \frac{\hat{p}_M^2}{2M} + \left [ \frac{\hat{p}_\mu^2}{2\mu} + V(r) \right ]
+\hat{H} = \frac{\hat{p}_M^2}{2M} + \left [ \frac{\hat{p}_\mu^2}{2\mu} + V(\vec{r}) \right ]
 \end{align}$$</p>
 <p>The first term depends on the center-of-mass coordinate $(\vec{R}),$  while the second and third terms depend on the inter-particle separation coordinate $(\vec{r}).$ With this choice of coordinates, the Hamiltonian is additively separable. As a result, the wave function can be expressed as a product of wave functions for effective particles of mass $M$ and $\mu$</p>
 <p>$$ \begin{align}
@@ -8293,15 +8293,20 @@ T &amp;= \frac{\vec{p}_1\cdot \vec{p}_1}{2 m_1} + \frac{\vec{p}_2 \cdot \vec{p}_
 \end{align}$$</p>
 <p>and the energy will be expressible as a sum</p>
 <p>$$ \begin{align}
-E = E_M E_\mu
+E = E_M + E_\mu
 \end{align}$$</p>
 <p>Because the Hamiltonian is separable, these wave function and energy components can be obtained by solving separate Schrödinger equations that involve only one coordinate, i.e.,</p>
 <p>$$\begin{align}
-\frac{\hat{p}_M^2}{2M} \psi_M(\vec{R}) &amp;= E_M \psi_M(\vec{R}) \\
-\left [ \frac{\hat{p}_\mu^2}{2\mu} + V(r) \right ] \psi_\mu(\vec{r}) &amp;= E_\mu \psi_\mu(\vec{r})
+\hat{H}_M \psi_M(\vec{R}) &amp;= E_M \psi_M(\vec{R}) \\
+\hat{H}_\mu \psi_\mu(\vec{r}) &amp;= E_\mu \psi_\mu(\vec{r})
 \end{align}$$</p>
-<p>The first of these equations resembles the Schrödinger equation for a free-particle of mass, $M.$ As such, the energy, $E_M,$ corresponds to the translational energy of the entire system traveling through space and will not be quantized. The Schrödinger equation for the effective particle of mass, $\mu,$ is more complicated, and its solution will depend on the precise form of $V(r).$ Depending on the form of this potential, $E_\mu$ may be quantized.</p>
-<p>To this point, this analysis has been completely general. The Hamiltonian for any two-particle system with a potential that depends on the inter-particle distance can be separated in this way. The $\vec{R}$-dependent part of the wave function will always look like that for a free-particle, where as the $\vec{r}$-dependent part will be more interesting.  Here, we are specifically concerned with the case where $\psi(\vec{r})$ is a wave function characterizing the rotational motion of a molecular system (specifically, a diatomic molecule). In the <strong>rigid rotor</strong> model, the atoms in this molecular are assumed to rotate about their center of mass, at a fixed distance, $d$ from one-another. As a result $V(r)$ is chosen to be zero when $r=d$ and infinite otherwise. This potential is <strong>sperically symmetrical</strong>, meaning that it only depends on the magnitude of $\vec{r}.$ It turns out that the wave function for a system experiencing such a potential is separable as</p>
+<p>where</p>
+<p>$$\begin{align}
+\hat{H}_M  &amp;= \frac{\hat{p}_M^2}{2M}  \\
+\hat{H}_\mu &amp;= \frac{\hat{p}_\mu^2}{2\mu} + V(\vec{r}) 
+\end{align}$$</p>
+<p>The first of these equations resembles the Schrödinger equation for a free-particle of mass, $M.$ As such, the energy, $E_M,$ corresponds to the translational energy of the entire system traveling through space and will not be quantized. The Schrödinger equation for the effective particle of mass, $\mu,$ is more complicated, and its solution will depend on the precise form of $V(\vec{r}).$ Depending on the form of this potential, $E_\mu$ may be quantized.</p>
+<p>To this point, this analysis has been completely general. The Hamiltonian for any two-particle system with a potential that depends on the inter-particle distance can be separated in this way. The $\vec{R}$-dependent part of the wave function will always look like that for a free-particle, where as the $\vec{r}$-dependent part will be more interesting.  Here, we are specifically concerned with the case where $\psi(\vec{r})$ is a wave function characterizing the rotational motion of a molecular system (specifically, a diatomic molecule). In the <strong>rigid rotor</strong> model, the atoms in this molecular are assumed to rotate about their center of mass, at a fixed distance, $d$ from one-another. As a result $V(\vec{r})$ is chosen to be zero when $|\vec{r}|=d$ and infinite otherwise. This potential is <strong>sperically symmetrical</strong>, meaning that it depends on the magnitude but not the orientation of $\vec{r}.$  It turns out that the wave function for a system experiencing such a potential is separable as</p>
 <p>$$\begin{align}
 \psi_\mu(\vec{r}) &amp;= \psi_\mu(r, \theta, \phi) \\
 &amp;= R(r) Y^m_l(\theta, \phi)
@@ -8310,13 +8315,13 @@ E = E_M E_\mu
 <p>$$\begin{align}
 \psi_\mu(\theta, \phi) &amp;= Y^m_l(\theta, \phi)
 \end{align}$$</p>
-<p>The Hamiltonian for the rigid rotor is the $\mu$-dependent part of the Hamiltonian above, with $V(r) = 0,$ or</p>
+<p>The Hamiltonian for the rigid rotor is the $\mu$-dependent part of the Hamiltonian above. If we consider only the region of space where $|\vec{r}| = r = d,$ where the potential, $V(\vec{r}),$ vanishes, then we have</p>
 <p>$$
 \begin{align}
-\hat{H}_\mu = -\frac{\hbar^2}{2\mu}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r} \right ) + \frac{1}{2\mu r^2}\hat{L}^2
+\hat{H}_\mu = -\frac{\hbar^2}{2\mu}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{d}\frac{\partial}{\partial r} \right ) + \frac{1}{2\mu d^2}\hat{L}^2
 \end{align}
 $$</p>
-<p>Because $r$ is fixed, derivatives with respect to $r$ carry no meaning, so we ignore these terms, replace $r$ with $d$, and we are left with</p>
+<p>Note that, because $r$ is fixed, we have replaced it with $d$ in this expression. Moreover, with $r$ being fixed, derivatives with respect to $r$ carry no meaning, so we ignore these terms and are left with</p>
 <p>$$
 \begin{align}
 \hat{H}_\mu = \frac{1}{2\mu d^2}\hat{L}^2
