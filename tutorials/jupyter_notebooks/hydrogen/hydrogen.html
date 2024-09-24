@@ -1,3 +1,34 @@
+---
+layout: page
+math: true
+---
+
+<b>Jupyter Notebook Tutorials: Introduction to Quantum Mechanics</b>
+<br>
+<hr>
+
+<ol>
+<li>
+<a href=../qm_postulates/qm_postulates.html style="color:#e65100;">The Postulates of Quantum Mechanics</a> (<a href=../qm_postulates/qm_postulates.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../translation/translation.html style="color:#e65100;">Translational Motion</a> (<a href=../translation/translation.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../vibration/vibration.html style="color:#e65100;">Vibrational Motion</a> (<a href=../vibration/vibration.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../rotation/rotation.html style="color:#e65100;">Angular Momentum, Rotational Motion, and Spin</a> (<a href=../rotation/rotation.ipynb style="color:#e65100;">notebook</a>)<br>
+</li>
+<li>
+<a href=../hydrogen/hydrogen.html style="color:#e65100;">The Hydrogen Atom</a> (<a href=../hydrogen/hydrogen.ipynb style="color:#e65100;">notebook</a>) ... under construction<br>
+</li>
+<li>The Variation Theorem</li>
+<li>Perturbation Theory</li>
+</ol>
+
+<hr>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -7538,9 +7569,9 @@ r &amp;= |\vec{r}|
 \end{align}$$</p>
 <p>The potential is the Coulomb potential</p>
 <p>$$\begin{align}
-V(r) = -\frac{Z_n e^2}{4 \pi \epsilon_0 r}
+V(r) = -\frac{Z e^2}{4 \pi \epsilon_0 r}
 \end{align}$$</p>
-<p>where $Z_n$ is the atomic number for the nucleus, $e$ represents the magnitude of the charge of an electron, and $\epsilon_0$ is the permittivity of free space. As written, this Hamiltonian is not separable, but, as discussed in the previous notebook, we can re-express it in a separable form by performing a coordinate transformation. Specifically, we represent the Hamiltonian using the inter-particle coordinate, $\vec{r},$ and the center-of-mass coordinate, defined by</p>
+<p>where $Z$ is the atomic number for the nucleus, $e$ represents the magnitude of the charge of an electron, and $\epsilon_0$ is the permittivity of free space. As written, this Hamiltonian is not separable, but, as discussed in the previous notebook, we can re-express it in a separable form by performing a coordinate transformation. Specifically, we represent the Hamiltonian using the inter-particle coordinate, $\vec{r},$ and the center-of-mass coordinate, defined by</p>
 <p>$$\begin{align}
 \vec{R} = \frac{m_\text{e} \vec{r}_\text{e} + m_\text{n} \vec{r}_\text{p}}{m_\text{e} + m_\text{n}}
 \end{align}$$</p>
@@ -7572,7 +7603,7 @@ E = E_M + E_\mu
 \end{align}$$</p>
 <p>The center-of-mass problem resembles the free-particle problem, and $E_M$ is thus simply the non-quantized translational energy for the hydrogenic atom as a whole. The inter-particle part of the problem is much more interesting and is the source of the quantization of the energy levels for the system. Thus, for the remainder of this notebook, we focus only on the $\mu$ dependent part of the problem and suppress the subscript $\mu,$ for simplicity. We have</p>
 <p>$$\begin{align}
-\hat{H} &amp;= - \frac{\hbar^2}{2\mu}\nabla^2 - \frac{Z_\text{n}e^2}{4\pi\epsilon_0 r}
+\hat{H} &amp;= - \frac{\hbar^2}{2\mu}\nabla^2 - \frac{Ze^2}{4\pi\epsilon_0 r}
 \end{align}$$</p>
 <p>Note that the Coulomb potential is <strong>spherically symmetrical</strong>, i.e., it depends only on the distance between the electron and nucleus, so the hydrogenic atom problem is thus a <strong>central force problem</strong>. As discussed in the previous notebook, the wave function for a central force problem is factorizable as</p>
 <p>$$\begin{align}
@@ -7728,11 +7759,11 @@ E = -\frac{k^2\hbar^2}{2\mu}
 \end{align}$$</p>
 <p>At this point, out of blind, sheer brilliance, we decide that it may be worth reminding ourselves of the actual form of the potential,</p>
 <p>$$\begin{align}
-V(r) = -\frac{Z_\text{n}e^2}{4\pi \epsilon_0 r}
+V(r) = -\frac{Ze^2}{4\pi \epsilon_0 r}
 \end{align}$$</p>
 <p>which, for kicks, we decide to insert into the radial equation in an enticing way</p>
 <p>$$\begin{align}
-\frac{1}{k^2} \frac{d^2 u}{dr^2} = \left [1 - \frac{\mu Z_\text{n} e^2}{2\pi \epsilon_0 \hbar^2 k }\left ( \frac{1}{kr} \right)  + l(l+1) \left ( \frac{1}{kr} \right )^2 \right ] u
+\frac{1}{k^2} \frac{d^2 u}{dr^2} = \left [1 - \frac{\mu Z e^2}{2\pi \epsilon_0 \hbar^2 k }\left ( \frac{1}{kr} \right)  + l(l+1) \left ( \frac{1}{kr} \right )^2 \right ] u
 \end{align}$$</p>
 <p>Aha! It seems like a change of variables might be in order. Let us select</p>
 <p>$$\begin{align}
@@ -7740,7 +7771,7 @@ V(r) = -\frac{Z_\text{n}e^2}{4\pi \epsilon_0 r}
 \end{align}$$</p>
 <p>lump as many constants as possible into a single constant, $\bar{\rho},$</p>
 <p>$$\begin{align}
-\bar{\rho} = \frac{\mu Z_\text{n} e^2}{2\pi\epsilon_0\hbar^2 k}
+\bar{\rho} = \frac{\mu Z e^2}{2\pi\epsilon_0\hbar^2 k}
 \end{align}$$</p>
 <p>and replace $\frac{d}{dr}$ using the chain rule</p>
 <p>$$\begin{align}
@@ -7754,17 +7785,150 @@ V(r) = -\frac{Z_\text{n}e^2}{4\pi \epsilon_0 r}
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a3c967f4-6dd0-4e9d-96ad-e2fb20b797c1">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=71368079-d952-4993-9c1d-5a6186ebaca8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>At this point, we may begin inspecting limits to get an idea of the functional form for $u(\rho)$. Let us start with the limit or large $\rho$ or $r.$ In this limit</p>
+<p>$$\begin{align}
+\frac{d u(\rho)}{d\rho^2} = u(\rho)
+\end{align}$$</p>
+<p>This equation has a general solution</p>
+<p>$$\begin{align}
+u(\rho) = A e^{-\rho} + Be^{\rho}
+\end{align}$$</p>
+<p>However, because</p>
+<p>$$\begin{align}
+\lim_{\rho\to\infty} e^{\rho} = \infty
+\end{align}$$</p>
+<p>we must choose $B=0,$ and, as a result, we expect that</p>
+<p>$$\begin{align}
+u(\rho) \sim Ae^{-\rho}
+\end{align}$$</p>
+<p>in the limit that $\rho$ becomes large.</p>
+<p>Now, let us consider the limit that $\rho$ approaches zero. In this limit, we expect the $l(l+1)$ term to dominate and have</p>
+<p>$$\begin{align}
+\frac{d u(\rho)}{d\rho^2} = \frac{l(l+1)}{\rho^2} u(\rho)
+\end{align}$$</p>
+<p>We put on our differential equations hats and note that the presence of $\frac{1}{\rho^2}$ suggests that $u(\rho)$ may be a polynomial in $\rho.$ Indeed, a general solution to this equation would be</p>
+<p>$$\begin{align}
+u(\rho) = C \rho^{l+1} + D \rho^{-l}
+\end{align}$$</p>
+<p>We note, however, that</p>
+<p>$$\begin{align}
+\lim_{\rho\to 0} \rho^{-l} = \infty
+\end{align}$$</p>
+<p>for non-zero $l,$ so we must choose $D=0,$ and, as a result, we expect that</p>
+<p>$$\begin{align}
+u(\rho) \sim C\rho^{l+1}
+\end{align}$$</p>
+<p>in the limit that $\rho$ approaches zero.</p>
+<blockquote>
+<p>Practice</p>
+<blockquote>
+<p>Question 1.</p>
+<p>Show that
+$$\begin{align}
+u(\rho) = C \rho^{l+1} + D \rho^{-l}
+\end{align}$$
+is a solution to the differential equation
+$$\begin{align}
+\frac{d u(\rho)}{d\rho^2} = \frac{l(l+1)}{\rho^2} u(\rho)
+\end{align}$$</p>
+</blockquote>
+</blockquote>
+<p>Having established the form of $u(\rho)$ in the limits of large and small $\rho,$ we now must find a functional form that satisfies the radial equation while stitching together these two limits. We choose</p>
+<p>$$\begin{align}
+u(\rho) = \rho^{l+1} e^{-\rho} w(\rho)
+\end{align}$$</p>
+<p>and seek a power-series solution to the radial equation with</p>
+<p>$$\begin{align}
+w(\rho) = \sum_{j=0}^\infty c_j \rho^j
+\end{align}$$</p>
+<p>We probably all agree that we have suffered through enough math for one day, so the interested reader is directed to Chapter 6 of Levine's <a href="https://www.amazon.com/Quantum-Chemistry-7th-Ira-Levine/dp/0321803450">Quantum Chemistry textbook</a>, which provides a detailed solution to the remainder of this problem. In short, after a bit of calculus and algebra, one finds a two-term recursion relation for the series expansion coefficients:</p>
+<p>$$\begin{align}
+c_{j+1} = \frac{2(l+j+1) - \bar{\rho}}{(2l+2+j)(j+1)}c_j
+\end{align}$$</p>
 </div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5adb1561-aff9-43bc-85c3-1bf4dbbff1ac">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Even with this recursion relation, our job is not done. We must ensure that the resulting wave function is well behaved. To do so, we will proceed in a similar manner as when we studied the quantum harmonic oscillator problem. In the limit that $j$ becomes large, the series expansion coefficients have the form</p>
+<p>$$\begin{align}
+c_{j+1} = \frac{2}{j+1}c_j
+\end{align}$$</p>
+<p>If this was exactly the form of the series, then we could state</p>
+<p>$$\begin{align}
+c_j = \frac{2^j}{j!} c_0
+\end{align}$$</p>
+<p>and</p>
+<p>$$\begin{align}
+w(\rho) &amp;= c_0 \sum_{j=0}^\infty \frac{2^j}{j!}\rho^j \\
+&amp;= c_0e^{2\rho}
+\end{align}$$</p>
+<p>Inserting this result into our expression for $u(\rho)$ gives</p>
+<p>$$\begin{align}
+u(\rho) = c_0 \rho^{l+1} e^{\rho}
+\end{align}$$</p>
+<p>which is not well behaved when $\rho\to\infty$! So, as was the case in the quantum harmonic oscillator and the particle-on-a-sphere models, the power series expansion for $w(\rho)$ must truncate at some point, with $j = j_\text{max},$ in order for the wave function to be well behaved. At $j_\text{max}$ we have</p>
+<p>$$ c_{j_\text{max}} = 0 = 2(l + j_\text{max} + 1) - \bar{\rho}$$</p>
+<p>At this point, we introduce a new quantum number, $n = l + j_\text{max} + 1,$ which we will call the <strong>principal quantum number</strong>. We can see that $l \le n - 1$ and the minimum value for $n$ is one, just like we learn in our general chemistry courses.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=171eb35d-0e68-409d-880b-9e8a54948516">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The principle quantum number is related to the energy of the hydrogenic atom, but it will take just a bit more algebra to see exactly how. We know that $\bar{\rho} = 2n,$ and that $\bar{\rho}$ is related to a number of fundamantal constants. We have</p>
+<p>$$\begin{align}
+\bar{\rho} = 2n &amp;= \frac{\mu Z e^2}{2\pi\epsilon_0\hbar^2 k} \\
+\end{align}$$</p>
+<p>and thus</p>
+<p>$$\begin{align}
+4n^2 &amp;= \frac{\mu^2 Z^2 e^4}{4\pi^2\epsilon_0^2\hbar^4 k^2} \\
+\end{align}$$</p>
+<p>Recall that</p>
+<p>$$\begin{align}
+k = \left ( \frac{-2\mu E}{\hbar^2} \right ) ^{1/2}
+\end{align}$$</p>
+<p>which, when inserted into the previous expression, leads to</p>
+<p>$$\begin{align}
+E_n = -\frac{\mu}{2\hbar^2}\left ( \frac{Ze}{4\pi\epsilon_0} \right )^2 \left ( \frac{1}{n^2} \right )
+\end{align}$$</p>
+<p>This result is somewhat remarkable in the sense that it is identical to the energy from the Bohr model of the hydrogen atom (perhaps to within the difference between $\mu$ and $m_\text{e}$), despite the fact that Bohr's model is build on incorrect physics. Regardless, from this expression, it is clear that the energy of the hydrogenic atom is quantized, and that the energy levels become more closely spaced as $n$ increases. Moreover, for each value of $n$, there are $n$ possible values of the orbital angular momentum quantum number, $l,$ and $2l+1$ possible values of the magnetic quantum number, $m,$ for each $l$ value:</p>
+<p>$$\begin{align}
+n &amp;= 1, 2, 3 ... \\
+l &amp;= 0, 1, 2 ... n-1 \\
+m &amp;= 0, \pm 1, \pm 2, ... \pm l
+\end{align}$$</p>
+<p>Because the energy depends only on the principal quantum number, each energy level has an overall degeneracy equal to $n^2.$</p>
+<p>Before moving on to discuss the wave functions, we connect these energy levels to spectral lines discussed in general chemistry or undergraduate physical chemistry courses. Emission lines for hydrogenic atoms correspond to differences in these energy levels of at</p>
+<p>$$\begin{align}
+\tilde{\nu} &amp;= \frac{1}{\lambda} = \frac{1}{hc}(E_{n_f} - E_{n_i}) \\
+&amp;= \left ( \frac{1}{hc} \right ) \left ( \frac{\mu}{2\hbar^2} \right ) \left ( \frac{Ze^2}{4\pi\epsilon_0} \right )^2 \left ( \frac{1}{n_i^2} - \frac{1}{n_f^2} \right ) \\
+\end{align}$$</p>
+<p>where $n_i$ and $n_f$ represent the principal quantum numbers for the initial and final states, respectively. We can also express the lines using the Rydberg constant, $R_A,$ for atom $A$ with charge $Z_A$ and mass $m_A$ as</p>
+<p>$$\begin{align}
+\tilde{\nu} = R_A Z_A^2 \left ( \frac{1}{n_i^2} - \frac{1}{n_f^2} \right )
+\end{align}$$</p>
+<p>with</p>
+<p>$$\begin{align}
+R_A &amp;= \frac{\mu_A}{2 \hbar^2}\left ( \frac{e^2}{4\pi \epsilon_0} \right ) \\
+\mu_A &amp;= \frac{m_\text{e} m_A}{m_\text{e} + m_A}
+\end{align}$$</p>
 </div>
 </div>
 </div>
