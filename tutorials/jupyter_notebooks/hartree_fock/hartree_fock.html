@@ -3,10 +3,23 @@ layout: page
 math: true
 ---
 
-Jupyter Notebook Tutorials: Quantum Chemistry 
+<b>Jupyter Notebook Tutorials: Quantum Chemistry</b>
 <br>
 <hr>
 
+<ol>
+<li>
+<a href=../hartree_fock/hartree_fock.html style="color:#e65100;">Hartree Fock Theory</a> (<a href=../hartree_fock/hartree_fock.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../second_quantization/second_quantization.html style="color:#e65100;">Second Quantization</a> (<a href=../second_quantization/second_quantization.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+<li>
+<a href=../cis/cis.html style="color:#e65100;">Configuration Interaction with Single Excitations</a> (<a href=../cis/cis.ipynb style="color:#e65100;">notebook</a>) <br>
+</li>
+</ol>
+
+<hr>
 
 <!DOCTYPE html>
 
@@ -64,9 +77,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .highlight .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */
 .highlight .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */
   </style>
-
 <style type="text/css">
-
 /*-----------------------------------------------------------------------------
 | Copyright (c) Jupyter Development Team.
 | Distributed under the terms of the Modified BSD License.
@@ -2567,6 +2578,7 @@ select.jp-mod-styled[multiple] {
 
 .jp-switch-label {
   margin-right: 5px;
+  font-family: var(--jp-ui-font-family);
 }
 
 .jp-switch-track {
@@ -2702,6 +2714,7 @@ button.jp-ToolbarButtonComponent .jp-ToolbarButtonComponent-label {
   line-height: 100%;
   padding-left: 2px;
   color: var(--jp-ui-font-color1);
+  font-family: var(--jp-ui-font-family);
 }
 
 #jp-main-dock-panel[data-mode='single-document']
@@ -2883,6 +2896,7 @@ input::placeholder {
   color: var(--jp-ui-font-color0);
   display: block;
   font-size: var(--jp-ui-font-size1);
+  font-family: var(--jp-ui-font-family);
   height: 24px;
   line-height: 14px;
   padding: 0 25px 0 10px;
@@ -2981,6 +2995,7 @@ select {
 
 .jp-StatusBar-TextItem {
   font-size: var(--jp-ui-font-size1);
+  font-family: var(--jp-ui-font-family);
   line-height: 24px;
   color: var(--jp-ui-font-color1);
 }
@@ -3037,6 +3052,7 @@ select {
 
 .jp-Statusbar-ProgressBar-progress-bar p {
   color: var(--jp-ui-font-color1);
+  font-family: var(--jp-ui-font-family);
   font-size: var(--jp-ui-font-size1);
   line-height: 10px;
   width: 100px;
@@ -3288,6 +3304,7 @@ select {
   width: 100px;
   display: block;
   font-size: var(--jp-ui-font-size2);
+  font-family: var(--jp-ui-font-family);
   font-weight: lighter;
 }
 
@@ -3788,6 +3805,7 @@ button.jp-Dialog-close-button {
   text-align: left;
   padding-left: var(--jp-code-padding);
   line-height: var(--jp-code-line-height);
+  font-family: var(--jp-code-font-family);
 }
 
 .jp-RenderedText pre,
@@ -4004,6 +4022,7 @@ button.jp-Dialog-close-button {
 
 .jp-RenderedHTMLCommon {
   color: var(--jp-content-font-color1);
+  font-family: var(--jp-content-font-family);
   font-size: var(--jp-content-font-size1);
   line-height: var(--jp-content-line-height);
 
@@ -4166,6 +4185,7 @@ button.jp-Dialog-close-button {
   border: 0;
   background-color: var(--jp-layout-color0);
   color: var(--jp-content-font-color1);
+  font-family: var(--jp-code-font-family);
   font-size: inherit;
   line-height: var(--jp-code-line-height);
   padding: 0;
@@ -4558,6 +4578,7 @@ h6:hover .jp-InternalAnchorLink {
   color: var(--jp-ui-font-color0);
   font-size: var(--jp-ui-font-size1);
   background-color: var(--jp-layout-color0);
+  font-family: var(--jp-ui-font-family);
   padding: 2px 1px;
   resize: none;
 }
@@ -4804,6 +4825,7 @@ h6:hover .jp-InternalAnchorLink {
 .cm-editor {
   line-height: var(--jp-code-line-height);
   font-size: var(--jp-code-font-size);
+  font-family: var(--jp-code-font-family);
   border: 0;
   border-radius: 0;
   height: auto;
@@ -4923,6 +4945,7 @@ h6:hover .jp-InternalAnchorLink {
   padding-bottom: 0.05em;
   left: -1px;
   font-size: 0.95em;
+  font-family: var(--jp-ui-font-family);
   font-weight: bold;
   line-height: normal;
   user-select: none;
@@ -5315,6 +5338,7 @@ h6:hover .jp-InternalAnchorLink {
 .jp-OutputPrompt {
   width: var(--jp-cell-prompt-width);
   color: var(--jp-cell-outprompt-font-color);
+  font-family: var(--jp-cell-prompt-font-family);
   padding: var(--jp-code-padding);
   letter-spacing: var(--jp-cell-prompt-letter-spacing);
   line-height: var(--jp-code-line-height);
@@ -5506,6 +5530,7 @@ body.lm-mod-override-cursor .jp-OutputArea-output.jp-mod-isolated::before {
 }
 
 .jp-Stdin-input {
+  font-family: var(--jp-code-font-family);
   font-size: inherit;
   color: inherit;
   background-color: inherit;
@@ -5797,6 +5822,7 @@ Note: input and output wrappers have "display: block" propery in print mode.
   vertical-align: top;
   width: var(--jp-cell-prompt-width);
   color: var(--jp-cell-inprompt-font-color);
+  font-family: var(--jp-cell-prompt-font-family);
   padding: var(--jp-code-padding);
   letter-spacing: var(--jp-cell-prompt-letter-spacing);
   opacity: var(--jp-cell-prompt-opacity);
@@ -5888,6 +5914,7 @@ Note: input and output wrappers have "display: block" propery in print mode.
   white-space: nowrap;
   overflow-x: hidden;
   color: var(--jp-inverse-layout-color3);
+  font-family: var(--jp-code-font-family);
 }
 
 .jp-InputPlaceholder > .jp-Placeholder-content {
@@ -6257,6 +6284,7 @@ cell outputs.
 
 .jp-Notebook-ExecutionIndicator span {
   font-size: var(--jp-ui-font-size1);
+  font-family: var(--jp-ui-font-family);
   color: var(--jp-ui-font-color1);
   line-height: 24px;
   display: block;
@@ -6522,6 +6550,7 @@ cell outputs.
   flex: 1 1 auto;
   z-index: 2;
   font-size: var(--jp-code-font-size);
+  font-family: var(--jp-code-font-family);
   line-height: var(--jp-code-line-height);
   padding: var(--jp-code-padding);
   border: var(--jp-border-width) solid var(--jp-cell-editor-border-color);
@@ -6537,6 +6566,7 @@ cell outputs.
   color: var(--jp-cell-inprompt-font-color);
   padding: var(--jp-code-padding);
   padding-left: 12px;
+  font-family: var(--jp-cell-prompt-font-family);
   letter-spacing: var(--jp-cell-prompt-letter-spacing);
   line-height: 1.9;
   font-size: var(--jp-code-font-size);
@@ -6783,7 +6813,7 @@ div.jp-Cell-Placeholder-h2 {
 div.jp-Cell-Placeholder-content-1,
 div.jp-Cell-Placeholder-content-2,
 div.jp-Cell-Placeholder-content-3 {
-  left: 5px;
+  left: 15px;
   right: 15px;
   height: 10px;
 }
@@ -6913,6 +6943,9 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-ui-font-size1: 18px; /* Base font size */
   --jp-ui-font-size2: 1.2em;
   --jp-ui-font-size3: 1.44em;
+  --jp-ui-font-family: system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+    helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
 
   /*
    * Use these font colors against the corresponding main layout colors.
@@ -6966,6 +6999,9 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-content-font-color2: rgba(0, 0, 0, 0.54);
   --jp-content-font-color3: rgba(0, 0, 0, 0.38);
   --jp-content-link-color: var(--md-blue-900);
+  --jp-content-font-family: system-ui, -apple-system, blinkmacsystemfont,
+    'Segoe UI', helvetica, arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
 
   /*
    * Code Fonts
@@ -6975,8 +7011,9 @@ all of MD as it is not optimized for dense, information rich UIs.
 
   --jp-code-font-size: 12px;
   --jp-code-line-height: 1.3077; /* 17px for 13px base */
-  --jp-code-padding: 0px; /* 5px for 13px base, codemirror highlighting needs integer px value */
+  --jp-code-padding: 5px; /* 5px for 13px base, codemirror highlighting needs integer px value */
   --jp-code-font-family-default: menlo, consolas, 'DejaVu Sans Mono', monospace;
+  --jp-code-font-family: var(--jp-code-font-family-default);
 
   /* This gives a magnification of about 125% in presentation mode over normal. */
   --jp-code-presentation-font-size: 16px;
@@ -7052,7 +7089,8 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-cell-editor-box-shadow: inset 0 0 2px var(--md-blue-300);
   --jp-cell-editor-active-background: var(--jp-layout-color0);
   --jp-cell-editor-active-border-color: var(--jp-brand-color1);
-  --jp-cell-prompt-width: 0px; 
+  --jp-cell-prompt-width: 0px;
+  --jp-cell-prompt-font-family: var(--jp-code-font-family-default);
   --jp-cell-prompt-letter-spacing: 0;
   --jp-cell-prompt-opacity: 1;
   --jp-cell-prompt-not-active-opacity: 0.5;
@@ -7243,6 +7281,7 @@ a.anchor-link {
   padding: var(--jp-code-padding) 4px;
   margin: 0;
 
+  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
@@ -7251,6 +7290,7 @@ a.anchor-link {
 
 .jp-OutputArea-output pre {
   line-height: inherit;
+  font-family: inherit;
 }
 
 .jp-RenderedText pre {
@@ -7517,7 +7557,8 @@ a.anchor-link {
 <p>is the kinetic energy operator for all electrons, $i$,</p>
 <p>$$\hat{V}_{\rm en} = -\sum_i \sum_A \frac{Z_A}{|r_i - r_A|}$$</p>
 <p>is the potential energy operator describing the interation between each electron, $i$ and nucleus, $A$, with nuclear charge, $Z_A$, and</p>
-<p>$$\hat{V}_{\rm ee} = \frac{1}{2}\sum_{i \neq j}\frac{1}{|r_i - r_j|}$$</p>
+<p>$$\hat{V}_{\rm ee} = \frac{1}{2}\sum_{i
+eq j}\frac{1}{|r_i - r_j|}$$</p>
 <p>is the operator corresponding to the repulsion between electrons $i$ and $j$.</p>
 </div>
 </div>
@@ -7701,7 +7742,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -7777,7 +7818,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># define the molecule. be sure to disable point-group symmetry</span>
@@ -7817,7 +7858,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># diagonalize the overlap matrix</span>
@@ -7858,7 +7899,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># core guess</span>
@@ -7907,7 +7948,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">e_convergence</span> <span class="o">=</span> <span class="mf">1e-8</span>
@@ -8332,7 +8373,7 @@ c_n \\
         
         <span class="c1"># when printing the energy, don't forget the nuclear repulsion contribution</span>
         <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">'    </span><span class="si">%5i</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">energy</span> <span class="o">+</span> <span class="n">enuc</span><span class="p">,</span> <span class="n">dE</span><span class="p">,</span> <span class="n">dD</span><span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'    </span><span class="si">%5i</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">energy</span> <span class="o">+</span> <span class="n">enuc</span><span class="p">,</span> <span class="n">dE</span><span class="p">,</span> <span class="n">g_norm</span><span class="p">)</span> <span class="p">)</span>
     
         <span class="c1"># save energy and density</span>
         <span class="n">old_energy</span> <span class="o">=</span> <span class="n">energy</span>
@@ -8398,22 +8439,22 @@ c_n \\
 
      Iter               energy                   dE            ||[F,D]|| 
 
-        0     -57.734126997170      68.445632685822       0.000000000875
-        1     -90.876714355657      33.142587358486       0.000000000875
-        2     -63.585014510045      27.291699845612       0.000000000875
-        3     -83.321300762312      19.736286252268       0.000000000875
-        4     -75.066454302003       8.254846460309       0.000000000875
-        5     -75.846583477919       0.780129175916       0.000000000875
-        6     -76.018131785339       0.171548307420       0.000000000875
-        7     -76.024352985809       0.006221200470       0.000000000875
-        8     -76.020531102756       0.003821883053       0.000000000875
-        9     -76.021225776237       0.000694673481       0.000000000875
-       10     -76.021450170191       0.000224393954       0.000000000875
-       11     -76.021426149788       0.000024020403       0.000000000875
-       12     -76.021418507208       0.000007642580       0.000000000875
-       13     -76.021418479489       0.000000027719       0.000000000875
-       14     -76.021418442492       0.000000036996       0.000000000875
-       15     -76.021418446551       0.000000004058       0.000000000875
+        0     -57.734126997170      68.445632685822       4.234897267463
+        1     -90.876714355657      33.142587358486       3.607428053184
+        2     -63.585014510045      27.291699845612       3.492934979685
+        3     -83.321300762312      19.736286252268       2.796902127647
+        4     -75.066454302003       8.254846460309       0.726212516753
+        5     -75.846583477919       0.780129175916       0.112901943508
+        6     -76.018131785339       0.171548307420       0.014063583891
+        7     -76.024352985809       0.006221200470       0.004902052072
+        8     -76.020531102756       0.003821883053       0.001003640869
+        9     -76.021225776237       0.000694673481       0.000212591412
+       10     -76.021450170191       0.000224393954       0.000034855110
+       11     -76.021426149788       0.000024020403       0.000005627945
+       12     -76.021418507208       0.000007642580       0.000000344061
+       13     -76.021418479489       0.000000027719       0.000000067844
+       14     -76.021418442492       0.000000036996       0.000000005767
+       15     -76.021418446551       0.000000004058       0.000000001027
 
     SCF iterations converged!
 
