@@ -7655,7 +7655,7 @@ N x(L-x)\text{, } &amp;0 \le x \le L \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -7772,7 +7772,7 @@ W = \frac{\langle \phi | \hat{H} \phi \rangle}{\langle \phi |\phi \rangle}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_w</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">H11</span><span class="p">,</span> <span class="n">H12</span><span class="p">,</span> <span class="n">H22</span><span class="p">,</span> <span class="n">S12</span><span class="p">):</span>
@@ -7879,7 +7879,7 @@ w  =    4.93487 Eh
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">psi_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
@@ -8002,8 +8002,8 @@ W &amp;= \frac{\hbar^2}{2m} c + \frac{\pi^2}{2} \nu^2 m c^{-1} \\
 \end{align}$$</p>
 <p>What happens if $\phi$ is orthogonal to the true ground-state wave function? In that case, we have</p>
 <p>$$\begin{align}
-\langle \phi | \psi_1 \rangle &amp;= 0
-&amp;= \sum c_k^* \langle \psi_k | \phi_1 \rangle
+\langle \phi | \psi_1 \rangle &amp;= 0 \\
+&amp;= \sum c_k^* \langle \psi_k | \phi_1 \rangle \\
 &amp;= c_1^*
 \end{align}$$</p>
 <p>So, if $\langle \phi | \psi_1 \rangle = 0,$ then the expansion coefficient corresponding to that basis function is zero. As a result, we can restrict the sum that defines $\phi$ as</p>
@@ -8036,7 +8036,7 @@ N x(L-x)(L/2 - x) \text{, } &amp;0 \le x \le L \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -8125,27 +8125,31 @@ Evaluate the expecation value of the one-dimensional PIB Hamiltonian with respec
 <p>will recover the exact energy for the first excited state of the one-dimensional QHO problem.</p>
 </blockquote>
 </blockquote>
-<p><strong>Case 3</strong>. Recall that the hydrogenic atom problem is a central force problem, and all central force problems have solutions of the form</p>
+<p><strong>Case 3</strong>. The hydrogenic atom problem is a central force problem, and all central force problems have solutions of the form</p>
 <p>$$\begin{align}
-$\psi(r, \theta, \phi) &amp;= R(r) Y^m_l(\theta, \phi)
+\psi(r, \theta, \phi) &amp;= R(r) Y^m_l(\theta, \phi)
 \end{align}$$</p>
-<p>where $Y^m_l(\theta, \phi)$ are the spherical harmonics. The spherical harmonics with different $l$ values or orthogonal, i.e.,</p>
+<p>where $Y^m_l(\theta, \phi)$ are the spherical harmonics. Recall that the spherical harmonics with different $l$ values are orthogonal, i.e.,</p>
 <p>$$\begin{align}
 \langle Y^m_l(\theta, \phi) | Y^m_{l^\prime}(\theta, \phi) \rangle = 0\text{, }~~~l \neq l^\prime
 \end{align}$$</p>
-<p>One could choose</p>
+<p>One could choose as trial functions</p>
 <p>$$\begin{align}
 \phi_1(r, \theta, \phi) &amp;= R(r) Y^0_0(\theta, \phi) \\
 \phi_2(r, \theta, \phi) &amp;= R(r) Y^0_1(\theta, \phi) \\
 \phi_3(r, \theta, \phi) &amp;= R(r) Y^0_2(\theta, \phi) \\
 \text{etc.}  \nonumber
 \end{align}$$</p>
+<p>where $R(r)$ is an as-of-yet undetermined function that contains the variational parameters and should satisfy the boundary conditions for bound states</p>
+<p>$$\begin{align}
+\lim_{r\to\infty} R(r) = 0
+\end{align}$$</p>
 <p>The trial function $\phi_1$ could be used to find an approximate radial function and energy for the lowest-energy state with $l=0,$ which would be the $n=1$ state. The trial functions $\phi_2,$ $\phi_3,$ etc., could then be used to find approximate radial functions and energies for the lowest-energy states with $l=1, 2,$ etc. (the $n=2, 3,$ etc. states).</p>
 <p><strong>Case 4</strong>. In a later notebook, we will discuss <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">Hartree-Fock theory</a>, which is a variational approach for finding approximate wave functions for many-electron systems. In the Hartree-Fock approach, the trial wave function is chosen to be an antisymmetrized product of "spin-orbitals," which are one-electron wave functions that include both spin and spatial coordinates. As an example, for two electrons, such a wave function would look like</p>
 <p>$$\begin{align}
 \phi({\bf x}_1, {\bf x_2}) = \frac{1}{\sqrt{2}} [ \chi_1({\bf x}_1) \chi_2({\bf x}_2) - \chi_1({\bf x}_2) \chi_2({\bf x}_1)]
 \end{align}$$</p>
-<p>where ${\bf x}_1$ and ${\bf x}_2$ represents the spin and spatial coordinates for electrons 1 and 2, respectively, and $\chi_1$ and $\chi_2$ are the spin-orbital that contains the variational parameters. For molecules having point-group symmetry beyond C$_1,$ the spin-orbitals can be defined such that they belong to a specific irreducible representation of the point-group. States of different total symmetry can then be constructed where the overall symmetry is defined by the products of the symmetries of the underlying spin-orbitals. Consider a water molecule, which belongs to the C$_{2v}$ point group, which has four irreducible representations ($A_1,$ $A_2,$ $B_1,$ and $B_2$). As such, the Hatree-Fock approach could be used to find wave functions and energies approximating those for the four lowest-energy states with each of these overall symmetries.</p>
+<p>where ${\bf x}_1$ and ${\bf x}_2$ represent the spin and spatial coordinates for electrons 1 and 2, respectively, and $\chi_1$ and $\chi_2$ are the spin-orbitals that contains the variational parameters. For molecules having point-group symmetry beyond $\text{C}_1,$ the spin-orbitals can be defined such that they belong to a specific irreducible representation of the point-group. States of different total symmetry can then be constructed where the overall symmetry is defined by the products of the symmetries of the underlying spin-orbitals. Consider a water molecule, which belongs to the C$_{2v}$ point group, which itself has four irreducible representations ($A_1,$ $A_2,$ $B_1,$ and $B_2$). As such, the Hatree-Fock approach could be used to find wave functions and energies approximating those for the four lowest-energy states with each of these overall symmetries.</p>
 <p><strong>Case 5</strong>. Lastly, consider again the antisymmetrized product wave function from Hartree-Fock theory. The spin degrees of freedom could be chosen such that the trial wave function has a specific spin symmetry (e.g., singlet, triplet, etc.). In this way, the Hartree-Fock approach could be used to find wave functions and energies approximating those for the lowest-energy states of a given spin symmetry.</p>
 </div>
 </div>
@@ -8310,7 +8314,7 @@ u_n
 <p>$$\begin{align}
 \sum_{k}\left [ \sum_i A_{ki} u_i - w_k \right ] | f_k \rangle  = 0
 \end{align}$$</p>
-<p>At this point, we put on our linear algebra hats and note that, if $|f_k\rangle \neq 0$ adn all $|f_k\rangle$ are linearly independent, then this equation only has a solution if</p>
+<p>At this point, we put on our linear algebra hats and note that, if $|f_k\rangle \neq 0$ and all $|f_k\rangle$ are linearly independent, then this equation only has a solution if</p>
 <p>$$\begin{align}
 \sum_i A_{ki} u_i - w_k  = 0\text{, }~~~\forall ~k
 \end{align}$$</p>
