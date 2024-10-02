@@ -8333,7 +8333,7 @@ u_n
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="The-Secular-Equations">The Secular Equations<a class="anchor-link" href="#The-Secular-Equations">¶</a></h3><p>In the linear variational method, the trial wave function is expanded in a basis of known functions</p>
+<h3 id="The-Secular-Equation">The Secular Equation<a class="anchor-link" href="#The-Secular-Equation">¶</a></h3><p>In the linear variational method, the trial wave function is expanded in a basis of known functions</p>
 <p>$$\begin{align}
 |\phi\rangle = \sum_k c_k |f_k\rangle
 \end{align}$$</p>
@@ -8414,7 +8414,7 @@ i &amp;= 2: ~~~ (H_{21} - S_{21} W) c_1 + (H_{22} - W S_{22}) c_2 = 0
 <li><p>Use numerical matrix methods. The linear equations are equivalent to what is called a generalized eigenvalue problem. If the basis is orthonormalized, then the linear equations would be equivalent to matrix eigenvalue problem, which could be solved by finding a transformation that brings the matrix to diagonal form. This approach is most similar to how some problems in quantum chemistry are solved, in practice, so we will return to this idea later.</p>
 </li>
 </ol>
-<p>For now, let us proced with option 2. Let us continue with the two basis function case, where the secular equation is</p>
+<p>For now, let us proced with option 2. Again, consider the two basis function case, where the secular equation is</p>
 <p>$$\begin{align}
 \det ( H_{ij} - W S_{ij} ) &amp;= 0 \\
 &amp;= \begin{vmatrix}
@@ -8423,7 +8423,7 @@ H_{21} - S_{21}W &amp; H_{22} - S_{22}W \\
 \end{vmatrix} \\
 &amp;= (H_{11} - S_{11}W)(H_{22} - S_{22}W) - (H_{12} - S_{12}W)(H_{21} - S_{21}W)
 \end{align}$$</p>
-<p>where, in the last line, we have followed the <a href="https://en.wikipedia.org/wiki/Determinant">rule for evaluating a $2\times 2$ determinant</a>. This equation is quadratic in $W,$ which implies the existance of two solutions, or two estimates of the energy. With $n$ basis functions, we would have an $n$th-order polynomial that would give $n$ estimates for energies with</p>
+<p>In the last line, we have followed the <a href="https://en.wikipedia.org/wiki/Determinant">rule for evaluating a $2\times 2$ determinant</a>. This equation is quadratic in $W,$ which implies the existance of two solutions, or two estimates of the energy. With $n$ basis functions, we would have an $n$th-order polynomial that would give $n$ estimates for energies with</p>
 <p>$$\begin{align}
 W_1 \le W_2 \le ... \le W_n
 \end{align}$$</p>
@@ -8436,31 +8436,122 @@ E_2 \le W_2 \\
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ead665d7-d6ce-46ac-b507-f76a1342c1d7">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c5033e6-aeab-46fb-b446-b31794b5d6d4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>How does this work in practice? Let's revisit the one-dimensional PIB problem, where the trial function is expanded in a basis of four functions:</p>
+<p>$$\begin{align}
+|\phi\rangle = \sum_{k=1}^4 c_k |f_k\rangle
+\end{align}$$</p>
+<p>where</p>
+<p>$$\begin{align}
+|f_1\rangle &amp;= x(l-x) \\
+|f_2\rangle &amp;= x^2(l-x)^2 \\
+|f_3\rangle &amp;= x(l-x)(l/2-x) \\
+|f_4\rangle &amp;= x^2(l-x)^2(l/2-x) \\
+\end{align}$$</p>
+<p>Wait, does the use of four basis functions imply that we will need to deal with a $4\times 4$ determinant? In general, yes, but for this specify example, not quite. The actual structure of the problem will be much simpler, and the reason is symmetry.</p>
+<p>First, let us think about the symmetry of the basis functions. $|f_1\rangle$ and $|f_2\rangle$ are even about the middle of the box, while $|f_3\rangle$ and $|f_4\rangle$ are odd. As such,</p>
+<p>$$\begin{align}
+\langle f_1 | f_3 \rangle = S_{13} &amp;= 0 \\
+&amp;= S_{14} \\
+&amp;= S_{23} \\
+&amp; = S_{24}
+\end{align}$$</p>
+<p>So, overall, the overlap matrix is block diagonal</p>
+<p>$$\begin{align}
+{\bf S} = \begin{pmatrix}
+S_{11} &amp; S_{12} &amp; 0 &amp; 0 \\
+S_{21} &amp; S_{22} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; S_{33} &amp; S_{34} \\
+0 &amp; 0 &amp; S_{43} &amp; S_{44} \\
+\end{pmatrix}
+\end{align}$$</p>
+<p>What about the matrix representation of the Hamiltonian? Does it have a similar structure? The answer is, "yes," but first, in order to understand why, we must introduce the <strong>parity operator</strong> and explore its properties.</p>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d5088316-3e95-4718-a75b-b57b8907ccc8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d6bd8ef5-2c43-4602-a4c8-c99435838470">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The parity operator, $\hat{\Pi},$ is an operator that flips the sign of spatial coordinates. In three dimensions, we have</p>
+<p>$$\begin{align}
+\hat{\Pi} f(x, y, z) = f(-x, -y, -z)
+\end{align}$$</p>
+<p>What are the eigenvalues of this operator? It may be useful to consider what happens when acting on both sides of this equation with the partity operator</p>
+<p>$$\begin{align}
+\hat{\Pi}^2 f(x, y, z) &amp;= \hat{\Pi} f(-x, -y, -z) \\
+&amp;= f(x, y, z)
+\end{align}$$</p>
+<p>which implies that</p>
+<p>$$\begin{align}
+\hat{\Pi}^2 = 1
+\end{align}$$</p>
+<p>Now, consider the eigenvalue equation</p>
+<p>$$\begin{align}
+\hat{\Pi} g_i = c_i g_i
+\end{align}$$</p>
+<p>Acting on both sides of the equation with $\hat{\Pi}$ leads to</p>
+<p>$$\begin{align}
+\hat{\Pi}^2 g_i &amp;= c_i \hat{\Pi} g_i \\
+&amp;= c_i^2 g_i 
+\end{align}$$</p>
+<p>which, when combined with the previous result, gives</p>
+<p>$$\begin{align}
+g_i &amp;= c_i^2 g_i \\
+\end{align}$$</p>
+<p>and, thus,</p>
+<p>$$\begin{align}
+c_i = \pm 1
+\end{align}$$</p>
+<p>What are the eigenfunctions of the parity operator? Given that the eigenvalues are $\pm 1,$ the eigenfunctions should satisfy</p>
+<p>$$\begin{align}
+\hat{\Pi} g_i(x, y, z) &amp;= \pm g_i(x, y, z)
+\end{align}$$</p>
+<p>but we also know that the parity operator should flip the sign of the coordinates, i.e.,</p>
+<p>$$\begin{align}
+\hat{\Pi} g_i(x, y, z) &amp;= g_i(-x, -y, -z)
+\end{align}$$</p>
+<p>Combining these results</p>
+<p>$$\begin{align}
+g_i(x, y, z) = \pm g_i(-x, -y, -z)
+\end{align}$$</p>
+<p>which implies that the eigenfunctions of the parity operator are all (well-behaved) functions with even and odd parity.</p>
+<p>Does the parity operator commute with the Hamiltonian for the one-dimensional PIB problem? Consider</p>
+<p>$$\begin{align}
+[\hat{H}, \hat{\Pi}] = [\hat{T}, \hat{\Pi}] + [V, \hat{\Pi}]
+\end{align}$$</p>
+<p>In one-dimension</p>
+<p>$$\begin{align}
+[\hat{T}, \hat{\Pi}] f(x) &amp;= \hat{T}\hat{\Pi}f(x) - \hat{\Pi}\hat{T}f(x) \\
+&amp;= -\frac{\hbar^2}{2m} \left [ \frac{d^2}{dx^2}\hat{\Pi} f(x) - \hat{\Pi} \frac{d^2}{dx^2} f(x) \right ] \\
+&amp;= -\frac{\hbar^2}{2m} \left [ \frac{d^2}{dx^2} f(-x) -  \frac{d}{d(-x)} \frac{d}{d(-x)}f(-x) \right ] \\
+&amp;= -\frac{\hbar^2}{2m} \left [ \frac{d^2}{dx^2} f(-x) -  \frac{d}{dx} \frac{d}{dx}f(-x) \right ] \\
+&amp;= 0
+\end{align}$$</p>
+<p>Therefore, $[\hat{T}, \hat{\Pi}] = 0$.</p>
+<blockquote>
+<p>Practice</p>
+<blockquote>
+<p>Question 4</p>
+<p>Convince yourself that</p>
+<p>$$\begin{align}
+\hat{\Pi} \left [ \frac{d^2}{dx^2} f(x) \right ] = \frac{d^2}{dx^2} f(-x)
+\end{align}$$
+using the centered second-order finite-difference expression for the second derivative</p>
+<p>$$\begin{align}
+\frac{d^2}{dx^2} f(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}
+\end{align}$$</p>
+</blockquote>
+</blockquote>
 </div>
 </div>
 </div>
