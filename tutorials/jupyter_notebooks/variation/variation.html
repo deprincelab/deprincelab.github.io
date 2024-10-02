@@ -8326,31 +8326,113 @@ u_n
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=04270252-2999-462f-ab56-730a02bd82dc">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5f64dc5b-720e-4c32-8811-d69ffad33d44">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-Secular-Equations">The Secular Equations<a class="anchor-link" href="#The-Secular-Equations">¶</a></h3><p>In the linear variational method, the trial wave function is expanded in a basis of known functions</p>
+<p>$$\begin{align}
+|\phi\rangle = \sum_k c_k |f_k\rangle
+\end{align}$$</p>
+<p>where the set of functions $\{|f_k\rangle\}$ is not necessarily orthonormalized. While not required, the following analysis will be simpler if we assume that $\{c_k\}$ and $\{|f_k\rangle\}$ are real-valued. We would like to minimize the variational integral</p>
+<p>$$\begin{align}
+W = \frac{\langle \phi | \hat{H} | \phi \rangle}{\langle \phi | \phi \rangle}
+\end{align}$$</p>
+<p>with respect to the expansion coefficients. The optimal coefficients should satisfy</p>
+<p>$$\begin{align}
+\frac{\partial W}{\partial c_i} = 0
+\end{align}$$</p>
+<p>for all $i$. Let's do some math! We have</p>
+<p>$$\begin{align}
+\frac{\partial W}{\partial c_i} &amp;= \frac{\partial}{\partial c_i} \langle \phi | \hat{H} | \phi \rangle \langle \phi | \phi \rangle^{-1} \\
+&amp;=  \left [ \left \langle \left . \left . \frac{ \partial \phi}{\partial c_i}\right | \hat{H} \right | \phi \right \rangle   + \left \langle \phi \left | \hat{H} \left | \frac{\partial \phi}{\partial c_i} \right . \right . \right \rangle \right ] \langle \phi | \phi \rangle^{-1} \nonumber \\
+&amp;- \langle \phi | \hat{H} | \phi \rangle \left [ \left \langle \left . \frac{ \partial \phi}{\partial c_i} \right | \phi \right \rangle  + \left \langle \phi \left | \frac{\partial \phi}{\partial c_i}\right . \right \rangle \right ] \langle \phi | \phi \rangle^{-2}
+\end{align}$$</p>
+<p>The derivative of the trial wave function with respect to $c_i$ is</p>
+<p>$$\begin{align}
+\frac{\partial}{c_i} | \phi \rangle &amp;= \sum_k \frac{\partial}{c_i} c_k | f_k \rangle \\
+&amp;= \sum_k \delta_{ik} | f_k \rangle \\
+&amp;= |f_i\rangle
+\end{align}$$</p>
+<p>so the gradient of $W$ becomes</p>
+<p>$$\begin{align}
+\frac{\partial W}{\partial c_i} &amp;= \frac{\langle f_i | \hat{H} | \phi \rangle + \langle \phi | \hat{H} | f_i \rangle}{\langle \phi | \phi \rangle} - \frac{\langle \phi | \hat{H} | \phi \rangle}{\langle \phi |\phi\rangle^2} \left [ \langle f_i | \phi \rangle +  \langle \phi | f_i \rangle \right ]
+\end{align}$$</p>
+<p>By multiplying through by a factor of $\langle \phi | \phi \rangle$ and recognizing that $\frac{\langle \phi | \hat{H} | \phi \rangle}{\langle \phi | \phi \rangle} = W,$ this expression simplifies to</p>
+<p>$$\begin{align}
+0 &amp;= \langle f_i | \hat{H} | \phi \rangle + \langle \phi | \hat{H} | f_i \rangle - W \left [ \langle f_i | \phi \rangle +  \langle \phi | f_i \rangle \right ] \\
+&amp;= \sum_k c_k \langle f_i | \hat{H} | f_k \rangle  + \sum_k c_k^* \langle f_k | \hat{H} | f_i \rangle  - W \left ( \sum_k c_k \langle f_i | f_k \rangle + \sum_k c_k^* \langle f_k | f_i \rangle  \right ) \\
+&amp;= \sum_k c_k \left ( H_{ik} + H_{ki} \right ) - W \sum_k c_k \left (S_{ik} + S_{ki} \right )
+\end{align}$$</p>
+<p>where, in the last line, we have recognized that $c_k$ is real valued, and we have introduced the overlap integral</p>
+<p>$$\begin{align}
+S_{ik} = \langle f_i | f_k \rangle
+\end{align}$$</p>
+<p>Now, recall that $\hat{H}$ is a Hermitian operator, so</p>
+<p>$$\begin{align}
+\langle f_i | \hat{H} | f_k \rangle &amp;= \langle f_k | \hat{H} | f_i \rangle^* \\
+H_{ik} &amp;= H_{ki}^* \\
+H_{ik} &amp;= H_{ik}^\dagger \\
+\end{align}$$</p>
+<p>where we have introduced the "dagger" notation, which refers to the adjoint, or conjugate transpose, of the matrix. Hence, we say that Hermitian matrices are "self adjoint." If the basis functions are real-valued and the Hamiltonian contains only real-valued quantities (e.g., no spin-orbit coupling or complex external fields), then the elements of the matrix representation of the Hamiltonian will be real-valued, as will the overlap integrals, so</p>
+<p>$$\begin{align}
+H_{ik} &amp;= H_{ki} \\
+S_{ik} &amp;= S_{ki}
+\end{align}$$</p>
+<p>We now have</p>
+<p>$$\begin{align}
+\sum_k \left [ H_{ik} - S_{ik}W\right ] c_k = 0\text{, }~~~\forall~i
+\end{align}$$</p>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb8ba2a1-4146-4335-b282-61f9a0f6bb65">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=559ea5e1-d92b-4b89-8b32-1c7f3707e3a8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>It will be easiest to understsand how to solve this set of linear equations if we consider the specific case where trial function is expanded in a basis of only two functions, in which case we would have</p>
+<p>$$\begin{align}
+i &amp;= 1: ~~~ (H_{11} - S_{11} W) c_1 + (H_{12} - W S_{12}) c_2 = 0 \\
+i &amp;= 2: ~~~ (H_{21} - S_{21} W) c_1 + (H_{22} - W S_{22}) c_2 = 0
+\end{align}$$</p>
+<p>We have three options for solving these equations:</p>
+<ol>
+<li><p>Use Gaussian / Gauss-Jordon elimination. This procedure is essentially what one would do when solving for $n$ unknown coefficients with $n$ equations by hand.</p>
+</li>
+<li><p>Solve the non-linear equation resulting from</p>
+<p>$$\begin{align}
+\det\left ( H_{ij} - WS_{ij} \right ) = 0
+\end{align}$$</p>
+<p>where $\det$ refers to the determinant. It turns out that the original set of equations has a non-trivial solution if and only if this determinant is equal to zero. This determinant equation is sometimes called the <strong>secular equation</strong>.</p>
+</li>
+<li><p>Use numerical matrix methods. The linear equations are equivalent to what is called a generalized eigenvalue problem. If the basis is orthonormalized, then the linear equations would be equivalent to matrix eigenvalue problem, which could be solved by finding a transformation that brings the matrix to diagonal form. This approach is most similar to how some problems in quantum chemistry are solved, in practice, so we will return to this idea later.</p>
+</li>
+</ol>
+<p>For now, let us proced with option 2. Let us continue with the two basis function case, where the secular equation is</p>
+<p>$$\begin{align}
+\det ( H_{ij} - W S_{ij} ) &amp;= 0 \\
+&amp;= \begin{vmatrix}
+H_{11} - S_{11}W &amp; H_{12} - S_{12}W \\
+H_{21} - S_{21}W &amp; H_{22} - S_{22}W \\
+\end{vmatrix} \\
+&amp;= (H_{11} - S_{11}W)(H_{22} - S_{22}W) - (H_{12} - S_{12}W)(H_{21} - S_{21}W)
+\end{align}$$</p>
+<p>where, in the last line, we have followed the <a href="https://en.wikipedia.org/wiki/Determinant">rule for evaluating a $2\times 2$ determinant</a>. This equation is quadratic in $W,$ which implies the existance of two solutions, or two estimates of the energy. With $n$ basis functions, we would have an $n$th-order polynomial that would give $n$ estimates for energies with</p>
+<p>$$\begin{align}
+W_1 \le W_2 \le ... \le W_n
+\end{align}$$</p>
+<p>It can be proved that each of these values are bounded by the true eigenvalues of the Hamiltonian as</p>
+<p>$$\begin{align}
+E_1 \le W_1 \\
+E_2 \le W_2 \\
+\text{etc}. \nonumber
+\end{align}$$</p>
 </div>
 </div>
 </div>
@@ -8383,6 +8465,62 @@ u_n
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fa954233-d230-4d22-8996-24769e64d224">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f3526655-975e-427f-9159-d6f6ad22304d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cbfda9f3-5dbb-46d9-b1b6-32837c4263fb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ed687311-024d-4628-90c6-79c0c1f92032">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5994fa7a-b465-42ed-a847-401b71c51a37">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
