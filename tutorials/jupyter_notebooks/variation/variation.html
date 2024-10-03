@@ -31,8 +31,6 @@ math: true
 
 <hr>
 
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -7826,14 +7824,14 @@ W = \frac{\langle \phi | \hat{H} \phi \rangle}{\langle \phi |\phi \rangle}
 <span class="n">H11</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_1</span> <span class="o">*</span> <span class="n">phi_1pp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     
 <span class="c1"># &lt;phi1|H|phi2&gt;</span>
-<span class="c1"># &lt;phi2|H|phi1&gt; = &lt;phi2|H|phi1&gt;* because H is Hermitian</span>
+<span class="c1"># &lt;phi2|H|phi1&gt; = &lt;phi1|H|phi2&gt;* because H is Hermitian</span>
 <span class="n">H12</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_1</span> <span class="o">*</span> <span class="n">phi_2pp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
  <span class="c1"># &lt;phi2|H|phi2&gt;</span>
 <span class="n">H22</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_2</span> <span class="o">*</span> <span class="n">phi_2pp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># S11 = &lt;phi_1|phi_1&gt; = 1 because phi_1 is normalized</span>
-<span class="c1"># S22 = &lt;phi_2|phi_2&gt; = 1 because phi_1 is normalized</span>
+<span class="c1"># S22 = &lt;phi_2|phi_2&gt; = 1 because phi_2 is normalized</span>
 <span class="c1"># S12 = S21 = &lt;phi_1 | phi_2&gt;</span>
 <span class="n">S12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_1</span> <span class="o">*</span> <span class="n">phi_2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     
@@ -8682,14 +8680,14 @@ c &amp;= H_{11} H_{22} - H_{12}H_{21}
 <span class="n">H11</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_1</span> <span class="o">*</span> <span class="n">phi_1pp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     
 <span class="c1"># &lt;phi1|H|phi2&gt;</span>
-<span class="c1"># &lt;phi2|H|phi1&gt; = &lt;phi2|H|phi1&gt;* because H is Hermitian</span>
+<span class="c1"># &lt;phi2|H|phi1&gt; = &lt;phi1|H|phi2&gt;* because H is Hermitian</span>
 <span class="n">H12</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_1</span> <span class="o">*</span> <span class="n">phi_2pp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
  <span class="c1"># &lt;phi2|H|phi2&gt;</span>
 <span class="n">H22</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_2</span> <span class="o">*</span> <span class="n">phi_2pp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># S11 = &lt;phi_1|phi_1&gt; = 1 because phi_1 is normalized</span>
-<span class="c1"># S22 = &lt;phi_2|phi_2&gt; = 1 because phi_1 is normalized</span>
+<span class="c1"># S22 = &lt;phi_2|phi_2&gt; = 1 because phi_2 is normalized</span>
 <span class="c1"># S12 = S21 = &lt;phi_1 | phi_2&gt;</span>
 <span class="n">S12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_1</span> <span class="o">*</span> <span class="n">phi_2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     
@@ -8739,34 +8737,128 @@ E_n = \frac{\hbar^2n^2\pi^2}{2mL^2}
 E_3 =  \frac{9\pi^2}{2} {\rm E}_h \approx 44.41322 ~{\rm E}_h
 \end{align}$$</p>
 <p>As can be seen, the description of this state is a bit worse than that of the ground-state, with $W_3$ agreeing with $E_3$ to only $\approx 15\%\text{.}$ Note that $W_3 &gt; E_3,$ as asserted above.</p>
+<p>Solving</p>
+<p>$$\begin{align}
+0 &amp;= \begin{vmatrix}
+H_{33} - W S_{33} &amp; H_{34} - W S_{34} \\
+H_{43} - W S_{43} &amp; H_{44} - W S_{44} \\ 
+\end{vmatrix} \\
+\end{align}$$</p>
+<p>will give us the odd parity solutions, which provide upper-bounds to $E_2$ and $E_4$ of the one-dimensional PIB problem. As with the even-parity states, solving this equation requires knowledge of the matrix elements of the Hamiltonian for basis functions $|f_3\rangle$ and $|f_4\rangle\text{.}$ We can simplify matters if we note that the Hamiltonian is purely kinetic within the box, and</p>
+<p>$$\begin{align}
+\hat{H} = \hat{T} = \frac{\hat{p}^2}{2m}
+\end{align}$$</p>
+<p>Because $\hat{p}$ is Hermitian,</p>
+<p>$$\begin{align}
+H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
+&amp;= \frac{1}{2m} \langle f_i | \hat{p}^2 | f_j \rangle \\
+&amp;= -\frac{i\hbar}{2m}  \left \langle f_i  \left | \hat{p} \left | \frac{ d f_j}{dx} \right \rangle \right  . \right . \\
+&amp;= -\frac{i\hbar}{2m} \left . \left \langle \left . \frac{ d f_j}{dx}  \right | \hat{p} \right | f_i \right \rangle^*  \\
+&amp;= \frac{\hbar^2}{2m} \left . \left \langle  \frac{ d f_j}{dx} \right | \frac{ d f_i}{dx} \right \rangle^*  \\
+&amp;= \frac{\hbar^2}{2m} \left . \left \langle  \frac{ d f_i}{dx} \right | \frac{ d f_j}{dx} \right \rangle
+\end{align}$$</p>
+<p>As such, we only need to evaluate first derivatives of the basis functions, i.e.,</p>
+<p>$$\begin{align}
+\frac{d}{dx}f_3 &amp;= \frac{d}{dx} x(l-x)(l/2-x)\\
+&amp;= (l-x) (l/2 - x) - x (l/2 - x) - x(l-x) \\
+\frac{d}{dx}f_4 &amp;= \frac{d}{dx} x^2(l-x)^2(l/2-x)\\
+&amp;= 2x(l-x)^2(l/2-x) - 2x^2(l-x)(l/2-x) - x^2(l-x)^2
+\end{align}$$</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ed687311-024d-4628-90c6-79c0c1f92032">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ed687311-024d-4628-90c6-79c0c1f92032">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># use a fine-grain grid to be sure numerical integrals are accurate</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">5001</span><span class="p">)</span>
+
+<span class="c1"># normalization constant</span>
+<span class="n">phi_3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">N3</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_3</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="n">phi_3</span> <span class="o">*=</span> <span class="n">N3</span>
+
+<span class="c1"># first derivative</span>
+<span class="n">phi_3p</span> <span class="o">=</span> <span class="n">N3</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c1"># normalization constant</span>
+<span class="n">phi_4</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+<span class="n">N4</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_4</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="n">phi_4</span> <span class="o">*=</span> <span class="n">N4</span>
+
+<span class="c1"># first derivative</span>
+<span class="n">phi_4p</span> <span class="o">=</span> <span class="n">N4</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+
+<span class="c1"># &lt;phi3|H|phi3&gt;</span>
+<span class="n">H33</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_3p</span> <span class="o">*</span> <span class="n">phi_3p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    
+<span class="c1"># &lt;phi3|H|phi4&gt;</span>
+<span class="c1"># &lt;phi4|H|phi3&gt; = &lt;phi3|H|phi4&gt;* because H is Hermitian</span>
+<span class="n">H34</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_3p</span> <span class="o">*</span> <span class="n">phi_4p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+ <span class="c1"># &lt;phi2|H|phi2&gt;</span>
+<span class="n">H44</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_4p</span> <span class="o">*</span> <span class="n">phi_4p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># S33 = &lt;phi_3|phi_3&gt; = 1 because phi_3 is normalized</span>
+<span class="c1"># S44 = &lt;phi_4|phi_4&gt; = 1 because phi_4 is normalized</span>
+<span class="c1"># S34 = S43 = &lt;phi_3 | phi_4&gt;</span>
+<span class="n">S34</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_3</span> <span class="o">*</span> <span class="n">phi_4</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    
+<span class="c1"># quadratic formula:</span>
+<span class="c1"># ax^2 + bx + c = 0</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">S34</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">H33</span> <span class="o">+</span> <span class="n">H44</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">H34</span><span class="o">*</span><span class="n">S34</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">H33</span> <span class="o">*</span> <span class="n">H44</span> <span class="o">-</span> <span class="n">H34</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">W2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="n">W4</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"W2  = </span><span class="si">%10.5f</span><span class="s2"> Eh"</span> <span class="o">%</span> <span class="p">(</span><span class="n">W2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"W4  = </span><span class="si">%10.5f</span><span class="s2"> Eh"</span> <span class="o">%</span> <span class="p">(</span><span class="n">W4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5994fa7a-b465-42ed-a847-401b71c51a37">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>W2  =   19.75078 Eh
+W4  =  100.24951 Eh
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7ac502c8-913e-4e23-a3e2-3525efa98a27">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Given the exact energies, $E_2$ and $E_4,$</p>
+<p>$$\begin{align}
+E_2 &amp;= 2\pi^2 \approx 19.73921 E_\text{h} \\
+E_4 &amp;= 8\pi^2 \approx 78.95684 E_\text{h}
+\end{align}$$</p>
+<p>we can see that $W_2$ and $W_4$ agree with these values to within 0.059% and 27%, respectively. Again, note that $W_2 &gt; E_2$ and $W_4 &gt; E_4,$ as asserted above.</p>
+<p>So far, we have seen that estimates for the eigenvalues of the Hamiltonian can be obtained from the secular equation. What about the corresponding estimates of the eigenfunctions? Once the $W_n$ are known, we can substitute them back into the original linear equations</p>
+<p>$$\begin{align}
+\sum_j (H_{ij} - W_n S_{ij}) c_j^{(n)} = 0
+\end{align}$$</p>
+<p>and solve for the expansion coefficients, $c_j^{(n)},$ where the superscript indicates that these coefficients are different for each state. It is important to note that, in cases where the basis functions have well-defined parity, coefficients corresponding to even parity basis functions will only contribute to the states with even parity, and coefficients corresponding to odd parity basis functions will only contribute to the states with odd parity.</p>
 </div>
 </div>
 </div>
