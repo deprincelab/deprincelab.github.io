@@ -8652,7 +8652,7 @@ c &amp;= H_{11} H_{22} - H_{12}H_{21}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [58]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -8757,13 +8757,7 @@ H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
 &amp;= \frac{\hbar^2}{2m} \left . \left \langle  \frac{ d f_j}{dx} \right | \frac{ d f_i}{dx} \right \rangle^*  \\
 &amp;= \frac{\hbar^2}{2m} \left . \left \langle  \frac{ d f_i}{dx} \right | \frac{ d f_j}{dx} \right \rangle
 \end{align}$$</p>
-<p>As such, we only need to evaluate first derivatives of the basis functions, i.e.,</p>
-<p>$$\begin{align}
-\frac{d}{dx}f_3 &amp;= \frac{d}{dx} x(l-x)(l/2-x)\\
-&amp;= (l-x) (l/2 - x) - x (l/2 - x) - x(l-x) \\
-\frac{d}{dx}f_4 &amp;= \frac{d}{dx} x^2(l-x)^2(l/2-x)\\
-&amp;= 2x(l-x)^2(l/2-x) - 2x^2(l-x)(l/2-x) - x^2(l-x)^2
-\end{align}$$</p>
+<p>As such, we only need to evaluate first derivatives of the basis functions. The Python code below calculates these  gradients numerically.</p>
 </div>
 </div>
 </div>
@@ -8772,7 +8766,7 @@ H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [59]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -8786,7 +8780,7 @@ H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
 <span class="n">phi_3</span> <span class="o">*=</span> <span class="n">N3</span>
 
 <span class="c1"># first derivative</span>
-<span class="n">phi_3p</span> <span class="o">=</span> <span class="n">N3</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">phi_3p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">phi_3</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># normalization constant</span>
 <span class="n">phi_4</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
@@ -8794,7 +8788,7 @@ H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
 <span class="n">phi_4</span> <span class="o">*=</span> <span class="n">N4</span>
 
 <span class="c1"># first derivative</span>
-<span class="n">phi_4p</span> <span class="o">=</span> <span class="n">N4</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">phi_4p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">phi_4</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># &lt;phi3|H|phi3&gt;</span>
 <span class="n">H33</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">phi_3p</span> <span class="o">*</span> <span class="n">phi_3p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -8834,8 +8828,8 @@ H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>W2  =   19.75078 Eh
-W4  =  100.24951 Eh
+<pre>W2  =   19.75077 Eh
+W4  =  100.24872 Eh
 </pre>
 </div>
 </div>
@@ -8862,17 +8856,98 @@ E_4 &amp;= 8\pi^2 \approx 78.95684 E_\text{h}
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e03bc758-ad84-4c8a-9cee-c38205709c08">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=311f03f2-4340-42b1-a33e-05b626527b56">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-Variation-Problem-as-an-Eigenvalue-Problem">The Variation Problem as an Eigenvalue Problem<a class="anchor-link" href="#The-Variation-Problem-as-an-Eigenvalue-Problem">¶</a></h3><p>If the basis in which the trial function is expanded is orthonormalized, the problem of solving the secular  equation is equivalent to the problem of finding the eigenvalues of the matrix representation of the Hamiltonian. To make this apparent, first consider a linear trial function of the form</p>
+<p>$$\begin{align}
+|\phi \rangle = \sum_k c_k | f_k \rangle
+\end{align}$$</p>
+<p>For the two basis function case, the stationarity of $W$ with respect to variations in the coefficients led to</p>
+<p>$$\begin{align}
+(H_{11} - S_{11} W) c_1 + (H_{12} - S_{12} W )c_2 &amp;= 0\\(H_{21} - S_{21} W) c_1 + (H_{22} - S_{22} W )c_2 &amp;= 0
+\end{align}$$</p>
+<p>If the basis is orthonormalized, then</p>
+<p>$$\begin{align}
+S_{ij} = \langle f_i | f_j \rangle = \delta_{ij}
+\end{align}$$</p>
+<p>and</p>
+<p>$$\begin{align}
+H_{11} c_1 + H_{12}c_2 &amp;= W c_1 \\
+H_{21} c_1 + H_{22}c_2 &amp;= W c_2
+\end{align}$$</p>
+<p>which can be re-expressed as</p>
+<p>$$\begin{align}
+\begin{pmatrix}
+H_{11} &amp; H_{12} \\
+H_{21} &amp; H_{22} \\
+\end{pmatrix}
+\begin{pmatrix}
+c_{1} \\
+c_{2} \\
+\end{pmatrix}
+= W \begin{pmatrix}
+c_{1} \\
+c_{2} \\
+\end{pmatrix}
+\end{align}$$</p>
+<p>or</p>
+<p>$$\begin{align}
+{\bf H} {\bf c} = W {\bf c}
+\end{align}$$</p>
+<p>The structure of this equation is similar to that of the eigenvalue equations we have encountered throughout these notebooks. We have a matrix (${\bf H}$) whose action on a vector (${\bf c}$) gives the same vector, multiplied by a scalar. Indeed, this is an example of a matrix eigenvalue equation, and we refer to ${\bf c}$ as an eigenvector of ${\bf H}\text{.}$ This result is generalizable to the case where the trial function is expanded as a linear combination of more than two basis functions.</p>
+<p>In order for the matrix eigenvalue equation to have a solution, we still have the requirement that</p>
+<p>$$\begin{align}
+\det({\bf H} - W{\bf S}) = 0
+\end{align}$$</p>
+<p>Recall that the determinant is an $n$th-order polynomial, where $n$ is the number of basis functions, and that there are $n$ roots to the secular equation, that give $n$ different estimates for the eigenvalues of the Hamiltonian. This result implies that the matrix ${\bf H}$ should have $n$ distinct eigenvalue and eigenvector pairs. For a Hermitian matrix (like the Hamiltonian), the eigenvectors are linearly independent, which means that they fully span the same space as the basis functions. This property is reminiscent of the postulate stating that the eigenfunctions of Hermitian operators form a complete set.</p>
+<p>Because there are $n$ eigenvalues and eigenvectors, we have</p>
+<p>$$\begin{align}
+{\bf H}{\bf c}^{(i)} = W_i {\bf c}^{(i)}
+\end{align}$$</p>
+<p>for $i = 1, 2, ..., n\text{.}$ If we collect each of the eigenvectors into a single matrix</p>
+<p>$$\begin{align}
+{\bf C} = \begin{pmatrix}
+c_1^{(1)} &amp; c_1^{(2)} &amp; ... &amp;c_1^{(n)} \\
+c_2^{(1)} &amp; c_2^{(2)} &amp; ... &amp;c_2^{(n)} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+c_n^{(1)} &amp; c_n^{(2)} &amp; ... &amp;c_n^{(n)} 
+\end{pmatrix}
+\end{align}$$</p>
+<p>and define a diagonal matrix with the eigenvalues on the diagonal</p>
+<p>$$\begin{align}
+{\bf C} = \begin{pmatrix}
+W_1 &amp; 0 &amp; 0 &amp; ... \\
+0 &amp; W_2 &amp; 0 &amp; ... \\
+0 &amp; 0 &amp; \ddots &amp;  \\
+\vdots &amp; \vdots &amp;  &amp;W_n 
+\end{pmatrix}
+\end{align}$$</p>
+<p>then we can write</p>
+<p>$$\begin{align}
+{\bf H} {\bf C} = {\bf C}{\bf W}
+\end{align}$$</p>
+<p>Now, we define the inverse of a matrix , ${\bf C}^{-1},$ such that</p>
+<p>$$\begin{align}
+{\bf C}{\bf C}^{-1} = {\bf C}^{-1}{\bf C} = {\bf I}
+\end{align}$$</p>
+<p>where ${\bf I}$ is the identity matrix. The inverse matrix, ${\bf C}^{-1},$ exists, provided that</p>
+<p>$$\begin{align}
+\det({\bf C}) \neq 0
+\end{align}$$</p>
+<p>Assuming that ${\bf C}^{-1}$ does exist, we can apply it to both sides of the equation above to give</p>
+<p>$$\begin{align}
+{\bf C}^{-1} {\bf H} {\bf C} &amp;= {\bf C}^{-1} {\bf C} {\bf W}
+\end{align}$$</p>
+<p>or</p>
+<p>$$\begin{align}
+{\bf C}^{-1} {\bf H} {\bf C} &amp;= {\bf W}
+\end{align}$$</p>
+<p>This expression indicates that the eigenvectors of ${\bf H}$ form a matrix that bring the Hamiltonian to diagonal form. In other words, if the basis used to represent the Hamiltonian is orthonormal, then the linear variational problem reduces to the search for the set of vectors that diagonalize ${\bf H}$.</p>
 </div>
 </div>
 </div>
@@ -8891,6 +8966,48 @@ E_4 &amp;= 8\pi^2 \approx 78.95684 E_\text{h}
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=243c52e2-d0a9-453e-9121-f735e8e7f820">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8c92233b-63eb-4683-a26f-9cd0aa7d9320">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c1f0cef7-494e-4939-aa20-36b90a4233d4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e24de403-a74b-40f8-9250-69391d8f708e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
