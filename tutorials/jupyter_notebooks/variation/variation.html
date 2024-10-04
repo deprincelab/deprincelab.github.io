@@ -24,7 +24,7 @@ math: true
 <a href=../hydrogen/hydrogen.html style="color:#e65100;">The Hydrogen Atom</a> (<a href=../hydrogen/hydrogen.ipynb style="color:#e65100;">notebook</a>) <br>
 </li>
 <li>
-<a href=../variation/variation.html style="color:#e65100;">The Variation Theorem</a> (<a href=../variation/variation.ipynb style="color:#e65100;">notebook</a>) ... under construction<br>
+<a href=../variation/variation.html style="color:#e65100;">The Variation Theorem</a> (<a href=../variation/variation.ipynb style="color:#e65100;">notebook</a>)<br>
 </li>
 <li>Perturbation Theory</li>
 </ol>
@@ -7772,7 +7772,7 @@ W = \frac{\langle \phi | \hat{H} \phi \rangle}{\langle \phi |\phi \rangle}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_w</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">H11</span><span class="p">,</span> <span class="n">H12</span><span class="p">,</span> <span class="n">H22</span><span class="p">,</span> <span class="n">S12</span><span class="p">):</span>
@@ -7879,7 +7879,7 @@ w  =    4.93487 Eh
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">psi_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
@@ -8036,7 +8036,7 @@ N x(L-x)(L/2 - x) \text{, } &amp;0 \le x \le L \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -8652,7 +8652,7 @@ c &amp;= H_{11} H_{22} - H_{12}H_{21}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [58]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -8766,7 +8766,7 @@ H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [59]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -8900,11 +8900,11 @@ c_{2} \\
 {\bf H} {\bf c} = W {\bf c}
 \end{align}$$</p>
 <p>The structure of this equation is similar to that of the eigenvalue equations we have encountered throughout these notebooks. We have a matrix (${\bf H}$) whose action on a vector (${\bf c}$) gives the same vector, multiplied by a scalar. Indeed, this is an example of a matrix eigenvalue equation, and we refer to ${\bf c}$ as an eigenvector of ${\bf H}\text{.}$ This result is generalizable to the case where the trial function is expanded as a linear combination of more than two basis functions.</p>
-<p>In order for the matrix eigenvalue equation to have a solution, we still have the requirement that</p>
+<p>Recall that the linear equations that we are now representing as an eigenvalue equation only have a solution if</p>
 <p>$$\begin{align}
-\det({\bf H} - W{\bf S}) = 0
+\det({\bf H} - W{\bf I}) = 0
 \end{align}$$</p>
-<p>Recall that the determinant is an $n$th-order polynomial, where $n$ is the number of basis functions, and that there are $n$ roots to the secular equation, that give $n$ different estimates for the eigenvalues of the Hamiltonian. This result implies that the matrix ${\bf H}$ should have $n$ distinct eigenvalue and eigenvector pairs. For a Hermitian matrix (like the Hamiltonian), the eigenvectors are linearly independent, which means that they fully span the same space as the basis functions. This property is reminiscent of the postulate stating that the eigenfunctions of Hermitian operators form a complete set.</p>
+<p>where ${\bf I}$ is the identity matrix. The determinant is an $n$th-order polynomial, where $n$ is the number of basis functions, and there are $n$ roots to the secular equation, that give $n$ different estimates for the eigenvalues of the Hamiltonian. It follows that the matrix ${\bf H}$ should have $n$ distinct eigenvalue and eigenvector pairs. For a Hermitian matrix (like the Hamiltonian), the eigenvectors are linearly independent, which means that they fully span the same space as the basis functions. This property is reminiscent of the postulate stating that the eigenfunctions of Hermitian operators form a complete set.</p>
 <p>Because there are $n$ eigenvalues and eigenvectors, we have</p>
 <p>$$\begin{align}
 {\bf H}{\bf c}^{(i)} = W_i {\bf c}^{(i)}
@@ -8931,11 +8931,11 @@ W_1 &amp; 0 &amp; 0 &amp; ... \\
 <p>$$\begin{align}
 {\bf H} {\bf C} = {\bf C}{\bf W}
 \end{align}$$</p>
-<p>Now, we define the inverse of a matrix , ${\bf C}^{-1},$ such that</p>
+<p>Now, we define the inverse of a matrix , ${\bf C}^{-1}\text{,}$ such that</p>
 <p>$$\begin{align}
 {\bf C}{\bf C}^{-1} = {\bf C}^{-1}{\bf C} = {\bf I}
 \end{align}$$</p>
-<p>where ${\bf I}$ is the identity matrix. The inverse matrix, ${\bf C}^{-1},$ exists, provided that</p>
+<p>The inverse matrix, ${\bf C}^{-1}\text{,}$ exists, provided that</p>
 <p>$$\begin{align}
 \det({\bf C}) \neq 0
 \end{align}$$</p>
@@ -8948,6 +8948,32 @@ W_1 &amp; 0 &amp; 0 &amp; ... \\
 {\bf C}^{-1} {\bf H} {\bf C} &amp;= {\bf W}
 \end{align}$$</p>
 <p>This expression indicates that the eigenvectors of ${\bf H}$ form a matrix that bring the Hamiltonian to diagonal form. In other words, if the basis used to represent the Hamiltonian is orthonormal, then the linear variational problem reduces to the search for the set of vectors that diagonalize ${\bf H}$.</p>
+<p>As an example, let us revisit the one-dimensional finite square well potential problem. For this problem, the potential has the form</p>
+<p>$$\begin{align}
+V(x) = \begin{cases}
+V_0\text{, } &amp;x &lt; 0 \\
+0\text{, } &amp; 0 \le x \le L \\
+V_0\text{, } &amp; x \ge L 
+\end{cases}
+\end{align}$$</p>
+<p>We want to expand the trial function as a linear combination of orthogonal basis functions,</p>
+<p>$$\begin{align}
+| \phi \rangle = \sum_n c_n |f_n \rangle 
+\end{align}$$</p>
+<p>Let us choose $f_n$ to be one-dimensional PIB wave functions, which satisfy this orthogonality requirement and have the form</p>
+<p>$$\begin{align}
+f_n(x) = \begin{cases}
+0\text{, } &amp;x &lt; 0 \\
+\left ( \frac{2}{L^\prime} \right) \sin\left(\frac{n\pi (x-x_\text{min})}{L^\prime}\right)\text{, } &amp;0 \le x \le L^\prime \\
+0\text{, }&amp;x \ge L^\prime
+\end{cases}
+\end{align}$$</p>
+<p>Here, we have chosen a box with a length $L' &gt; L$ because the finite square well potential wave functions should penetrate into the classically forbidden regions where $x &gt; L$ and $x &lt; -L\text{.}$ Note that the position in the sine function is shifted because the PIB functions are usually defined on the interval $x = [0, L^\prime]\text{,}$ but if they are defined in this way, the basis functions would not be centered about the middle of the finite square well. Hence, the PIB basis function should be defined on the interval $x = [x_\text{min}, x_\text{max}]\text{,}$ where</p>
+<p>$$\begin{align}
+x_\text{min} &amp;= \frac{1}{2} L - \frac{1}{2} L^\prime \\
+x_\text{max} &amp;= \frac{1}{2} L + \frac{1}{2} L^\prime \\
+\end{align}$$</p>
+<p>The following Python code defines the potential and 100 basis functions on the interval $x = [x_\text{min}, x_\text{max}]\text{.}$</p>
 </div>
 </div>
 </div>
@@ -8956,58 +8982,226 @@ W_1 &amp; 0 &amp; 0 &amp; ... \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># set some parameters (in atomic units, where hbar = 1)</span>
+<span class="c1"># these should be consistent with those used in the previous notebook</span>
+<span class="n">hbar</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># mass of particle</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># length of box (from 0 to L)</span>
+<span class="n">V0</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+<span class="c1"># box width for PIB basis functions</span>
+<span class="n">Lprime</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">L</span>
+
+<span class="c1"># number of basis functions</span>
+<span class="n">nbf</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># min x value ...</span>
+<span class="n">minx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">L</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">Lprime</span>
+
+<span class="c1"># max x value</span>
+<span class="n">maxx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">L</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">Lprime</span>
+
+<span class="n">dx</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">minx</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">maxx</span><span class="o">-</span><span class="n">minx</span><span class="p">)</span><span class="o">/</span><span class="n">dx</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># define the potential over this interval</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">myx</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">myx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">V0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">myx</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">V0</span><span class="p">)</span>
+
+<span class="c1"># define basis functions, f</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbf</span><span class="p">):</span>
+    
+    <span class="c1"># define basis function n over all space</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">myx</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="c1"># don't forget to shift myx by minx because the PIB functions are supposed to go from 0 to L'</span>
+        <span class="n">fn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">Lprime</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">myx</span><span class="o">-</span><span class="n">minx</span><span class="p">)</span> <span class="o">/</span> <span class="n">Lprime</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="c1"># add this basis function to our list of basis functions</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=243c52e2-d0a9-453e-9121-f735e8e7f820">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61692545-bafd-41f4-bd95-6e4025d0a831">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Having defined our basis functions, we can now evaluate the Hamiltonian matrix elements,</p>
+<p>$$\begin{align}
+H_{ij} &amp;= \langle f_i | \hat{H} | f_j \rangle \\
+&amp;= \langle f_i | \hat{T} | f_j \rangle + \langle f_i | V(x) | f_j \rangle \\
+&amp;= \frac{\hbar^2}{2m} \langle f_i^\prime | f_j^\prime \rangle + \langle f_i | V(x) | f_j \rangle \\
+\end{align}$$</p>
+<p>where on the third line, we have again taken advantage of the fact that the expectation value of the kinetic energy operator can be expressed in terms of an overlap between gradients of the basis functions. The following Python code evaluates these matrix elements, with the gradients and integrals handled numerically.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6ae3ff04-9aa1-4595-b9b1-508fdf585658">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">[</span><span class="n">nbf</span><span class="p">,</span> <span class="n">nbf</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="c1"># gradient of basis functions</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbf</span><span class="p">):</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbf</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbf</span><span class="p">):</span>
+
+        <span class="c1"># potential energy term: &lt;fi|V|fj&gt;</span>
+        <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">V</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># kinetic energy term</span>
+        <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">hbar</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8c92233b-63eb-4683-a26f-9cd0aa7d9320">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cab569d4-ff49-4ade-821f-875169a0d809">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We now can use NumPy to solve the eigenvalue problem</p>
+<p>$$\begin{align}
+{\bf H} {\bf C} = {\bf C}{\bf W}
+\end{align}$$</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e24de403-a74b-40f8-9250-69391d8f708e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">w</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'W1 = </span><span class="si">%8.5f</span><span class="s1"> Eh'</span> <span class="o">%</span> <span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'W2 = </span><span class="si">%8.5f</span><span class="s1"> Eh'</span> <span class="o">%</span> <span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c1f0cef7-494e-4939-aa20-36b90a4233d4">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>W1 =  2.29461 Eh
+W2 =  8.13541 Eh
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=667dbf5e-ce2b-4cdc-acc3-604ab2039b95">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Recall that the exact energies for this problem that we determined in an earlier notebook were</p>
+<p>$$\begin{align}
+E_1 &amp;= 2.29499 E_\text{h} \\
+E_2 &amp;= 8.13715 E_\text{h}
+\end{align}$$</p>
+<p>Wow! $W_1$ and $W_2$ agree with these values to within less that 0.1%! However, note that they are not strict upper bounds to the exact energy. There are several possibilities for why this is the case:</p>
+<ol>
+<li><p>The PIB basis functions do not satisfy the boundary conditions for the finite square well potential problem because they have a derivative discontinuity at $x = x_\text{min}$ and $x = x_\text{max}\text{.}$ As a result, there will not be a strict guarantee that the energy estimates obtained by diagonalizing the matrix representation of the Hamiltonian will be upper bounds to the true energies for this problem.</p>
+</li>
+<li><p>The potential and kinetic energy matrix elements are evaluated numerically, which introduces some numerical error.</p>
+</li>
+<li><p>The kinetic energy matrix elements were also evaluated using gradients that were determined numerically, which introduces additional numerical error.</p>
+</li>
+</ol>
+<p>Lastly, we should visualize the variationally optimized wave functions. To do so, we will need to contract the eigenvectors with the basis functions as</p>
+<p>$$\begin{align}
+|\phi^{(i)}\rangle = \sum_j c^{(i)}_{j} |f_j\rangle
+\end{align}$$</p>
+<p>which can be achieved using NumPy's einsum function.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c2f73385-1f53-450e-b985-f1ce50f7af81">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,jk-&gt;ik'</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">phi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">'$\phi_1$'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">'$\phi_2$'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'wave function'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'x ($a_0$)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e24de403-a74b-40f8-9250-69391d8f708e">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
+<img alt="No description has been provided for this image" class="" src="data:image/png;base64,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yWWXXcbJJ5/Mz372MzZs2EBaWlqbx48aNeqYWWXvvvsudrudf/3rX1gsFgAee+wxGhoayM3NZdmyZWRlZTUdn5WVRX5+fqtrbNy4kd69e9OzZ08vf4ciYha1HIlIUPrtb39LWVkZf//737nzzjs56aSTuO6669o9fsqUKWzatKlV61FKSgrl5eW88847bN++nb/97W/84Q9/ICsrq8MtQZ999hnnnXdel78fEQkcCkciEnSWLl3Kww8/zIsvvkh8fDxWq5UXX3yRzz77jCeeeKLNc0aMGMHo0aN57bXXmt678MILuf7667nqqqs444wzyM/P59JLLyU3NxcwBlu3bCnKz89vNai7traWt956i5kzZ/rmGxURU2iFbBHpNt5//33uuOMONm7ciNV64t8NGxsbGTJkCEuXLiUhIYG8vDyWL19OSkoKAE888QRvvvnmMeOQRCS4acyRiHQb06ZNY/v27eTn55OdnX3C48PCwnjwwQc555xzcDgc/PrXv24KRgDh4eE8+uijvixZREygliMRERGRFjTmSERERKQFhSMRERGRFhSORERERFpQOBIRERFpQeFIREREpAWFIxEREZEWFI5EREREWlA4EhEREWlB4UhERESkBYUjERERkRYUjkRERERaUDgSERERaeH/A7ZDGbP++zZvAAAAAElFTkSuQmCC
+"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=76e87c61-0961-4062-9f6b-7a17b86aacb7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If you plot these approximate wave functions alongside the exact wave functions determined in a the previous notebook, you will find that they are indistinguishable on the scale of this figure.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=109486e9-515a-4583-8cc3-fa74a6f2a4b8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
