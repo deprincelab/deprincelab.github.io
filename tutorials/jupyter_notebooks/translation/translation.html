@@ -24,7 +24,7 @@ math: true
 <a href=../hydrogen/hydrogen.html style="color:#e65100;">The Hydrogen Atom</a> (<a href=../hydrogen/hydrogen.ipynb style="color:#e65100;">notebook</a>) <br>
 </li>
 <li>
-<a href=../variation/variation.html style="color:#e65100;">The Variation Theorem</a> (<a href=../variation/variation.ipynb style="color:#e65100;">notebook</a>)<br>
+<a href=../variation/variation.html style="color:#e65100;">The Variation Theorem</a> (<a href=../variation/variation.ipynb style="color:#e65100;">notebook</a>) <br>
 </li>
 <li>Perturbation Theory</li>
 </ol>
@@ -7561,45 +7561,38 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="The-Free-Particle">The Free Particle<a class="anchor-link" href="#The-Free-Particle">¶</a></h2><h3 id="The-Wave-Function-and-Its-Properties">The Wave Function and Its Properties<a class="anchor-link" href="#The-Wave-Function-and-Its-Properties">¶</a></h3><p>Consider the Hamiltonian for particle moving in one dimension (1D)</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{H} = \hat{T}_x + \hat{V}(x) 
-\end{align}$$</p>
-<p>In the free particle problem, the particle is subject to no external forces, which means that the potential term, $\hat{V}(x)$, vanishes, so</p>
-<p>$$\begin{align}
+\end{align}$$<p>In the free particle problem, the particle is subject to no external forces, which means that the potential term, $\hat{V}(x)$, vanishes, so</p>
+$$\begin{align}
 \hat{H} = \hat{T}_x = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
-\end{align}$$</p>
-<p>Like the other Hamiltonians that will be considered in this notebook, this Hamiltonian does not depend on time. As a result, we can solve the time-independent Schrödinger equation for the spatial part of the wave function, $\psi(x)$,</p>
-<p>$$\begin{align}
+\end{align}$$<p>Like the other Hamiltonians that will be considered in this notebook, this Hamiltonian does not depend on time. As a result, we can solve the time-independent Schrödinger equation for the spatial part of the wave function, $\psi(x)$,</p>
+$$\begin{align}
 \hat{H} \psi(x) &amp;= E \psi(x) \\
 -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} \psi(x) &amp;= E \psi(x)\\
-\end{align}$$</p>
-<p>Rearranging the constants, we have</p>
-<p>$$\begin{align}
+\end{align}$$<p>Rearranging the constants, we have</p>
+$$\begin{align}
 \frac{d^2}{dx^2} \psi(x) &amp;= -\frac{2mE}{\hbar^2} \psi(x)\\
 &amp;= -k^2 \psi(x)
-\end{align}$$</p>
-<p>where we have introduced a constant, $k = +(2mE/\hbar^2)^{1/2}$. Now, we have two useful pieces of information:</p>
+\end{align}$$<p>where we have introduced a constant, $k = +(2mE/\hbar^2)^{1/2}$. Now, we have two useful pieces of information:</p>
 <ol>
 <li>The wave function should be an eigenfunction of $\frac{d^2}{dx^2}$ (e.g., exponential, sin, or cosine functions)</li>
 <li>The wave function should have a negative eigenvalue.</li>
 </ol>
 <p>A general form for $\psi(x)$ that satisfies both of these requirements is</p>
-<p>$$\begin{align}
+$$\begin{align}
 \psi(x) = A e^{ikx} + B e^{-ikx}
-\end{align}$$</p>
-<p>Let's verify that this form satisfies the Schrödinger equation</p>
-<p>$$\begin{align}
+\end{align}$$<p>Let's verify that this form satisfies the Schrödinger equation</p>
+$$\begin{align}
 \hat{H}\psi(x) &amp;= -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} \left [ A e^{ikx} + B e^{-ikx} \right ] \\
 &amp;= ik \left ( -\frac{\hbar^2}{2m} \right ) \frac{d}{dx} \left [ A e^{ikx} + B e^{-ikx} \right ] \\
 &amp;= (ik)^2 \left ( -\frac{\hbar^2}{2m} \right ) \frac{d}{dx} \left [ A e^{ikx} + B e^{-ikx} \right ] \\
 &amp;= -k^2 \left ( -\frac{\hbar^2}{2m} \right ) \psi(x) \\
 &amp;= \frac{k^2\hbar^2}{2m} \psi(x)
-\end{align}$$</p>
-<p>So, yes, $\psi(x) = Ae^{ik} + Be^{-ikx}$ is an eigenfunction of the Hamiltonian for a free particle moving in one dimension, and</p>
-<p>$$\begin{align}
+\end{align}$$<p>So, yes, $\psi(x) = Ae^{ik} + Be^{-ikx}$ is an eigenfunction of the Hamiltonian for a free particle moving in one dimension, and</p>
+$$\begin{align}
 E = \frac{k^2\hbar^2}{2m}
-\end{align}$$</p>
-<p>is the associated eigenvalue. We can draw one interesting conclusion from this result: nothing limits the value that $k$ can take (as long as it is real-valued). As a result, the energy of a free particle is not quantized.</p>
+\end{align}$$<p>is the associated eigenvalue. We can draw one interesting conclusion from this result: nothing limits the value that $k$ can take (as long as it is real-valued). As a result, the energy of a free particle is not quantized.</p>
 </div>
 </div>
 </div>
@@ -7611,12 +7604,11 @@ E = \frac{k^2\hbar^2}{2m}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>What do the terms $e^{\pm ikx}$ mean, physically? Let's assume that $B = 0,$ so $\psi(x) = Ae^{ikx}$. This function is still an eigenfunction of the Hamiltonian, with the same eigenvalue. Is it an eigenfunction of any other operators, like $\hat{p}_x$? Let's see:</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{p}_x A e^{ikx} &amp;= -i\hbar \frac{d}{dx} Ae^{ikx} \\
 &amp;= -i^2 \hbar k A e^{ikx} \\
 &amp;= \hbar k \psi(x)
-\end{align}$$</p>
-<p>Yes! $\psi(x) = A e^{ikx}$ is an eigenfunction of $\hat{p}_x,$ with eigenfunction $\hbar k.$ This result indicates that the state described by this function has a well-defined (or definite) value of the momentum in the $x$-direction. Recall, $k = +\left ( \frac{2mE}{\hbar^2} \right )^{1/2},$ so, $k \ge 0$ and $\hbar k \ge 0$, which implies that $p_x \ge 0$. Since the momentum of the particle is positive and well-defined, the state described by $\psi(x) = Ae^{ikx}$ corresponds to the case where the free particle is traveling in the $+x$ direction, with momentum $\hbar k$. If this interpretation is not clear, recall the following</p>
+\end{align}$$<p>Yes! $\psi(x) = A e^{ikx}$ is an eigenfunction of $\hat{p}_x,$ with eigenfunction $\hbar k.$ This result indicates that the state described by this function has a well-defined (or definite) value of the momentum in the $x$-direction. Recall, $k = +\left ( \frac{2mE}{\hbar^2} \right )^{1/2},$ so, $k \ge 0$ and $\hbar k \ge 0$, which implies that $p_x \ge 0$. Since the momentum of the particle is positive and well-defined, the state described by $\psi(x) = Ae^{ikx}$ corresponds to the case where the free particle is traveling in the $+x$ direction, with momentum $\hbar k$. If this interpretation is not clear, recall the following</p>
 <ol>
 <li>Any function can be expanded in terms of eigenfunctions of a Hermitian operator, $\hat{B}$, as
 $$ \begin{align}
@@ -7631,16 +7623,14 @@ $$\begin{align}
 </ol>
 <p>We obtain a similar result if we start from the free particle wave function and assume that $A = 0$. In this case, $\psi(x) = B e^{-ikx}$ is also an eigenfunction of $\hat{p}_x$, but the associated eigenvalue is $-\hbar k$. Hence,  $\psi(x) = Be^{-ikx}$ represents a state where the particle has definite value of the momentum, $-\hbar k$ (moving in the $-x$ direction).</p>
 <p>The general form of the free-particle wave function is</p>
-<p>$$\begin{align}
+$$\begin{align}
 \psi(x) = A e^{ikx} + Be^{-ikx}
-\end{align}$$</p>
-<p>Based on the analysis above, this state is a superposition of two pure-momentum states (momentum eigenfunctions), with different values for the momentum. Is this state an eigenfunction of the momentum operator?  We have</p>
-<p>$$\begin{align}
+\end{align}$$<p>Based on the analysis above, this state is a superposition of two pure-momentum states (momentum eigenfunctions), with different values for the momentum. Is this state an eigenfunction of the momentum operator?  We have</p>
+$$\begin{align}
 \hat{p}_x (A e^{ikx} + Be^{-ikx}) &amp;= \hat{p}_x A e^{ikx} + \hat{p}_x B e^{-ikx} \\
 &amp;= \hbar k A e^{ikx} - \hbar k Be^{-ikx} \\
 &amp;= \hbar k ( A e^{ikx} - Be^{-ikx})
-\end{align}$$</p>
-<p>Note the minus sign. This wave function is not an eigenfunction of the momentum operator. As such, we cannot know whether the particle is moving to the left or the right without taking a measurement. The probability of finding the particle moving to the right will be proportional to $|A|^2$, while the probability of finding the particle moving to the left will be proportional to $|B|^2$.</p>
+\end{align}$$<p>Note the minus sign. This wave function is not an eigenfunction of the momentum operator. As such, we cannot know whether the particle is moving to the left or the right without taking a measurement. The probability of finding the particle moving to the right will be proportional to $|A|^2$, while the probability of finding the particle moving to the left will be proportional to $|B|^2$.</p>
 </div>
 </div>
 </div>
@@ -7652,22 +7642,19 @@ $$\begin{align}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>What about other properties, such as position? We can proceed as we did above. Let us assume $B=0$ and check if $\psi(x) = Ae^{ikx}$ is an eigenfunction of the position operator. We have</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{x} \psi(x) = A x e^{ikx}
-\end{align}$$</p>
-<p>Clearly, the function on the right-hand side is a different function of $x$, so we can safely conclude that, no, $\psi(x) = A e^{ikx}$ is not an eigenfunction of the position operator. While the state represented by this wave function does not have a definite position, we can still calculate the expectation value of position. We have</p>
-<p>$$\begin{align}
+\end{align}$$<p>Clearly, the function on the right-hand side is a different function of $x$, so we can safely conclude that, no, $\psi(x) = A e^{ikx}$ is not an eigenfunction of the position operator. While the state represented by this wave function does not have a definite position, we can still calculate the expectation value of position. We have</p>
+$$\begin{align}
 \langle x \rangle &amp;= \frac{\langle \psi(x)|x|\psi(x)\rangle}{\langle \psi(x) | \psi(x) \rangle} \\
 &amp;= \frac{|A|^2\int_{-\infty}^{\infty} e^{-ikx} x e^{ikx} dx}{|A|^2\int_{-\infty}^{\infty} e^{-ikx} e^{ikx} dx} \\
 &amp;= \frac{\int_{-\infty}^{\infty} x dx}{\int_{-\infty}^{\infty} dx} \\
 &amp;= 0
-\end{align}$$</p>
-<p>This result does not tell us much, only that, after infinitely-many mesurements, the average position is zero, which implies that we are equally likely to find the particle at $+x$ and $-x$.</p>
+\end{align}$$<p>This result does not tell us much, only that, after infinitely-many mesurements, the average position is zero, which implies that we are equally likely to find the particle at $+x$ and $-x$.</p>
 <p>The Born interpretation of the wave function provides a result consistent with this one. The probability density</p>
-<p>$$\begin{align}
+$$\begin{align}
 |\Psi(x)|^2 = |A|^2 e^{-ikx} e^{ikx} = |A|^2
-\end{align}$$</p>
-<p>is equal to a constant over all space, which implies we're equally likely to find the particle <em>anywhere</em> in $x$. Put another way, we have no idea where the particle will be located before a measurement is taken.</p>
+\end{align}$$<p>is equal to a constant over all space, which implies we're equally likely to find the particle <em>anywhere</em> in $x$. Put another way, we have no idea where the particle will be located before a measurement is taken.</p>
 </div>
 </div>
 </div>
@@ -7680,26 +7667,22 @@ $$\begin{align}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Heisenberg-Uncertainty-Principle">Heisenberg Uncertainty Principle<a class="anchor-link" href="#Heisenberg-Uncertainty-Principle">¶</a></h3><p>This result is a specific manifestation of Heisenberg's Uncertainty Principle. It is impossible to specify, with arbitrary precision, both the position and momentum of a quantum mechanical particle. The wave function $\psi(x) = A e^{ikx}$ represents a state with a well-defined value for the momentum, meaning we know exactly what the momentum is for the particle in this state. As a consequence, we cannot know anything about the position of the particle.</p>
 <p>Mathematically, we have</p>
-<p>$$\begin{align}
+$$\begin{align}
 \Delta x \Delta p_x \ge \frac{1}{2}\hbar
-\end{align}$$</p>
-<p>where $\Delta \Omega$ represents the uncertainty in the observable $\Omega$. The uncertainty is calculated as the standard deviation</p>
-<p>$$\begin{align}
+\end{align}$$<p>where $\Delta \Omega$ represents the uncertainty in the observable $\Omega$. The uncertainty is calculated as the standard deviation</p>
+$$\begin{align}
 \Delta \Omega = \left ( \langle \Omega^2 \rangle - \langle \Omega \rangle^2 \right )^{1/2}
-\end{align}$$</p>
-<p>The uncertainty relationship between position and momentum is a consequance of the particle-wave duality of microscopic particles. See Section 1.3 of Levine's "Quantum Chemistry" textbook (5th Ed.) for a graphical illustration of this concept.</p>
+\end{align}$$<p>The uncertainty relationship between position and momentum is a consequance of the particle-wave duality of microscopic particles. See Section 1.3 of Levine's "Quantum Chemistry" textbook (5th Ed.) for a graphical illustration of this concept.</p>
 <p>Let's calculate the uncertainty in position and momentum for the state represented by the wave function $\psi(x) = A e^{ikx}$. Because $\psi(x)$ is an eigenfunction of the momentum operator, we immediately know that</p>
-<p>$$\begin{align}
+$$\begin{align}
 \langle p_x \rangle &amp;= \hbar k \\
 \langle p_x^2 \rangle &amp;= \hbar^2 k^2
-\end{align}$$</p>
-<p>In the second line, we take advantage of the fact that an eigenfunction of an operator $\hat{B}$ is also an eigenfunction of the operator $\hat{B}^2$. Now, the uncertainty in the momentum is</p>
-<p>$$\begin{align}
+\end{align}$$<p>In the second line, we take advantage of the fact that an eigenfunction of an operator $\hat{B}$ is also an eigenfunction of the operator $\hat{B}^2$. Now, the uncertainty in the momentum is</p>
+$$\begin{align}
 \Delta p_x =&amp; \left ( \langle p_x^2 \rangle - \langle p_x \rangle^2 \right )^{1/2} \\
 &amp;= \left( \hbar^2 k^2 - \hbar^2 k^2 \right )^{1/2} \\
 &amp;= 0
-\end{align}$$</p>
-<p>Note that, in general, a variance / standard deviation of zero for a given property implies that the state is an eigenfunction of the operator associated with that observable.</p>
+\end{align}$$<p>Note that, in general, a variance / standard deviation of zero for a given property implies that the state is an eigenfunction of the operator associated with that observable.</p>
 </div>
 </div>
 </div>
@@ -7711,24 +7694,20 @@ $$\begin{align}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Now, consider the uncertainty in $x$,</p>
-<p>$$\begin{align}
+$$\begin{align}
 \Delta x =&amp; \left ( \langle x^2 \rangle - \langle x \rangle^2 \right )^{1/2}
-\end{align}$$</p>
-<p>We showed already that $\langle x \rangle = 0$. Next, we have</p>
-<p>$$\begin{align}
+\end{align}$$<p>We showed already that $\langle x \rangle = 0$. Next, we have</p>
+$$\begin{align}
 \langle x^2 \rangle &amp;= \frac{\langle \psi(x)|x^2|\psi(x)\rangle}{\langle \psi(x) | \psi(x) \rangle} \\
 &amp;= \frac{|A|^2\int_{-\infty}^{\infty} e^{-ikx} x^2 e^{ikx} dx}{|A|^2\int_{-\infty}^{\infty} e^{-ikx} e^{ikx} dx} \\
 &amp;= \frac{\int_{-\infty}^{\infty} x^2 dx}{\int_{-\infty}^{\infty} dx}
-\end{align}$$</p>
-<p>Both the numerator and denomator are integrals over even functions, which are infinite, but the numerator is a larger infinity and thus</p>
-<p>$$\begin{align}
+\end{align}$$<p>Both the numerator and denomator are integrals over even functions, which are infinite, but the numerator is a larger infinity and thus</p>
+$$\begin{align}
 \langle x^2 \rangle = \infty
-\end{align}$$</p>
-<p>and</p>
-<p>$$\begin{align}
+\end{align}$$<p>and</p>
+$$\begin{align}
 \Delta x = \infty
-\end{align}$$</p>
-<p>Hence, there is an infinite uncertainty in the position of the particle represented by the state, $\psi(x) = A e^{ikx}$. This result is consistent with the Born interpretation of the state suggesting that one would be equally likely to find the particle anywere, and, thus, we have no idea where the particle is without taking a measurement.</p>
+\end{align}$$<p>Hence, there is an infinite uncertainty in the position of the particle represented by the state, $\psi(x) = A e^{ikx}$. This result is consistent with the Born interpretation of the state suggesting that one would be equally likely to find the particle anywere, and, thus, we have no idea where the particle is without taking a measurement.</p>
 </div>
 </div>
 </div>
@@ -7740,48 +7719,41 @@ $$\begin{align}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>More generally, the Heisenberg Uncertainty Principle applies to other pairs of observables, $A$ and $B$. Specifically, the product of uncertainties in $A$ and $B$ are bounded by</p>
-<p>$$\begin{align}
+$$\begin{align}
 \Delta A \Delta B \ge \frac{1}{2} |\langle [\hat{A}, \hat{B}]\rangle|
-\end{align}$$</p>
-<p>If $\hat{A}$ and $\hat{B}$ commute, then</p>
-<p>$$\begin{align}
+\end{align}$$<p>If $\hat{A}$ and $\hat{B}$ commute, then</p>
+$$\begin{align}
 \Delta A \Delta B \ge 0
-\end{align}$$</p>
-<p>which suggests that it would be possible for states to exist where the uncertainties in $A$ and $B$ are both zero. On the other hand, if $\hat{A}$ and $\hat{B}$ do not commute, then there is some finite lower bound to the degree to which $A$ and $B$ can be known simultaneously.</p>
+\end{align}$$<p>which suggests that it would be possible for states to exist where the uncertainties in $A$ and $B$ are both zero. On the other hand, if $\hat{A}$ and $\hat{B}$ do not commute, then there is some finite lower bound to the degree to which $A$ and $B$ can be known simultaneously.</p>
 <p>If $[\hat{A}, \hat{B}] = 0$ and $\Delta A$ and $\Delta B$ are both zero, then the state would be an eigenfunction of both $\hat{A}$ and $\hat{B}$, which brings us to a theorem</p>
 <p><strong>Theorem</strong>: If Hermitian operators $\hat{A}$ and $\hat{B}$ commute, then there exists a common, complete set of eigenfunctions of these operators.</p>
 <p>Stated another way, if $\hat{A}$ and $\hat{B}$ have a common, complete set of eigenfunctions, then they <em>must</em> commute.</p>
 <p><strong>Proof</strong></p>
 <p>Consider linear Hermitian operators $\hat{A}$ and $\hat{B}$ that share a common set of eigenfunctions:</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{A} g_i &amp;= a_i g_i \\
 \hat{B} g_i &amp;= b_i g_i
-\end{align}$$</p>
-<p>Now, consider a general function, $f$, that is expanded in terms of these functions, $\{g_i\}$, which form a complete set</p>
-<p>$$\begin{align}
+\end{align}$$<p>Now, consider a general function, $f$, that is expanded in terms of these functions, $\{g_i\}$, which form a complete set</p>
+$$\begin{align}
 f = \sum_k c_k g_k 
-\end{align}$$</p>
-<p>Let us evaluate how the commutator of $\hat{A}$ and $\hat{B}$ act on this function</p>
-<p>$$\begin{align}
+\end{align}$$<p>Let us evaluate how the commutator of $\hat{A}$ and $\hat{B}$ act on this function</p>
+$$\begin{align}
 [\hat{A}, \hat{B}]f &amp;= [\hat{A}, \hat{B}]\sum_k c_k g_k \\
 &amp;= (\hat{A}\hat{B} -\hat{B}\hat{A})\sum_k c_k g_k\\
 &amp;= \sum_k c_k \left [ \hat{A} (\hat{B}g_k) - \hat{B}(\hat{A}g_k) \right ]\\
 &amp;= \sum_k c_k \left [ b_k \hat{A} g_k - a_k \hat{B} g_k \right ] \\
 &amp;= \sum_k c_k \left [ b_k a_k - a_k b_k \right ] g_k \\
 [\hat{A}, \hat{B}]f &amp;= 0
-\end{align}$$</p>
-<p>Therefore $[\hat{A}, \hat{B}] = 0$.</p>
+\end{align}$$<p>Therefore $[\hat{A}, \hat{B}] = 0$.</p>
 <p>If we can write down free-particle wave functions that are eigenfunctions of both the Hamiltonian and the momentum operator (i.e., $\psi(x) = C e^{\pm ikx})$, then these operators must commute. Recall that the free-particle Hamiltonian is purely kinetic, and the kinetic energy operator can be expressed in terms of the momentum operator</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{H} = \hat{T} = \frac{\hat{p}_x^2}{2m}
-\end{align}$$</p>
-<p>Now, it should be clear after this discussion that  the commutator between this operator and the momentum operator should vanish. Indeed, it does,</p>
-<p>$$\begin{align}
+\end{align}$$<p>Now, it should be clear after this discussion that  the commutator between this operator and the momentum operator should vanish. Indeed, it does,</p>
+$$\begin{align}
 [\hat{H}, \hat{p}_x] &amp;= [\frac{\hat{p}_x^2}{2m}, \hat{p}_x] \\
 &amp;= \frac{1}{2m} [\hat{p}_x^2, \hat{p}_x] \\
 &amp;= 0
-\end{align}$$</p>
-<p>because, as we learned in the last notebook, the commutator of any operator with any power of itself is zero.</p>
+\end{align}$$<p>because, as we learned in the last notebook, the commutator of any operator with any power of itself is zero.</p>
 </div>
 </div>
 </div>
@@ -7795,41 +7767,54 @@ f = \sum_k c_k g_k
 <blockquote>
 <p>Practice</p>
 <p>Question 1: Derive the result</p>
-<p>$$\begin{align}
-\Delta x \Delta p_x \ge \frac{1}{2} \hbar
+<p>$$\begin{align}</p>
+</blockquote>
+<p>\Delta x \Delta p_x \ge \frac{1}{2} \hbar
 \end{align}$$</p>
+<blockquote>
 <p>using the general expression for Heisenberg's Uncertainty principle</p>
-<p>$$\begin{align}
-\Delta x \Delta p_x \ge \frac{1}{2} | \langle [ \hat{x}, \hat{p}_x ] \rangle |
+<p>$$\begin{align}</p>
+</blockquote>
+<p>\Delta x \Delta p_x \ge \frac{1}{2} | \langle [ \hat{x}, \hat{p}_x ] \rangle |
 \end{align}$$</p>
+<blockquote>
 <details>
 <summary>Answer 1</summary> 
 Let us first evaluate the commutator of $\hat{x}$ and $\hat{p}_x$:
 $$\begin{align}
-    [\hat{x}, \hat{p}_x]f &amp;= x \left ( -i\hbar \frac{d}{dx}\right ) f - \left (-i\hbar \frac{d}{dx}\right ) x f \\
-    &amp;= -i\hbar x f^\prime + i\hbar( f + x f^\prime) \\
-    [\hat{x}, \hat{p}_x]f &amp;= i\hbar f
-\end{align}$$
-
+</details></blockquote>
+<pre><code>[\hat{x}, \hat{p}_x]f &amp;= x \left ( -i\hbar \frac{d}{dx}\right ) f - \left (-i\hbar \frac{d}{dx}\right ) x f \\
+&amp;= -i\hbar x f^\prime + i\hbar( f + x f^\prime) \\
+[\hat{x}, \hat{p}_x]f &amp;= i\hbar f
+</code></pre>
+<p>\end{align}$$</p>
+<blockquote>
 <p>Therefore $[\hat{x}, \hat{p}_x] = i\hbar$. Now, insert this result into the expression for the joint uncertainty in $x$ and $p_x$
-$$\begin{align}
-\Delta x \Delta p_x \ge \frac{1}{2} | \langle i\hbar \rangle |
-\end{align}$$
-For the expectation value, we have
+$$\begin{align}</p>
+</blockquote>
+<p>\Delta x \Delta p_x \ge \frac{1}{2} | \langle i\hbar \rangle |
+\end{align}$$</p>
+<blockquote>
+<p>For the expectation value, we have</p>
+</blockquote>
 $$\begin{align}
 \langle i\hbar \rangle &amp;= \frac{\langle \psi | i \hbar | \psi \rangle }{\langle \psi | \psi \rangle }\\
 &amp;= i \hbar \frac{\langle \psi | \psi \rangle }{\langle \psi | \psi \rangle } \\
 &amp;= i\hbar
+\end{align}$$<blockquote>
+<p>For any non-zero wave function, $\psi$. So
+$$\begin{align}\Delta x \Delta p_x &amp;\ge \frac{1}{2} | i\hbar |\</p>
+</blockquote>
+<p>&amp;\ge \frac{1}{2} \hbar
 \end{align}$$
-For any non-zero wave function, $\psi$. So
-$$\begin{align}\Delta x \Delta p_x &amp;\ge \frac{1}{2} | i\hbar |\\
-&amp;\ge \frac{1}{2} \hbar
-\end{align}$$
-because
-$$\begin{align}
-|i\hbar| = \left [ (-i\hbar)(i\hbar) \right]^{1/2} = \left [ \hbar^2 \right ]^{1/2} = \hbar
+because</p>
+<blockquote>
+<p>$$\begin{align}</p>
+</blockquote>
+<p>|i\hbar| = \left [ (-i\hbar)(i\hbar) \right]^{1/2} = \left [ \hbar^2 \right ]^{1/2} = \hbar
 \end{align}$$</p>
-</details>
+<blockquote>
+
 </blockquote>
 </div>
 </div>
@@ -7929,29 +7914,25 @@ $$\begin{align}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Mathematically, we define this potential in a piecewise way as</p>
 <p><strong>Region I</strong>:</p>
-<p>$$\begin{align}
+$$\begin{align}
 V(x) = \infty\text{, }~~~x &lt; 0
-\end{align}$$</p>
-<p><strong>Region II</strong>:</p>
-<p>$$\begin{align}
+\end{align}$$<p><strong>Region II</strong>:</p>
+$$\begin{align}
 V(x) = 0\text{, }~~~0 \le x \le L
-\end{align}$$</p>
-<p><strong>Region III</strong>:</p>
-<p>$$\begin{align}
+\end{align}$$<p><strong>Region III</strong>:</p>
+$$\begin{align}
 V(x) = \infty\text{, }~~~x &gt; L
-\end{align}$$</p>
-<p>As such, the TISE should be solved in a piecewise way, i.e., for each region of space. We have</p>
-<p>$$\begin{align}
+\end{align}$$<p>As such, the TISE should be solved in a piecewise way, i.e., for each region of space. We have</p>
+$$\begin{align}
 \psi(x) = \psi_I(x) ~~~ &amp;\text{if } x &lt; 0 \\
 \psi(x) = \psi_{II}(x) ~~~ &amp;\text{if } 0 \le x \le L \\
 \psi(x) = \psi_{III}(x) ~~~ &amp;\text{if } x &gt; L
-\end{align}$$</p>
-<p>where $\psi_I$, $\psi_{II}$, and $\psi_{III}$ satisfy</p>
-<p>$$\begin{align}
+\end{align}$$<p>where $\psi_I$, $\psi_{II}$, and $\psi_{III}$ satisfy</p>
+$$\begin{align}
 \hat{H} \psi_I(x) = E \psi_I(x) ~~~ &amp;\text{if } x &lt; 0 \\
 \hat{H} \psi_{II}(x) = E \psi_{II}(x) ~~~ &amp;\text{if } 0 \le x \le L \\
 \hat{H} \psi_{III}(x) = E \psi_{III}(x) ~~~ &amp;\text{if } x &gt; L
-\end{align}$$</p>
+\end{align}$$
 </div>
 </div>
 </div>
@@ -7963,19 +7944,17 @@ V(x) = \infty\text{, }~~~x &gt; L
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>To start, what does the wave function look like outside of the box (in regions I and III)? Consider the Schrödinger equation for region I:</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{H}\psi_I(x) &amp;= E \psi_I \\
 \left [ -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x) \right ] \psi_I(x) &amp;= E \psi_I(x) \\
 -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi_I(x) &amp;= [E-V(x)]\psi_I(x) \\
 \frac{1}{V(x)-E}\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi_I(x) &amp;= \psi_I(x)
-\end{align}$$</p>
-<p>Recall that the potential is infinite in this region of space, so,</p>
-<p>$$ \psi_I(x) = \lim_{V(x)\to \infty} \frac{1}{V(x)-E}\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi_I(x) = 0$$</p>
-<p>From this simple analysis, we can conlude that the wave function must go to zero as $V(x)$ approaches infinity. Therefor the probability of finding a particle at $x \le 0$ is zero ($|\psi_I(x)|^2 = 0$). This result makes sense because the particle would need infinite kinetic energy to overcome the infinite potential energy barrier required to enter that region of space.</p>
+\end{align}$$<p>Recall that the potential is infinite in this region of space, so,</p>
+$$ \psi_I(x) = \lim_{V(x)\to \infty} \frac{1}{V(x)-E}\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi_I(x) = 0$$<p>From this simple analysis, we can conlude that the wave function must go to zero as $V(x)$ approaches infinity. Therefor the probability of finding a particle at $x \le 0$ is zero ($|\psi_I(x)|^2 = 0$). This result makes sense because the particle would need infinite kinetic energy to overcome the infinite potential energy barrier required to enter that region of space.</p>
 <p>A similar analysis for region III leads to</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 \psi_{III}(x) = 0 
-\end{align}$$</p>
+\end{align}$$
 </div>
 </div>
 </div>
@@ -7987,56 +7966,45 @@ V(x) = \infty\text{, }~~~x &gt; L
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>In region II, the Schrödinger equation has a non-trivial solution. We have</p>
-<p>$$\begin{align}
+$$\begin{align}
 \hat{H}\psi_{II}(x) &amp;= E\psi_{II}(x) \\
 -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} \psi_{II}(x) &amp;= -E\psi_{II}(x) \\
 \frac{d^2}{dx^2} \psi_{II}(x) &amp;= -\frac{2mE}{\hbar^2} \psi_{II}(x) \\
 \frac{d^2}{dx^2} \psi_{II}(x) &amp;= -k^2 \psi_{II}(x) \\
-\end{align}$$</p>
-<p>with $k = \left ( \frac{2mE}{\hbar^2} \right )^{1/2}$. Like the free-particle, a general solution to this differential equation is</p>
-<p>$$\begin{align}
+\end{align}$$<p>with $k = \left ( \frac{2mE}{\hbar^2} \right )^{1/2}$. Like the free-particle, a general solution to this differential equation is</p>
+$$\begin{align}
 \psi_{II}(x) = A e^{ikx} + B e^{-ikx} 
-\end{align}$$</p>
-<p>Unlike the free-particle problem, the probability amplitudes, $A$ and $B$, can be determined by considering the boundary conditions for the problem. These are the conditions that must be satisfied by the wave function in order for it to be well-behaved. Before applying these conditions, note that it will actually be easier to solve this problem by representing the wave function in terms of sine and cosine functions, as opposed to complex exponential functions. Euler's formula can be used to express $\psi_{II}$ in this way. We have</p>
-<p>$$\begin{align}
+\end{align}$$<p>Unlike the free-particle problem, the probability amplitudes, $A$ and $B$, can be determined by considering the boundary conditions for the problem. These are the conditions that must be satisfied by the wave function in order for it to be well-behaved. Before applying these conditions, note that it will actually be easier to solve this problem by representing the wave function in terms of sine and cosine functions, as opposed to complex exponential functions. Euler's formula can be used to express $\psi_{II}$ in this way. We have</p>
+$$\begin{align}
 e^{\pm ikx} = \text{cos}(kx) + i \text{sin}(\pm kx) 
-\end{align}$$</p>
-<p>or</p>
-<p>$$\begin{align}
+\end{align}$$<p>or</p>
+$$\begin{align}
 e^{\pm ikx} = \text{cos}(kx) \pm i \text{sin}(kx) 
-\end{align}$$</p>
-<p>Given this relationship, it is eash to show that</p>
-<p>$$\begin{align}
+\end{align}$$<p>Given this relationship, it is eash to show that</p>
+$$\begin{align}
 \psi(x) = (A+B) \text{cos}(kx) + i (A-B)\text{sin}(kx)
-\end{align}$$</p>
-<p>or</p>
-<p>$$\begin{align}
+\end{align}$$<p>or</p>
+$$\begin{align}
 \psi(x) = C \text{cos}(kx) + D \text{sin}(kx)
-\end{align}$$</p>
-<p>where we have introduced new constant factors, $C = A+B$ and $D = i (A-B)$.</p>
+\end{align}$$<p>where we have introduced new constant factors, $C = A+B$ and $D = i (A-B)$.</p>
 <p>Now, what are $C$ and $D$? As mentioned above, we can determine these constants by the application of boundary conditions. First, in order for $\psi(x)$ to be well-behaved, it must be continuous over all space. In particular, it must be continuous at the edges of the box (at $x=0$ and $x=L$), which places restrictions on $\psi_{II}$, namely</p>
-<p>$$\begin{align}
+$$\begin{align}
 \psi_{II}(x = 0) = \psi_{I}(x = 0) = 0
-\end{align}$$</p>
-<p>and</p>
-<p>$$\begin{align}
+\end{align}$$<p>and</p>
+$$\begin{align}
 \psi_{II}(x = L) = \psi_{III}(x = L) = 0
-\end{align}$$</p>
-<p>For the first of these conditions, we have</p>
-<p>$$ \begin{align}
+\end{align}$$<p>For the first of these conditions, we have</p>
+$$ \begin{align}
 0 &amp;= \psi_{II}(0) \\
 &amp;= C \text{cos}(0) + D \text{sin}(0) \\
 &amp;= C
-\end{align}$$</p>
-<p>and the wave function simplifies to</p>
-<p>$$\begin{align}
+\end{align}$$<p>and the wave function simplifies to</p>
+$$\begin{align}
 \psi_{II}(x) = D \text{sin}(kx)
-\end{align}$$</p>
-<p>The second boundary condition gives us</p>
-<p>$$\begin{align}
+\end{align}$$<p>The second boundary condition gives us</p>
+$$\begin{align}
 0 = \psi_{II}(L) = D \text{sin}(k L)
-\end{align}$$</p>
-<p>This equation could be satisfied with the choice $D = 0$, but then $\psi(x)$ would be zero over all space, which means that $|\psi(x)|^2 = 0$ over all space, implying that there is zero probability of finding the particle anywhere. We reject this unphysical solution. How else can this equation be satisfied? The sine function must be zero; the following Python code will visualize where this is the case:</p>
+\end{align}$$<p>This equation could be satisfied with the choice $D = 0$, but then $\psi(x)$ would be zero over all space, which means that $|\psi(x)|^2 = 0$ over all space, implying that there is zero probability of finding the particle anywhere. We reject this unphysical solution. How else can this equation be satisfied? The sine function must be zero; the following Python code will visualize where this is the case:</p>
 </div>
 </div>
 </div>
@@ -8086,56 +8054,46 @@ e^{\pm ikx} = \text{cos}(kx) \pm i \text{sin}(kx)
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>$\text{sin}(x)$ is zero whenever $x = n \pi$, where $n$ is an integer. So, the boundary condition can be satisfied if $kL = n\pi$, giving $k = \frac{n\pi}{L}$ and</p>
-<p>$$\begin{align}
+$$\begin{align}
 \psi_{II}(x) = D \text{sin}\left (\frac{n\pi x}{L}\right )
-\end{align}$$</p>
-<p>We have not yet determined the constant $D$, but we did stumble upon an interesting result. Recall that $k$ is related to the energy:</p>
-<p>$$\begin{align}
+\end{align}$$<p>We have not yet determined the constant $D$, but we did stumble upon an interesting result. Recall that $k$ is related to the energy:</p>
+$$\begin{align}
 k = \left ( \frac{2 m E}{\hbar^2} \right )^{1/2} = \frac{n\pi}{L}
-\end{align}$$</p>
-<p>Rearranging for the energy, we find</p>
-<p>$$\begin{align}
+\end{align}$$<p>Rearranging for the energy, we find</p>
+$$\begin{align}
 E_n = \frac{\hbar^2 n^2 \pi^2}{2 m L^2}
-\end{align}$$</p>
-<p>or, since $\hbar = \frac{h}{2\pi}$</p>
-<p>$$\begin{align}
+\end{align}$$<p>or, since $\hbar = \frac{h}{2\pi}$</p>
+$$\begin{align}
 E_n = \frac{h^2 n^2}{8 m L^2}
-\end{align}$$</p>
-<p>Here, we have added a subscript "$n$" to the symbol for the energy to denote that the energy for each state can be labeled by $n$. Because $n$ must be an integer, the energy for a PIB is <u>quantized</u>, which means that it can only take on certain values, and the quantization of the energy results from applying restrictions to the wave function. We call $n$ a <u>quantum number</u>; this quantum number characterizes the state of the particle.</p>
+\end{align}$$<p>Here, we have added a subscript "$n$" to the symbol for the energy to denote that the energy for each state can be labeled by $n$. Because $n$ must be an integer, the energy for a PIB is <u>quantized</u>, which means that it can only take on certain values, and the quantization of the energy results from applying restrictions to the wave function. We call $n$ a <u>quantum number</u>; this quantum number characterizes the state of the particle.</p>
 <p>Are there any other restrictions on the value that $n$ can take, aside from being an integer? Yes. First, consider the case where $n=0$:</p>
-<p>$$\begin{align}
+$$\begin{align}
 \psi_{II}^{n=0}(x) = D \text{sin} \left ( \frac{0 x \pi}{L} \right ) = 0
-\end{align}$$</p>
-<p>which would imply that the wave function is zero everywhere. We already rejected such a situation as unphysical earlier, and the do the same here. The case $n=0$ is not allowed. What about $n &lt; 0$? Let's try $n=-1$:</p>
-<p>$$ \begin{align}
+\end{align}$$<p>which would imply that the wave function is zero everywhere. We already rejected such a situation as unphysical earlier, and the do the same here. The case $n=0$ is not allowed. What about $n &lt; 0$? Let's try $n=-1$:</p>
+$$ \begin{align}
 \psi_{II}^{n=-1}(x) &amp;= D \text{sin} \left ( \frac{-1 x \pi}{L} \right ) \\
 &amp;= -D \text{sin} \left ( \frac{1 x \pi}{L} \right ) \\
 &amp;= \psi_{II}^{n=1}(x)
-\end{align}$$</p>
-<p>More generally,</p>
-<p>$$\begin{align}
+\end{align}$$<p>More generally,</p>
+$$\begin{align}
 \psi_{II}^{-n}(x) = -\psi_{II}^{n}(x) 
-\end{align}$$</p>
-<p>When introducing the concept of normalization in the last notebook, we discussed idea that two states that differ by only a multiplicative constant represent the same state. So, because the wave functions for $n$ and $-n$ differ by only a sign, they must represent the same state. For this reason, we ignore all $n &lt; 0$, because these states are redundant. Hence, the allowed values for $n$ are all <em>positive</em> integers, 1, 2, 3, etc. The lowest-energy state (having $n=0$) is the "ground state." All other PIB states have higher energy and are called "excited states."</p>
+\end{align}$$<p>When introducing the concept of normalization in the last notebook, we discussed idea that two states that differ by only a multiplicative constant represent the same state. So, because the wave functions for $n$ and $-n$ differ by only a sign, they must represent the same state. For this reason, we ignore all $n &lt; 0$, because these states are redundant. Hence, the allowed values for $n$ are all <em>positive</em> integers, 1, 2, 3, etc. The lowest-energy state (having $n=0$) is the "ground state." All other PIB states have higher energy and are called "excited states."</p>
 <p>After applying two boundary conditions, we have yet to determine the constant $D$. This constant can be determined by normalization:</p>
-<p>$$\begin{align}
+$$\begin{align}
 \int_{-\infty}^{\infty} |\psi(x)|^2 dx &amp;= 1 \\
 &amp;= \int_{0}^{L} |\psi_{II}(x)|^2 dx
-\end{align}$$</p>
-<p>because the integrals over $|\psi(x)|^2$ in regions I and III are zero. Now,</p>
-<p>$$\begin{align}
+\end{align}$$<p>because the integrals over $|\psi(x)|^2$ in regions I and III are zero. Now,</p>
+$$\begin{align}
 1 &amp;= |D|^2 \int_0^L \text{sin}^2\left ( \frac{n \pi x}{L} \right ) dx \\
 &amp;= \frac{1}{2} D^2 \int_0^L \left [ 1 - \text{cos}\left ( \frac{2 n \pi x}{L}\right ) \right ] dx \\
 &amp;= \left . \frac{1}{2} D^2 \left [ x - \frac{L}{2\pi n}\text{sin}\left ( \frac{2 \pi n x}{L} \right ) \right ]  \right|_0^L \\
 &amp;= \frac{1}{2}D^2 L\\
 D &amp;= \left ( \frac{2}{L} \right ) ^{1/2}
-\end{align}$$</p>
-<p>where, in the second line, we assumed that $D$ is real-valued, and made use of the double angle formula $[2 \text{sin}^2(t) = 1 - \text{cos}(2t)].$ Now, we have fully defined the spatial wave function for the one-dimensional PIB problem:</p>
-<p>$$ \begin{align}
+\end{align}$$<p>where, in the second line, we assumed that $D$ is real-valued, and made use of the double angle formula $[2 \text{sin}^2(t) = 1 - \text{cos}(2t)].$ Now, we have fully defined the spatial wave function for the one-dimensional PIB problem:</p>
+$$ \begin{align}
 \psi_n(x) &amp;= \left ( \frac{2}{L} \right)^{1/2} \text{sin}\left ( \frac{n\pi x}{L}\right)\text{, if }~~~0 \le x \le L \\
 &amp;= 0\text{, }~~~\text{otherwise}
-\end{align}$$</p>
-<p>and the energy of the state represented by this wave function is $E_n$.</p>
+\end{align}$$<p>and the energy of the state represented by this wave function is $E_n$.</p>
 <p>Let's visualize the wave functions and probability densities for the first few $n$. For simplicity, we will take the particle to be an electron with mass, $m = m_e$, and we will use atomic units, where $\hbar = 1$ and $m_e = 1$. The length of the box will be $L = 1 a_0$.</p>
 </div>
 </div>
@@ -8236,14 +8194,12 @@ D &amp;= \left ( \frac{2}{L} \right ) ^{1/2}
 <li>there is a kink in the wave function at the left- and right-hand edges of the box, so the wave function does not have a continuous first derivative over all space. Recall that the requirement that the wave function be smooth is lifted when the potential is not finite.</li>
 </ul>
 <p>Where are we most likely to find the particle? For any $n$, we are most likely to find the particle where $|\psi(x)|^2$ is at a maximum. To find such a point, we first locate the stationary points by setting the first derivative of the probability density equal to zero</p>
-<p>$$\begin{align}
+$$\begin{align}
 \frac{d}{dx}|\psi(x)|^2 = 0
-\end{align}$$</p>
-<p>and solving for $x$. We can verify that the stationary point is a maximum by checking the sign on the second derivative of the probability density. If</p>
-<p>$$\begin{align}
+\end{align}$$<p>and solving for $x$. We can verify that the stationary point is a maximum by checking the sign on the second derivative of the probability density. If</p>
+$$\begin{align}
 \frac{d^2}{dx^2} |\psi(x)|^2 &lt; 0 
-\end{align}$$</p>
-<p>the stationary point is a maximum. For the PIB problem, all maxima in $|\psi(x)|^2$ have the same value (meaning we're equally likely to find the particle at any of the maxima). For other problems, this might not be the case; there could be local maxima.</p>
+\end{align}$$<p>the stationary point is a maximum. For the PIB problem, all maxima in $|\psi(x)|^2$ have the same value (meaning we're equally likely to find the particle at any of the maxima). For other problems, this might not be the case; there could be local maxima.</p>
 <p>How does the quantum mechanical probability density relate to the classical one? For a classical particle in a box, we would be equally likely to find the particle anywhere in the box (with probability $1/L$), as visualized here:</p>
 </div>
 </div>
@@ -8303,10 +8259,9 @@ D &amp;= \left ( \frac{2}{L} \right ) ^{1/2}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Clearly, the quantum and classical probability distributions differ, which brings us to an impoartant question. Should quantum mechanics recover classical results in any limit? The anser is yes. The <strong>Bohr Correspondence Principle</strong> states that, in the limit of large quantum numbers, quantum mechanicals will recover classical results. Let us consider the quantum mechanical description of a classical particle, which would have very large $m$ and $L$. Given the form of the energy:</p>
-<p>$$\begin{align}
+$$\begin{align}
 E_n = \frac{\hbar^2 n^2 \pi^2}{2 m L^2}
-\end{align}$$</p>
-<p>we can conclude that the spacings between energy levels is tiny because $m$ and $L$ are large. As a consequence any non-zero kinetic energy will put the particle in an extremely high-energy state. Let us inspect the probability density for a high-energy state, as compared to the low-energy states and the classical limit.</p>
+\end{align}$$<p>we can conclude that the spacings between energy levels is tiny because $m$ and $L$ are large. As a consequence any non-zero kinetic energy will put the particle in an extremely high-energy state. Let us inspect the probability density for a high-energy state, as compared to the low-energy states and the classical limit.</p>
 </div>
 </div>
 </div>
@@ -8383,10 +8338,12 @@ E_n = \frac{\hbar^2 n^2 \pi^2}{2 m L^2}
 <details>
 <summary>Answer 2</summary>
 <p>We have
-$$\begin{align}
-    \psi_{n_i}(x) = \left ( \frac{2}{L} \right )^{1/2} \text{sin}\left(\frac{n_i \pi x}{L}\right)
-    \end{align}$$
-when $0 \le x \le L$, and $\psi_{n_i}(x) = 0$ otherwise.
+$$\begin{align}</p>
+</details></blockquote>
+<pre><code>\psi_{n_i}(x) = \left ( \frac{2}{L} \right )^{1/2} \text{sin}\left(\frac{n_i \pi x}{L}\right)
+\end{align}$$
+</code></pre>
+<p>when $0 \le x \le L$, and $\psi_{n_i}(x) = 0$ otherwise.
 The overlap of $\psi_{n_i}(x)$ and $\psi_{n_j}(x)$ is
 $$ \begin{align} 
 \langle \psi_{n_i} | \psi_{n_j} \rangle &amp;= \int_{-\infty}^{0} |0|^2 dx + \frac{2}{L}  \int_0^L \text{sin}\left(\frac{n_i \pi x}{L} \right )\text{sin}\left(\frac{n_j \pi x}{L} \right ) dx   + \int_L^\infty |0|^2 dx \\
@@ -8403,7 +8360,8 @@ $$ \begin{align}
 &amp;= 0
 \end{align}$$
 The limit at $x=L$ is zero because $n_i\pm n_j$ are both integers.</p>
-</details>
+<blockquote>
+
 </blockquote>
 </div>
 </div>
@@ -8417,22 +8375,18 @@ The limit at $x=L$ is zero because $n_i\pm n_j$ are both integers.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Before moving on, it is worth reiterating that the application of boundary conditions placed restrictions on the form of the wave function, which then led to the quantization of the energy. Essentially, only certain wave functions satisfy the boundary conditions (i.e., are well behaved), and, thus only certain energies are observed. We can supplement these mathematical arguments for the quantization of the energy with the following, more physical arguments.</p>
 <p>Recall that all PIB wave functions look like standing waves. If a particle is represented as a wave, then only certain wave lengths will lead to waves that do not interfere destructively with themselves. For a standing wave, the wave length should be a half-integer multiple of the box length, i.e.,</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 \frac{n \lambda}{2} = L
-\end{align}$$</p>
-<p>where $n = 1, 2, 3,$ etc. Now, recall the <strong>de Broglie wave length</strong> for a microscopic particle, which is related to the linear momentum, $p$, for that particle</p>
-<p>$$\begin{align}
+\end{align}$$<p>where $n = 1, 2, 3,$ etc. Now, recall the <strong>de Broglie wave length</strong> for a microscopic particle, which is related to the linear momentum, $p$, for that particle</p>
+$$\begin{align}
 \lambda = \frac{h}{p} 
-\end{align}$$</p>
-<p>If we insert the de Broglie wave length into the standing wave length expression and solve for the momentum, we obtain</p>
-<p>$$\begin{align}
+\end{align}$$<p>If we insert the de Broglie wave length into the standing wave length expression and solve for the momentum, we obtain</p>
+$$\begin{align}
 p = \frac{n h}{2 L}
-\end{align}$$</p>
-<p>For the particle-in-a-box problem, the energy is purely kinetic because the potential is zero inside the box and the wave function is zero outside the box. Combining the classical expression for the kinetic energy and the expression above for the momentum yields</p>
-<p>$$\begin{align}
+\end{align}$$<p>For the particle-in-a-box problem, the energy is purely kinetic because the potential is zero inside the box and the wave function is zero outside the box. Combining the classical expression for the kinetic energy and the expression above for the momentum yields</p>
+$$\begin{align}
 E = \frac{p^2}{2m} = \frac{n^2 h^2}{8 mL^2}
-\end{align}$$</p>
-<p>which is the same result obtained from solving the Schrödinger equation and applying boundary conditions! In this case, simple physical arguments starting from the wave-like nature of microscopic particles leads to the same result as solving the Schrödinger equation directly.</p>
+\end{align}$$<p>which is the same result obtained from solving the Schrödinger equation and applying boundary conditions! In this case, simple physical arguments starting from the wave-like nature of microscopic particles leads to the same result as solving the Schrödinger equation directly.</p>
 </div>
 </div>
 </div>
@@ -8444,75 +8398,60 @@ E = \frac{p^2}{2m} = \frac{n^2 h^2}{8 mL^2}
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Three-Dimensional-Particle-in-a-Box">Three-Dimensional Particle-in-a-Box<a class="anchor-link" href="#Three-Dimensional-Particle-in-a-Box">¶</a></h3><p>Now, consider the three-dimensional generalization of the PIB problem. In the three-dimensional PIB problem, a particle of mass, $m$, is confined to a three-dimensional region of space by an infinite potential barrier. In this problem, the potential has the form</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 V(x,y,z) = 0 \text{, } \text{if } &amp;0 \le x \le a \\
 \text{and } &amp;0 \le y \le b \\
 \text{and } &amp;0 \le z \le c
-\end{align}$$</p>
-<p>and</p>
-<p>$$ \begin{align}
+\end{align}$$<p>and</p>
+$$ \begin{align}
 V(x, y, z) = \infty \text{, otherwise}
-\end{align}$$</p>
-<p>We showed above that the wave function is zero in regions of space where the potential is infinite, so we only need to solve the Schrödinger equation for the wave function inside the box. We have</p>
-<p>$$\begin{align}
+\end{align}$$<p>We showed above that the wave function is zero in regions of space where the potential is infinite, so we only need to solve the Schrödinger equation for the wave function inside the box. We have</p>
+$$\begin{align}
 \hat{H}\psi(x, y, z) = E\psi(x, y, z) 
-\end{align}$$</p>
-<p>with</p>
-<p>$$\begin{align}
+\end{align}$$<p>with</p>
+$$\begin{align}
 \hat{H} = -\frac{\hbar^2}{2m} \nabla^2 = -\frac{\hbar^2}{2m} \left ( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}  + \frac{\partial^2}{\partial z^2}  \right ) 
-\end{align}$$</p>
-<p>Note that the Hamiltonian is <strong>additively separable</strong> in $x$, $y$, and $z$. This structure means that we can apply the separation of variables technique, as was done in the time-independent Schrödinger equation in the previous notebook. The wave function will be a product of wave functions that depend, separately on each variable, i.e.,</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Note that the Hamiltonian is <strong>additively separable</strong> in $x$, $y$, and $z$. This structure means that we can apply the separation of variables technique, as was done in the time-independent Schrödinger equation in the previous notebook. The wave function will be a product of wave functions that depend, separately on each variable, i.e.,</p>
+$$ \begin{align}
 \psi(x, y, z) = f(x) g(y) h(z) 
-\end{align}$$</p>
-<p>Insert this result into the Schrödinger equation to obtain</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Insert this result into the Schrödinger equation to obtain</p>
+$$ \begin{align}
 -\frac{\hbar^2}{2m} \left [ f^{\prime\prime}(x) g(y) h(z) + f(x) g^{\prime\prime}(y) h(z) + f(x) g(y) h^{\prime\prime}(z) \right ] = E f(x) g(y) h(z)
-\end{align}$$</p>
-<p>Left-multiplying both sides of the equation by $\frac{1}{f(x) g(y) h(z)}$ yields</p>
-<p>$$\begin{align}
+\end{align}$$<p>Left-multiplying both sides of the equation by $\frac{1}{f(x) g(y) h(z)}$ yields</p>
+$$\begin{align}
 -\frac{\hbar^2}{2m} \frac{1}{f(x)} f^{\prime\prime}(x)-\frac{\hbar^2}{2m} \frac{1}{g(x)} g^{\prime\prime}(y)-\frac{\hbar^2}{2m} \frac{1}{h(x)} h^{\prime\prime}(z) = E 
-\end{align}$$</p>
-<p>or</p>
-<p>$$\begin{align}
+\end{align}$$<p>or</p>
+$$\begin{align}
 E_x + E_y + E_z = E 
-\end{align}$$</p>
-<p>with</p>
-<p>$$ \begin{align}
+\end{align}$$<p>with</p>
+$$ \begin{align}
 E_x = -\frac{\hbar^2}{2m} \frac{1}{f(x)} f^{\prime\prime}(x) 
-\end{align}$$</p>
-<p>etc. Now, it is easy to see that, for</p>
-<p>$$ \begin{align}
+\end{align}$$<p>etc. Now, it is easy to see that, for</p>
+$$ \begin{align}
 E_x = E - E_y + E_z
-\end{align}$$</p>
-<p>the left-hand side depends only on the variable $x$, while the right-hand side depends on $y$ and $z$ and is independent of $x$. So, if $x$ is varied and $y$ and $z$ are held constant, then the right-hand side of this equation will not change. Hence, $E_x$, $E_y$, and $E_z$ must all be constants.</p>
+\end{align}$$<p>the left-hand side depends only on the variable $x$, while the right-hand side depends on $y$ and $z$ and is independent of $x$. So, if $x$ is varied and $y$ and $z$ are held constant, then the right-hand side of this equation will not change. Hence, $E_x$, $E_y$, and $E_z$ must all be constants.</p>
 <p>The functions $f(x)$, $g(y)$, and $h(z)$ can be determined by solving separate one-dimensional problems of the form</p>
-<p>$$\begin{align}
+$$\begin{align}
 \frac{d^2}{dx^2} f(x) &amp;= -\frac{2 m E_x}{\hbar^2} f(x) \\
 \frac{d^2}{dy^2} g(y) &amp;= -\frac{2 m E_y}{\hbar^2} g(y) \\
 \frac{d^2}{dz^2} h(z) &amp;= -\frac{2 m E_z}{\hbar^2} h(z)
-\end{align}$$</p>
-<p>While look like the equation for the one-dimensional PIB problem, with similar boundary conditions. Hence,</p>
-<p>$$ \begin{align}
+\end{align}$$<p>While look like the equation for the one-dimensional PIB problem, with similar boundary conditions. Hence,</p>
+$$ \begin{align}
 f(x) &amp;= \left ( \frac{2}{a} \right )^{1/2} \text{sin}\left ( \frac{n_x \pi x}{a} \right ) \\
 g(y) &amp;= \left ( \frac{2}{b} \right )^{1/2} \text{sin}\left ( \frac{n_y \pi y}{b} \right ) \\
 h(z) &amp;= \left ( \frac{2}{c} \right )^{1/2} \text{sin}\left ( \frac{n_z \pi z}{c} \right )
-\end{align}$$</p>
-<p>where $n_x$, $n_y$, and $n_z$ are all positive integers, and</p>
-<p>$$ \begin{align}
+\end{align}$$<p>where $n_x$, $n_y$, and $n_z$ are all positive integers, and</p>
+$$ \begin{align}
 \psi(x, y, z) = \left ( \frac{8}{abc} \right )^{1/2} \text{sin}\left ( \frac{n_x \pi x}{a} \right ) \text{sin}\left ( \frac{n_y \pi y}{b} \right )\text{sin}\left ( \frac{n_z \pi z}{c} \right ) 
-\end{align}$$</p>
-<p>For the energy, we have</p>
-<p>$$\begin{align}
+\end{align}$$<p>For the energy, we have</p>
+$$\begin{align}
 E_x &amp;= \frac{n_x^2 h^2}{8ma^2} \\
 E_y &amp;= \frac{n_y^2 h^2}{8mb^2} \\
 E_z &amp;= \frac{n_z^2 h^2}{8mc^2}
-\end{align}$$</p>
-<p>and</p>
-<p>$$ \begin{align}
+\end{align}$$<p>and</p>
+$$ \begin{align}
 E = \frac{h^2}{8m}\left ( \frac{n_x^2}{a^2} + \frac{n_y^2}{b^2} + \frac{n_z^2}{c^2} \right ) 
-\end{align}$$</p>
-<p>The ground state (the lowest-energy state) will have $n_x = n_y = n_z = 1.$</p>
+\end{align}$$<p>The ground state (the lowest-energy state) will have $n_x = n_y = n_z = 1.$</p>
 </div>
 </div>
 </div>
@@ -8524,10 +8463,9 @@ E = \frac{h^2}{8m}\left ( \frac{n_x^2}{a^2} + \frac{n_y^2}{b^2} + \frac{n_z^2}{c
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Degenerate-Energy-Levels">Degenerate Energy Levels<a class="anchor-link" href="#Degenerate-Energy-Levels">¶</a></h4><p>Suppose that the box to which the particle is confined is a cube, with $a = b = c.$ The energy would be</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 E = \frac{h^2}{8ma^2}\left ( n_x^2 + n_y^2 + n_z^2 \right ) 
-\end{align}$$</p>
-<p>Now, states with different quantum numbers could be degenerate. The table below provides values of $n_x^2 + n_y^2 + n_z^2,$ which is proportional to the energy, for the lowest 11 states.</p>
+\end{align}$$<p>Now, states with different quantum numbers could be degenerate. The table below provides values of $n_x^2 + n_y^2 + n_z^2,$ which is proportional to the energy, for the lowest 11 states.</p>
 <table>
 <thead>
 <tr>
@@ -8620,14 +8558,12 @@ E = \frac{h^2}{8ma^2}\left ( n_x^2 + n_y^2 + n_z^2 \right )
 </table>
 <p>We can see that the ground state is non-degenerate, but the first, second, and third excited states are all triply degenerate.</p>
 <p>It is easy to visualize why some states are degenerate. Consider an electron of mass, $m = m_e$, confined to a two-dimensional box with sides, $a = b = 1a_0$. Following a procedure similar to that given above, the wave function and energy levels for this state are</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 \psi(x, y) = \frac{2}{a} \text{sin}\left ( \frac{n_x \pi x}{a}\right )\text{sin}\left ( \frac{n_y \pi y}{a}\right ) 
-\end{align}$$</p>
-<p>and</p>
-<p>$$ \begin{align}
+\end{align}$$<p>and</p>
+$$ \begin{align}
 E = \frac{h^2}{8ma^2} \left ( n_x^2 + n_y^2 \right )
-\end{align}$$</p>
-<p>Let us visualize the wave functions for the lowest-energy excited states, which are degenerate and characterized by $n_x = 1,$ $n_y = 2$ and $n_x = 2,$ $n_y = 1.$.</p>
+\end{align}$$<p>Let us visualize the wave functions for the lowest-energy excited states, which are degenerate and characterized by $n_x = 1,$ $n_y = 2$ and $n_x = 2,$ $n_y = 1.$.</p>
 </div>
 </div>
 </div>
@@ -8698,47 +8634,38 @@ E = \frac{h^2}{8ma^2} \left ( n_x^2 + n_y^2 \right )
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="The-Free-Particle,-Revisited">The Free Particle, Revisited<a class="anchor-link" href="#The-Free-Particle,-Revisited">¶</a></h2><p>Now that we have some practice applying boundary conditions, let's revisit the free particle problem. Recall that the Schrödinger equation for a particle of mass, $m$, moving in the $x$-direction and subject to no external forces has the form</p>
-<p>$$\begin{align}
+$$\begin{align}
 -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} \psi(x) &amp;= E \psi(x) \\
 \frac{d^2}{dx^2} \psi(x) &amp;= -\frac{2mE}{\hbar^2} \psi(x) \\
 \frac{d^2}{dx^2} \psi(x) &amp;= -k^2 \psi(x)
-\end{align}$$
-where $k = +\left (\frac{2mE}{\hbar^2}\right)^{1/2}$. We already found that this equation has a general solution</p>
-<p>$$ \begin{align}
+\end{align}$$<p>where $k = +\left (\frac{2mE}{\hbar^2}\right)^{1/2}$. We already found that this equation has a general solution</p>
+$$ \begin{align}
 \psi(x) = A e^{ikx} + B e^{-ikx}
-\end{align}$$</p>
-<p>Can we apply any boundary conditions? We do not know much about the form of the wave function as $x \to \pm \infty$, aside from the fact that it does not go to zero, i.e.,</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Can we apply any boundary conditions? We do not know much about the form of the wave function as $x \to \pm \infty$, aside from the fact that it does not go to zero, i.e.,</p>
+$$ \begin{align}
 \lim_{x\to\pm\infty} \psi(x) \neq 0
-\end{align}$$</p>
-<p>As such, there is a non-zero probability that the particle could be found <strong>anywhere</strong> in $x$, even at $x \to \pm \infty.$ Such a state is called an "unbound" state, as opposed to a "bound" state in which the particle is <strong>localized</strong> in some region of space. For a bound state,</p>
-<p>$$ \begin{align}
+\end{align}$$<p>As such, there is a non-zero probability that the particle could be found <strong>anywhere</strong> in $x$, even at $x \to \pm \infty.$ Such a state is called an "unbound" state, as opposed to a "bound" state in which the particle is <strong>localized</strong> in some region of space. For a bound state,</p>
+$$ \begin{align}
 \lim_{x\to\pm\infty} \psi(x) = 0 
-\end{align}$$</p>
-<p>While the free-particle wave function does not vanish as $x\to\pm\infty$, we should still expect that it is finite in this limit, i.e.,</p>
-<p>$$ \begin{align}
+\end{align}$$<p>While the free-particle wave function does not vanish as $x\to\pm\infty$, we should still expect that it is finite in this limit, i.e.,</p>
+$$ \begin{align}
 \lim_{x\to\pm\infty} |\psi(x)| &lt; \infty
-\end{align}$$</p>
-<p>This is the only boundary condition for the free particle problem: the wave function must be finite <strong>everywhere</strong>. Does this condition have any interesting consequences?</p>
+\end{align}$$<p>This is the only boundary condition for the free particle problem: the wave function must be finite <strong>everywhere</strong>. Does this condition have any interesting consequences?</p>
 <p>Let us assume that $E &lt; 0$ and see what happens to the wave function</p>
-<p>$$\begin{align}
+$$\begin{align}
 \psi(x) &amp;= A e^{i[2mE / \hbar^2]^{1/2} x} + B e^{-i[2mE / \hbar^2]^{1/2} x} \\
 &amp;= A e^{i[-2m|E| / \hbar^2]^{1/2} x} + B e^{-i[-2m|E| / \hbar^2]^{1/2} x} \\
 &amp;= A e^{-[2m|E| / \hbar^2]^{1/2} x} + B e^{[2m|E| / \hbar^2]^{1/2} x}
-\end{align}$$</p>
-<p>Now, consider the following limits</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Now, consider the following limits</p>
+$$ \begin{align}
 \lim_{x \to \infty} \psi(x) = A e^{-\infty} + B e^{\infty} = B e^{\infty} = \infty 
-\end{align}$$</p>
-<p>and</p>
-<p>$$ \begin{align}
+\end{align}$$<p>and</p>
+$$ \begin{align}
 \lim_{x \to -\infty} \psi(x) = A e^{\infty} + B e^{-\infty} = A e^{\infty} = \infty 
-\end{align}$$</p>
-<p>So, $E&lt;0$ leads to $\psi(\pm\infty) = \infty$, which violates our only boundary condition. As such, $E$ <strong>must</strong> be a non-negative number. This result makes sense, physically. The energy of a free particle is purely kinetic. Classically, the kinetic energy, $T$, is</p>
-<p>$$ \begin{align}
+\end{align}$$<p>So, $E&lt;0$ leads to $\psi(\pm\infty) = \infty$, which violates our only boundary condition. As such, $E$ <strong>must</strong> be a non-negative number. This result makes sense, physically. The energy of a free particle is purely kinetic. Classically, the kinetic energy, $T$, is</p>
+$$ \begin{align}
 T = \frac{p^2}{2m}
-\end{align}$$</p>
-<p>Having $T &lt; 0$ would imply that the momentum is imaginary! This result is clearly nonsense and is rejected as non-physical.</p>
+\end{align}$$<p>Having $T &lt; 0$ would imply that the momentum is imaginary! This result is clearly nonsense and is rejected as non-physical.</p>
 </div>
 </div>
 </div>
@@ -8756,28 +8683,38 @@ T = \frac{p^2}{2m}
 <summary>Answer 3</summary> 
 We would like to show
 $$\begin{align}
-    \langle \hat{T}_x \rangle &amp;= \frac{\langle \psi | \hat{T}_x | \psi \rangle }{\langle \psi | \psi \rangle} \ge 0 \\
-\end{align}$$
-
+</details></blockquote>
+<pre><code>\langle \hat{T}_x \rangle &amp;= \frac{\langle \psi | \hat{T}_x | \psi \rangle }{\langle \psi | \psi \rangle} \ge 0 \\
+</code></pre>
+<p>\end{align}$$</p>
+<blockquote>
 <p>To simplify things, let us assume that $\psi$ is normalized, i.e., $\langle \psi | \psi \rangle = 1$, so we have
-$$\begin{align}
-    \langle \hat{T}_x \rangle &amp;= \langle \psi | \hat{T}_x | \psi \rangle \\
-    &amp;= \int_{-\infty}^{\infty} \psi(x)^* \frac{\hat{p}_x^2}{2m} \psi(x) dx \\
-    &amp;= \frac{1}{2m} \int_{-\infty}^{\infty} \psi(x)^* \hat{p}_x \hat{p}_x \psi(x) dx \\
-    &amp;= \frac{1}{2m} \int_{-\infty}^{\infty} \psi(x)^* \hat{p}_x f(x) dx \\
-\end{align}$$
-where we have introduced a function, $f(x) = \hat{p}_x \psi(x)$. Now, because $\hat{p}_x$ is Hermitian, the last line can be reexpressed as
-$$ \begin{align}
-    \langle \hat{T}_x \rangle &amp;= \frac{1}{2m} \left ( \int_{-\infty}^{\infty} f(x)^* \hat{p}_x \psi(x) dx \right ) ^* \\
-    &amp;= \frac{1}{2m} \left ( \int_{-\infty}^{\infty} f(x)^* f(x) dx \right ) ^* \\
-    &amp;= \frac{1}{2m} \int_{-\infty}^{\infty} f(x)^* f(x) dx \\
-    &amp;= \frac{1}{2m} \int_{-\infty}^{\infty} |f(x)|^2 dx
-\end{align}$$
-The square modulus of any function is a non-negative function, the integral of a non-negative function over all space is  non-negative, and the mass, $m$ is also non-negative, which means that
-$$ \begin{align}
-\langle \hat{T}_x \rangle \ge 0
+$$\begin{align}</p>
+</blockquote>
+<pre><code>\langle \hat{T}_x \rangle &amp;= \langle \psi | \hat{T}_x | \psi \rangle \\
+&amp;= \int_{-\infty}^{\infty} \psi(x)^* \frac{\hat{p}_x^2}{2m} \psi(x) dx \\
+&amp;= \frac{1}{2m} \int_{-\infty}^{\infty} \psi(x)^* \hat{p}_x \hat{p}_x \psi(x) dx \\
+&amp;= \frac{1}{2m} \int_{-\infty}^{\infty} \psi(x)^* \hat{p}_x f(x) dx \\
+</code></pre>
+<p>\end{align}$$</p>
+<blockquote>
+<p>where we have introduced a function, $f(x) = \hat{p}_x \psi(x)$. Now, because $\hat{p}_x$ is Hermitian, the last line can be reexpressed as
+$$ \begin{align}</p>
+</blockquote>
+<pre><code>\langle \hat{T}_x \rangle &amp;= \frac{1}{2m} \left ( \int_{-\infty}^{\infty} f(x)^* \hat{p}_x \psi(x) dx \right ) ^* \\
+&amp;= \frac{1}{2m} \left ( \int_{-\infty}^{\infty} f(x)^* f(x) dx \right ) ^* \\
+&amp;= \frac{1}{2m} \int_{-\infty}^{\infty} f(x)^* f(x) dx \\
+&amp;= \frac{1}{2m} \int_{-\infty}^{\infty} |f(x)|^2 dx
+</code></pre>
+<p>\end{align}$$</p>
+<blockquote>
+<p>The square modulus of any function is a non-negative function, the integral of a non-negative function over all space is  non-negative, and the mass, $m$ is also non-negative, which means that
+$$ \begin{align}</p>
+</blockquote>
+<p>\langle \hat{T}_x \rangle \ge 0
 \end{align}$$</p>
-</details>
+<blockquote>
+
 </blockquote>
 </div>
 </div>
@@ -8829,17 +8766,15 @@ $$ \begin{align}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Mathematically, we define this potential in a piecewise way as</p>
 <p><strong>Region I</strong> ($x &lt; 0$):</p>
-<p>$$\begin{align}
+$$\begin{align}
 V(x) = V_0
-\end{align}$$</p>
-<p><strong>Region II</strong> ($0 \le x \le L$):</p>
-<p>$$\begin{align}
+\end{align}$$<p><strong>Region II</strong> ($0 \le x \le L$):</p>
+$$\begin{align}
 V(x) = 0
-\end{align}$$</p>
-<p><strong>Region III</strong> ($x &gt; L$):</p>
-<p>$$\begin{align}
+\end{align}$$<p><strong>Region III</strong> ($x &gt; L$):</p>
+$$\begin{align}
 V(x) = V_0
-\end{align}$$</p>
+\end{align}$$
 </div>
 </div>
 </div>
@@ -8852,38 +8787,31 @@ V(x) = V_0
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Wavefunctions">Wavefunctions<a class="anchor-link" href="#Wavefunctions">¶</a></h3><p>As for the PIB problem, the TISE for the finite square well potential problem should be solved in a piecewise way, i.e., for each region of space. We have</p>
 <p><strong>Region I</strong> ($x &lt; 0$):</p>
-<p>$$\begin{align}
-\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_I(x) = E \psi_I(x)
-\end{align}$$</p>
-<p>which has solutions of the form</p>
-<p>$$\begin{align}
+$$\begin{align}
+\left ( \frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0 \right ) \psi_I(x) = E \psi_I(x)
+\end{align}$$<p>which has solutions of the form</p>
+$$\begin{align}
 \psi_I(x) = C~e^{\alpha x} + D~e^{-\alpha x}
-\end{align}$$</p>
-<p><strong>Region II</strong> ($0 \le x \le L$):</p>
-<p>$$\begin{align}
+\end{align}$$<p><strong>Region II</strong> ($0 \le x \le L$):</p>
+$$\begin{align}
 \frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_{II}(x) = E \psi_{II}(x)
-\end{align}$$</p>
-<p>which has solutions of the form</p>
-<p>$$\begin{align}
+\end{align}$$<p>which has solutions of the form</p>
+$$\begin{align}
 \psi_{II}(x) = A~{\rm cos}(\beta x) + B~{\rm sin}(\beta x)
-\end{align}$$</p>
-<p>and</p>
+\end{align}$$<p>and</p>
 <p><strong>Region III</strong> ($x &gt; l$):</p>
-<p>$$
-\begin{align}(\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_{III}(x) = E \psi_{III}(x)
-\end{align}$$</p>
-<p>which has solutions of the form</p>
-<p>$$\begin{align}
+$$
+\begin{align}
+\left (\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0 \right ) \psi_{III}(x) = E \psi_{III}(x)
+\end{align}$$<p>which has solutions of the form</p>
+$$\begin{align}
 \psi_{III}(x) = F~e^{\alpha x} + G~e^{-\alpha x}
-\end{align}$$</p>
-<p>Above, $\alpha$ and $\beta$ are real numbers, defined by</p>
-<p>$$\begin{align}
+\end{align}$$<p>Above, $\alpha$ and $\beta$ are real numbers, defined by</p>
+$$\begin{align}
 \alpha = ( 2 m [V_0 - E] / \hbar^2)^{1/2}
-\end{align}$$</p>
-<p>$$\begin{align}
+\end{align}$$$$\begin{align}
 \beta = (2 m E / \hbar^2)^{1/2}
-\end{align}$$</p>
-<p>Note that the solutions in regions I and III involve <strong>real</strong>-valued exponential functions, as opposed to complex exponential functions.</p>
+\end{align}$$<p>Note that the solutions in regions I and III involve <strong>real</strong>-valued exponential functions, as opposed to complex exponential functions.</p>
 </div>
 </div>
 </div>
@@ -8895,25 +8823,21 @@ V(x) = V_0
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Boundary-Conditions">Boundary Conditions<a class="anchor-link" href="#Boundary-Conditions">¶</a></h3><p>If we consider that the wave function should be finite in the limit that $x$ tends to $\pm \infty$, then we immediately find that two of the unknown coefficients must be zero. First, consider the limit</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 \lim_{x\to-\infty} \psi_I(x) = Ce^{-\alpha\infty} + D e^{\alpha\infty} = D e^{\infty} 
-\end{align}$$</p>
-<p>Hence, $D = 0$ is required to prevent the wave function from blowing up as $x\to -\infty.$ Similarly, the limit</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Hence, $D = 0$ is required to prevent the wave function from blowing up as $x\to -\infty.$ Similarly, the limit</p>
+$$ \begin{align}
 \lim_{x\to+\infty} \psi_{III}(x) = Fe^{\alpha\infty} + G e^{-\alpha\infty} = F e^{\infty} 
-\end{align}$$</p>
-<p>implies that $F$ must vanish as well. So, we have</p>
-<p>$$\begin{align}
+\end{align}$$<p>implies that $F$ must vanish as well. So, we have</p>
+$$\begin{align}
 \psi_{I}(x) &amp;= C e^{\alpha x} \\
 \psi_{III}(x) &amp;= G e^{-\alpha x}
-\end{align}$$</p>
-<p>which already tells us something interesting about the probability density in regions I and III. First, there is a non-zero probability of finding the particle outside of the box, despite having $E &lt; V_0$. A region of space where the external potential is greater than the energy of the particle is called a <strong>classically forbidden</strong> region. It is forbidden for a classical particle to enter such a region of space, because doing so would imply that the momentum of the particle is imaginary. Classically, we would have</p>
-<p>$$\begin{align}
+\end{align}$$<p>which already tells us something interesting about the probability density in regions I and III. First, there is a non-zero probability of finding the particle outside of the box, despite having $E &lt; V_0$. A region of space where the external potential is greater than the energy of the particle is called a <strong>classically forbidden</strong> region. It is forbidden for a classical particle to enter such a region of space, because doing so would imply that the momentum of the particle is imaginary. Classically, we would have</p>
+$$\begin{align}
 E &amp;= T_x + V(x) \\
 E - V(x) &amp;= T_x \\
 &amp;= \frac{p_x^2}{2m}  &lt; 0\text{ if } E &lt; V(x)
-\end{align}$$</p>
-<p>The penetration of a particle into such a classically forbidden region is called <strong>tunneling</strong>. The second interesting observation we can make is that $|\psi(x)|^2$ will decay exponentially in these classically forbidden regions with $E &lt; V_0.$</p>
+\end{align}$$<p>The penetration of a particle into such a classically forbidden region is called <strong>tunneling</strong>. The second interesting observation we can make is that $|\psi(x)|^2$ will decay exponentially in these classically forbidden regions with $E &lt; V_0.$</p>
 <p>We can determine the remaining unknown coefficients through the application of additional boundary conditions:</p>
 <ol>
 <li><p>The wavefunction should be continuous between regions I and II (at $x=0$):</p>
@@ -9065,7 +8989,9 @@ E - V(x) &amp;= T_x \\
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>From above, we can see that there are two allowable energies (points at which the blue and orange curves cross, not counting the divergence in the blue curve). These energies look like they are roughly 2.5 and 8.0 (atomic units). We now need to numerically solve the trancendental equation. We're going to use the function:</p>
-<pre><code>optimize.fsolve</code></pre>
+<pre><code>optimize.fsolve
+
+</code></pre>
 <p>from the scipy package for this purpose. We will have to pass some objective function $f(E) = 0$ for which this function will find the optimal $E$ value(s).</p>
 </div>
 </div>
@@ -9285,55 +9211,70 @@ E - V(x) &amp;= T_x \\
 <blockquote>
 <p>Question 4: Does increasing $V_0$ increase or decrease the number of bound states?</p>
 <details>
-<summary>Answer 4</summary> 
-    As $V_0$ is increased, the well should be able to support a larger number of bound states.
-    </details>
+</details></blockquote>
+</blockquote>
+<pre><code>&lt;summary&gt;Answer 4&lt;/summary&gt; 
+As $V_0$ is increased, the well should be able to support a larger number of bound states.
+&lt;/details&gt;    
+</code></pre>
+<blockquote>
+<blockquote>
 </blockquote>
 <blockquote>
 <p>Question 5: Does increasing $L$ increase or decrease the number of bound states?</p>
 <details>
-<summary>Answer 5</summary>  
-    As $L$ is increased, the well should be able to support a larger number of bound states. We can rationalize this result by thinking about the form of the energy for the infinite square well potential model (the particle in a box):
-    $$\begin{align}
-    E_n = \frac{h^2 n^2}{8mL^2}
-    \end{align}$$
-    As $L$ increases, the spacing between energy levels decreases. Hence, for the finite square well potential model, it is reasonable to expect that a similar trend will occur, resulting in a larger number states with $E &lt; V_0$. 
-    </details>
+</details></blockquote>
 </blockquote>
+<pre><code>&lt;summary&gt;Answer 5&lt;/summary&gt;  
+As $L$ is increased, the well should be able to support a larger number of bound states. We can rationalize this result by thinking about the form of the energy for the infinite square well potential model (the particle in a box):
+$$\begin{align}
+E_n = \frac{h^2 n^2}{8mL^2}
+\end{align}$$
+As $L$ increases, the spacing between energy levels decreases. Hence, for the finite square well potential model, it is reasonable to expect that a similar trend will occur, resulting in a larger number states with $E &lt; V_0$. 
+&lt;/details&gt;
+</code></pre>
+<blockquote>
 <blockquote>
 <p>Question 6: Does increasing $m$ increase or decrease the number of bound states?</p>
 <details>
-<summary>Answer 6</summary>  
-    As $m$ is increased, the well should be able to support a larger number of bound states. Again, we can rationalize this result by thinking about the form of the energy for the infinite square well potential model (the particle in a box):
-    $$\begin{align}
-    E_n = \frac{h^2 n^2}{8mL^2}
-    \end{align}$$
-    As $m$ increases, the spacing between energy levels decreases. Hence, for the finite square well potential model, it is reasonable to expect that a similar trend will occur, resulting in a larger number states with $E &lt; V_0$. 
-    </details>
+</details></blockquote>
 </blockquote>
+<pre><code>&lt;summary&gt;Answer 6&lt;/summary&gt;  
+As $m$ is increased, the well should be able to support a larger number of bound states. Again, we can rationalize this result by thinking about the form of the energy for the infinite square well potential model (the particle in a box):
+$$\begin{align}
+E_n = \frac{h^2 n^2}{8mL^2}
+\end{align}$$
+As $m$ increases, the spacing between energy levels decreases. Hence, for the finite square well potential model, it is reasonable to expect that a similar trend will occur, resulting in a larger number states with $E &lt; V_0$. 
+&lt;/details&gt;
+</code></pre>
+<blockquote>
 <blockquote>
 <p>Question 7: For a given $m$, $L$, and $V_0$, which bound states have the highest / lowest tunneling probability (the probability of finding the particle outside of the well)? Can you rationalize this result?</p>
 <details>
-<summary>Answer 7</summary>
-    The highest-energy bound states should have the largest tunneling probability. The lowest-energy bound states should have the lowest tunneling probability. We can rationalize this result by considering the form of the wave function in region III:
-    $$ \begin{align}
-    \psi_{III}(x) = G e^{-\alpha x}
-    \end{align}$$
-    Recall that 
-    $$\begin{align}
-    \alpha = ( 2 m [V_0 - E] / \hbar^2)^{1/2}
-    \end{align}$$
-    The quantity $V_0 - E$ is related to how rapidly the wave function decays with increasing $x$ in this region of space. As $E$ increases, $V_0 - E$ decreases, which implies that the wave function will decay more slowly in this region. 
-    </details>
+</details></blockquote>
 </blockquote>
+<pre><code>&lt;summary&gt;Answer 7&lt;/summary&gt;
+The highest-energy bound states should have the largest tunneling probability. The lowest-energy bound states should have the lowest tunneling probability. We can rationalize this result by considering the form of the wave function in region III:
+$$ \begin{align}
+\psi_{III}(x) = G e^{-\alpha x}
+\end{align}$$
+Recall that 
+$$\begin{align}
+\alpha = ( 2 m [V_0 - E] / \hbar^2)^{1/2}
+\end{align}$$
+The quantity $V_0 - E$ is related to how rapidly the wave function decays with increasing $x$ in this region of space. As $E$ increases, $V_0 - E$ decreases, which implies that the wave function will decay more slowly in this region. 
+&lt;/details&gt;
+</code></pre>
+<blockquote>
 <blockquote>
 <p>Question 8: Can the number of bound states ever be zero, for certain combinations of $m$, $L$, and $V_0$?</p>
 <details>
-<summary>Answer 8</summary>
-No, the minimum number of bound states is one, no matter what values we have for $m$, $L$, and $V_0$.
-    </details>
+</details></blockquote>
 </blockquote>
-</blockquote>
+<pre><code>&lt;summary&gt;Answer 8&lt;/summary&gt;
+</code></pre>
+<p>No, the minimum number of bound states is one, no matter what values we have for $m$, $L$, and $V_0$.
+    </p>
 </div>
 </div>
 </div>
@@ -9345,22 +9286,18 @@ No, the minimum number of bound states is one, no matter what values we have for
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>This ananlysis has assumed that the potential barrier height, $V_0$, is greater than the energy for the particle, $E$. What if $E &gt; V_0$? In this case, the particle should be able to overcome the potential barrier to "escape" the box. Let us inspect the general form of the wave function in region I given above, (before the application of any boundary conditions). We had</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 \psi_I(x) = A e^{\alpha x} + B^{-\alpha x}
-\end{align}$$</p>
-<p>with</p>
-<p>$$ \begin{align}
+\end{align}$$<p>with</p>
+$$ \begin{align}
 \alpha = \left ( \frac{2m}{\hbar^2} \right )^{1/2} \left ( V_0 - E \right )^{1/2}
-\end{align}$$</p>
-<p>which must be imaginary, since $V_0 - E &lt; 0$! A similar analysis holds for the wave function in region III. Hence the wave function looks like sums of complex exponential functions in all regions of space, much like the wave function for a free particle. Moreover</p>
-<p>$$\begin{align}
+\end{align}$$<p>which must be imaginary, since $V_0 - E &lt; 0$! A similar analysis holds for the wave function in region III. Hence the wave function looks like sums of complex exponential functions in all regions of space, much like the wave function for a free particle. Moreover</p>
+$$\begin{align}
 \lim_{x\to-\infty} \psi_I(x) \neq 0 
-\end{align}$$</p>
-<p>and</p>
-<p>$$ \begin{align}
+\end{align}$$<p>and</p>
+$$ \begin{align}
 \lim_{x\to+\infty} \psi_{III}(x) \neq 0 
-\end{align}$$</p>
-<p>which implies that there is a non-zero probability of finding the particle anywhere in $x$. Hence, the states with $E &gt; V_0$ are <strong>unbound</strong> states. Like in the free-particle problem, the energy for these unbound states is continuous (not quantized).</p>
+\end{align}$$<p>which implies that there is a non-zero probability of finding the particle anywhere in $x$. Hence, the states with $E &gt; V_0$ are <strong>unbound</strong> states. Like in the free-particle problem, the energy for these unbound states is continuous (not quantized).</p>
 </div>
 </div>
 </div>
@@ -9432,47 +9369,36 @@ No, the minimum number of bound states is one, no matter what values we have for
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Region I</strong> ($x &lt; 0$):</p>
-<p>$$\begin{align}
+$$\begin{align}
 V(x) = 0
-\end{align}$$</p>
-<p>$$\begin{align}
+\end{align}$$$$\begin{align}
 \frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_I(x) = E \psi_I(x)
-\end{align}$$</p>
-<p>which has solutions of the form</p>
-<p>$$\begin{align}
+\end{align}$$<p>which has solutions of the form</p>
+$$\begin{align}
 \psi_I(x) = A~e^{ikx} + B~e^{-ikx}
-\end{align}$$</p>
-<p><strong>Region II</strong> ($0 \le x \le L$):</p>
-<p>$$\begin{align}
+\end{align}$$<p><strong>Region II</strong> ($0 \le x \le L$):</p>
+$$\begin{align}
 V(x) = V_0
-\end{align}$$</p>
-<p>$$\begin{align}
+\end{align}$$$$\begin{align}
 (\frac{-\hbar^2}{2m}\frac{d^2}{dx^2} + V_0) \psi_{II}(x) = E \psi_{II}(x)
-\end{align}$$</p>
-<p>which has solutions of the form</p>
-<p>$$\begin{align}
+\end{align}$$<p>which has solutions of the form</p>
+$$\begin{align}
 \psi_{II}(x) = C~e^{\lambda x} + D~e^{-\lambda x}
-\end{align}$$</p>
-<p>and</p>
+\end{align}$$<p>and</p>
 <p><strong>Region III</strong> ($x &gt; L$):</p>
-<p>$$\begin{align}
+$$\begin{align}
 V(x) = 0
-\end{align}$$</p>
-<p>$$\begin{align}
+\end{align}$$$$\begin{align}
 \frac{-\hbar^2}{2m}\frac{d^2}{dx^2} \psi_{III}(x) = E \psi_{III}(x)
-\end{align}$$</p>
-<p>which has solutions of the form</p>
-<p>$$\begin{align}
+\end{align}$$<p>which has solutions of the form</p>
+$$\begin{align}
 \psi_{III}(x) = F~e^{i k x} + G~e^{-i k x}
-\end{align}$$</p>
-<p>Above, $k$ and $\lambda$ are real numbers, defined by</p>
-<p>$$\begin{align}
+\end{align}$$<p>Above, $k$ and $\lambda$ are real numbers, defined by</p>
+$$\begin{align}
 k = (2 m E / \hbar^2)^{1/2}
-\end{align}$$</p>
-<p>$$\begin{align}
+\end{align}$$$$\begin{align}
 \lambda = ( 2 m [V_0 - E] / \hbar^2)^{1/2}
-\end{align}$$</p>
-<p>Similar to the finite square well potential problem, the solutions in regions I and III (where $V(x) = 0$) involve complex exponential functions, while the solution in region II (where $V(x) = V_0 &gt; E$) involves real-valued exponential functions.</p>
+\end{align}$$<p>Similar to the finite square well potential problem, the solutions in regions I and III (where $V(x) = 0$) involve complex exponential functions, while the solution in region II (where $V(x) = V_0 &gt; E$) involves real-valued exponential functions.</p>
 </div>
 </div>
 </div>
@@ -9491,14 +9417,12 @@ k = (2 m E / \hbar^2)^{1/2}
 <li>$|G|^2$ is proportional to the probability that the particle is traveling to the left in region III</li>
 </ul>
 <p>The tunneling probability should be probability that the particle is traveling to the right in region III, normalized by the probability that the particle encountered the barrier in region I, or</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 T = \frac{|F|^2}{|A|^2}
-\end{align}$$</p>
-<p>Similarly, we could define a reflection probability, $R$, as the probability that the particle is moving to the left in region I, normalized by the probability that the particle encountered the barrier in region I, or</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Similarly, we could define a reflection probability, $R$, as the probability that the particle is moving to the left in region I, normalized by the probability that the particle encountered the barrier in region I, or</p>
+$$ \begin{align}
 R = \frac{|B|^2}{|A|^2}
-\end{align}$$</p>
-<p>In order to determine $T$, we must apply boundary conditions to determine the unknown coefficients, $A$, $B$, $C$, $D$, $F$, and $G$. We have four boundary conditions:</p>
+\end{align}$$<p>In order to determine $T$, we must apply boundary conditions to determine the unknown coefficients, $A$, $B$, $C$, $D$, $F$, and $G$. We have four boundary conditions:</p>
 <ol>
 <li>The wave function should be continuous between regions I and II: $\psi_I(x=0) = \psi_{II}(x=0)$</li>
 <li>The derivative of the wave function should be continuous between regions I and II: $\left . \psi^\prime_I(x) \right |_{x=0} = \left . \psi_{II}^\prime(x) \right |_{x = 0}$</li>
@@ -9506,25 +9430,22 @@ R = \frac{|B|^2}{|A|^2}
 <li>The derivative of the wave function should be continuous between regions II and III: $\left . \psi^\prime_{II}(x) \right |_{x=L} = \left . \psi_{III}^\prime(x) \right |_{x = L}$</li>
 </ol>
 <p>At first glance, it seems like we have more unknown coefficients than equations, but this will not be an issue. First, we can eliminate one of the unknowns on physical grounds. Consider the coffficient, $G$. The value $|G|^2$ should represent the probability that the particle is moving to the left in region III. However, because (i) the particle encountered the barrier from the left and (ii) the potential in region III is zero for all $x &gt; L$, we can conclude that the particle should <em>never</em> be found moving to the left in region III. Therefore, we set $G = 0$. Second, note that we do not need to know $A$ and $F$ absolutely. Determining $T$ only requires knowledge of their ratio. Hence, we really only have four unknown quantities:</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 \frac{|F|^2}{|A|^2}\text{, }B\text{, }C\text{, }D
-\end{align}$$</p>
-<p><strong>Boundary condition 1</strong>:</p>
+\end{align}$$<p><strong>Boundary condition 1</strong>:</p>
 <p>Enforcing continuity of the wave function at the boundary between regions I and II $[ \psi_I(x=0) = \psi_{II}(x=0)]$ leads to</p>
-<p>$$\begin{align}
+$$\begin{align}
 A e^0 + B e^0 &amp;= C e^0 + D e ^0 \\
 A + B &amp;= C + D
-\end{align}$$</p>
-<p>Enforcing the smoothness of the wave function at the boundary between regions I and II $[ \left . \psi^\prime_I(x) \right |_{x=0} = \left . \psi_{II}^\prime(x) \right |_{x = 0} ]$ leads to</p>
-<p>$$\begin{align}
+\end{align}$$<p>Enforcing the smoothness of the wave function at the boundary between regions I and II $[ \left . \psi^\prime_I(x) \right |_{x=0} = \left . \psi_{II}^\prime(x) \right |_{x = 0} ]$ leads to</p>
+$$\begin{align}
 ik A e^0 - ik B e^0 &amp;= \lambda c e^0 - \lambda D e^0 \\
 ik (A - B) &amp;= \lambda (C - D)  \\
 A - B &amp;= -\frac{i\lambda}{k} (C - D)  \\
-\end{align}$$</p>
-<p>Adding the results of the application of these boundary conditions eliminates $B$ and leads to</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Adding the results of the application of these boundary conditions eliminates $B$ and leads to</p>
+$$ \begin{align}
 2 A = C\left ( 1 - \frac{i\lambda}{k}\right ) + D \left ( 1 + \frac{i\lambda}{k}\right ) 
-\end{align}$$</p>
+\end{align}$$
 </div>
 </div>
 </div>
@@ -9536,24 +9457,21 @@ A - B &amp;= -\frac{i\lambda}{k} (C - D)  \\
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Eventually after applying the two remaining conditions and a bit of algebra, we eventually find</p>
-<p>$$ \begin{align}
+$$ \begin{align}
 T &amp;= \frac{|F|^2}{|A|^2} \\
 &amp;= \left [ 1 + \frac{V_0^2}{4E(V_0-E)}\text{sinh}\left ( \left [ \frac{2m(V_0-E)}{\hbar^2}\right ]^{1/2} L \right )  \right ]^{-1}
-\end{align}$$</p>
-<p>where the hyperbolic sine function is defined by</p>
-<p>$$\begin{align}
+\end{align}$$<p>where the hyperbolic sine function is defined by</p>
+$$\begin{align}
 \text{sinh}(x) = \frac{e^x - e^{-x}}{2}
-\end{align}$$</p>
-<p>This expression for $T$ is a bit difficult to interpret directly, but we can learn something useful in the limits of high ($V_0 - E \gg 1$) and wide ($L \gg 1$) barriers. For the hyperbolic sine term, we have</p>
-<p>$$ \begin{align}
+\end{align}$$<p>This expression for $T$ is a bit difficult to interpret directly, but we can learn something useful in the limits of high ($V_0 - E \gg 1$) and wide ($L \gg 1$) barriers. For the hyperbolic sine term, we have</p>
+$$ \begin{align}
 \lim_{\substack{V_0 - E \gg 1\\ L \gg 1}} \text{sinh}\left ( \left [ \frac{2m(V_0-E)}{\hbar^2}\right ]^{1/2} L \right ) &amp;= \frac{1}{2} \lim_{\substack{V_0 - E \gg 1\\ L \gg 1}} \left [ e^{[2m(V_0-E)/\hbar^2]^{1/2}L} - e^{-[2m(V_0-E)/\hbar^2]^{1/2}L} \right ] \\
 &amp;= \frac{1}{2} e^{[2m(V_0-E)/\hbar^2]^{1/2}L}
-\end{align}$$</p>
-<p>Now,</p>
-<p>$$ \begin{align}
+\end{align}$$<p>Now,</p>
+$$ \begin{align}
 \lim_{\substack{V_0 - E \gg 1\\ L \gg 1}}T &amp;= \left [ 1 + \frac{V_0^2}{8E(V_0-E)}\frac{1}{2} e^{[2m(V_0-E)/\hbar^2]^{1/2}L}  \right ]^{-1} \\
 &amp;\approx \frac{8E(V_0-E)}{V_0^2}e^{-[2m(V_0-E)/\hbar^2]^{1/2}L}
-\end{align}$$</p>
+\end{align}$$
 </div>
 </div>
 </div>
