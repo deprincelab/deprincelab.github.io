@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>second_quantization</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>perturbation</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7510,217 +7510,332 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2d791798-5325-4c2a-8e64-b5456350ae2c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61f2a4f5-87fb-4a47-98fc-11953d61bf72">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Second-Quantization">Second Quantization<a class="anchor-link" href="#Second-Quantization">¶</a></h1>
+<h1 id="Perturbation-Theory">Perturbation Theory<a class="anchor-link" href="#Perturbation-Theory">¶</a></h1><p>In the last notebook, we used the variation theorem to find approximate solutions to the Schrödinger equation. An alterative approach is based on perturbation theory. This notebook outlines the fundamental principles of time-independent and time-dependent perturbation theories.</p>
+<h2 id="Time-Independent-Perturbation-Theory">Time-Independent Perturbation Theory<a class="anchor-link" href="#Time-Independent-Perturbation-Theory">¶</a></h2><p>Time-independent perturbation theory is an approach for finding approximate solutions to the time-independent Schrödinger equation that complements the variational approach discussed in the last notebook. The basic idea is that the Hamiltonian for a system can be partitioned into a "simple" Hamiltonian for which solutions can be determined and a "small" perturbation to that simple Hamiltonian. We have</p>
+<p>$$\begin{align}
+\hat{H} = \hat{H}_0 + \lambda \hat{H}^\prime
+\end{align}$$</p>
+<p>Here, $H_0$ is the <strong>zeroth-order</strong> Hamiltonian, which is the simple part of the problem and $\hat{H}^\prime$ is the operator representing the perturbation. We have also introduced a parameter, $\lambda,$ which can have any value on the interval $[0, 1].$ In the limit that $\lambda \to 0,$ we recover the simple Hamiltonian. In the limit that $\lambda \to 1,$ we recover the full Hamiltonian. We assume that we can determine the eigenfunctions of $\hat{H}_0$ that satisfy</p>
+<p>$$\begin{align}
+\hat{H}_0 | \psi_n^{(0)}\rangle  = E_n^{(0)}|  \psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>where $E_n^{(0)}$ and $\psi_n^{(0)}$ are called the zeroth-order energies and wave functions, respectively.</p>
+<h3 id="Non-Degenerate-Perturbation-Theory">Non-Degenerate Perturbation Theory<a class="anchor-link" href="#Non-Degenerate-Perturbation-Theory">¶</a></h3><p>The next steps differ depending on whether or not any of the eigenvalues of $\hat{H}_0$ are degenerate. We will consider only the case that the eigenvalues are all non-degenerate; the resulting perturbation theory is thus called non-denerate perturbation theory.</p>
+<p>Consider a wave function, $|\psi_n\rangle$, that satisfies the time-independent Schrödinger equation,</p>
+<p>$$\begin{align}
+\hat{H} |\psi_n\rangle = E_n |\psi_n\rangle
+\end{align}$$</p>
+<p>or</p>
+<p>$$\begin{align}
+(\hat{H}_0 + \lambda \hat{H}^\prime) |\psi_n\rangle = E_n |\psi_n\rangle
+\end{align}$$</p>
+<p>where the subscript $n$ refers to a particular state. We now expand $|\psi_n\rangle$ as a Taylor series in the perturbation strength, $\lambda$:</p>
+<p>$$\begin{align}
+|\psi_n\rangle  = \left . |\psi_n\rangle  \right |_{\lambda = 0} + \lambda \left . \frac{\partial |\psi_n\rangle}{\partial \lambda} \right |_{\lambda = 0} + \lambda ^2\frac{1}{2!}\left . \frac{\partial^2 |\psi_n\rangle}{\partial \lambda^2} \right |_{\lambda = 0} + \lambda ^3 \frac{1}{3!} \left . \frac{\partial^3 |\psi_n\rangle}{\partial \lambda^3} \right |_{\lambda = 0} + ...
+\end{align}$$</p>
+<p>We can simply our notation by first noting that</p>
+<p>$$\begin{align}
+\left . |\psi_n\rangle  \right |_{\lambda = 0} = |\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>Next, we define the <strong>$p$-th order correction to the wave function</strong> in terms of the $p$-th order derivative of the wave function, evaluated at $\lambda = 0$, i.e.,</p>
+<p>$$\begin{align}
+\frac{1}{p!} \left  . \frac{\partial^p |\psi_n\rangle}{\partial \lambda^p} \right |_{\lambda = 0} = |\psi_n^{(p)}\rangle
+\end{align}$$</p>
+<p>Now, the full wave function can be expressed as</p>
+<p>$$\begin{align}
+|\psi_n\rangle  = |\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle   + \lambda ^2|\psi_n^{(2)}\rangle  + \lambda ^3|\psi_n^{(3)}\rangle  + ...
+\end{align}$$</p>
+<p>The energy for state $n$ is expanded in a similar way:</p>
+<p>$$\begin{align}
+E_n = E_n^{(0)} + \lambda E_n^{(1)}   + \lambda ^2 E_n^{(2)}  + \lambda^3 E_n^{(3)}  + ...
+\end{align}$$</p>
+<p>where $E_n^{(p)}$ is referred to as the <strong>$p$-th order correction to the energy</strong>. In what follows, we will derive expressions for the $p$-th order corrections to the wave function and energy, which are typically determined order-by-order, starting with $p = 1$.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=972c0cfd-712b-4a51-aa04-09a87dfe6de1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf4b7c96-9197-4a51-858d-a073e6224150">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Second quantization is a convenient formalism in quantum chemistry that allows one to represent quantum mechanical operators and wave functions in terms of operators that create or destroy particles (creation and annihilation operators, respectively). This project provides an overview of the properties of Fermionic creation and annihilation operators and introduces the second-quantized forms of one- and two-particle operators and many-particle wave functions. It also covers the concept of normal order, which is useful for evaluating integrals involving second-quantized operators and wave functions. Python code is provided for bringing strings of second-quantized operators to normal order, using the <a href="https://github.com/edeprince3/pdaggerq">$p^\dagger q$ package</a>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bfc7191f-9fc2-42a7-b6c4-736ebfd3fdb0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Fermionic-Creation-and-Annihilation-Operators">Fermionic Creation and Annihilation Operators<a class="anchor-link" href="#Fermionic-Creation-and-Annihilation-Operators">¶</a></h2><p>Central to the second quantization formalism is the concept of Fock space, which is the space spanned by functions with different particle numbers (i.e., zero-, one-, two-particle functions, etc.). Given a set of $m$ spin-orbitals, $\{\phi\}$, the occupation number representation of an $N$-particle state $|\psi^N\rangle$ is</p>
-<p>$$ |\psi^N\rangle = | n_0, n_1, n_2, ..., n_m \rangle $$</p>
-<p>where $n_p$ is the occupation of the $p$th orbital (0 or 1), and $\sum_p n_p = N$. This state is just a Slater determinant of $N$ occupied spin-orbitals. Different particle-number states can be accessed via the application of creation and annihilation operators to $|\psi^N\rangle$. In this project, we are primarily concerned with electronic wave functions, so we focus our attention on Fermionic creation and annihilation operators. We define the operators $\hat{a}^\dagger_p$ and $\hat{a}_q$ such that they create an electron in spin-orbital $\phi_p$ or destroy an electron in spin-orbital $\phi_q$, respectively. Consider the action of these operators on an electronic state that involves only a single spin-orbital, $\phi_k$:</p>
-<p>$$
-\begin{align}
-\hat{a}_k | 0_k \rangle &amp;= 0 \\
-\hat{a}_k | 1_k \rangle &amp;= |0_k\rangle \\
-\hat{a}^\dagger_k | 0_k \rangle &amp;= |1_k\rangle \\
-\hat{a}^\dagger_k | 1_k \rangle &amp;= 0 \\
-\end{align}
-$$</p>
-<p>The right-hand side of the first equation is zero because one cannot annihilate an electron in an empty spin-orbital. The right-hand side of the last equation is zero because the spin-orbitals can contain a maximum of one electron. Acting on a multielectron state is similar, except that we must be a little careful because we need to account for the antisymmetry of the state. For example, consider an annihilator acting on a two-electron / two-orbital state</p>
-<p>$$ \hat{a}_1 = | 1_0, 1_1 \rangle = -\hat{a}_1| 1_1, 1_0 \rangle = -|0_1 1_0\rangle = -|1_0 0_1 \rangle$$</p>
-<p>The minus sign resuts from the fact that we need to move orbital 1 to the front of the occupation number vector in order to annihilate the electron in that orbital, and we accumulate a minus sign every time we swap two occupied orbitals. For a general Fock state, we would have</p>
-<p>$$ 
-\begin{align}
-\hat{a}_k | n_0, n_1, ..., 1_k, n_{k+1}, ..., n_m \rangle &amp;= (-1)^{\sum_{l &lt; k} n_l} \hat{a}_k | 1_k, n_0, n_1, ..., n_{k+1}, ..., n_m \rangle \\
-&amp;= (-1)^{\sum_{l &lt; k} n_l} | 0_k, n_0, n_1, ..., n_{k+1}, ..., n_m \rangle \\
-&amp; = (-1)^{\sum_{l &lt; k} n_l} | n_0, n_1, ..., 0_k, n_{k+1}, ..., n_m \rangle
-\end{align}
-$$</p>
-<p>Similar considerations should be made when adding electrons to a Fock state with creation operators</p>
-<p>$$ 
-\begin{align}
-\hat{a}^\dagger_k | n_0, n_1, ..., 0_k, n_{k+1} ... n_m \rangle &amp;= \hat{a}^\dagger_k | 0_k, n_0, n_1, ..., n_{k+1}, ..., n_m \rangle \\
-&amp;= | 1_k, n_0, n_1, ..., n_{k+1}, ..., n_m \rangle \\
-&amp; = (-1)^{\sum_{l &lt; k} n_l} | n_0, n_1, ..., 1_k, n_{k+1} ... n_m \rangle
-\end{align}
-$$</p>
-<p>Given these definitions, it is not too difficult to see that the product of operators $\hat{a}^\dagger_k \hat{a}_k$ counts the occupation of the $k$th orbital, i.e.,</p>
-<p>$$ \hat{a}^\dagger_k \hat{a}_k | n_0, n_1, ..., n_k, ..., n_m \rangle = n_k | n_0, n_1, ..., n_k, ..., n_{k+1}, ..., n_m \rangle  $$</p>
-<p>which suggests that we can define a number operator to count the total number of electrons in the state as</p>
-<p>$$ \hat{N} = \sum_p \hat{a}^\dagger_p \hat{a}_p $$</p>
-<p>The existence of this operator is our first clue that we should be able build useful quantum mechanical operators from sums / products of creation and annihilation operators.</p>
-<p>The algebraic properties of Fermionic creation and annihilation operators encode the antisymmetry properties that should be satisfied by many-electron wave functions. Specifically, Fermionic creation and annihilation operators satisfy the following anticommutation relations</p>
-<p>$$ \{\hat{a}_p, \hat{a}_q \} = \hat{a}_p \hat{a}_q + \hat{a}_q \hat{a}_p = 0$$</p>
-<p>$$ \{\hat{a}^\dagger_p, \hat{a}^\dagger_q \} = \hat{a}^\dagger_p \hat{a}^\dagger_q + \hat{a}^\dagger_q \hat{a}^\dagger_p = 0$$</p>
+<p>If the corrections to the wave function are determined order-by-order, how is the total wave function normalized? Here, we use a special type of normalization condition, called <strong>intermediate normalization</strong> in which the overlap of the full wave function with the zeroth-order wave function is one:</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)} | \psi_n \rangle = 1
+\end{align}$$</p>
+<p>If we expand $|\psi_n\rangle$ in powers of $\lambda$, we have</p>
+<p>$$\begin{align}
+1 = \langle \psi_n^{(0)} | \psi_n^{(0)} \rangle + \langle \psi_n^{(0)} | \psi_n^{(1)} \rangle \lambda + \langle \psi_n^{(0)} | \psi_n^{(2)} \rangle \lambda^2 + \langle \psi_n^{(0)} | \psi_n^{(3)} \rangle \lambda^3 + ...
+\end{align}$$</p>
+<p>If we choose $|\psi_n^{(0)}\rangle$ to be normalized, then we have</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)} | \psi_n^{(0)}\rangle = 1
+\end{align}$$</p>
 <p>and</p>
-<p>$$ \{\hat{a}^\dagger_p, \hat{a}_q \} = \hat{a}^\dagger_p \hat{a}_q + \hat{a}_q \hat{a}^\dagger_p = \delta_{pq}$$</p>
-<p>where $\delta_{pq}$ is the Kronecker delta function.</p>
+<p>$$\begin{align}
+0 =  \langle \psi_n^{(0)} | \psi_n^{(1)} \rangle \lambda + \langle \psi_n^{(0)} | \psi_n^{(2)} \rangle \lambda^2 + \langle \psi_n^{(0)} | \psi_n^{(3)} \rangle \lambda^3 + ...
+\end{align}$$</p>
+<p>This expression must be satisfied for all powers of $\lambda$. As a result, we can conclude that</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)} | \psi_n^{(p)}\rangle = 0\text{, }\forall\text{ }p &gt; 0
+\end{align}$$</p>
+<p>In other words, the zeroth-order wave function for state $n$, $|\psi_n^{(0)}\rangle$, is orthogonal to all corrections to the wave function, $|\psi_n^{(p)}\rangle$. Note that the reason we can assume that $|\psi_n^{(0)}\rangle$ is normalized is that it is an eigenfunction of a Hermitian operator ($\hat{H}_0$) and is therefore normalizable. For the remainder of this discussion, we will assume that the zeroth-order wave functions form an orthonormal set, i.e.,</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)}|\psi_m^{(0)}\rangle = \delta_{mn}
+\end{align}$$</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2b22b175-a081-4b91-b612-7518e7dbb332">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7a9e8d7c-5655-4ec7-bdd9-ba80426d36ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Second-Quantized-Operators">Second-Quantized Operators<a class="anchor-link" href="#Second-Quantized-Operators">¶</a></h2><p>As suggested above, sums / products of creation and annihilation operators can be used to represent quantum mechanical operators.</p>
-<h4 id="One-Body-Operators">One-Body Operators<a class="anchor-link" href="#One-Body-Operators">¶</a></h4><p>Consider a one-body operator</p>
-<p>$$ \mathcal{O}_1 = \sum_i^N \hat{h}({\bf x}_i) $$</p>
-<p>where $i$ sums over all the $N$ electrons in the system and ${\bf x}_i$ represents the coordinates (spatial plus spin) of electron $i$. The second-quantized form of this operator, expanded within a basis of $m$ spin orbitals, $\{ \phi \}$, is</p>
-<p>$$ \mathcal{O}_1 = \sum_{p}^m \sum_q^m \langle \phi_p({\bf x}_1) | \hat{h}({\bf x}_1) | \phi_q({\bf x}_1) \rangle \hat{a}^\dagger_p \hat{a}_q = \sum_{pq} h_{pq} \hat{a}^\dagger_p \hat{a}_q $$</p>
-<p>Note that the sum in the original expression runs over the particles in the system, whereas the sums in the second-quantized form of the operator run over the spin-orbitals. Moving forward, it is assumed that the sums have these limits, and this notation is suppressed.</p>
-<h4 id="Two-Body-Operators">Two-Body Operators<a class="anchor-link" href="#Two-Body-Operators">¶</a></h4><p>Consider a general two-body operator</p>
-<p>$$\mathcal{O}_2 = \frac{1}{2} \sum_{i \neq j} \hat{g}({\bf x}_i, {\bf x}_j) $$</p>
-<p>The second-quantized form of this operator, expanded within a basis of $m$ spin orbitals, is</p>
-<p>$$ \mathcal{O}_2 = \frac{1}{2} \sum_{pqrs} \langle \phi_p({\bf x}_1)\phi_q({\bf x}_2) | \hat{g}({\bf x}_i, {\bf x}_j) | \phi_r({\bf x}_1) \phi_s({\bf x}_2) \rangle \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r = \frac{1}{2} \sum_{pqrs} g_{pqrs} \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r $$</p>
-<p>Note that the double sum in the original operator is restricted, whereas no restrictions appear in the second-quantized form of the operator.</p>
-<h4 id="Products-of-Operators">Products of Operators<a class="anchor-link" href="#Products-of-Operators">¶</a></h4><p>Occasionally one may encounter products of operators, and it is important to recognize that the second-quantized form of the product operator depends on whether the one takes the product of the original operators or their second-quantized forms. Consider two one-body operators, $\hat{A}$ and $\hat{B}$, defined as</p>
-<p>$$
-\begin{align}
-\hat{A} &amp;= \sum_i \hat{A}({\bf x}_i) \\
-&amp;= \sum_{pq} A_{pq} \hat{a}^\dagger_p \hat{a}_q
-\end{align}
-$$</p>
-<p>and</p>
-<p>$$
-\begin{align}
-\hat{B} &amp;= \sum_i \hat{B}({\bf x}_i) \\
-&amp;= \sum_{pq} B_{pq} \hat{a}^\dagger_p \hat{a}_q
-\end{align}
-$$</p>
-<p>The product of these operators contains both one-body and two-body operators</p>
-<p>$$ 
-\begin{align}
-\hat{A}\hat{B} &amp;= \sum_{ij} \hat{A}({\bf x}_i) \hat{B}({\bf x}_j) \\
-&amp;= \sum_{i\neq j} \hat{A}({\bf x}_i) \hat{B}({\bf x}_j) + \sum_{i} \hat{A}({\bf x}_i) \hat{B}({\bf x}_i)
-\end{align}
-$$</p>
-<p>Based on the definitions above, the second-quantized form of this operator would be</p>
-<p>$$ 
-\begin{align}
-\hat{A}\hat{B} &amp;= \sum_{pqrs} \langle \phi_p({\bf x}_1)\phi_q({\bf x}_2) | \hat{A}({\bf x}_1)\hat{B}({\bf x}_2) | \phi_r({\bf x}_1) \phi_s({\bf x}_2) \rangle \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r \\
-&amp;+ \sum_{pq} \langle \phi_p({\bf x}_1) | \hat{A}({\bf x}_1)\hat{B}({\bf x}_1)|\phi_q({\bf x}_1)\rangle \hat{a}^\dagger_p \hat{a}_q \\
-&amp;= \sum_{pqrs} \langle \phi_p({\bf x}_1) | \hat{A}({\bf x}_1) | \phi_r({\bf x}_1)  \rangle \langle \phi_q({\bf x}_2) | \hat{B}({\bf x}_2) | \phi_s({\bf x}_2) \rangle \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r \\
-&amp;+ \sum_{pq} (AB)_{pq} \hat{a}^\dagger_p \hat{a}_q \\
-&amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r + \sum_{pq} (AB)_{pq} \hat{a}^\dagger_p \hat{a}_q
-\end{align}
-$$</p>
-<p>where we have used the fact that the operator $\hat{A}({\bf x}_1)\hat{B}({\bf x}_2)$ is separable so we can perform the integrals over electron coordinates ${\bf x}_1$ and ${\bf x}_2$ separately.</p>
-<p>If instead we take the product of the second-quantized form of these operators, we obtain a slightly different result</p>
-<p>$$
-\begin{align}
-\left ( \sum_{pr} A_{pr} \hat{a}^\dagger_p \hat{a}_r \right ) \left ( \sum_{qs} B_{qs} \hat{a}^\dagger_q \hat{a}_s \right ) &amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}_r \hat{a}^\dagger_q \hat{a}_s \\
-&amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p (\delta_{qr} - \hat{a}^\dagger_q \hat{a}_r ) \hat{a}_s \\
-&amp;= -\sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}^\dagger_q \hat{a}_r \hat{a}_s + 
-\sum_{pqrs} \delta_{pr} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}_s \\
-&amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}^\dagger_q \hat{a}_s \hat{a}_r + \sum_{pq} \left ( \sum_r A_{pr} B_{rq}  \right ) \hat{a}^\dagger_p \hat{a}_q
-\end{align}
-$$</p>
-<p>where, in the second and fourth lines, we have made use of two of the anticommutator identies given above. We can see that these two representations of $\hat{A}\hat{B}$ differ in the one-body part, and it turns out that these representations are only equivalent in the limit that the basis set $\{\phi\}$ is complete. This result makes sense because we can relate the two forms of the one-body part through the resolution of the identity, i.e.,</p>
-<p>$$ 
-\begin{align}
-\sum_r A_{pr} B_{rq} &amp;= \sum_r \langle \phi_p({\bf x}_1)| \hat{A}({\bf x}_1) |\phi_r({\bf x}_1\rangle \langle \phi_r({\bf x}_1)| \hat{B}({\bf x}_1) | \phi_q({\bf x}_1)\rangle \\
-&amp; = \langle \phi_p({\bf x}_1)| \hat{A}({\bf x}_1) \hat{B}({\bf x}_1) | \phi_q({\bf x}_1)\rangle \\
-&amp; = (AB)_{pq}
-\end{align}
-$$</p>
-<p>where we have used the fact that</p>
-<p>$$\sum_r |\phi_r({\bf x}_1\rangle \langle \phi_r({\bf x}_1)| = \hat{1}$$</p>
-<p>if the basis set is complete.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=108b0925-ef27-44bf-9dbe-565e964311b5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Second-Quantized-Wave-Functions">Second-Quantized Wave Functions<a class="anchor-link" href="#Second-Quantized-Wave-Functions">¶</a></h2><p>A Slater determinant for an $N$-electron system can be generated from the vacuum state by the repeated application of $N$ creation operators</p>
-<p>$$|\Phi_0\rangle = \prod_i^N \hat{a}_i^{\dagger} |\rangle$$</p>
-<p>More complicated many-electron wave functions can then be created by the application of additional creation and annihilation operators to this state. For example, consider the full configuration interaction (CI) wave function, which is a linear combination of all possible $N$-electron Slater determinants. We can generate the full CI wave function from the reference Slater determinant, $|\Phi_0\rangle$, by applying one-body, two-body, etc. transition operators to this state</p>
-<p>$$ |\Psi_{\rm CI}\rangle = (1 + \hat{C}_1 + \hat{C}_2 + ... + \hat{C}_N)|\Phi_0\rangle$$</p>
-<p>with</p>
-<p>$$
-\begin{align}
-\hat{C}_1 &amp;= \sum_{ia} c_i^a \hat{a}^\dagger_a \hat{a}_i \\
-\hat{C}_2 &amp;= \frac{1}{(2!)^2} \sum_{ijab} c_{ij}^{ab} \hat{a}^\dagger_a \hat{a}^\dagger_b \hat{a}_j \hat{a}_i\\
-\hat{C}_3 &amp;= \frac{1}{(3!)^2} \sum_{ijkabc} c_{ijk}^{abc} \hat{a}^\dagger_a \hat{a}^\dagger_b \hat{a}^\dagger_c \hat{a}_k \hat{a}_j \hat{a}_i\\
+<p>Let us go back to the Schrödinger equation, with $|\psi_n\rangle$ and $E_n$ expanded in powers of $\lambda$:</p>
+<p>$$\begin{align}
+(\hat{H}_0 + \lambda \hat{H}^\prime) ( |\psi_0\rangle + \lambda |\psi_n^{(1)}\rangle + ...) = ( E_n^{(0)} + \lambda E_n^{(1)} + ...)( |\psi_0\rangle + \lambda |\psi_n^{(1)}\rangle + ...)
+\end{align}$$</p>
+<p>The right- and left-hand sides of this equation must be equal for all possible values of $\lambda$, which implies that terms on either side having the same power of $\lambda$ must be equivalent. Each order in $\lambda$ defines a different equation involving only a few of the corrections to the wave function and energy. For up to $\lambda = 2$, we have</p>
+<p>$$\begin{align}
+\lambda^0:~~&amp; \hat{H}_0 |\psi_n^{(0)}\rangle = E_n^{(0)} |\psi_n^{(0)}\rangle \\
+\lambda^1:~~&amp; \hat{H}_0 |\psi_n^{(1)}\rangle + \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle \\
+\lambda^2:~~&amp; \hat{H}_0 |\psi_n^{(2)}\rangle + \hat{H}^\prime | \psi_n^{(1)} \rangle = E_n^{(0)} |\psi_n^{(2)}\rangle + E_n^{(1)} |\psi_n^{(1)}\rangle + E_n^{(2)} |\psi_n^{(0)}\rangle\\
 ...
-\end{align}
-$$</p>
-<p>Here, the labels $i$, $j$, $k$, ... refer to orbitals that are occupied in the reference determinant, $|\Phi_0\rangle$, and $a$, $b$, $c$, ... refer to unoccupied orbitals. So, the operator $\hat{C}_1$ is a single excitation operator, which generates Slater determinants where an electron in occupied orbital $\phi_i$ is moved to virtual orbital $\phi_a$. Similarly, $\hat{C}_2$ is a double excitation operator that generates configurations that are doubly substituted with respect to $|\Phi_0\rangle$. The coefficients, $c_i^a$, $c_{ij}^{ab}$, etc. are variable parameters that can be determined according to the variation theorem (i.e., by minimizing the electronic energy with respect to variations in the coefficients). Additional details regarding the properties of CI wave functions and how the CI coefficients can be determined in practice will be provided in another tutorial project.</p>
-<p>Other types of wave functions can be defined in a similar way. For example, the coupled-cluster family of wave functions has the form</p>
-<p>$$ |\Psi_{\rm CC}\rangle = \text{exp}(\hat{T})|\Phi_0\rangle$$</p>
-<p>where $\hat{T} = \hat{T}_1 + \hat{T}_2 + ... \hat{T}_N$ is the cluster operator and</p>
-<p>$$
-\begin{align}
-\hat{T}_1 &amp;= \sum_{ia} t_i^a \hat{a}^\dagger_a \hat{a}_i \\
-\hat{T}_2 &amp;= \frac{1}{(2!)^2} \sum_{ijab} t_{ij}^{ab} \hat{a}^\dagger_a \hat{a}^\dagger_b \hat{a}_j \hat{a}_i\\
-\hat{T}_3 &amp;= \frac{1}{(3!)^2} \sum_{ijkabc} t_{ijk}^{abc} \hat{a}^\dagger_a \hat{a}^\dagger_b \hat{a}^\dagger_c \hat{a}_k \hat{a}_j \hat{a}_i\\
-...
-\end{align}
-$$</p>
-<p>The amplitudes $t_i^a$, $t_{ij}^{ab}$, etc. are the cluster amplitudes, which can be determined using a projective solution to the Schrödinger equation. Additional details regarding the properties of CC wave functions and how the cluster amplitudes can be determined in practice will be provided in another tutorial project.</p>
+\end{align}$$</p>
+<p>The first of these equations is simply the zeroth-order Schrödinger equation.</p>
+<h4 id="The-First-Order-Correction-to-the-Energy">The First-Order Correction to the Energy<a class="anchor-link" href="#The-First-Order-Correction-to-the-Energy">¶</a></h4><p>What is the first-order correction to the energy for state $n$, $E_n^{(1)}$? We can determine this quantity using the first-order Schrödinger equation,</p>
+<p>$$\begin{align}
+\hat{H}_0 |\psi_n^{(1)}\rangle + \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>To isolate $E_n^{(1)}$, we can left-multiply both sides of this equation by $\langle \psi_n^{(0)}|$ and integrating each term over all space</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle + \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} \langle \psi_n^{(0)}|\psi_n^{(1)}\rangle + E_n^{(1)} \langle \psi_n^{(0)}|\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>Now, let us inspect each term and play my favorite game: "zero, one, or something else?!".</p>
+<ol>
+<li>$\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle = 0$. "How can this be?" you might ask. Well, two pieces of information are key. First, $|\psi_n^{(0)}\rangle$ is an eigenfunction of $\hat{H}_0$. Second, $|\psi_n^{(0)}\rangle$ is orthogonal to any correction to the wave function for state $n$ (e.g., $|\psi_n^{(1)}\rangle$). More explicitly,
+$$\begin{align}
+\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle &amp; = \langle \psi_n^{(1)}| \hat{H}_0 |\psi_n^{(0)}\rangle ^* 
+\\
+&amp; = E_n^{(0)} \langle \psi_n^{(1)} | \psi_n^{(0)}\rangle^* \\
+&amp; = 0
+\end{align}$$</li>
+<li>$\langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle = $ something else.</li>
+<li>$\langle \psi_n^{(0)}|\psi_n^{(1)}\rangle = 0$ because, as mentioned above, these functions are orthogonal.</li>
+<li>$\langle \psi_n^{(0)}|\psi_n^{(0)}\rangle = 1$ because the zeroth-order wave functions are normalized.</li>
+</ol>
+<p>The first term on the left- and right-hand sides of this equation vanish because (1) $|\psi_n^{(0)}\rangle$ is an eigenfunction of $\hat{H}_0$, and (2) $|\psi_n^{(0)}\rangle$ and $|\psi_n^{(1)}\rangle$ are orthogonal. More explicitly, the first term on the left-hand side vanishes because</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle &amp; = \langle \psi_n^{(1)}| \hat{H}_0 |\psi_n^{(0)}\rangle ^* 
+\\
+&amp; = E_n^{(0)} \langle \psi_n^{(1)} | \psi_n^{(0)}\rangle^* \\
+&amp; = 0
+\end{align}$$</p>
+<p>Noting that the zeroth-order wave functions are normalized, we are left with</p>
+<p>$$\begin{align}
+E_n^{(1)} =  \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle 
+\end{align}$$</p>
+<p>which we could evaluate, given $|\psi_n^{(0)}\rangle$ and $\hat{H}^\prime$. So, to first-order in perturbation theory,</p>
+<p>$$\begin{align}
+E_n = E_n^{(0)} + \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle
+\end{align}$$</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9f76c6a-ed27-4be2-b58b-af3db78a2bcb">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0bf9f172-8f0e-40d9-861b-adc1359b472f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Normal-Order">Normal Order<a class="anchor-link" href="#Normal-Order">¶</a></h2><h4 id="The-True-Vacuum">The True Vacuum<a class="anchor-link" href="#The-True-Vacuum">¶</a></h4><p>One of the benefits of second quantization is that it simplifies the way in which we evaluate integrals involving quantum mechanical operators and many-body wave functions. It turns out that integrals over these operators are most conveniently dealt with when the operators are in "normal order," that is, when all of the creation operators lie to the left of the annihilation operators. Technically, this this definition of normal order is relative to the true vacuum state ($|\rangle$), whereas many electronic structure methods rely on a normal order relative to a different state, which is usually the  Fermi vacuum. This case will be discussed in the next section.</p>
-<p>For the true vacuum state, normal order is defined when the creation operators are all to the left of the annihilation operators. In this way, any expectation value of a string of normal-ordered operators (with respect to the vacuum state) will be zero. For example,</p>
-<p>$$ 
-\begin{align} 
-\langle | \hat{a}^\dagger_p \hat{a}_q | \rangle &amp;= 0 \\
-\langle | \hat{a}_p \hat{a}_q | \rangle &amp;= 0 \\
-\langle | \hat{a}^\dagger_p \hat{a}^\dagger_q | \rangle &amp;= 0
-\end{align}
-$$</p>
-<p>Note that the last integral vanishes, despite $\hat{a}^\dagger_p \hat{a}^\dagger_q$ not annihilating the ket state, $|\rangle$. The reason this term vanishes is that these operators will annihilate the bra state, $\langle |$, because</p>
-<p>$$
-\begin{align}
-\langle | \hat{a}^\dagger_p \hat{a}^\dagger_q = \left (\hat{a}_q \hat{a}_p|\rangle\right )^\dagger = 0 \\
-\end{align}
-$$</p>
-<p>Now, consider an operator that is not normal ordered, $\hat{a}_p \hat{a}^\dagger_q$. Briging this operator to normal order is easy; we simply apply the Fermionic anticommutation relations given above. We then find</p>
-<p>$$ \langle | \hat{a}_p \hat{a}^\dagger_q | \rangle = \langle | \delta_{pq} | \rangle - \langle | \hat{a}^\dagger_p \hat{a}_q | \rangle = \delta_{pq} $$</p>
-<p>The term that does not vanish is the one that does not include any operators. This is the power of the concept of normal order. If we would like to evaluate the expectation value of some second-quantized object, we simply need to bring that object to normal order. The only non-zero terms will be the "fully-contracted" ones that do not involve any operators.</p>
-<p>Bringing more general strings of creation and annihilation operators to normal order is straightforward enough, given the anti-commutator relations obeyed by the operators. The challenge is really just that the application of these rules can become tedious. Thankfully, computers are well suited for tedious tasks.  We have developed a tool (<a href="https://github.com/edeprince3/pdaggerq">pdaggerq</a>) that uses a simple Python interface to define and rearrange complicated strings of creation and annihilation operators. For example, the following Python code will bring the expression $\hat{a}_i^{\dagger}\hat{a}_j \hat{a}_l^{\dagger} \hat{a}_k$ to normal order.</p>
+<p>Now, let us evaluate the ground-state energy (to first order) of a one-dimensional anharmonic oscillator of mass $m$ with the following Hamiltonian</p>
+<p>$$\begin{align}
+\hat{H} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + \frac{1}{2} k x^2 + c x^3 + d x^4
+\end{align}$$</p>
+<p>Here, $x$ reprents the displacement of the oscillator from its equilibrium position, and $k,$ $c,$ and $d$ are constants. We can partition this Hamiltonian into a zeroth-order part that looks like the Hamiltonian for the quantum harmonic oscillator (QHO) problem,</p>
+<p>$$\begin{align}
+\hat{H}_0 = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + \frac{1}{2} k x^2
+\end{align}$$</p>
+<p>and a perturbation</p>
+<p>$$\begin{align}
+\hat{H}^\prime = c x^3 + d x^4
+\end{align}$$</p>
+<p>The zeroth-order wave functions have the form</p>
+<p>$$\begin{align}
+|\psi_n^{(0)}\rangle = N_n e^{-\alpha x^2/2} H_n(\alpha^{1/2}x) 
+\end{align}$$</p>
+<p>where $\alpha = \frac{\omega m}{\hbar}$, $\omega = 2\pi \nu$, $\nu$ is the frequency of the oscillations, $N_n$ is a normalization constant, and $H_n$ is a Hermite polynomial. The zeroth-order energies are</p>
+<p>$$\begin{align}
+E_n^{(0)} = \left (v + \frac{1}{2} \right ) \hbar \omega
+\end{align}$$</p>
+<p>To first order, the ground-state energy is</p>
+<p>$$\begin{align}
+E_0 = E_0^{(0)} + \langle \psi_0^{(0)} | \hat{H}^\prime | \psi_0^{(0)}\rangle
+\end{align}$$</p>
+<p>Given that $E_0^{(0)} = \frac{1}{2}\hbar \omega$ and $|\psi_0^{(0)}\rangle = \left ( \frac{\alpha}{\pi}\right ) ^{1/4}e^{-\alpha x^2/2} $, we have</p>
+<p>$$\begin{align}
+E_0 &amp;= \frac{1}{2}\hbar \omega + \int_{-\infty}^{\infty} ( cx^3 + dx^4) \left ( \frac{\alpha}{\pi}\right ) ^{1/2}e^{-\alpha x^2} \\
+&amp;= \frac{1}{2}\hbar \omega + d \left ( \frac{\alpha}{\pi}\right ) ^{1/2} \int_{-\infty}^{\infty} x^4 e^{-\alpha x^2} dx \\
+&amp;= \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2}
+\end{align}$$</p>
+<p>Note that the parameter, $c$, does not appear at first order, but it will appear at higher orders in perturbation theory.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bcdf0f9e-43f9-4ebc-8442-185dffb1a3c6">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=12b0cdc7-9bd3-4c48-afc6-bd0fc775ccc4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id=""><a class="anchor-link" href="#">¶</a></h4><p>The First-Order Correction to the Wave Function</p>
+<p>We isolated the first-order correction to the energy by left-multiplying the first-order Schrödinger equation by $\langle \psi_n^{(0)}|$ and integrating over all space. Let us see what happens if instead we project the first-order Schrödinger equation,</p>
+<p>$$\begin{align}
+\hat{H}_0 |\psi_n^{(1)}\rangle + \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>onto $\langle \psi_m^{(0)}|$, with $m\neq n$. Doing so gives</p>
+<p>$$\begin{align}
+\langle \psi_m^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle + \langle \psi_m^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} \langle \psi_m^{(0)}|\psi_n^{(1)}\rangle + E_n^{(1)} \langle \psi_m^{(0)}|\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>How shall we proceed? You guessed it! It is time for another rousing game of "zero, one, or something else?!".</p>
+<ol>
+<li>$\langle \psi_m^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle =$ something else. We have
+$$\begin{align}
+\langle \psi_m^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle &amp; = \langle \psi_n^{(1)}| \hat{H}_0 |\psi_m^{(0)}\rangle ^* 
+\\
+&amp; = E_m^{(0)} \langle \psi_n^{(1)} | \psi_m^{(0)}\rangle^* \\
+&amp; = E_m^{(0)} \langle \psi_m^{(0)} | \psi_n^{(1)}\rangle
+\end{align}$$
+Note that, while the first-order correction to the wave function for state $n$ will be orthogonal to the zeroth-order wave function for state $n$, we have no such guarantee for the zeroth-order wave function for a different state (in this case, state $m$).</li>
+<li>$\langle \psi_m^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle = $ something else.</li>
+<li>$\langle \psi_m^{(0)}|\psi_n^{(1)}\rangle = $ something else. As stated above, we have no guarantee that a correction to the wave function for state $n$ is orthogonal to the zeroth-order wave function for a different state, $m$.</li>
+<li>$\langle \psi_m^{(0)}|\psi_n^{(0)}\rangle = 0$ because the zeroth-order wave functions form an orthonormal set, and $m \neq n$.</li>
+</ol>
+<p>With these considerations, we have</p>
+<p>$$\begin{align}
+\langle \psi_m^{(0)}|\psi_n^{(1)}\rangle  = \frac{\langle \psi_m^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}}
+\end{align}$$</p>
+<p>Now, we recall that the zeroth-order wave functions are eigenfunctions of a Hermitian operator, and, they form a complete set. As such, we can expand $|\psi_n^{(1)}\rangle$ as</p>
+<p>$$\begin{align}
+|\psi_n^{(1)}\rangle = \sum_{k\neq n} c_k |\psi_k^{(0)}\rangle
+\end{align}$$</p>
+<p>Note the restriction that $k \neq n$, which is necessary to guaratee that $\langle \psi_n^{(0)}|\psi_n^{(1)}\rangle = 0$. To determine a given expansion coefficient, we must project $|\psi_n^{(1)}\rangle$ onto the corresponding basis function:</p>
+<p>$$\begin{align}
+\langle \psi_m^{(0)} | \psi_n^{(1)} \rangle &amp;= \sum_{k\neq n} c_k\langle \psi_m^{(0)} | \psi_k^{(0)} \rangle \\
+&amp;= \sum_{k\neq n} c_k \delta_{mk}\\
+&amp;= c_m
+\end{align}$$</p>
+<p>Combined with the result from above, we can see that the expansion coefficients are</p>
+<p>$$\begin{align}
+c_m = \frac{\langle \psi_m^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_m^{(0)}}
+\end{align}$$</p>
+<p>so the first-order correction to the wave function is</p>
+<p>$$\begin{align}
+|\psi_n^{(1)}\rangle = \sum_{k\neq n} \frac{\langle \psi_k^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_k^{(0)}} | \psi_k^{(0)} \rangle
+\end{align}$$</p>
+<p>From our anharmonic oscillator example, the first-order correction to the wave function for state $n$ would be</p>
+<p>$$\begin{align}
+|\psi_n^{(1)}\rangle = \sum_{k\neq n}^\infty \frac{N_k N_n \int_{-\infty}^{\infty} e^{-\alpha x^2} H_k(\alpha^{1/2}x) H_n(\alpha^{1/2} x) (cx^3 + dx^4)}{\hbar\omega ( n - k )} |\psi_k^{(0)}\rangle
+\end{align}$$</p>
+<p>In this case, we can see that the summation is over an infinite number of states, $k$. Note, however, that this is not generally the case. In Møller-Plesset perturbation theory, for example, evalulating the first-order correction to the wave function does not require an infinite summation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e51f5119-d7ef-4219-9bbf-07ed95461688">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="The-Second-Order-Correction-to-the-Energy">The Second-Order Correction to the Energy<a class="anchor-link" href="#The-Second-Order-Correction-to-the-Energy">¶</a></h4><p>Let's keep this party going. Here, we will derive an expression for the second-order correction to the energy. The second-order energy is particularly important in electronic structure theory. In Møller-Plesset perturbation theory, the second-order correction (MP2) is the first correction to the Hartree-Fock energy.</p>
+<p>To obtain the second-order energy, we proceed in a similar manner as above, when we isolated the first-order energy from the first-order Schrödinger equation. The second-order Schrödinger equation is</p>
+<p>$$\begin{align}
+\hat{H}_0 |\psi_n^{(2)}\rangle + \hat{H}^\prime | \psi_n^{(1)} \rangle = E_n^{(0)} |\psi_n^{(2)}\rangle + E_n^{(1)} |\psi_n^{(1)}\rangle + E_n^{(2)} |\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>We left-multiply both sides by $\langle \psi_n^{(0)}|$ and integrate over all space, giving</p>
+<p>$$\begin{align}
+\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(2)}\rangle + \langle \psi_n^{(0)} | \hat{H}^\prime | \psi_n^{(1)} \rangle = E_n^{(0)} \langle \psi_n^{(0)}|\psi_n^{(2)}\rangle + E_n^{(1)} \langle \psi_n^{(0)}|\psi_n^{(1)}\rangle + E_n^{(2)} \langle \psi_n^{(0)}|\psi_n^{(0)}\rangle
+\end{align}$$</p>
+<p>Guess what time it is? It is time to play "zero, one, or something else?!". On the left-hand side of this equation, $\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(2)}\rangle = 0$ (you can prove this for yourself). On the right-hand side, only the third term survives because the zeroth order wave function for state $n$ is orthogonal to any correction to the wave function for state $n$. We then have</p>
+<p>$$\begin{align}
+E_n^{(2)} &amp;= \langle \psi_n^{(0)} | \hat{H}^\prime | \psi_n^{(1)}\rangle
+\end{align}$$</p>
+<p>We just showed that</p>
+<p>$$\begin{align}
+|\psi_n^{(1)}\rangle = \sum_{k\neq n} \frac{\langle \psi_k^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle}{E_n^{(0)} - E_k^{(0)}} | \psi_k^{(0)} \rangle
+\end{align}$$</p>
+<p>so</p>
+<p>$$\begin{align}
+E_n^{(2)} &amp;= \sum_{k\neq n} \langle \psi_n^{(0)} | \hat{H}^\prime | \psi_k^{(0)} \rangle \frac{\langle \psi_k^{(0)}|\hat{H}^\prime | \psi_n^{(0)} \rangle }{E_n^{(0)} - E_k^{(0)}} \\
+&amp;= \sum_{k\neq n} \frac{ |\langle \psi_k^{(0)}|\hat{H}^\prime | \psi_n^{(0)} \rangle |^2 }{E_n^{(0)} - E_k^{(0)}} 
+\end{align}$$</p>
+<p>Recall the anharmonic oscillator. To second-order the ground-state energy for this system would be</p>
+<p>$$\begin{align}
+E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k N_0 \left [ \int_{-\infty}^{\infty} e^{-\alpha x^2} H_k(\alpha^{1/2}x) H_0(\alpha^{1/2} x) (cx^3 + dx^4) dx\right ] }{\frac{1}{2}\hbar\omega-\hbar\omega (k + \frac{1}{2})}
+\end{align}$$</p>
+<p>Note that, unlike the first-order energy, the second-order energy  for the anharmonic oscillator will depend on both the $c$ and $d$ parameters.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e46e3798-9356-4fb0-ae00-0ef4b549e001">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Interpretation-of-these-Results">Interpretation of these Results<a class="anchor-link" href="#Interpretation-of-these-Results">¶</a></h4><ol>
+<li>Perturbed energies and wave functions allow us to "mix" character of other zeroth-order states into state $n$. This mixing is necessary because $|psi_n^{(0)}\rangle$ will not look exactly like $|\psi_n\rangle$.</li>
+<li>The $\frac{1}{E_n^{(0)} - E_k^{(0)}}$ term implies that states nearby in energy dominate perturbative corrections for state $n$.</li>
+<li>In general, summations can be infinite (e.g., as we saw for the anharmonic oscillator problem). Exceptions include Møller-Plesset perturbation theory.</li>
+<li>Higher-order corrections to the energies and wave functions can become extremely complicated. In electronic structure theory, the highest-order corrections one would typically encouter would be fourth-order [MP4 or CCSD(T)] or fifth order [CCSD(T)].</li>
+<li>If the zeroth-order problem has a continuum of eigenfunctions (e.g., unbound states in the hydrogen atom problem), the these states must be included in the perturbative expansins (in these cases, sums over states become integrals).</li>
+<li>The approach outlined above works well for non-degenerate $\hat{H}_0$ and when the perturbation is "small." In such cases, $|\psi_n^{(0)}\rangle$ gives a good approximation to $|\psi_n\rangle$.</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aa555a70-d8cb-46de-abac-3776a6c83eda">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=474bc551-a7fa-44b2-9520-aea9ee1beeb7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b3c461f8-114a-4d95-a3ab-9f942be9a120">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7728,428 +7843,23 @@ $$</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
-
-<span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"true"</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'a*(i)'</span><span class="p">,</span><span class="s1">'a(j)'</span><span class="p">,</span><span class="s1">'a*(l)'</span><span class="p">,</span><span class="s1">'a(k)'</span><span class="p">])</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Time-Dependent Perturbation Theory</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['+1.00000000000000', 'i*', 'k', 'd(j,l)']
-['-1.00000000000000', 'i*', 'l*', 'j', 'k']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d382e677-c0b1-46e8-aa5f-4a5e670d0bdf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This simple example can be verified by hand.  Other more complicated strings can be much more annoying to rearrange.</p>
-<h4 id="The-Fermi-Vacuum">The Fermi Vacuum<a class="anchor-link" href="#The-Fermi-Vacuum">¶</a></h4><p>In correlated methods like CI or CC theory, normal order is not defined relative to the true vacuum state, but, rather, relative to the "Fermi vacuum," which is the Hartree-Fock (HF) state (a single Slater determinant). Recall that such a state can be generated by adding electrons to the true vacuum state</p>
-<p>$$|\Phi_0\rangle = \prod_i^N \hat{a}_i^{\dagger} |\rangle$$</p>
-<p>Now, given this reference state, rearranging operator strings for normal order relative to the true vacuum will become far too complicated because of the need to deal with all of the creation operators associated with constructing the HF state. The solution is to define normal order in a different way.</p>
-<p>Our goal is to arrange our operators such that the expectation value of any term involving operators is zero, and the only non-zero terms are the fully-contracted ones involving no creation or annihilation operators. According to this rule, the usual creation or annihilation operators can act as either creators or annihilators on the Fermi vacuum, depending on the space (particle or hole) in which they act. So, $\hat{a}^{\dagger}_i$ and $\hat{a}_a$, should be treated as annihilation operators with respect to the Fermi vacuum because</p>
-<p>$$
-\begin{align}
-\hat{a}^{\dagger}_i |\Phi_0\rangle &amp;= 0 \\
-\hat{a}_a |\Phi_0\rangle &amp;= 0
-\end{align}
-$$</p>
-<p>while $\hat{a}_j$ and $\hat{a}^{\dagger}_b$ are treated as creation operators with respect to $|\Phi_0\rangle$ because</p>
-<p>$$
-\begin{align}
-\hat{a}_j |\Phi_0\rangle &amp;\neq 0\\
-\hat{a}^{\dagger}_b |\Phi_0\rangle &amp;\neq 0
-\end{align}
-$$</p>
-<p>To bring a string of operators to normal order relative to the Fermi vacuum, all $\hat{a}^{\dagger}_i$ and $\hat{a}_a$ must lie to the right of all $\hat{a}_j$ and $\hat{a}^{\dagger}_b$. In this way, the expectation value of any normal-ordered string of operators will be zero. For example</p>
-<p>$$
-\begin{align}
-\langle \Phi_0 | \hat{a}^{\dagger}_i |\Phi_0\rangle &amp;= 0 \\
-\langle \Phi_0 | \hat{a}_a |\Phi_0\rangle &amp;= 0 \\
-\langle \Phi_0 | \hat{a}_j |\Phi_0\rangle &amp;= 0 \\
-\langle \Phi_0 | \hat{a}^{\dagger}_b |\Phi_0\rangle &amp;= 0
-\end{align}
-$$</p>
-<p>Note that the last two integrals vanish, despite $\hat{a}_j$ and $\hat{a}^{\dagger}_b$ not annihilating the ket state, $|\Phi_0\rangle$. The reason is that these operators will annihilate the bra state, $\langle \Phi_0 |$, because</p>
-<p>$$
-\begin{align}
-\langle \Phi_0 | \hat{a}_j = \left (\hat{a}^\dagger_j|\Phi_0\rangle\right )^\dagger = 0 \\
-\langle \Phi_0 | \hat{a}^{\dagger}_b = \left (\hat{a}_b|\Phi_0\rangle\right )^\dagger = 0
-\end{align}
-$$</p>
-<p>These results are generalizable to longer strings of operators. For example, the following normal-ordered products of two operators also vanish:</p>
-<p>$$
-\begin{align}
-\langle \Phi_0 | \hat{a}_j \hat{a}^\dagger_i |\Phi_0\rangle = 0 \\
-\langle \Phi_0 | \hat{a}^\dagger_i \hat{a}_a |\Phi_0\rangle = 0 \\
-\langle \Phi_0 | \hat{a}^\dagger_a \hat{a}_i |\Phi_0\rangle = 0 \\
-\langle \Phi_0 | \hat{a}^\dagger_a \hat{a}_b |\Phi_0\rangle = 0 \\
-\end{align}
-$$</p>
-<p>Again, an expectation value over any normal-ordered string of creation and annihilation operators will be zero, regardless of how many operators appear in the string.</p>
-<p>Let us use what we have learned so far to evaluate the expectation value of the one-body operator</p>
-<p>$$\hat{\mathcal{O}}_1 = \sum_{pq} h_{pq} \hat{a}^\dagger_p \hat{a}_q$$</p>
-<p>with respect to the Hartree-Fock state, $|\Phi_0\rangle$. In order to bring this operator to normal order with respect to the Fermi vacuum, we need to split each sum over general orbitals into separate sums over occupied and virtual orbitals. In this way, we can more clearly identify which operators annihilate the Fermi vacuum. We have</p>
-<p>$$\hat{\mathcal{O}}_1 = \sum_{ij} h_{ij} \hat{a}^\dagger_i \hat{a}_j + \sum_{ia} h_{ia} \hat{a}^\dagger_i \hat{a}_a + \sum_{ai} h_{ai} \hat{a}^\dagger_a \hat{a}_i + \sum_{ab} h_{ia} \hat{a}^\dagger_a \hat{a}_b $$</p>
-<p>Here, only the first sum involves an operator that is not in normal order. Bringing it to normal order $(\hat{a}^\dagger_i \hat{a}_j = \delta_{ij} - \hat{a}_j \hat{a}^\dagger_i)$, we have</p>
-<p>$$ \hat{\mathcal{O}}_1 = \sum_{i} h_{ii} - \sum_{ij} h_{ij} \hat{a}_j \hat{a}^\dagger_i  + \sum_{ia} h_{ia} \hat{a}^\dagger_i \hat{a}_a + \sum_{ai} h_{ai} \hat{a}^\dagger_a \hat{a}_i + \sum_{ab} h_{ia} \hat{a}^\dagger_a \hat{a}_b $$</p>
-<p>and the expectation value of $\hat{\mathcal{O}_1}$ is</p>
-<p>$$ \langle \Phi_0 | \hat{\mathcal{O}}_1 |\Phi_0\rangle = \sum_{i} h_{ii} $$</p>
-<p>because, as shown above, all of the expectation values involving the normal-ordered operators vanish. Note that this result is consistent with the Slater-Condon rules, as we should expect! Just to be sure, let's check if we can get the same result from the pdaggerq package. We can use the built-in operator 'h' to represent the one-body operator here.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7d8aa8e9-c9d9-4433-97bb-26b8e2b56c31">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f949448b-a68c-4501-bfca-2feb1b747d34">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'h'</span><span class="p">])</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['+1.00000000000000', 'h(i,i)']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=10eb6e40-938f-4a3b-8f36-c4f92977a8e1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Let us try a slightly more complicated example. We will use pdaggerq to evaluate the Hartree-Fock energy, which is the expectation value of the Hamiltonian with respect to the Hartree-Fock state. In second-quantization, the Hamiltonian has the form</p>
-<p>$$ \hat{H} = \sum_{pq} h_{pq} \hat{a}^\dagger_p \hat{a}_q + \frac{1}{2} \sum_{pqrs} (pr|qs) \hat{a}^\dagger_p \hat{a}^\dagger_q \hat{a}_s \hat{a}_r $$</p>
-<p>where $h_{pq}$ is the matrix representation of the core Hamiltonian (kinetic energy plus electron-nucleus potential energy operators), and $(pr|qs)$ is an electron repulsion integral in chemists' notation. Two-body operators in pdaggerq are assumed to be antisymmetrized, so we should instead use</p>
-<p>$$ \hat{H} = \sum_{pq} h_{pq} \hat{a}^\dagger_p \hat{a}_q + \frac{1}{4} \sum_{pqrs} \langle pq || rs \rangle \hat{a}^\dagger_p \hat{a}^\dagger_q \hat{a}_s \hat{a}_r $$</p>
-<p>Here, $\langle pq || rs \rangle = \langle pq | rs \rangle - \langle pq | sr \rangle$, where $\langle pq | rs \rangle = (pr|qs)$ is an electron repulsion integral in physicists' notation. The Hartree-Fock energy (evaluated in the basis of orthonormal molecular orbitals) is</p>
-<p>$$ E_0 = \langle \Phi_0 | \hat{H} | \Phi_0 \rangle = \sum_{i} h_{ii} + \frac{1}{2} \sum_{ij} \langle ij || ij \rangle $$</p>
-<p>In pdaggerq, we can use the built-in operators 'h' and 'g' to represent the core Hamiltonian operator and an antisymmetrized two-electron operator.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2d397ed5-1d58-4fe0-a45d-fca95762f3e8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'h'</span><span class="p">])</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="p">[</span><span class="s1">'g'</span><span class="p">])</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['+1.00000000000000', 'h(i,i)']
-['+0.50000000000000', 'g(j,i,j,i)']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3cb7470b-2ce6-45ee-9a6c-de11902544dc">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Indeed, this is the correct form for the Hartree-Fock energy! We can also use a slightly different representation of the Hamiltonian,</p>
-<p>$$ \hat{H} = \hat{f} + \hat{v} $$</p>
-<p>where $\hat{f}$ is the Fock operator and $\hat{v} = \hat{H} - \hat{f}$ is the fluctuation potential operator.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3b694a44-aec1-4e27-9b1d-7a3f05d40346">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'f'</span><span class="p">])</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'v'</span><span class="p">])</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['+1.00000000000000', 'f(i,i)']
-['-0.50000000000000', '&lt;j,i||j,i&gt;']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2fab7fe7-fcf1-4e60-b403-fae0ea65c444">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This result is equivalent to the one above because, in the MO basis,</p>
-<p>$$ f_{ii} = \sum_{ii} h_{ii} + \sum_{ij} \langle ji || ji \rangle$$</p>
-<p>so</p>
-<p>$$ \sum_{i} f_{ii} - \frac{1}{2} \sum_{ij} \langle ji||ji \rangle = \sum_{i} h_{ii} + \frac{1}{2} \sum_{ij} \langle ji||ji \rangle$$</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a204ded-aedd-40aa-a8e5-b0d1fe176c55">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Now, let's consider one last, slightly more complicated example. We will use pdaggerq to evaluate the CC with single and double excitations (CCSD) energy expression:</p>
-<p>$$E_{\rm {CC}} = \langle \Phi_0|\text{exp}(-\hat{T}) \hat{H} \text{exp}(\hat{T})|\Phi_0 \rangle$$</p>
-<p>Here, $\hat{T}=\hat{T}_1+\hat{T}_2$ represents the cluster operator, and $\text{exp}(-\hat{T}) \hat{H} \text{exp}(\hat{T})$ is a similarity transformation of the Hamiltonian. This similarity transformation can be carried out using commutators according to the Baker Campbell Hausdorff (BCH) expansion of the Hamiltonian, which truncates after four nested commutators</p>
-<p>$$ \hat{H} = \hat{H} + [\hat{H}, \hat{T}] + \frac{1}{2!} [[\hat{H}, \hat{T}], \hat{T}] + \frac{1}{3!} [[[\hat{H}, \hat{T}], \hat{T}], \hat{T}] + \frac{1}{4!} [[[[\hat{H}, \hat{T}], \hat{T}], \hat{T}], \hat{T}]$$</p>
-<p>The following code makes use of the built-in operator string types in pdaggerq ('t1', 't2', etc.), as well as commutator and double commutator functions, to evaluate the CCSD energy. Note that, for the energy expression, we only need to consider the BCH expansion up to double commutators. For specific definitions of these operators and functions, see <a href="https://github.com/edeprince3/pdaggerq/">here</a>.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0907bc59-2659-4f68-bb38-f9dc3df2ac68">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
-
-<span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">set_print_level</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'# &lt; 0 | e(-T) H e(T) | 0&gt; :'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-
-<span class="c1"># H = f + v (fock operator plus fluctuation potential)</span>
-
-<span class="c1"># one-electron part: </span>
-
-<span class="c1"># f</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'f'</span><span class="p">])</span>
-
-<span class="c1"># [f, T1]</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_commutator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'f'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">])</span>
-
-<span class="c1"># [f, T2]</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_commutator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'f'</span><span class="p">],[</span><span class="s1">'t2'</span><span class="p">])</span>
-
-<span class="c1"># two-electron part: </span>
-
-<span class="c1"># v</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'v'</span><span class="p">])</span>
-
-<span class="c1"># [v, T1]</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_commutator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'v'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">])</span>
-
-<span class="c1"># [v, T2]</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_commutator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'v'</span><span class="p">],[</span><span class="s1">'t2'</span><span class="p">])</span>
-
-<span class="c1"># [[v, T1], T1]]</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_double_commutator</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">[</span><span class="s1">'v'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">])</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
-# &lt; 0 | e(-T) H e(T) | 0&gt; :
-
-['+1.00000000000000', 'f(i,i)']
-['+1.00000000000000', 'f(i,a)', 't1(a,i)']
-['-0.50000000000000', '&lt;j,i||j,i&gt;']
-['+0.25000000000000', '&lt;j,i||a,b&gt;', 't2(a,b,j,i)']
-['-0.50000000000000', '&lt;j,i||a,b&gt;', 't1(a,i)', 't1(b,j)']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=905bab1d-961f-4a8a-be77-e27960f142d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We can see that the expectation value of the similarity-transformed Hamiltonian matrix can be broken down as</p>
-<p>$$ E_{\rm CC} = E_0 + E_{\rm c}$$</p>
-<p>where $E_0$ is the Hartree-Fock energy discussed above, and $E_{\rm c}$ is a correlation contribution defined as</p>
-<p>$$ E_{\rm c} = \sum_{ia} f_{ia} t^a_i + \frac{1}{4}\sum_{ijab} \langle ij||ab\rangle \left ( t_{ij}^{ab} + 2 t^a_i t^b_j \right ) $$</p>
-<p>Note that pdaggerq also has a built-in "add_st_operator" function that will automatically generate the nested commutators that arise in the BCH expansion (up to four nested commutators), which greatly simplifies the code given above:</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=eea00ffd-239a-4dff-91ad-cb5c59bf563c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
-
-<span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">set_print_level</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'# &lt; 0 | e(-T) H e(T) | 0&gt; :'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-
-<span class="c1"># H = f + v (fock operator plus fluctuation potential)</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">add_st_operator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'f'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">,</span><span class="s1">'t2'</span><span class="p">])</span>
-<span class="n">pq</span><span class="o">.</span><span class="n">add_st_operator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'v'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">,</span><span class="s1">'t2'</span><span class="p">])</span>
-
-<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-    
-<span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
-# &lt; 0 | e(-T) H e(T) | 0&gt; :
-
-['+1.00000000000000', 'f(i,i)']
-['+1.00000000000000', 'f(i,a)', 't1(a,i)']
-['-0.50000000000000', '&lt;j,i||j,i&gt;']
-['+0.25000000000000', '&lt;j,i||a,b&gt;', 't2(a,b,j,i)']
-['-0.50000000000000', '&lt;j,i||a,b&gt;', 't1(a,i)', 't1(b,j)']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fb27721f-7258-44c3-9836-e709eb6b4f73">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We will explore more of the functionality in pdaggerq in the tutorials on CI and CC theory that follow this one.</p>
 </div>
 </div>
 </div>
