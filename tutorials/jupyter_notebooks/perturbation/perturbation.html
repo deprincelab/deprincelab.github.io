@@ -7668,18 +7668,7 @@ $$\begin{align}
 <li>$\langle \psi_n^{(0)}|\psi_n^{(1)}\rangle = 0$ because, as mentioned above, these functions are orthogonal.</li>
 <li>$\langle \psi_n^{(0)}|\psi_n^{(0)}\rangle = 1$ because the zeroth-order wave functions are normalized.</li>
 </ol>
-<p>The first term on the left- and right-hand sides of this equation vanish because (1) $|\psi_n^{(0)}\rangle$ is an eigenfunction of $\hat{H}_0$, and (2) $|\psi_n^{(0)}\rangle$ and $|\psi_n^{(1)}\rangle$ are orthogonal. More explicitly, the first term on the left-hand side vanishes because</p>
-<p>$$\begin{align}
-\langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle &amp; = \langle \psi_n^{(1)}| \hat{H}_0 |\psi_n^{(0)}\rangle ^* 
-\\
-&amp; = E_n^{(0)} \langle \psi_n^{(1)} | \psi_n^{(0)}\rangle^* \\
-&amp; = 0
-\end{align}$$</p>
-<p>Noting that the zeroth-order wave functions are normalized, we are left with</p>
-<p>$$\begin{align}
-E_n^{(1)} =  \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle 
-\end{align}$$</p>
-<p>which we could evaluate, given $|\psi_n^{(0)}\rangle$ and $\hat{H}^\prime$. So, to first-order in perturbation theory,</p>
+<p>Thus, to first-order in perturbation theory,</p>
 <p>$$\begin{align}
 E_n = E_n^{(0)} + \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle
 \end{align}$$</p>
@@ -7711,7 +7700,7 @@ E_n = E_n^{(0)} + \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle
 \end{align}$$</p>
 <p>where $\alpha = \frac{\omega m}{\hbar}$, $\omega = 2\pi \nu$, $\nu$ is the frequency of the oscillations, $N_n$ is a normalization constant, and $H_n$ is a Hermite polynomial. The zeroth-order energies are</p>
 <p>$$\begin{align}
-E_n^{(0)} = \left (v + \frac{1}{2} \right ) \hbar \omega
+E_n^{(0)} = \left (n + \frac{1}{2} \right ) \hbar \omega
 \end{align}$$</p>
 <p>To first order, the ground-state energy is</p>
 <p>$$\begin{align}
@@ -7734,8 +7723,7 @@ E_0 &amp;= \frac{1}{2}\hbar \omega + \int_{-\infty}^{\infty} ( cx^3 + dx^4) \lef
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id=""><a class="anchor-link" href="#">¶</a></h4><p>The First-Order Correction to the Wave Function</p>
-<p>We isolated the first-order correction to the energy by left-multiplying the first-order Schrödinger equation by $\langle \psi_n^{(0)}|$ and integrating over all space. Let us see what happens if instead we project the first-order Schrödinger equation,</p>
+<h4 id="The-First-Order-Correction-to-the-Wave-Function">The First-Order Correction to the Wave Function<a class="anchor-link" href="#The-First-Order-Correction-to-the-Wave-Function">¶</a></h4><p>We isolated the first-order correction to the energy by left-multiplying the first-order Schrödinger equation by $\langle \psi_n^{(0)}|$ and integrating over all space. Let us see what happens if instead we project the first-order Schrödinger equation,</p>
 <p>$$\begin{align}
 \hat{H}_0 |\psi_n^{(1)}\rangle + \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle
 \end{align}$$</p>
@@ -7837,7 +7825,7 @@ E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k 
 <li>In general, summations can be infinite (e.g., as we saw for the anharmonic oscillator problem). Exceptions include Møller-Plesset perturbation theory.</li>
 <li>Higher-order corrections to the energies and wave functions can become extremely complicated. In electronic structure theory, the highest-order corrections one would typically encouter would be fourth-order [MP4 or CCSD(T)] or fifth order [CCSD(T)].</li>
 <li>If the zeroth-order problem has a continuum of eigenfunctions (e.g., unbound states in the hydrogen atom problem), the these states must be included in the perturbative expansins (in these cases, sums over states become integrals).</li>
-<li>The approach outlined above works well for non-degenerate $\hat{H}_0$ and when the perturbation is "small." In such cases, $|\psi_n^{(0)}\rangle$ gives a good approximation to $|\psi_n\rangle$.</li>
+<li>The approach outlined above works well for $\hat{H}_0$ with non-degenerate energy levels and when the perturbation is "small." In such cases, $|\psi_n^{(0)}\rangle$ gives a good approximation to $|\psi_n\rangle$.</li>
 </ol>
 </div>
 </div>
