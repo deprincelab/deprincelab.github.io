@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for name in qm_postulates translation vibration rotation hydrogen variation perturbation hartree_fock second_quantization cis; do
+for name in qm_postulates translation vibration rotation hydrogen variation perturbation hartree_fock second_quantization cis mbpt; do
     file=${name}/${name}.html
     ./replace 'autoNumber: "AMS",' "" ${file}
     ./replace "--jp-cell-prompt-width: 64px;" "--jp-cell-prompt-width: 0px;" ${file}
