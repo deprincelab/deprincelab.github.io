@@ -7787,7 +7787,7 @@ $$\begin{align}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
@@ -7841,9 +7841,9 @@ E_0 &amp;= E_0^{(0)} + E_1^{(0)} \nonumber \\
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-First-Order-Correction-to-the-Wave-Function">The First-Order Correction to the Wave Function<a class="anchor-link" href="#The-First-Order-Correction-to-the-Wave-Function">¶</a></h2><p>The first-order correction to the wave function, $|\psi_0^{(1)}$, can be expanded in terms of zeroth-order wave functions as</p>
+<h2 id="The-First-Order-Correction-to-the-Wave-Function">The First-Order Correction to the Wave Function<a class="anchor-link" href="#The-First-Order-Correction-to-the-Wave-Function">¶</a></h2><p>The first-order correction to the wave function, $|\psi_0^{(1)}\rangle$, can be expanded in terms of zeroth-order wave functions as</p>
 <p>$$\begin{align}
-|\psi_0^{(1)} = \sum_{k \neq 0} c^{(1)}_k |\psi_k^{(0)}\rangle
+|\psi_0^{(1)}\rangle = \sum_{k \neq 0} c^{(1)}_k |\psi_k^{(0)}\rangle
 \end{align}$$</p>
 <p>where the restriction on the sum is required to ensure that the first-order correction to the wave function for state 0 is orthogonal to $|\psi_0^{(0)}\rangle$. If we recall that our zeroth-order wave functions are just Slater determinants, we can recast the equation above as</p>
 <p>$$\begin{align}
@@ -7896,7 +7896,7 @@ c_{ab,ij}^{(1)} &amp;= \frac{\langle \Phi_{ij}^{ab} | \hat{v} | \Phi_0 \rangle}{
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
@@ -8020,14 +8020,202 @@ $$\begin{align}
 <p>$$\begin{align}
 E_0^{(2)} = \frac{1}{4} \sum_{ij,ab} \langle \Phi_0 | \hat{v}|\Phi_{ij}^{ab}\rangle \frac{\langle ab || ij \rangle }{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}
 \end{align}$$</p>
-<p>We have already evaluated the matrix element, $\langle \Phi_0 | \hat{v}|\Phi_{ij}^{ab}\rangle$, so the final expression for the second-order correction to the energy is</p>
+<p>We have already evaluated the matrix element, $\langle \Phi_0 | \hat{v}|\Phi_{ij}^{ab}\rangle$, so the second-order correction to the energy is actually given by</p>
 <p>$$\begin{align}
 E_0^{(2)} = \frac{1}{4} \sum_{ij,ab}  \frac{|\langle ab || ij \rangle |^2}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}
 \end{align}$$</p>
+<p>Note that, in this expression, the labels $i$, $j$, $a$, and $b$ refer to spin orbitals. If we are working in a spatial orbital basis, we must explicitly account for the spin of each orbital label. In this case, we would have</p>
+<p>$$\begin{align}
+E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sigma  || i_\sigma j_\sigma \rangle |^2}{\epsilon_{i_\sigma} + \epsilon_{j_\sigma} - \epsilon_{a_\sigma} - \epsilon_{b_\sigma}} + \frac{1}{2} \sum_{\sigma\tau} \sum_{ij,ab}  \frac{|\langle a_\sigma b_\tau  | i_\sigma j_\tau \rangle |^2}{\epsilon_{i_\sigma} + \epsilon_{j_\tau} - \epsilon_{a_\sigma} - \epsilon_{b_\tau}}
+\end{align}$$</p>
+<p>where $\sigma, \tau \in \{\alpha, \beta\}$. Note the factor of $\frac{1}{2}$ and the lack of antisymmetrization on the opposite-spin term, which arise from spin-symmetry considerations, <em>i.e.</em>, $\langle a_\sigma b_\tau || i_\sigma j_\tau \rangle = \langle a_\sigma b_\tau | i_\sigma j_\tau \rangle$ and $\langle a_\sigma b_\tau || i_\tau j_\sigma \rangle = -\langle a_\sigma b_\tau | j_\sigma i_\tau \rangle$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a3683157-57f9-4a12-a97f-020e1d8ce652">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">Numerical Procedure for Evaluating $E_0^{(2)}$<a class="anchor-link" href="#Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">¶</a></h2><p>To evaluate the second-order energy numerically, we can use the Psi4 package (or any other package that gives us access to the required integrals). The following code runs a Hartree-Fock calculation on H$_2$O$^+$ and extracts the $\alpha$- and $\beta$-spin MO coefficient matrices and energies. Note that some of the keyword options are chosen to tighten convergence and to avoid the use of the density fitting approximation. Eventually, we will compare our second-order energy to the same quantity evaluated using Psi4, and we want to avoid any sources of possible disagreement.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4519d15b-b884-4146-a9c2-f7a9e5658efa">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">1 2</span>
+<span class="s2">O</span>
+<span class="s2">H 1 1.0</span>
+<span class="s2">H 1 1.0 2 104.5</span>
+<span class="s2">symmetry c1</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'basis'</span> <span class="p">:</span> <span class="s1">'sto-3g'</span><span class="p">,</span> 
+           <span class="s1">'scf_type'</span><span class="p">:</span> <span class="s1">'pk'</span><span class="p">,</span> 
+           <span class="s1">'mp2_type'</span> <span class="p">:</span> <span class="s1">'conv'</span><span class="p">,</span> 
+           <span class="s1">'e_convergence'</span> <span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>
+           <span class="s1">'d_convergence'</span> <span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>
+           <span class="s1">'reference'</span> <span class="p">:</span> <span class="s1">'uhf'</span><span class="p">}</span>
+
+<span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+<span class="n">psi4</span><span class="o">.</span><span class="n">set_output_file</span><span class="p">(</span><span class="s1">'output.dat'</span><span class="p">)</span> 
+
+<span class="n">e_hf</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="s1">'scf'</span><span class="p">,</span> <span class="n">return_wfn</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># get MO coefficients</span>
+<span class="n">Ca</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">Ca</span><span class="p">()</span>
+<span class="n">Cb</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">Cb</span><span class="p">()</span>
+
+<span class="c1"># orbital energies</span>
+<span class="n">epsilon_a</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">epsilon_a</span><span class="p">()</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
+<span class="n">epsilon_b</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">epsilon_b</span><span class="p">()</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ca8796ee-1351-4377-a641-f7f0faaab917">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can now use Psi4's MintsHelper object to evaluate the electron repulsion integrals in the MO basis. We will use the spatial orbital expression for $E_0^{(2)}$, which means that we need to consider multiple spin blocks of the electron repulsion integral (ERI) tensor.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4ad6b567-2f71-406d-9d92-909b4595fe55">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># molecular integrals helper</span>
+<span class="n">mints</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">MintsHelper</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">basisset</span><span class="p">())</span>
+
+<span class="c1"># ERIs in chemists' notation</span>
+<span class="n">g_aaaa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">))</span>
+<span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">))</span>
+<span class="n">g_aabb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">))</span>
+
+<span class="c1"># ERIs in physicists' notation &lt;pq|rs&gt; = (pr|qs)</span>
+<span class="n">g_aaaa</span> <span class="o">=</span> <span class="n">g_aaaa</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">g_bbbb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">g_aabb</span> <span class="o">=</span> <span class="n">g_aabb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># antisymmetrized ERIs in physicists' notation &lt;pq||rs&gt; = &lt;pq|rs&gt; - &lt;pq|sr&gt;</span>
+<span class="n">g_aaaa</span> <span class="o">-=</span> <span class="n">g_aaaa</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">g_bbbb</span> <span class="o">-=</span> <span class="n">g_bbbb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b829451-56a0-40e2-8c67-d3fa97dc58f1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The following code evaluates $E_0^{(2)}$ and compares the result to the correlation energy from an MP2 calculation carried out using Psi4. Second-order MBPT is commonly referred to as second-order Møller-Plesset perturbation theory, or MP2.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8a7182af-8d00-49ff-864e-845f62e4dadd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># number of electrons, basis functions</span>
+<span class="n">nmo</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nmo</span><span class="p">()</span>
+<span class="n">oa</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
+<span class="n">ob</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nbeta</span><span class="p">()</span>
+
+<span class="n">e2</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="c1"># aaaa</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oa</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oa</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">oa</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">oa</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">e2</span> <span class="o">+=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
+
+<span class="c1"># bbbb</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">e2</span> <span class="o">+=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
+
+
+<span class="c1"># abab and baba (note the factor of two difference from the expression above)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oa</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">oa</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">e2</span> <span class="o">+=</span> <span class="n">g_aabb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
+                
+<span class="n">e_mp2</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="s1">'mp2'</span><span class="p">)</span>
+<span class="n">e2_psi4</span> <span class="o">=</span> <span class="n">e_mp2</span> <span class="o">-</span> <span class="n">e_hf</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'my E(2) =   </span><span class="si">%20.12f</span><span class="s1"> Eh'</span> <span class="o">%</span> <span class="p">(</span><span class="n">e2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'psi4 E(2) = </span><span class="si">%20.12f</span><span class="s1"> Eh'</span> <span class="o">%</span> <span class="p">(</span><span class="n">e2_psi4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+my E(2) =        -0.029933352948 Eh
+psi4 E(2) =      -0.029933352948 Eh
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cbd8734c-cdfd-4956-82ec-0b05a6bfdf88">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can see that our second-order energy is numerically equivalent to that from Psi4. Fantastic!</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c161e14d-b241-4993-94a6-14d1f14d5cb6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
