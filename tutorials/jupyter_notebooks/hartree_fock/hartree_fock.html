@@ -7681,9 +7681,9 @@ $$
 \end{align}
 $$
 where we have used the fact that the overlap integral matrix is symmetric. Combining each of these results and redefining some labels leads to</p>
-<p>$$\forall ~i, ~\mu: ~~~~\sum_\nu (h_{\mu\nu} + F_{\mu\nu})c_{\nu i} = \sum_\nu \sum_j S_{\mu\nu} c_{\nu j} \epsilon_{ji}$$</p>
+<p>$$\forall ~i, ~\mu: ~~~~\sum_\nu F_{\mu\nu} c_{\nu i} = \sum_\nu \sum_j S_{\mu\nu} c_{\nu j} \epsilon_{ji}$$</p>
 <p>It turns out that this equation can be satisfied for many different Lagrange multipliers, so we choose to find the solution for which the matrix of multipliers is diagonal ($\epsilon_{ji} \to \delta_{ij}\epsilon_i$), giving us</p>
-<p>$$\forall ~i, ~\mu: ~~~~\sum_\nu (h_{\mu\nu} + F_{\mu\nu})c_{\nu i} = \epsilon_{i} \sum_\nu S_{\mu\nu} c_{\nu i} $$</p>
+<p>$$\forall ~i, ~\mu: ~~~~\sum_\nu F_{\mu\nu} c_{\nu i} = \epsilon_{i} \sum_\nu S_{\mu\nu} c_{\nu i} $$</p>
 <p>This equation can be solved as a generalized eigenvalue problem</p>
 <p>$$ {\bf F}{\bf c} = {\bf S}{\bf c}{\bf \epsilon}$$</p>
 <p>where ${\bf \epsilon}$ is a diagonal matrix, and the entries on the diagonal are interpreted as the orbital energies. Note that, by solving this problem as a generalized eigenvalue problem, we obtain not only the set of occupied orbitals and orbital energies ($\phi_i$ and $\epsilon_i$) but also a set of unoccupied orbitals and energies ($\phi_a$ and $\epsilon_a$). While the unoccupied orbitals and orbital energies do not enter the energy expression for Hartree-Fock theory, we will need them for post-Hartree-Fock methods that capture electron correlation effects that are missing at the mean-field level.</p>
