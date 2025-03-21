@@ -7555,7 +7555,7 @@ a.anchor-link {
 <p>$$\begin{align}
 f_{\mu\nu} = h_{\mu\nu} + J_{\mu\nu} - K_{\mu\nu}
 \end{align}$$</p>
-<p>Here, $\mu$ and $\nu$ are labels for the atomic orbital (AO) basis functions, and $h_{\mu\nu}$, $J_{\mu\nu}$, and $K_{\mu\nu}$ are elements of the core Hamiltonian, Coulomb, and exchage matrices, respectively. In the canonical molecular orbital (MO) basis determined via the Hartree-Fock-Roothan procedure, we have</p>
+<p>Here, $\mu$ and $\nu$ are labels for the atomic orbital (AO) basis functions, and $h_{\mu\nu}$, $J_{\mu\nu}$, and $K_{\mu\nu}$ are elements of the core Hamiltonian, Coulomb, and exchange matrices, respectively. In the canonical molecular orbital (MO) basis determined via the Hartree-Fock-Roothaan procedure, we have</p>
 <p>$$\begin{align}
 \hat{f} = \sum_{pq} f_{pq}\hat{a}^\dagger_p \hat{a}_q
 \end{align}$$</p>
@@ -7585,7 +7585,7 @@ f_{pq} = h_{pq} + \sum_i \langle pi||qi \rangle = \epsilon_p \delta_{pq}
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Perturbation-Expansion-of-the-Wave-Function-and-Energy">The Perturbation Expansion of the Wave Function and Energy<a class="anchor-link" href="#The-Perturbation-Expansion-of-the-Wave-Function-and-Energy">¶</a></h2><p>Recall that in non-degenerate perturbation theory, the wave function and energy are expanded in powers of the perturbation strength as</p>
+<h2 id="The-Perturbation-Expansion-of-the-Wave-Function-and-Energy">The Perturbation Expansion of the Wave Function and Energy<a class="anchor-link" href="#The-Perturbation-Expansion-of-the-Wave-Function-and-Energy">¶</a></h2><p>Recall that, in non-degenerate perturbation theory, the wave function and energy are expanded in powers of the perturbation strength as</p>
 <p>$$\begin{align}
 |\psi_n\rangle  = |\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle   + \lambda ^2|\psi_n^{(2)}\rangle  + \lambda ^3|\psi_n^{(3)}\rangle  + ...
 \end{align}$$</p>
@@ -7595,7 +7595,7 @@ E_n = E_n^{(0)} + \lambda E_n^{(1)}   + \lambda ^2 E_n^{(2)}  + \lambda^3 E_n^{(
 \end{align}$$</p>
 <p>where $|\psi_n^{(n)}\rangle$ is the $p$-th order correction to the wave function and
 $E_n^{(p)}$ is the $p$-th order correction to the energy. In MBPT, these quantities are determined order by order, beginning with the zeroth-order ($p = 0$) solution to the problem.</p>
-<p>What are the zeroth-order wave functions $|\psi_n^{(0)}\rangle$? Is the Hartree-Fock wave function ($|\Phi_0\rangle$) a suitable zeroth-order wave function? We start by recognizing that the eigenfunctions and eigenvalues of the Fock operator are the MOs and corresponding MO energies that satisfy</p>
+<p>What are the zeroth-order wave functions $|\psi_n^{(0)}\rangle$? Is the Hartree-Fock wave function ($|\Phi_0\rangle$) a suitable zeroth-order wave function? The eigenfunctions and eigenvalues of the Fock operator are the MOs and corresponding MO energies that satisfy</p>
 <p>$$\begin{align}
 \hat{f} \phi_p = \epsilon_p \phi_p
 \end{align}$$</p>
@@ -7609,7 +7609,7 @@ $E_n^{(p)}$ is the $p$-th order correction to the energy. In MBPT, these quantit
 <p>$$\begin{align}
 E^{(0)}_0 = \sum_i \epsilon_i
 \end{align}$$</p>
-<p>where the sum is restricted to include only those orbitals that are occupied in $|\Phi_0\rangle$.</p>
+<p>where the sum is restricted to include only those orbitals that are occupied in $|\Phi_0\rangle$. Throughout this tutorial, the labels $i$, $j$, $k$, and $l$ refer to MOs that are occupied in the Hartree-Fock configuration, while $a$, $b$, $c$, and $d$ refer to virtual MOs.</p>
 <p>In MBPT, we choose the zeroth-order wave functions to be all possible $N$-electron Slater determinants, including the Hartree-Fock configuration, <em>i.e.</em>,</p>
 <p>$$\begin{align}
 |\psi_0^{(0)}\rangle &amp;= |\Phi_0\rangle \\
@@ -7637,7 +7637,7 @@ E^{(0)}_{a,i} = \sum_{k\neq i} \epsilon_k + \epsilon_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
@@ -7677,8 +7677,8 @@ E^{(0)}_{a,i} = \sum_{k\neq i} \epsilon_k + \epsilon_a
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Great! This is exactly what we were expecting. The expectation value of the Fock operator is given by the sum over the diagonal elements of the Fock matrix (the orbital energies), and the sum is restricted to the occupied orbital space.</p>
-<p>For the singly excited functions, we can do something similar, but we need to be aware of some of the internal assumptions made by the p$^\dagger$q package, namely, that repeated labels imply a summation. As such, an expression like</p>
+<p>Great! This is exactly what we were expecting. The expectation value of the Fock operator is equal to the sum over the diagonal elements of the Fock matrix (the orbital energies), and the sum is restricted to the occupied orbital space.</p>
+<p>For the singly excited functions, we can do something similar, but we need to be aware of a key internal assumptions made by the p$^\dagger$q package, that repeated labels imply a summation. As such, an expression like</p>
 <p>$$\begin{align}
 E^{(0)}_{a,i} = \langle \Phi^a_i | \hat{f} | \Phi_i^a \rangle = \langle \Phi_0 | \hat{a}^\dagger_i  \hat{a}_a \hat{f} \hat{a}^\dagger_a \hat{a}_i | \Phi_{0}\rangle
 \end{align}$$</p>
@@ -7691,7 +7691,7 @@ E^{(0)}_{a,i} = \langle \Phi^a_i | \hat{f} | \Phi_i^a \rangle = \langle \Phi_0 |
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
@@ -7736,7 +7736,7 @@ E^{(0)}_{a,i} = \langle \Phi^a_i | \hat{f} | \Phi_i^a \rangle = \langle \Phi_0 |
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Here, the notation 'd(a,b)' refers to a Kronecker delta function, $\delta_{ab}$. Now, we think about the case where $i = j$ and $a = b$ and see that the result is</p>
+<p>Here, the notation 'd(a,b)' refers to a Kronecker delta function, $\delta_{ab}$. Now, we can think about the case where $i = j$ and $a = b$ and see that the result is</p>
 <p>$$\begin{align}
 \langle \Phi_0 | \hat{a}^\dagger_i  \hat{a}_a \hat{f} \hat{a}^\dagger_a \hat{a}_i | \Phi_{0}\rangle &amp;= \sum_k f_{kk} - f_{ii} + f_{aa} \nonumber \\
 &amp;= \sum_k \epsilon_{k} - \epsilon_{i} + \epsilon_{a} \nonumber \\
@@ -7754,11 +7754,11 @@ E^{(0)}_{a,i} = \langle \Phi^a_i | \hat{f} | \Phi_i^a \rangle = \langle \Phi_0 |
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-First-Order-Correction-to-the-Energy">The First-Order Correction to the Energy<a class="anchor-link" href="#The-First-Order-Correction-to-the-Energy">¶</a></h2><p>Now, let us proceed by determining the corrections to the energy and wave function, using the Hartree-Fock wave function as the target zeroth-order state. Let us consider the first-order parts of the Schrödinger equation</p>
+<h2 id="The-First-Order-Correction-to-the-Energy">The First-Order Correction to the Energy<a class="anchor-link" href="#The-First-Order-Correction-to-the-Energy">¶</a></h2><p>Now, we proceed by determining the corrections to the energy and wave function, using the Hartree-Fock wave function as the target zeroth-order state. Let us consider the first-order part of the Schrödinger equation</p>
 <p>$$\begin{align}
 \hat{f} |\psi_n^{(1)}\rangle + \hat{v} | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle
 \end{align}$$</p>
-<p>We take $n = 0$ and $| \psi_n^{(0)} \rangle = |\Phi_0\rangle$, which then gives us</p>
+<p>We take $n = 0$ and $| \psi_0^{(0)} \rangle = |\Phi_0\rangle$, which then gives us</p>
 <p>$$\begin{align}
 \hat{f} |\psi_0^{(1)}\rangle + \hat{v} | \Phi_0 \rangle = E_0^{(0)} |\psi_0^{(1)}\rangle + E_0^{(1)} |\Phi_0 \rangle
 \end{align}$$</p>
@@ -7787,7 +7787,7 @@ $$\begin{align}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
@@ -7845,11 +7845,11 @@ E_0 &amp;= E_0^{(0)} + E_1^{(0)} \nonumber \\
 <p>$$\begin{align}
 |\psi_0^{(1)}\rangle = \sum_{k \neq 0} c^{(1)}_k |\psi_k^{(0)}\rangle
 \end{align}$$</p>
-<p>where the restriction on the sum is required to ensure that the first-order correction to the wave function for state 0 is orthogonal to $|\psi_0^{(0)}\rangle$. If we recall that our zeroth-order wave functions are just Slater determinants, we can recast the equation above as</p>
+<p>where the restriction on the sum ensures that the first-order correction to the wave function for state 0 is orthogonal to $|\psi_0^{(0)}\rangle$. If we recall that our zeroth-order wave functions are just Slater determinants, we can recast the equation above as</p>
 <p>$$\begin{align}
 |\psi_0^{(1)}\rangle = \sum_{i,a} c_{a,i}^{(1)} |\Phi_i^a\rangle + \frac{1}{4} \sum_{ij,ab} c_{ab, ij}^{(1)} |\Phi_{ij}^{ab}\rangle + \frac{1}{36} \sum_{ijk, abc} c_{abc, ijk}^{(1)} |\Phi_{ijk}^{abc}\rangle + ...
 \end{align}$$</p>
-<p>The first-order expansion coefficients are defined by the projections</p>
+<p>The first-order expansion coefficients in this expression are defined by the projections</p>
 <p>$$\begin{align}
 c_{a,i}^{(1)} &amp;= \langle \Phi_i^a|\psi_0^{(1)}\rangle \\
 c_{ab,ij}^{(1)} &amp;= \langle \Phi_{ij}^{ab}|\psi_0^{(1)}\rangle \\
@@ -7859,7 +7859,7 @@ c_{ab,ij}^{(1)} &amp;= \langle \Phi_{ij}^{ab}|\psi_0^{(1)}\rangle \\
 <p>$$\begin{align}
 \hat{f} |\psi_0^{(1)}\rangle + \hat{v} | \Phi_0 \rangle = E_0^{(0)} |\psi_0^{(1)}\rangle + E_0^{(1)} |\Phi_0 \rangle
 \end{align}$$</p>
-<p>We project this equation onto a zeroth-order wave function that is not equal to $\langle\Phi_0|$ (<em>e.g.</em>, $\langle \Phi_{ij...}^{ab...}|$), followed by integration over all space leads to</p>
+<p>We project this equation onto a zeroth-order wave function that is not equal to $\langle\Phi_0|$, <em>e.g.</em>, $\langle \Phi_{ij...}^{ab...}|$, to obtain</p>
 <p>$$\begin{align}
 \langle \Phi_{ij...}^{ab...} | \hat{f} |\psi_0^{(1)}\rangle + \langle \Phi_{ij...}^{ab...} | \hat{v} | \Phi_0 \rangle = E_0^{(0)} \langle \Phi_{ij...}^{ab...} |\psi_0^{(1)}\rangle + E_0^{(1)} \langle \Phi_{ij...}^{ab...} |\Phi_0 \rangle \\
 \end{align}$$</p>
@@ -7896,7 +7896,7 @@ c_{ab,ij}^{(1)} &amp;= \frac{\langle \Phi_{ij}^{ab} | \hat{v} | \Phi_0 \rangle}{
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
@@ -8012,7 +8012,7 @@ c^{(1)}_{abc,ijk} &amp;= 0 \\
 <p>$$\begin{align}
 \langle \Phi_0 | \hat{f} |\psi_0^{(2)}\rangle = E_0^{(0)} \langle \Phi_0 | \psi_0^{(2)}\rangle = 0
 \end{align}$$
-and
+and, of course,
 $$\begin{align}
 \langle \Phi_0 | \Phi_0 \rangle = 1
 \end{align}$$</p>
@@ -8026,7 +8026,7 @@ E_0^{(2)} = \frac{1}{4} \sum_{ij,ab}  \frac{|\langle ab || ij \rangle |^2}{\epsi
 \end{align}$$</p>
 <p>Note that, in this expression, the labels $i$, $j$, $a$, and $b$ refer to spin orbitals. If we are working in a spatial orbital basis, we must explicitly account for the spin of each orbital label. In this case, we would have</p>
 <p>$$\begin{align}
-E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sigma  || i_\sigma j_\sigma \rangle |^2}{\epsilon_{i_\sigma} + \epsilon_{j_\sigma} - \epsilon_{a_\sigma} - \epsilon_{b_\sigma}} + \frac{1}{2} \sum_{\sigma\tau} \sum_{ij,ab}  \frac{|\langle a_\sigma b_\tau  | i_\sigma j_\tau \rangle |^2}{\epsilon_{i_\sigma} + \epsilon_{j_\tau} - \epsilon_{a_\sigma} - \epsilon_{b_\tau}}
+E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sigma  || i_\sigma j_\sigma \rangle |^2}{\epsilon_{i_\sigma} + \epsilon_{j_\sigma} - \epsilon_{a_\sigma} - \epsilon_{b_\sigma}} + \frac{1}{2} \sum_{\sigma\neq\tau} \sum_{ij,ab}  \frac{|\langle a_\sigma b_\tau  | i_\sigma j_\tau \rangle |^2}{\epsilon_{i_\sigma} + \epsilon_{j_\tau} - \epsilon_{a_\sigma} - \epsilon_{b_\tau}}
 \end{align}$$</p>
 <p>where $\sigma, \tau \in \{\alpha, \beta\}$. Note the factor of $\frac{1}{2}$ and the lack of antisymmetrization on the opposite-spin term, which arise from spin-symmetry considerations, <em>i.e.</em>, $\langle a_\sigma b_\tau || i_\sigma j_\tau \rangle = \langle a_\sigma b_\tau | i_\sigma j_\tau \rangle$ and $\langle a_\sigma b_\tau || i_\tau j_\sigma \rangle = -\langle a_\sigma b_\tau | j_\sigma i_\tau \rangle$.</p>
 </div>
@@ -8048,7 +8048,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -8103,7 +8103,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># molecular integrals helper</span>
@@ -8143,7 +8143,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># number of electrons, basis functions</span>
@@ -8229,11 +8229,11 @@ psi4 E(2) =      -0.029933352948 Eh
 \langle \Phi_0 | \psi_0^{(2)}\rangle &amp;= 0 \\
 \langle \Phi_0 | \hat{f} |\psi_0^{(3)}\rangle &amp;= E_0^{(0)} \langle \Phi_0 | \psi_0^{(3)}\rangle = 0
 \end{align}$$
-and
+and, yet again,
 $$\begin{align}
 \langle \Phi_0 | \Phi_0 \rangle = 1
 \end{align}$$</p>
-<p>Oh, no! We need the second-order correction to the wave function! Fortunately, the situation is not as terrible as it seems because we only need the doubles part of the second-order correction to the wave function. The reason is that the matrix element $\langle \Phi_0 | \hat{v} | \psi^{(2)}_0 \rangle$ is only non-zero when the bra states correspond to doubly-excited determinants, as we saw earlier when evaluating the first-order correction to the wave function. This result does not imply that the second-order correction to the wave function contains only doubles terms; that is not the case. Rather, all we have shown is that the third-order correction to the energy can be determined from this subset of the second-order correction to the wave function, <em>i.e.</em>,</p>
+<p>Oh, no! To evaluate the third-order energy, we need the second-order correction to the wave function! Fortunately, the situation is not as terrible as it seems because we only need the doubles part of the second-order correction to the wave function. The reason is that the matrix element $\langle \Phi_0 | \hat{v} | \psi^{(2)}_0 \rangle$ is only non-zero when the bra states correspond to doubly-excited determinants, as we saw earlier when evaluating the first-order correction to the wave function. This result does not imply that the second-order correction to the wave function contains only doubles terms; that is not the case. Rather, all we have shown is that the third-order correction to the energy can be determined from this subset of the second-order correction to the wave function, <em>i.e.</em>,</p>
 <p>$$\begin{align}
 E_0^{(3)} = \frac{1}{4} \sum_{ij,ab} \langle \Phi_0 | \hat{v} | \Phi_{ij}^{ab}\rangle  c^{(2)}_{ab,ij} = \frac{1}{4} \sum_{ij,ab} \langle ij||ab \rangle  c^{(2)}_{ab,ij}
 \end{align}$$</p>
@@ -8249,7 +8249,7 @@ E_{ab,ij}^{(0)} c^{(2)}_{ab,ij} + \langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)}
 <p>$$\begin{align}
 c^{(2)}_{ab,ij} =  \frac{\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle - E_0^{(1)}c^{(1)}_{ab,ij}}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}
 \end{align}$$</p>
-<p>Now, the only remaining challenge is to evaluate</p>
+<p>Since we have alread determined $E_0^{(1)}$ and $c^{(1)}_{ab,ij}$, the only remaining challenge is to evaluate</p>
 <p>$$\begin{align}
 \langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle = \frac{1}{4} \sum_{kl,cd} \langle \Phi_{ij}^{ab} | \hat{v}  | \Phi_{kl}^{cd} \rangle c^{(1)}_{cd,kl}
 \end{align}$$</p>
@@ -8262,7 +8262,7 @@ c^{(2)}_{ab,ij} =  \frac{\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
@@ -8388,7 +8388,7 @@ c^{(2)}_{ab,ij} =  \frac{\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pdaggerq.parser</span> <span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
@@ -8582,7 +8582,7 @@ sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># construct first-order amplitudes</span>
@@ -8639,7 +8639,7 @@ sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">einsum</span>
@@ -8778,7 +8778,7 @@ sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
@@ -8828,7 +8828,7 @@ e1 += -0.50 * einsum('jiji', g_bbbb[ob, ob, ob, ob])
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We can implement these expressions to evaluate the first-order correction to the energy.</p>
+<p>The following code implements these expressions to evaluate the first-order correction to the energy.</p>
 </div>
 </div>
 </div>
@@ -8837,7 +8837,7 @@ e1 += -0.50 * einsum('jiji', g_bbbb[ob, ob, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># first-order energy, E(1) = &lt; 0 | v | 0 &gt;</span>
@@ -8876,7 +8876,7 @@ e1 += -0.50 * einsum('jiji', g_bbbb[ob, ob, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># construct second-order amplitudes</span>
