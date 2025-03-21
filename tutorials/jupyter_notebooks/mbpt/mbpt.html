@@ -7542,7 +7542,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Many-Body-Perturbation-Theory">Many-Body Perturbation Theory<a class="anchor-link" href="#Many-Body-Perturbation-Theory">¶</a></h1><p>Many-body perturbation theory (MBPT) is a non-variational approach based on non-degenerate perturbation theory that can be used to find approximate solutions to the electronic Schrödinger equation. This project provides an overview of the theoretical aspects of MBPT and a derivation of energy and wave function expressions for the first few orders, aided by the <a href="https://github.com/edeprince3/pdaggerq">$p^\dagger q$ package</a> for manipulating strings of second-quantized operators. For a review of key concepts in non-degenerate perturbation theory, refer to <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/perturbation/perturbation.html">these notes</a>. For an introduction to the p$^\dagger$q package, refer to <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/second_quantization/second_quantization.html">these notes</a>.</p>
+<h1 id="Many-Body-Perturbation-Theory">Many-Body Perturbation Theory<a class="anchor-link" href="#Many-Body-Perturbation-Theory">¶</a></h1><p>Many-body perturbation theory (MBPT) is a non-variational approach based on non-degenerate perturbation theory that can be used to find approximate solutions to the electronic Schrödinger equation. This project provides an overview of the theoretical aspects of MBPT and a derivation of energy and wave function expressions for the first few orders, aided by the <a href="https://github.com/edeprince3/pdaggerq">p$^\dagger$q package</a> for manipulating strings of second-quantized operators. For a review of key concepts in non-degenerate perturbation theory, refer to <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/perturbation/perturbation.html">these notes</a>. For an introduction to the p$^\dagger$q package, refer to <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/second_quantization/second_quantization.html">these notes</a>.</p>
 <h2 id="The-Hamiltonian">The Hamiltonian<a class="anchor-link" href="#The-Hamiltonian">¶</a></h2><p>We begin by partitioning the Hamiltonian for a many-electron system into a "simple" Hamiltonian for which solutions can be determined and a "small" perturbation to that simple Hamiltonian. Here, we use the partitioning</p>
 <p>$$\begin{align}
 \hat{H} = \hat{f} + \lambda \hat{v}
@@ -7996,11 +7996,11 @@ c^{(1)}_{abc,ijk} &amp;= 0 \\
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Second-Order-Correction-to-the-Energy">The Second-Order Correction to the Energy<a class="anchor-link" href="#The-Second-Order-Correction-to-the-Energy">¶</a></h2><p>We found earlier that the energy to first-order in MBPT is simply the Hartree-Fock energy. As such, the first meaningful correction to the energy is obtained at second order. To find, $E_0^{(2)}$, let us consider the second-order parts of the Schrödinger equation</p>
+<h2 id="The-Second-Order-Correction-to-the-Energy">The Second-Order Correction to the Energy<a class="anchor-link" href="#The-Second-Order-Correction-to-the-Energy">¶</a></h2><p>We found earlier that the energy to first-order in MBPT is simply the Hartree-Fock energy. As such, the first meaningful correction to the energy is obtained at second order. To find, $E_0^{(2)}$, let us consider the second-order part of the Schrödinger equation</p>
 <p>$$\begin{align}
 \hat{f} |\psi_0^{(2)}\rangle + \hat{v} |\psi_0^{(1)} \rangle = E_0^{(0)} |\psi_0^{(2)}\rangle + E_0^{(1)}|\psi_0^{(1)}\rangle + E_0^{(2)} |\Phi_0 \rangle
 \end{align}$$</p>
-<p>As we proceeded when seeking the first-order correction to the energy, we project this equation onto $\langle \Phi_0|$ to obtain</p>
+<p>When seeking the first-order correction to the energy, we projected the first-order Schrödinger equation onto $\langle \Phi_0|$. Doing the same for the second-order Schrödinger equation leads to</p>
 <p>$$\begin{align}
 \langle \Phi_0 | \hat{f} |\psi_0^{(2)}\rangle + \langle \Phi_0 | \hat{v} |\psi_0^{(1)} \rangle = E_0^{(0)} \langle \Phi_0|\psi_0^{(2)}\rangle + E_0^{(1)}\langle \Phi_0|\psi_0^{(1)}\rangle + E_0^{(2)} \langle \Phi_0|\Phi_0 \rangle
 \end{align}$$</p>
@@ -8039,7 +8039,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">Numerical Procedure for Evaluating $E_0^{(2)}$<a class="anchor-link" href="#Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">¶</a></h2><p>To evaluate the second-order energy numerically, we can use the Psi4 package (or any other package that gives us access to the required integrals). The following code runs a Hartree-Fock calculation on H$_2$O$^+$ and extracts the $\alpha$- and $\beta$-spin MO coefficient matrices and energies. Note that some of the keyword options are chosen to tighten convergence and to avoid the use of the density fitting approximation. Eventually, we will compare our second-order energy to the same quantity evaluated using Psi4, and we want to avoid any sources of possible disagreement.</p>
+<h2 id="Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">Numerical Procedure for Evaluating $E_0^{(2)}$<a class="anchor-link" href="#Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">¶</a></h2><p>To evaluate the second-order energy numerically, we can use the Psi4 package (or any other package that gives us access to the required integrals). The following code runs a Hartree-Fock calculation on H$_2$O$^+$ and extracts the $\alpha$- and $\beta$-spin MO coefficient matrices and energies. Note that some of the keyword options are chosen to tighten convergence and to avoid the use of the density fitting approximation. Eventually, we will compare our second-order and third-order energies to the same quantities evaluated using Psi4, and we want to avoid any sources of possible disagreement.</p>
 </div>
 </div>
 </div>
@@ -8048,7 +8048,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -8065,6 +8065,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'basis'</span> <span class="p">:</span> <span class="s1">'sto-3g'</span><span class="p">,</span> 
            <span class="s1">'scf_type'</span><span class="p">:</span> <span class="s1">'pk'</span><span class="p">,</span> 
            <span class="s1">'mp2_type'</span> <span class="p">:</span> <span class="s1">'conv'</span><span class="p">,</span> 
+           <span class="s1">'mp_type'</span> <span class="p">:</span> <span class="s1">'conv'</span><span class="p">,</span>
            <span class="s1">'e_convergence'</span> <span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>
            <span class="s1">'d_convergence'</span> <span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>
            <span class="s1">'reference'</span> <span class="p">:</span> <span class="s1">'uhf'</span><span class="p">}</span>
@@ -8102,7 +8103,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># molecular integrals helper</span>
@@ -8116,7 +8117,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <span class="c1"># ERIs in physicists' notation &lt;pq|rs&gt; = (pr|qs)</span>
 <span class="n">g_aaaa</span> <span class="o">=</span> <span class="n">g_aaaa</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">g_bbbb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">g_aabb</span> <span class="o">=</span> <span class="n">g_aabb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">g_abab</span> <span class="o">=</span> <span class="n">g_aabb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="c1"># antisymmetrized ERIs in physicists' notation &lt;pq||rs&gt; = &lt;pq|rs&gt; - &lt;pq|sr&gt;</span>
 <span class="n">g_aaaa</span> <span class="o">-=</span> <span class="n">g_aaaa</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -8142,39 +8143,39 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># number of electrons, basis functions</span>
 <span class="n">nmo</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nmo</span><span class="p">()</span>
-<span class="n">oa</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
-<span class="n">ob</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nbeta</span><span class="p">()</span>
+<span class="n">nalpha</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
+<span class="n">nbeta</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nbeta</span><span class="p">()</span>
 
 <span class="n">e2</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="c1"># aaaa</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oa</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oa</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">oa</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">oa</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
                 <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
                 <span class="n">e2</span> <span class="o">+=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
 
 <span class="c1"># bbbb</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
                 <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
                 <span class="n">e2</span> <span class="o">+=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
 
 
 <span class="c1"># abab and baba (note the factor of two difference from the expression above)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oa</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">oa</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
                 <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
-                <span class="n">e2</span> <span class="o">+=</span> <span class="n">g_aabb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
+                <span class="n">e2</span> <span class="o">+=</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">denom</span>
                 
 <span class="n">e_mp2</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="s1">'mp2'</span><span class="p">)</span>
 <span class="n">e2_psi4</span> <span class="o">=</span> <span class="n">e_mp2</span> <span class="o">-</span> <span class="n">e_hf</span>
@@ -8212,10 +8213,749 @@ psi4 E(2) =      -0.029933352948 Eh
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>We can see that our second-order energy is numerically equivalent to that from Psi4. Fantastic!</p>
+<h2 id="The-Third-Order-Correction-to-the-Energy">The Third-Order Correction to the Energy<a class="anchor-link" href="#The-Third-Order-Correction-to-the-Energy">¶</a></h2><p>To find, $E_0^{(3)}$, let us consider the third-order part of the Schrödinger equation</p>
+<p>$$\begin{align}
+\hat{f} |\psi_0^{(3)}\rangle + \hat{v} |\psi_0^{(2)} \rangle = E_0^{(0)} |\psi_0^{(3)}\rangle + E_0^{(1)}|\psi_0^{(2)}\rangle + E_0^{(2)}|\psi_0^{(1)}\rangle + E_0^{(3)} |\Phi_0 \rangle
+\end{align}$$</p>
+<p>We project this equation onto $\langle \Phi_0|$ to obtain</p>
+<p>$$\begin{align}
+\langle \Phi_0 | \hat{f} |\psi_0^{(3)}\rangle + \langle \Phi_0  | \hat{v} |\psi_0^{(2)} \rangle = E_0^{(0)} \langle \Phi_0 |\psi_0^{(3)}\rangle + E_0^{(1)}\langle \Phi_0 |\psi_0^{(2)}\rangle + E_0^{(2)}\langle \Phi_0 |\psi_0^{(1)}\rangle + E_0^{(3)} \langle \Phi_0 |\Phi_0 \rangle\end{align}$$</p>
+<p>which simplifies to</p>
+<p>$$\begin{align}
+\langle \Phi_0 | \hat{v} | \psi^{(2)}_0 \rangle = E_0^{(3)}
+\end{align}$$</p>
+<p>because</p>
+<p>$$\begin{align}
+\langle \Phi_0 | \psi_0^{(2)}\rangle &amp;= 0 \\
+\langle \Phi_0 | \hat{f} |\psi_0^{(3)}\rangle &amp;= E_0^{(0)} \langle \Phi_0 | \psi_0^{(3)}\rangle = 0
+\end{align}$$
+and
+$$\begin{align}
+\langle \Phi_0 | \Phi_0 \rangle = 1
+\end{align}$$</p>
+<p>Oh, no! We need the second-order correction to the wave function! Fortunately, the situation is not as terrible as it seems because we only need the doubles part of the second-order correction to the wave function. The reason is that the matrix element $\langle \Phi_0 | \hat{v} | \psi^{(2)}_0 \rangle$ is only non-zero when the bra states correspond to doubly-excited determinants, as we saw earlier when evaluating the first-order correction to the wave function. This result does not imply that the second-order correction to the wave function contains only doubles terms; that is not the case. Rather, all we have shown is that the third-order correction to the energy can be determined from this subset of the second-order correction to the wave function, <em>i.e.</em>,</p>
+<p>$$\begin{align}
+E_0^{(3)} = \frac{1}{4} \sum_{ij,ab} \langle \Phi_0 | \hat{v} | \Phi_{ij}^{ab}\rangle  c^{(2)}_{ab,ij} = \frac{1}{4} \sum_{ij,ab} \langle ij||ab \rangle  c^{(2)}_{ab,ij}
+\end{align}$$</p>
+<p>To obtain the second-order doubles amplitudes, we project the second-order part of the Schrödinger equation onto $\langle \Phi_{ij}^{ab}|$ giving</p>
+<p>$$\begin{align}
+\langle \Phi_{ij}^{ab} | \hat{f} |\psi_0^{(2)}\rangle + \langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle = E_0^{(0)} \langle \Phi_{ij}^{ab}|\psi_0^{(2)}\rangle + E_0^{(1)}\langle \Phi_{ij}^{ab}|\psi_0^{(1)}\rangle + E_0^{(2)} \langle \Phi_{ij}^{ab}|\Phi_0 \rangle
+\end{align}$$</p>
+<p>or</p>
+<p>$$\begin{align}
+E_{ab,ij}^{(0)} c^{(2)}_{ab,ij} + \langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle = E_0^{(0)}c^{(2)}_{ab,ij} + E_0^{(1)}c^{(1)}_{ab,ij}
+\end{align}$$</p>
+<p>Solving for the second-order doubles amplitudes, we have</p>
+<p>$$\begin{align}
+c^{(2)}_{ab,ij} =  \frac{\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle - E_0^{(1)}c^{(1)}_{ab,ij}}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}
+\end{align}$$</p>
+<p>Now, the only remaining challenge is to evaluate</p>
+<p>$$\begin{align}
+\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle = \frac{1}{4} \sum_{kl,cd} \langle \Phi_{ij}^{ab} | \hat{v}  | \Phi_{kl}^{cd} \rangle c^{(1)}_{cd,kl}
+\end{align}$$</p>
+<p>The following code evaluates this quantity using p$^\dagger$q. To simplify things, we will make use of the built-in operator 'r2', the action of which on the Hartree-Fock wave function can represent the first-order wave function. We will introduce spin labels, which can be done by passing a dictionary of spins to the pq.strings() function.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c161e14d-b241-4993-94a6-14d1f14d5cb6">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c161e14d-b241-4993-94a6-14d1f14d5cb6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
+
+<span class="n">pq</span><span class="o">.</span><span class="n">set_left_operators</span><span class="p">([[</span><span class="s1">'a*(i)'</span><span class="p">,</span> <span class="s1">'a*(j)'</span><span class="p">,</span> <span class="s1">'a(b)'</span><span class="p">,</span> <span class="s1">'a(a)'</span><span class="p">]])</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">set_right_operators</span><span class="p">([[</span><span class="s1">'r2'</span><span class="p">]])</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'v'</span><span class="p">])</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'# aa terms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'a'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'b'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'i'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'j'</span> <span class="p">:</span> <span class="s1">'a'</span>
+<span class="p">}</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'# bb terms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'a'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'b'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'i'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'j'</span> <span class="p">:</span> <span class="s1">'b'</span>
+<span class="p">}</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'# ab terms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'a'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'b'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'i'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'j'</span> <span class="p">:</span> <span class="s1">'b'</span>
+<span class="p">}</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+# aa terms
+
+['-0.50', '&lt;l,k||l,k&gt;_aaaa', 'r2_aaaa(a,b,i,j)']
+['-0.50', '&lt;l,k||l,k&gt;_abab', 'r2_aaaa(a,b,i,j)']
+['-0.50', '&lt;k,l||k,l&gt;_abab', 'r2_aaaa(a,b,i,j)']
+['-0.50', '&lt;l,k||l,k&gt;_bbbb', 'r2_aaaa(a,b,i,j)']
+['+0.50', '&lt;l,k||i,j&gt;_aaaa', 'r2_aaaa(a,b,l,k)']
+['+1.00', 'P(i,j)', 'P(a,b)', '&lt;k,a||c,j&gt;_aaaa', 'r2_aaaa(c,b,i,k)']
+['-1.00', 'P(i,j)', 'P(a,b)', '&lt;a,k||j,c&gt;_abab', 'r2_abab(b,c,i,k)']
+['+0.50', '&lt;a,b||c,d&gt;_aaaa', 'r2_aaaa(c,d,i,j)']
+
+# bb terms
+
+['-0.50', '&lt;l,k||l,k&gt;_aaaa', 'r2_bbbb(a,b,i,j)']
+['-0.50', '&lt;l,k||l,k&gt;_abab', 'r2_bbbb(a,b,i,j)']
+['-0.50', '&lt;k,l||k,l&gt;_abab', 'r2_bbbb(a,b,i,j)']
+['-0.50', '&lt;l,k||l,k&gt;_bbbb', 'r2_bbbb(a,b,i,j)']
+['+0.50', '&lt;l,k||i,j&gt;_bbbb', 'r2_bbbb(a,b,l,k)']
+['-1.00', 'P(i,j)', 'P(a,b)', '&lt;k,a||c,j&gt;_abab', 'r2_abab(c,b,k,i)']
+['+1.00', 'P(i,j)', 'P(a,b)', '&lt;k,a||c,j&gt;_bbbb', 'r2_bbbb(c,b,i,k)']
+['+0.50', '&lt;a,b||c,d&gt;_bbbb', 'r2_bbbb(c,d,i,j)']
+
+# ab terms
+
+['-0.50', '&lt;l,k||l,k&gt;_aaaa', 'r2_abab(a,b,i,j)']
+['-0.50', '&lt;l,k||l,k&gt;_abab', 'r2_abab(a,b,i,j)']
+['-0.50', '&lt;k,l||k,l&gt;_abab', 'r2_abab(a,b,i,j)']
+['-0.50', '&lt;l,k||l,k&gt;_bbbb', 'r2_abab(a,b,i,j)']
+['+0.50', '&lt;l,k||i,j&gt;_abab', 'r2_abab(a,b,l,k)']
+['+0.50', '&lt;k,l||i,j&gt;_abab', 'r2_abab(a,b,k,l)']
+['-1.00', '&lt;a,k||c,j&gt;_abab', 'r2_abab(c,b,i,k)']
+['-1.00', '&lt;k,b||c,j&gt;_abab', 'r2_aaaa(c,a,i,k)']
+['+1.00', '&lt;k,b||c,j&gt;_bbbb', 'r2_abab(a,c,i,k)']
+['+1.00', '&lt;k,a||c,i&gt;_aaaa', 'r2_abab(c,b,k,j)']
+['-1.00', '&lt;a,k||i,c&gt;_abab', 'r2_bbbb(c,b,j,k)']
+['-1.00', '&lt;k,b||i,c&gt;_abab', 'r2_abab(a,c,k,j)']
+['+0.50', '&lt;a,b||c,d&gt;_abab', 'r2_abab(c,d,i,j)']
+['+0.50', '&lt;a,b||d,c&gt;_abab', 'r2_abab(d,c,i,j)']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c5f961d1-0091-432d-888f-127d87dcc252">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Here, 'P(i,j)' represents a permutation operator, and we interpret 'r2(a,b,i,j)' as a first-order doubles amplitude. We can see that these expressions are a bit more complicated than the ones we generated earlier, so it might be convenient to use p$^\dagger$q to generate the corresponding NumPy einsum code for us. The following code does that.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=eea3fb9b-e082-45f0-9ad2-69cd0f1fa405">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pdaggerq.parser</span> <span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'# aaaa terms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'a'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'b'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'i'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'j'</span> <span class="p">:</span> <span class="s1">'a'</span>
+<span class="p">}</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"#</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'sigma2_aaaa'</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'j'</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'# bbbb terms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'a'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'b'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'i'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'j'</span> <span class="p">:</span> <span class="s1">'b'</span>
+<span class="p">}</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"#</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'sigma2_bbbb'</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'j'</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'# abab terms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'a'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'b'</span> <span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="s1">'i'</span> <span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'j'</span> <span class="p">:</span> <span class="s1">'b'</span>
+<span class="p">}</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"#</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'sigma2_abab'</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'j'</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+# aaaa terms
+
+#	 -0.50 &lt;l,k||l,k&gt;_aaaa*r2_aaaa(a,b,i,j)
+sigma2_aaaa += -0.50 * einsum('lklk,abij-&gt;abij', g_aaaa[oa, oa, oa, oa], r2_aaaa)
+
+#	 -0.50 &lt;l,k||l,k&gt;_abab*r2_aaaa(a,b,i,j)
+sigma2_aaaa += -0.50 * einsum('lklk,abij-&gt;abij', g_abab[oa, ob, oa, ob], r2_aaaa)
+
+#	 -0.50 &lt;k,l||k,l&gt;_abab*r2_aaaa(a,b,i,j)
+sigma2_aaaa += -0.50 * einsum('klkl,abij-&gt;abij', g_abab[oa, ob, oa, ob], r2_aaaa)
+
+#	 -0.50 &lt;l,k||l,k&gt;_bbbb*r2_aaaa(a,b,i,j)
+sigma2_aaaa += -0.50 * einsum('lklk,abij-&gt;abij', g_bbbb[ob, ob, ob, ob], r2_aaaa)
+
+#	  0.50 &lt;l,k||i,j&gt;_aaaa*r2_aaaa(a,b,l,k)
+sigma2_aaaa +=  0.50 * einsum('lkij,ablk-&gt;abij', g_aaaa[oa, oa, oa, oa], r2_aaaa)
+
+#	  1.00 P(i,j)*P(a,b)&lt;k,a||c,j&gt;_aaaa*r2_aaaa(c,b,i,k)
+contracted_intermediate =  1.00 * einsum('kacj,cbik-&gt;abij', g_aaaa[oa, va, va, oa], r2_aaaa)
+sigma2_aaaa +=  1.00000 * contracted_intermediate + -1.00000 * einsum('abij-&gt;abji', contracted_intermediate)  + -1.00000 * einsum('abij-&gt;baij', contracted_intermediate)  +  1.00000 * einsum('abij-&gt;baji', contracted_intermediate) 
+
+#	 -1.00 P(i,j)*P(a,b)&lt;a,k||j,c&gt;_abab*r2_abab(b,c,i,k)
+contracted_intermediate = -1.00 * einsum('akjc,bcik-&gt;abij', g_abab[va, ob, oa, vb], r2_abab)
+sigma2_aaaa +=  1.00000 * contracted_intermediate + -1.00000 * einsum('abij-&gt;abji', contracted_intermediate)  + -1.00000 * einsum('abij-&gt;baij', contracted_intermediate)  +  1.00000 * einsum('abij-&gt;baji', contracted_intermediate) 
+
+#	  0.50 &lt;a,b||c,d&gt;_aaaa*r2_aaaa(c,d,i,j)
+sigma2_aaaa +=  0.50 * einsum('abcd,cdij-&gt;abij', g_aaaa[va, va, va, va], r2_aaaa)
+
+
+# bbbb terms
+
+#	 -0.50 &lt;l,k||l,k&gt;_aaaa*r2_bbbb(a,b,i,j)
+sigma2_bbbb += -0.50 * einsum('lklk,abij-&gt;abij', g_aaaa[oa, oa, oa, oa], r2_bbbb)
+
+#	 -0.50 &lt;l,k||l,k&gt;_abab*r2_bbbb(a,b,i,j)
+sigma2_bbbb += -0.50 * einsum('lklk,abij-&gt;abij', g_abab[oa, ob, oa, ob], r2_bbbb)
+
+#	 -0.50 &lt;k,l||k,l&gt;_abab*r2_bbbb(a,b,i,j)
+sigma2_bbbb += -0.50 * einsum('klkl,abij-&gt;abij', g_abab[oa, ob, oa, ob], r2_bbbb)
+
+#	 -0.50 &lt;l,k||l,k&gt;_bbbb*r2_bbbb(a,b,i,j)
+sigma2_bbbb += -0.50 * einsum('lklk,abij-&gt;abij', g_bbbb[ob, ob, ob, ob], r2_bbbb)
+
+#	  0.50 &lt;l,k||i,j&gt;_bbbb*r2_bbbb(a,b,l,k)
+sigma2_bbbb +=  0.50 * einsum('lkij,ablk-&gt;abij', g_bbbb[ob, ob, ob, ob], r2_bbbb)
+
+#	 -1.00 P(i,j)*P(a,b)&lt;k,a||c,j&gt;_abab*r2_abab(c,b,k,i)
+contracted_intermediate = -1.00 * einsum('kacj,cbki-&gt;abij', g_abab[oa, vb, va, ob], r2_abab)
+sigma2_bbbb +=  1.00000 * contracted_intermediate + -1.00000 * einsum('abij-&gt;abji', contracted_intermediate)  + -1.00000 * einsum('abij-&gt;baij', contracted_intermediate)  +  1.00000 * einsum('abij-&gt;baji', contracted_intermediate) 
+
+#	  1.00 P(i,j)*P(a,b)&lt;k,a||c,j&gt;_bbbb*r2_bbbb(c,b,i,k)
+contracted_intermediate =  1.00 * einsum('kacj,cbik-&gt;abij', g_bbbb[ob, vb, vb, ob], r2_bbbb)
+sigma2_bbbb +=  1.00000 * contracted_intermediate + -1.00000 * einsum('abij-&gt;abji', contracted_intermediate)  + -1.00000 * einsum('abij-&gt;baij', contracted_intermediate)  +  1.00000 * einsum('abij-&gt;baji', contracted_intermediate) 
+
+#	  0.50 &lt;a,b||c,d&gt;_bbbb*r2_bbbb(c,d,i,j)
+sigma2_bbbb +=  0.50 * einsum('abcd,cdij-&gt;abij', g_bbbb[vb, vb, vb, vb], r2_bbbb)
+
+
+# abab terms
+
+#	 -0.50 &lt;l,k||l,k&gt;_aaaa*r2_abab(a,b,i,j)
+sigma2_abab += -0.50 * einsum('lklk,abij-&gt;abij', g_aaaa[oa, oa, oa, oa], r2_abab)
+
+#	 -0.50 &lt;l,k||l,k&gt;_abab*r2_abab(a,b,i,j)
+sigma2_abab += -0.50 * einsum('lklk,abij-&gt;abij', g_abab[oa, ob, oa, ob], r2_abab)
+
+#	 -0.50 &lt;k,l||k,l&gt;_abab*r2_abab(a,b,i,j)
+sigma2_abab += -0.50 * einsum('klkl,abij-&gt;abij', g_abab[oa, ob, oa, ob], r2_abab)
+
+#	 -0.50 &lt;l,k||l,k&gt;_bbbb*r2_abab(a,b,i,j)
+sigma2_abab += -0.50 * einsum('lklk,abij-&gt;abij', g_bbbb[ob, ob, ob, ob], r2_abab)
+
+#	  0.50 &lt;l,k||i,j&gt;_abab*r2_abab(a,b,l,k)
+sigma2_abab +=  0.50 * einsum('lkij,ablk-&gt;abij', g_abab[oa, ob, oa, ob], r2_abab)
+
+#	  0.50 &lt;k,l||i,j&gt;_abab*r2_abab(a,b,k,l)
+sigma2_abab +=  0.50 * einsum('klij,abkl-&gt;abij', g_abab[oa, ob, oa, ob], r2_abab)
+
+#	 -1.00 &lt;a,k||c,j&gt;_abab*r2_abab(c,b,i,k)
+sigma2_abab += -1.00 * einsum('akcj,cbik-&gt;abij', g_abab[va, ob, va, ob], r2_abab)
+
+#	 -1.00 &lt;k,b||c,j&gt;_abab*r2_aaaa(c,a,i,k)
+sigma2_abab += -1.00 * einsum('kbcj,caik-&gt;abij', g_abab[oa, vb, va, ob], r2_aaaa)
+
+#	  1.00 &lt;k,b||c,j&gt;_bbbb*r2_abab(a,c,i,k)
+sigma2_abab +=  1.00 * einsum('kbcj,acik-&gt;abij', g_bbbb[ob, vb, vb, ob], r2_abab)
+
+#	  1.00 &lt;k,a||c,i&gt;_aaaa*r2_abab(c,b,k,j)
+sigma2_abab +=  1.00 * einsum('kaci,cbkj-&gt;abij', g_aaaa[oa, va, va, oa], r2_abab)
+
+#	 -1.00 &lt;a,k||i,c&gt;_abab*r2_bbbb(c,b,j,k)
+sigma2_abab += -1.00 * einsum('akic,cbjk-&gt;abij', g_abab[va, ob, oa, vb], r2_bbbb)
+
+#	 -1.00 &lt;k,b||i,c&gt;_abab*r2_abab(a,c,k,j)
+sigma2_abab += -1.00 * einsum('kbic,ackj-&gt;abij', g_abab[oa, vb, oa, vb], r2_abab)
+
+#	  0.50 &lt;a,b||c,d&gt;_abab*r2_abab(c,d,i,j)
+sigma2_abab +=  0.50 * einsum('abcd,cdij-&gt;abij', g_abab[va, vb, va, vb], r2_abab)
+
+#	  0.50 &lt;a,b||d,c&gt;_abab*r2_abab(d,c,i,j)
+sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_abab)
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=26c7efcf-8238-4265-9ab5-38afaeabe785">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Here, 'oa', 'ob', 'va', and 'vb' are slices over occupied and virtual orbital labels. Below, we implement these expressions and evaluates the third-order contribution to the energy. First, we need to evaluate the first-order amplitudes.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5b2eb033-89e2-4f3a-b5b4-03671075cf3d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># construct first-order amplitudes</span>
+
+<span class="c1"># aaaa</span>
+<span class="n">r2_aaaa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nmo</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">r2_aaaa</span><span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">/</span> <span class="n">denom</span>
+
+<span class="c1"># bbbb</span>
+<span class="n">r2_bbbb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nmo</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">r2_bbbb</span><span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">/</span> <span class="n">denom</span>
+
+
+<span class="c1"># abab</span>
+<span class="n">r2_abab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nmo</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">r2_abab</span><span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">/</span> <span class="n">denom</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a7ef8bf8-cfeb-419c-9722-4b2c8ab0d2ac">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we can evaluate</p>
+<p>$$\begin{align}
+\sigma_{ab,ij} = \langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle = \frac{1}{4} \sum_{kl,cd} \langle \Phi_{ij}^{ab} | \hat{v}  | \Phi_{kl}^{cd} \rangle c^{(1)}_{cd,kl}
+\end{align}$$</p>
+<p>for each spin case using the code generated by p$^\dagger$q. For that code to function correctly, we must add a few lines to define the slices 'oa', etc. and to build each of the containers, sigma2_aaaa, etc.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=78d435f3-d82f-440b-adc9-bc47e391c70f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">einsum</span>
+
+<span class="c1"># define slices</span>
+
+<span class="n">oa</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">)</span>
+<span class="n">ob</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">)</span>
+<span class="n">va</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">vb</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># evaluate &lt; ab,ij | v | psi(1) &gt;</span>
+
+<span class="c1"># aaaa terms</span>
+<span class="n">sigma2_aaaa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_aaaa*r2_aaaa(a,b,i,j)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_abab*r2_aaaa(a,b,i,j)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;k,l||k,l&gt;_abab*r2_aaaa(a,b,i,j)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'klkl,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_bbbb*r2_aaaa(a,b,i,j)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	  0.50 &lt;l,k||i,j&gt;_aaaa*r2_aaaa(a,b,l,k)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lkij,ablk-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	  1.00 P(i,j)*P(a,b)&lt;k,a||c,j&gt;_aaaa*r2_aaaa(c,b,i,k)</span>
+<span class="n">contracted_intermediate</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kacj,cbik-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">contracted_intermediate</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;abji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baij'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span> 
+
+<span class="c1">#	 -1.00 P(i,j)*P(a,b)&lt;a,k||j,c&gt;_abab*r2_abab(b,c,i,k)</span>
+<span class="n">contracted_intermediate</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'akjc,bcik-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">contracted_intermediate</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;abji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baij'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span> 
+
+<span class="c1">#	  0.50 &lt;a,b||c,d&gt;_aaaa*r2_aaaa(c,d,i,j)</span>
+<span class="n">sigma2_aaaa</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abcd,cdij-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+
+<span class="c1"># bbbb terms</span>
+<span class="n">sigma2_bbbb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_aaaa*r2_bbbb(a,b,i,j)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_abab*r2_bbbb(a,b,i,j)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;k,l||k,l&gt;_abab*r2_bbbb(a,b,i,j)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'klkl,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_bbbb*r2_bbbb(a,b,i,j)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	  0.50 &lt;l,k||i,j&gt;_bbbb*r2_bbbb(a,b,l,k)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lkij,ablk-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	 -1.00 P(i,j)*P(a,b)&lt;k,a||c,j&gt;_abab*r2_abab(c,b,k,i)</span>
+<span class="n">contracted_intermediate</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kacj,cbki-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">contracted_intermediate</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;abji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baij'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span> 
+
+<span class="c1">#	  1.00 P(i,j)*P(a,b)&lt;k,a||c,j&gt;_bbbb*r2_bbbb(c,b,i,k)</span>
+<span class="n">contracted_intermediate</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kacj,cbik-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">contracted_intermediate</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;abji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span> <span class="o">-</span><span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baij'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span>  <span class="o">+</span>  <span class="mf">1.00000</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;baji'</span><span class="p">,</span> <span class="n">contracted_intermediate</span><span class="p">)</span> 
+
+<span class="c1">#	  0.50 &lt;a,b||c,d&gt;_bbbb*r2_bbbb(c,d,i,j)</span>
+<span class="n">sigma2_bbbb</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abcd,cdij-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+
+<span class="c1"># abab terms</span>
+<span class="n">sigma2_abab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_aaaa*r2_abab(a,b,i,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_abab*r2_abab(a,b,i,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;k,l||k,l&gt;_abab*r2_abab(a,b,i,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'klkl,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -0.50 &lt;l,k||l,k&gt;_bbbb*r2_abab(a,b,i,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lklk,abij-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	  0.50 &lt;l,k||i,j&gt;_abab*r2_abab(a,b,l,k)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'lkij,ablk-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	  0.50 &lt;k,l||i,j&gt;_abab*r2_abab(a,b,k,l)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'klij,abkl-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -1.00 &lt;a,k||c,j&gt;_abab*r2_abab(c,b,i,k)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'akcj,cbik-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -1.00 &lt;k,b||c,j&gt;_abab*r2_aaaa(c,a,i,k)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kbcj,caik-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_aaaa</span><span class="p">)</span>
+
+<span class="c1">#	  1.00 &lt;k,b||c,j&gt;_bbbb*r2_abab(a,c,i,k)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kbcj,acik-&gt;abij'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	  1.00 &lt;k,a||c,i&gt;_aaaa*r2_abab(c,b,k,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kaci,cbkj-&gt;abij'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	 -1.00 &lt;a,k||i,c&gt;_abab*r2_bbbb(c,b,j,k)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'akic,cbjk-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">r2_bbbb</span><span class="p">)</span>
+
+<span class="c1">#	 -1.00 &lt;k,b||i,c&gt;_abab*r2_abab(a,c,k,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'kbic,ackj-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	  0.50 &lt;a,b||c,d&gt;_abab*r2_abab(c,d,i,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abcd,cdij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+
+<span class="c1">#	  0.50 &lt;a,b||d,c&gt;_abab*r2_abab(d,c,i,j)</span>
+<span class="n">sigma2_abab</span> <span class="o">+=</span>  <span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abdc,dcij-&gt;abij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">r2_abab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9626b8bc-eca5-4d8e-bdc5-6dbe5ebeee72">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, the last ingredient we need in order to construct the second-order amplitudes is the first-order energy. We derived spin-orbital expressions for $E_0^{(1)}$ above, but since we are working in a spatial orbital basis, we can let p$^\dagger$q give us code that includes spin labels.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=686dd2df-2e7a-4529-a132-c3acd3ee205f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
+
+<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'v'</span><span class="p">])</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{})</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"#</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'e1'</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>#	 -0.50 &lt;j,i||j,i&gt;_aaaa
+e1 += -0.50 * einsum('jiji', g_aaaa[oa, oa, oa, oa])
+
+#	 -0.50 &lt;j,i||j,i&gt;_abab
+e1 += -0.50 * einsum('jiji', g_abab[oa, ob, oa, ob])
+
+#	 -0.50 &lt;i,j||i,j&gt;_abab
+e1 += -0.50 * einsum('ijij', g_abab[oa, ob, oa, ob])
+
+#	 -0.50 &lt;j,i||j,i&gt;_bbbb
+e1 += -0.50 * einsum('jiji', g_bbbb[ob, ob, ob, ob])
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af3eeb62-21c3-469a-9563-cdd8894ef0b2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can implement these expressions to evaluate the first-order correction to the energy.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ef050390-52be-453f-ac00-0b7e7b257e00">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># first-order energy, E(1) = &lt; 0 | v | 0 &gt;</span>
+
+<span class="n">e1</span> <span class="o">=</span> <span class="mf">0.0</span> 
+
+<span class="c1">#	 -0.50 &lt;j,i||j,i&gt;_aaaa</span>
+<span class="n">e1</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiji'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+
+<span class="c1">#	 -0.50 &lt;j,i||j,i&gt;_abab</span>
+<span class="n">e1</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiji'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#	 -0.50 &lt;i,j||i,j&gt;_abab</span>
+<span class="n">e1</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ijij'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#	 -0.50 &lt;j,i||j,i&gt;_bbbb</span>
+<span class="n">e1</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.50</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiji'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2c54e52f-f3a7-4d15-8306-6f617480994d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we are ready to construct the second-order amplitudes and evaluate $E^{(3)}_0$.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=210ad78d-b705-4dbe-aa7f-4bf2d719b9a0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># construct second-order amplitudes</span>
+
+<span class="c1"># aaaa</span>
+<span class="n">amp2_aaaa</span> <span class="o">=</span> <span class="n">sigma2_aaaa</span> <span class="o">-</span> <span class="n">e1</span> <span class="o">*</span> <span class="n">r2_aaaa</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">amp2_aaaa</span><span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">denom</span>
+
+<span class="c1"># bbbb</span>
+<span class="n">amp2_bbbb</span> <span class="o">=</span> <span class="n">sigma2_bbbb</span> <span class="o">-</span> <span class="n">e1</span> <span class="o">*</span> <span class="n">r2_bbbb</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">amp2_bbbb</span><span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">denom</span>
+
+
+<span class="c1"># abab</span>
+<span class="n">amp2_abab</span> <span class="o">=</span> <span class="n">sigma2_abab</span> <span class="o">-</span> <span class="n">e1</span> <span class="o">*</span> <span class="n">r2_abab</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">nmo</span><span class="p">):</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_a</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon_b</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+                <span class="n">amp2_abab</span><span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">nalpha</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">nbeta</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">denom</span>
+
+<span class="c1"># third order energy:</span>
+
+<span class="n">e3</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">e3</span> <span class="o">+=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'abij,abij-&gt;'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">amp2_aaaa</span><span class="p">)</span>
+<span class="n">e3</span> <span class="o">+=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'abij,abij-&gt;'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">amp2_bbbb</span><span class="p">)</span>
+<span class="n">e3</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'abij,abij-&gt;'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">amp2_abab</span><span class="p">)</span>
+
+<span class="n">e_mp3</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="s1">'mp3'</span><span class="p">)</span>
+<span class="n">e3_psi4</span> <span class="o">=</span> <span class="n">e_mp3</span> <span class="o">-</span> <span class="n">e_mp2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'my E(3) =   </span><span class="si">%20.12f</span><span class="s1"> Eh'</span> <span class="o">%</span> <span class="p">(</span><span class="n">e3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'psi4 E(3) = </span><span class="si">%20.12f</span><span class="s1"> Eh'</span> <span class="o">%</span> <span class="p">(</span><span class="n">e3_psi4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+my E(3) =        -0.007965387470 Eh
+psi4 E(3) =      -0.007965387470 Eh
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21cfc31a-7425-4577-be21-c895be42b1af">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can see that our third-order energy is numerically equivalent to that from Psi4. What a day!</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a3a319c7-0a9e-43b1-9e0c-fd7108d57215">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
