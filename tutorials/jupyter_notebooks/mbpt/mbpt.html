@@ -7547,7 +7547,7 @@ a.anchor-link {
 <p>$$\begin{align}
 \hat{H} = \hat{f} + \lambda \hat{v}
 \end{align}$$</p>
-<p>where the zeroth-order Hamiltonian, $\hat{f}$, is the <strong>Fock operator</strong>, and the perturbation, $\hat{v}$, is called the <strong>fluctuation potential</strong>. Recall from the <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">Hartree-Fock tutorial</a> that the second-quantized Fock operator is</p>
+<p>where the zeroth-order Hamiltonian, $\hat{f}$, is the <strong>Fock operator</strong>, the perturbation, $\hat{v}$, is called the <strong>fluctuation potential</strong>, and $\lambda$ is the <strong>perturbation strength</strong>. Recall from the <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">Hartree-Fock tutorial</a> that the second-quantized Fock operator is</p>
 <p>$$\begin{align}
 \hat{f} = \sum_{\mu\nu} f_{\mu\nu}\hat{a}^\dagger_\mu \hat{a}_\nu
 \end{align}$$</p>
@@ -7637,7 +7637,7 @@ E^{(0)}_{a,i} = \sum_{k\neq i} \epsilon_k + \epsilon_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
@@ -7678,7 +7678,7 @@ E^{(0)}_{a,i} = \sum_{k\neq i} \epsilon_k + \epsilon_a
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Great! This is exactly what we were expecting. The expectation value of the Fock operator is equal to the sum over the diagonal elements of the Fock matrix (the orbital energies), and the sum is restricted to the occupied orbital space.</p>
-<p>For the singly excited functions, we can do something similar, but we need to be aware of a key internal assumptions made by the p$^\dagger$q package, that repeated labels imply a summation. As such, an expression like</p>
+<p>For the singly excited functions, we can do something similar, but we need to be aware of a key internal assumption made by the p$^\dagger$q package, that repeated labels imply a summation. As such, an expression like</p>
 <p>$$\begin{align}
 E^{(0)}_{a,i} = \langle \Phi^a_i | \hat{f} | \Phi_i^a \rangle = \langle \Phi_0 | \hat{a}^\dagger_i  \hat{a}_a \hat{f} \hat{a}^\dagger_a \hat{a}_i | \Phi_{0}\rangle
 \end{align}$$</p>
@@ -7691,7 +7691,7 @@ E^{(0)}_{a,i} = \langle \Phi^a_i | \hat{f} | \Phi_i^a \rangle = \langle \Phi_0 |
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
@@ -7787,7 +7787,7 @@ $$\begin{align}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
@@ -7896,7 +7896,7 @@ c_{ab,ij}^{(1)} &amp;= \frac{\langle \Phi_{ij}^{ab} | \hat{v} | \Phi_0 \rangle}{
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
@@ -8039,7 +8039,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">Numerical Procedure for Evaluating $E_0^{(2)}$<a class="anchor-link" href="#Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">¶</a></h2><p>To evaluate the second-order energy numerically, we can use the Psi4 package (or any other package that gives us access to the required integrals). The following code runs a Hartree-Fock calculation on H$_2$O$^+$ and extracts the $\alpha$- and $\beta$-spin MO coefficient matrices and energies. Note that some of the keyword options are chosen to tighten convergence and to avoid the use of the density fitting approximation. Eventually, we will compare our second-order and third-order energies to the same quantities evaluated using Psi4, and we want to avoid any sources of possible disagreement.</p>
+<h2 id="Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">Numerical Procedure for Evaluating $E_0^{(2)}$<a class="anchor-link" href="#Numerical-Procedure-for-Evaluating-$E_0%5E%7B(2)%7D$">¶</a></h2><p>To evaluate the second-order energy numerically, we can use the Psi4 package (or any other package that gives us access to the required integrals). The following code runs a Hartree-Fock calculation on H$_2$O$^+$ and extracts the $\alpha$- and $\beta$-spin MO coefficient matrices and energies. Note that some of the keyword options are chosen to tighten convergence and to avoid the use of the density fitting approximation. Eventually, we will compare our second-order energy (and, later on, the third-order energy) to the same quantity evaluated using Psi4, and we want to avoid any sources of possible disagreement.</p>
 </div>
 </div>
 </div>
@@ -8048,7 +8048,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -8103,7 +8103,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># molecular integrals helper</span>
@@ -8143,7 +8143,7 @@ E_0^{(2)} = \frac{1}{4} \sum_\sigma \sum_{ij,ab}  \frac{|\langle a_\sigma b_\sig
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># number of electrons, basis functions</span>
@@ -8262,7 +8262,7 @@ c^{(2)}_{ab,ij} =  \frac{\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
@@ -8388,7 +8388,7 @@ c^{(2)}_{ab,ij} =  \frac{\langle \Phi_{ij}^{ab} | \hat{v} |\psi_0^{(1)} \rangle 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pdaggerq.parser</span> <span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
@@ -8582,7 +8582,7 @@ sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># construct first-order amplitudes</span>
@@ -8639,7 +8639,7 @@ sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">einsum</span>
@@ -8778,7 +8778,7 @@ sigma2_abab +=  0.50 * einsum('abdc,dcij-&gt;abij', g_abab[va, vb, va, vb], r2_a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
@@ -8837,7 +8837,7 @@ e1 += -0.50 * einsum('jiji', g_bbbb[ob, ob, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># first-order energy, E(1) = &lt; 0 | v | 0 &gt;</span>
@@ -8876,7 +8876,7 @@ e1 += -0.50 * einsum('jiji', g_bbbb[ob, ob, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># construct second-order amplitudes</span>
