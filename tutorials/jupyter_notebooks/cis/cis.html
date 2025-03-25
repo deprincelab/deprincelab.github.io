@@ -3,7 +3,7 @@ layout: page
 math: true
 ---
 
-<b>Jupyter Notebook Tutorials: Quantum Chemistry</b> 
+<b>Jupyter Notebook Tutorials: Quantum Chemistry</b>
 <br>
 <hr>
 
@@ -7542,7 +7542,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Configuration-Interaction-with-Single-Excitations">Configuration Interaction with Single Excitations<a class="anchor-link" href="#Configuration-Interaction-with-Single-Excitations">¶</a></h1><p>In this project, you will learn how to write a restricted configuration interaction with single excitations (CIS) code using the Python interface to the Psi4 electronic structure package. Most of Psi4's core libraries (integral generation, SCF solver, etc.) are exposed to Python, which facilitates the development of short, easy to understand codes for complex electronic structure methods. For example, you will soon find that it is possible to write a working CIS code in Python in less than 100 lines!</p>
+<h1 id="Configuration-Interaction-with-Single-Excitations">Configuration Interaction with Single Excitations<a class="anchor-link" href="#Configuration-Interaction-with-Single-Excitations">¶</a></h1><p>In the preceding tutorials, we have explored strategies for finding approximations to the lowest-energy eigenfunctions of the electronic Hamiltonian (using <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">Hartree-Fock theory</a> and <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/mbpt/mbpt.html">many-body perturbation theory</a>). In this project, we explore the simplest possible wave function <em>ansatz</em> for modeling electronically excited states, which is known as configuration interaction with single excitations (CIS). We will develop a CIS code using the Python interface to the Psi4 electronic structure package. Most of Psi4's core libraries (integral generation, SCF solver, etc.) are exposed to Python, which facilitates the development of short, easy to understand codes for complex electronic structure methods.</p>
 </div>
 </div>
 </div>
@@ -7553,28 +7553,112 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>At the Hartree-Fock level of theory, the <i>N</i>-electron wave function is approximated as an antisymmetrized product of <i>N</i> one-electron functions called molecular orbitals (MOs) (a Slater determinant). The simplest representation of an excited-state wave function would be a single Slater determinant comprised of a different set of molecular
-orbitals, but we can obtain a slightly better description of the excited state by expressing it as a linear combination of Slater determinants that differ by the ground-state configuration by one electron.  What we are describing here is a configuration interaction with single excitations (CIS) wave function; the CIS wave function for the <i>n</i><sup>th</sup> excited state can be expressed as</p>
-<p>$$|\psi(n)\rangle = \sum_{ia} c_i^a(n) |\phi_i^a\rangle$$</p>
-<p>Here, the symbol <i>φ<sub>i</sub><sup>a</sup></i> represents a Slater determinant that is singly excited relative to the reference determinant, and the indices <i>i</i> and <i>a</i> represent a spin orbitals that are occupied and unoccupied (virtual) in the reference, respectively.</p>
-<p>The expansion coefficients and energy of the excited state can be determined by testing the Schrödinger equation with one of the singly-excited configurations to obtain</p>
-<p>$$\sum_{jb} \langle \phi_i^a | \hat{H} | \phi_j^b \rangle c_j^b(n) = E(n) c_i^a(n)$$</p>
-<p>We can form similar expressions for all excited states, and, taken together, these expressions become an eigenvalue equation</p>
-<p>$${\bf H}{\bf c}(n) = E_n {\bf c}(n)$$</p>
-<p>where <b>H</b> is the matrix representation of the Hamiltonian in the basis of singly-excited determinants.  The elements of this matrix are given by</p>
-<p>$$H_{ia,jb} = F_{ab}\delta_{ij}-F_{ij}\delta_{ab} + \langle aj ||ib\rangle$$</p>
-<p>where $F$ represents the Fock matrix, and $\langle aj || ib \rangle$ represents an antisymmetrized electron-repulsion integral in physicists' notation.  Recall that the Fock matrix for restricted Hartree-Fock theory is diagonal in the MO basis, so this expression simplifies sligthly:</p>
-<p>$$H_{ia,jb} = (\epsilon_a - \epsilon_i) \delta_{ij}\delta_{ab} + \langle aj ||ib\rangle$$</p>
-<p>where $\epsilon_i$ and $\epsilon_a$ represent occupied and virtual orbital energies, respectively.</p>
-<h2 id="Singlet-Excitation-Energies">Singlet Excitation Energies<a class="anchor-link" href="#Singlet-Excitation-Energies">¶</a></h2><p>It turns out that when the eigenvalues of the CIS Hamiltonian represented in this spin-orbital basis correspond to energies for CIS states of two different spin symmetries: singlets and
+<h2 id="The-CIS-Wave-Function-and-Hamiltonian">The CIS Wave Function and Hamiltonian<a class="anchor-link" href="#The-CIS-Wave-Function-and-Hamiltonian">¶</a></h2><p>At the Hartree-Fock level of theory, the $N$-electron wave function is approximated as an antisymmetrized product of $N$ one-electron functions called molecular orbitals (MOs) (a Slater determinant). The simplest representation of an excited-state wave function would be a single Slater determinant comprised of a different set of MOs, but we can obtain a slightly better description of the excited state by expressing it as a linear combination of Slater determinants that differ by the ground-state configuration by one electron (<em>i.e.</em>, singly-excited confugurations).  What we are describing here is a configuration interaction with single excitations (CIS) wave function; the CIS wave function for the $n$th  excited state can be expressed as</p>
+<p>$$\begin{align}
+|\psi(n)\rangle = \sum_{ia} c_i^a(n) \hat{a}^\dagger_a\hat{a}_i |\Phi_0\rangle = \sum_{ia} c_i^a(n) |\Phi_i^a\rangle 
+\end{align}$$</p>
+<p>Here, the symbol $|\Phi_0\rangle$ represents the Hartree-Fock configuration, and $|\Phi_i^a\rangle$ is a Slater determinant that is singly excited relative $|\Phi_0\rangle$. The indices $i$ and $a$ represent spin orbitals that are occupied and unoccupied (virtual) in the reference, respectively.</p>
+<p>How do we determine the expansion coefficients? The <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/variation/variation.html">variation theorem</a> tells us that we can determine these coefficients variationally, that is, by minimizing the expectation value of the Hamiltonian with respect to variations in $c_i^a$. Recall that, when the Hamiltonian is expanded within a basis of know functions (in this case, the singly-excited configurations), then the variational problem can be expressed as a matrix eigenvalue problem, $i.e.$,</p>
+<p>$$\begin{align}
+{\bf H}{\bf c}(n) = E_n {\bf c}(n)
+\end{align}$$</p>
+<p>where $E_n$ represents the energy of state $n$ ($n &gt; 0$). Here, ${\bf H}$ is the matrix representation of the Hamiltonian expanded within the basis of singly-excited configurations, with elements</p>
+<p>$$\begin{align}
+H_{ia,jb} = \langle \Phi_i^a | \hat{H} | \Phi_j^b \rangle 
+\end{align}$$</p>
+<p>We can use the p$^\dagger$q package to evaluate this matrix element using the following code.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d1cded2f-7212-4d59-8439-5c958afff82c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
+
+<span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
+
+<span class="n">pq</span><span class="o">.</span><span class="n">set_left_operators</span><span class="p">([[</span><span class="s1">'a*(i)'</span><span class="p">,</span> <span class="s1">'a(a)'</span><span class="p">]])</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">set_right_operators</span><span class="p">([[</span><span class="s1">'a*(b)'</span><span class="p">,</span> <span class="s1">'a(j)'</span><span class="p">]])</span>
+
+<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'f'</span><span class="p">])</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">add_operator_product</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">[</span><span class="s1">'v'</span><span class="p">])</span>
+
+<span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['+1.00', 'd(a,b)', 'd(i,j)', 'f(k,k)']
+['-1.00', 'd(a,b)', 'f(j,i)']
+['+1.00', 'd(i,j)', 'f(a,b)']
+['-0.50', 'd(a,b)', 'd(i,j)', '&lt;l,k||l,k&gt;']
+['+1.00', '&lt;j,a||b,i&gt;']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e14de915-6316-4586-b6c8-0550197ed3ec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In the code snippet, 'f' and 'v' refer to the Fock operator ($\hat{f}$) and fluctuation potential ($\hat{v}$), respectively, and $\hat{H} = \hat{f} + \hat{v}$. In the output, 'd(a,b)' is a Kronecker delta function, 'f(a,b)' is an element of the Fock matrix, and '&lt;j,a||b,i&gt;' refers to an antisymmetrized electron repulsion integral (ERI) in physicists' notation. So, we can see that the matrix elements of the CIS Hamiltonian are</p>
+<p>$$\begin{align}
+H_{ia,jb} = f_{ab}\delta_{ij}-f_{ij}\delta_{ab} + \langle aj ||ib\rangle + \delta_{ij}\delta_{ab} \left ( \sum_k f_{kk} - \frac{1}{2} \sum_{kl} \langle kl||kl \rangle \right )
+\end{align}$$</p>
+<p>We can simplify this expression in two ways. First, we recall that the Fock matrix for Hartree-Fock theory is diagonal in the MO basis, and the diagonal elements are the orbital energies ($f_{pp} = \epsilon_p$). Second, note that</p>
+<p>$$\begin{align}
+ E_0 = \sum_k f_{kk} - \frac{1}{2} \sum_{kl} \langle kl||kl \rangle = \sum_k \epsilon_k - \frac{1}{2} \sum_{kl} \langle kl||kl \rangle
+\end{align}$$</p>
+<p>is the Hartree-Fock energy. We now have</p>
+<p>$$\begin{align}
+H_{ia,jb} = (\epsilon_a - \epsilon_i) \delta_{ij}\delta_{ab} + \langle aj ||ib\rangle + \delta_{ij}\delta_{ab} E_0
+\end{align}$$</p>
+<h2 id="Singlet-Excitation-Energies">Singlet Excitation Energies<a class="anchor-link" href="#Singlet-Excitation-Energies">¶</a></h2><p>Let us assume that $|\Phi_0\rangle$ represents a <strong>closed-shell restricted Hartree-Fock</strong> determinant. In this case, it turns out that the eigenvalues of the CIS Hamiltonian represented in the spin-orbital basis correspond to energies for CIS states of two different spin symmetries: singlets and
 triplets.  If we are only interested in the singlet states, then we can <strong>spin adapt</strong> our basis functions and represent the Hamiltonian matrix in this new spin-adapted basis. The singlet spin-adapted basis functions are given by</p>
-<p>$$ |\phi_i^a\rangle = \frac{1}{\sqrt{2}} \left ( |\phi^{a_\alpha}_{i_\alpha}\rangle + |\phi^{a_\beta}_{i_\beta}\rangle \right ) $$</p>
+<p>$$\begin{align}
+|\Phi_i^a\rangle = \frac{1}{\sqrt{2}} \left ( |\Phi^{a_\alpha}_{i_\alpha}\rangle + |\Phi^{a_\beta}_{i_\beta}\rangle \right ) 
+\end{align}$$</p>
 <p>and the corresponding matrix elements of the Hamiltonian are</p>
-<p>$$H_{ia,jb} = (\epsilon_a - \epsilon_i) \delta_{ij}\delta_{ab} + 2 \langle aj |ib\rangle - \langle aj | bi \rangle$$</p>
-<p>Using chemists' notation, these matrix elements are</p>
-<p>$$H_{ia,jb} = (\epsilon_a - \epsilon_i) \delta_{ij}\delta_{ab} + 2 ( ai |jb ) - ( ab | ji )$$</p>
-<p>Note that the orbital labels $i$, $j$, $a,$ and $b$ no longer represent spin orbitals; they represent spatial orbitals.  The benefits of spin-adaptation here are two-fold.  First, the dimension of the Hamiltonian is reduced by a factor of two. Second, because matrix diagonalization scales as the third power of matrix size, the cost of the diagonalization procedure is reduced by a factor of eight!</p>
-<p>With the theory out of the way, we can begin developing Python code that diagonalizes the CIS Hamiltonian. First, import the Psi4 and numpy libraries, create a molecule object, and set some basic options</p>
+<p>$$\begin{align}
+H_{ia,jb} = \frac{1}{2} \left ( \langle \Phi^{a_\alpha}_{i_\alpha} | \hat{H} | \Phi_{j_\alpha}^{b_\alpha} \rangle  + \langle \Phi^{a_\alpha}_{i_\alpha} | \hat{H} | \Phi_{j_\beta}^{b_\beta} \rangle + \langle \Phi^{a_\beta}_{i_\beta} | \hat{H} | \Phi_{j_\alpha}^{b_\alpha} \rangle  +\langle \Phi^{a_\beta}_{i_\beta} | \hat{H} | \Phi_{j_\beta}^{b_\beta} \rangle   \right )
+\end{align}$$</p>
+<p>Comparing to the expression for the Hamiltonian in the spin-orbital basis generated by p$^\dagger$q, we note the following:</p>
+<ol>
+<li>Kronecker delta functions involving orbitals with different spin-symmetry labels will be zero.</li>
+<li>The exchange part of the antisymmetrized ERIs vanish for terms involving different spin-symmetry labels, <em>e.g.</em>,  $\langle a_\alpha j_\beta || i_\alpha b_\beta \rangle = \langle a_\alpha j_\beta | i_\alpha b_\beta \rangle$</li>
+<li>In restricted Hartree-Fock theory, the $\alpha$- and $\beta$-spin orbitals and orbital energies are equivalent.</li>
+</ol>
+<p>With these considerations in mind, we find that</p>
+<p>$$\begin{align}
+H_{ia,jb} = (\epsilon_a - \epsilon_i) \delta_{ij}\delta_{ab} + 2 \langle aj |ib\rangle - \langle aj | bi \rangle + \delta_{ij}\delta_{ab} E_0
+\end{align}$$</p>
+<p>Note that the orbital labels $i$, $j$, $a,$ and $b$ no longer represent spin orbitals; they represent spatial orbitals. Using chemists' notation, these matrix elements are</p>
+<p>$$\begin{align}
+H_{ia,jb} = (\epsilon_a - \epsilon_i) \delta_{ij}\delta_{ab} + 2 ( ai |jb ) - ( ab | ji ) + \delta_{ij}\delta_{ab} E_0 
+\end{align}$$</p>
+<p>The benefits of spin-adaptation here are two-fold.  First, the dimension of the Hamiltonian is reduced by a factor of two. Second, because matrix diagonalization scales as the third power of matrix size, the cost of the diagonalization procedure is reduced by a factor of eight!</p>
+<p>With the theory out of the way, we can begin developing Python code that diagonalizes the CIS Hamiltonian. First, import the Psi4 and numpy libraries, create a molecule object, and set some basic options.</p>
 </div>
 </div>
 </div>
@@ -7583,7 +7667,7 @@ triplets.  If we are only interested in the singlet states, then we can <strong>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -7624,7 +7708,7 @@ triplets.  If we are only interested in the singlet states, then we can <strong>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># compute the Hartree-Fock energy and wavefunction</span>
@@ -7650,12 +7734,12 @@ triplets.  If we are only interested in the singlet states, then we can <strong>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Grab data from wavfunction</span>
 
-<span class="c1"># number of doubly occupied orbitals</span>
+<span class="c1"># number of doubly occupied orbitals (for RHF, nalpha = nbeta = ndocc)</span>
 <span class="n">ndocc</span>   <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
 
 <span class="c1"># total number of orbitals</span>
@@ -7693,7 +7777,7 @@ triplets.  If we are only interested in the singlet states, then we can <strong>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># use Psi4's MintsHelper to generate ERIs</span>
@@ -7726,7 +7810,7 @@ For convenience, we can also strip out the occupied and virtual orbital energies
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># strip out occupied orbital energies</span>
@@ -7755,7 +7839,7 @@ For convenience, we can also strip out the occupied and virtual orbital energies
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">Ham</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ndocc</span><span class="o">*</span><span class="n">nvirt</span><span class="p">,</span><span class="n">ndocc</span><span class="o">*</span><span class="n">nvirt</span><span class="p">))</span>
@@ -7843,6 +7927,14 @@ For convenience, we can also strip out the occupied and virtual orbital energies
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note that we did not add the reference energy to the diagonal elements of the Hamiltonian. This choice has the effect of shifting the eigenvalues of the Hamiltonian by this constant. In other words, we have modified the original eigenvalue problem</p>
+<p>$$\begin{align}
+{\bf H}{\bf c}(n) = E_n {\bf c}(n)
+\end{align}$$</p>
+<p>such that the eigenvalues of ${\bf H}$ correspond to excitation energies rather than total energies, $i.e.$,</p>
+<p>$$\begin{align}
+({\bf H} - E_0){\bf c}(n) = (E_n-E_0) {\bf c}(n) = \omega_n {\bf c}(n)
+\end{align}$$</p>
 <h2 id="Triplet-Excitation-Energies">Triplet Excitation Energies<a class="anchor-link" href="#Triplet-Excitation-Energies">¶</a></h2><p>We can also define spin-adapted basis functions for triplet spin states. The triplet spin-adapted basis functions are given by</p>
 <p>$$ |\phi_i^a\rangle = \frac{1}{\sqrt{2}} \left ( |\phi^{a_\alpha}_{i_\alpha}\rangle - |\phi^{a_\beta}_{i_\beta}\rangle \right ) $$</p>
 <p>and the corresponding matrix elements of the Hamiltonian are</p>
@@ -7856,7 +7948,7 @@ For convenience, we can also strip out the occupied and virtual orbital energies
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># build triplet hamiltonian</span>
