@@ -27,6 +27,7 @@ math: true
 
 <hr>
 
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -7634,11 +7635,11 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
 \end{align}$$</p>
 <p>and assuming we can store and invert this tensor, we could determine the response vector as</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = \left ( h_{jb, ia} \right )^{-1} 2 \mu_{ia}^\alpha
+\left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = h_{jb, ia} ^{-1} 2 \mu_{ia}^\alpha
 \end{align}$$</p>
 <p>Here, we have expressed all quantities in a basis of spin orbitals. If we explicitly account for spin, then we have two response equations for $\alpha$- and $\beta$-spin:</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  \left ( h_{j_\sigma b_\sigma, i_\tau a_\tau} \right )^{-1} 2 \mu_{i_\tau a_\tau}^\alpha
+\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   2 \mu_{i_\tau a_\tau}^\alpha
 \end{align}$$</p>
 <p>We can use the p$^\dagger$q package to evaluate the different spin blocks of $h_{jb,ia}$ using the following code.</p>
 </div>
@@ -7683,11 +7684,11 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
         <span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> spin block'</span> <span class="o">%</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'# </span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> spin block'</span> <span class="o">%</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'mat'</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">))))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'h_'</span><span class="o">+</span><span class="n">s1</span><span class="o">+</span><span class="n">s2</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">))))</span>
             <span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -7702,88 +7703,88 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
-a-a spin block
+# a-a spin block
 
 # -1.00 d(a,b)*f_aa(j,i)
-mat += -1.00 * einsum('ab,ji-&gt;jbia', kd_aa[va, va], f_aa[oa, oa])
+h_aa += -1.00 * einsum('ab,ji-&gt;jbia', kd_aa[va, va], f_aa[oa, oa])
 
 #  1.00 d(i,j)*f_aa(a,b)
-mat +=  1.00 * einsum('ij,ab-&gt;jbia', kd_aa[oa, oa], f_aa[va, va])
+h_aa +=  1.00 * einsum('ij,ab-&gt;jbia', kd_aa[oa, oa], f_aa[va, va])
 
 # -1.00 d(b,a)*f_aa(i,j)
-mat += -1.00 * einsum('ba,ij-&gt;jbia', kd_aa[va, va], f_aa[oa, oa])
+h_aa += -1.00 * einsum('ba,ij-&gt;jbia', kd_aa[va, va], f_aa[oa, oa])
 
 #  1.00 d(j,i)*f_aa(b,a)
-mat +=  1.00 * einsum('ji,ba-&gt;jbia', kd_aa[oa, oa], f_aa[va, va])
+h_aa +=  1.00 * einsum('ji,ba-&gt;jbia', kd_aa[oa, oa], f_aa[va, va])
 
 # -1.00 &lt;j,i||a,b&gt;_aaaa
-mat += -1.00 * einsum('jiab-&gt;jbia', g_aaaa[oa, oa, va, va])
+h_aa += -1.00 * einsum('jiab-&gt;jbia', g_aaaa[oa, oa, va, va])
 
 #  1.00 &lt;j,a||b,i&gt;_aaaa
-mat +=  1.00 * einsum('jabi-&gt;jbia', g_aaaa[oa, va, va, oa])
+h_aa +=  1.00 * einsum('jabi-&gt;jbia', g_aaaa[oa, va, va, oa])
 
 #  1.00 &lt;i,b||a,j&gt;_aaaa
-mat +=  1.00 * einsum('ibaj-&gt;jbia', g_aaaa[oa, va, va, oa])
+h_aa +=  1.00 * einsum('ibaj-&gt;jbia', g_aaaa[oa, va, va, oa])
 
 # -1.00 &lt;a,b||j,i&gt;_aaaa
-mat += -1.00 * einsum('abji-&gt;jbia', g_aaaa[va, va, oa, oa])
+h_aa += -1.00 * einsum('abji-&gt;jbia', g_aaaa[va, va, oa, oa])
 
 
-a-b spin block
+# a-b spin block
 
 #  1.00 &lt;i,j||a,b&gt;_abab
-mat +=  1.00 * einsum('ijab-&gt;jbia', g_abab[oa, ob, va, vb])
+h_ab +=  1.00 * einsum('ijab-&gt;jbia', g_abab[oa, ob, va, vb])
 
 #  1.00 &lt;a,j||i,b&gt;_abab
-mat +=  1.00 * einsum('ajib-&gt;jbia', g_abab[va, ob, oa, vb])
+h_ab +=  1.00 * einsum('ajib-&gt;jbia', g_abab[va, ob, oa, vb])
 
 #  1.00 &lt;i,b||a,j&gt;_abab
-mat +=  1.00 * einsum('ibaj-&gt;jbia', g_abab[oa, vb, va, ob])
+h_ab +=  1.00 * einsum('ibaj-&gt;jbia', g_abab[oa, vb, va, ob])
 
 #  1.00 &lt;a,b||i,j&gt;_abab
-mat +=  1.00 * einsum('abij-&gt;jbia', g_abab[va, vb, oa, ob])
+h_ab +=  1.00 * einsum('abij-&gt;jbia', g_abab[va, vb, oa, ob])
 
 
-b-a spin block
+# b-a spin block
 
 #  1.00 &lt;j,i||b,a&gt;_abab
-mat +=  1.00 * einsum('jiba-&gt;jbia', g_abab[oa, ob, va, vb])
+h_ba +=  1.00 * einsum('jiba-&gt;jbia', g_abab[oa, ob, va, vb])
 
 #  1.00 &lt;j,a||b,i&gt;_abab
-mat +=  1.00 * einsum('jabi-&gt;jbia', g_abab[oa, vb, va, ob])
+h_ba +=  1.00 * einsum('jabi-&gt;jbia', g_abab[oa, vb, va, ob])
 
 #  1.00 &lt;b,i||j,a&gt;_abab
-mat +=  1.00 * einsum('bija-&gt;jbia', g_abab[va, ob, oa, vb])
+h_ba +=  1.00 * einsum('bija-&gt;jbia', g_abab[va, ob, oa, vb])
 
 #  1.00 &lt;b,a||j,i&gt;_abab
-mat +=  1.00 * einsum('baji-&gt;jbia', g_abab[va, vb, oa, ob])
+h_ba +=  1.00 * einsum('baji-&gt;jbia', g_abab[va, vb, oa, ob])
 
 
-b-b spin block
+# b-b spin block
 
 # -1.00 d(a,b)*f_bb(j,i)
-mat += -1.00 * einsum('ab,ji-&gt;jbia', kd_bb[vb, vb], f_bb[ob, ob])
+h_bb += -1.00 * einsum('ab,ji-&gt;jbia', kd_bb[vb, vb], f_bb[ob, ob])
 
 #  1.00 d(i,j)*f_bb(a,b)
-mat +=  1.00 * einsum('ij,ab-&gt;jbia', kd_bb[ob, ob], f_bb[vb, vb])
+h_bb +=  1.00 * einsum('ij,ab-&gt;jbia', kd_bb[ob, ob], f_bb[vb, vb])
 
 # -1.00 d(b,a)*f_bb(i,j)
-mat += -1.00 * einsum('ba,ij-&gt;jbia', kd_bb[vb, vb], f_bb[ob, ob])
+h_bb += -1.00 * einsum('ba,ij-&gt;jbia', kd_bb[vb, vb], f_bb[ob, ob])
 
 #  1.00 d(j,i)*f_bb(b,a)
-mat +=  1.00 * einsum('ji,ba-&gt;jbia', kd_bb[ob, ob], f_bb[vb, vb])
+h_bb +=  1.00 * einsum('ji,ba-&gt;jbia', kd_bb[ob, ob], f_bb[vb, vb])
 
 # -1.00 &lt;j,i||a,b&gt;_bbbb
-mat += -1.00 * einsum('jiab-&gt;jbia', g_bbbb[ob, ob, vb, vb])
+h_bb += -1.00 * einsum('jiab-&gt;jbia', g_bbbb[ob, ob, vb, vb])
 
 #  1.00 &lt;j,a||b,i&gt;_bbbb
-mat +=  1.00 * einsum('jabi-&gt;jbia', g_bbbb[ob, vb, vb, ob])
+h_bb +=  1.00 * einsum('jabi-&gt;jbia', g_bbbb[ob, vb, vb, ob])
 
 #  1.00 &lt;i,b||a,j&gt;_bbbb
-mat +=  1.00 * einsum('ibaj-&gt;jbia', g_bbbb[ob, vb, vb, ob])
+h_bb +=  1.00 * einsum('ibaj-&gt;jbia', g_bbbb[ob, vb, vb, ob])
 
 # -1.00 &lt;a,b||j,i&gt;_bbbb
-mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
+h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 
 </pre>
 </div>
@@ -7812,16 +7813,17 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">einsum</span>
 
 <span class="c1"># set molecule</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
-<span class="s2">O  0.00000  0.00000   0.12716</span>
-<span class="s2">H  0.00000  0.75808  -0.50864</span>
-<span class="s2">H  0.00000 -0.75808  -0.50864</span>
+<span class="s2">O1	0.00000   0.00000   0.11572</span>
+<span class="s2">H2	0.00000   0.74879  -0.46288</span>
+<span class="s2">H3	0.00000  -0.74879  -0.46288</span>
 <span class="s2">symmetry c1</span>
 <span class="s2">"""</span><span class="p">)</span>   
 
-<span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s1">'basis'</span><span class="p">:</span> <span class="s1">'sto-3g'</span><span class="p">,</span>
+<span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s1">'basis'</span><span class="p">:</span> <span class="s1">'cc-pvdz'</span><span class="p">,</span>
                   <span class="s1">'scf_type'</span><span class="p">:</span> <span class="s1">'pk'</span><span class="p">,</span>
                   <span class="s1">'e_convergence'</span><span class="p">:</span> <span class="mf">1e-12</span><span class="p">,</span>
                   <span class="s1">'d_convergence'</span><span class="p">:</span> <span class="mf">1e-12</span><span class="p">})</span>
@@ -7842,7 +7844,7 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that we asked the energy routine to return a wavefunction. This object contains all of the important information from the Hartree-Fock computation, including the number of electrons, the number of orbitals, the AO/MO transformation matrices, and more! We will need some of this information.</p>
+<p>Note that we asked the energy routine to return a wavefunction. This object contains all of the important information from the Hartree-Fock computation, including the number of electrons, the number of orbitals, the AO/MO transformation matrices, and more! The code below grabs everything we will need to evaluate the polarizability.</p>
 </div>
 </div>
 </div>
@@ -7851,7 +7853,7 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Grab data from wavfunction</span>
@@ -7871,13 +7873,13 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">g_aaaa</span>
 <span class="n">g_abab</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="n">nalpha</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
-<span class="n">nbeta</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nbeta</span><span class="p">()</span>
+<span class="n">noa</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
+<span class="n">nob</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nbeta</span><span class="p">()</span>
 
-<span class="n">oa</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">nalpha</span><span class="p">)</span>
-<span class="n">ob</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">nbeta</span><span class="p">)</span>
-<span class="n">va</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">nalpha</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">vb</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">nbeta</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">oa</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">noa</span><span class="p">)</span>
+<span class="n">ob</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">nob</span><span class="p">)</span>
+<span class="n">va</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">vb</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">nob</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="n">nmo</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nmo</span><span class="p">()</span>
 <span class="n">kd_aa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">nmo</span><span class="p">)</span>
@@ -7917,17 +7919,7 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Now, you shoul have all of the ingredients to evaluate the dipole polarizability ... good luck!</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=007bd1bc-e3d8-40df-aa68-970441cc2847">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The code below evaluates the matrix representation of the double commutator using the code generated by p$^\dagger$q. Note that we will need to modify the autogenerated code slightly to initialize each spin block of $h_{jb,ia}$.</p>
 </div>
 </div>
 </div>
@@ -7936,10 +7928,91 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># a-a spin block</span>
+
+<span class="c1"># -1.00 d(a,b)*f_aa(j,i)</span>
+<span class="n">h_aa</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ab,ji-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+
+<span class="c1">#  1.00 d(i,j)*f_aa(a,b)</span>
+<span class="n">h_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ij,ab-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">])</span>
+
+<span class="c1"># -1.00 d(b,a)*f_aa(i,j)</span>
+<span class="n">h_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ba,ij-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+
+<span class="c1">#  1.00 d(j,i)*f_aa(b,a)</span>
+<span class="n">h_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,ba-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">])</span>
+
+<span class="c1"># -1.00 &lt;j,i||a,b&gt;_aaaa</span>
+<span class="n">h_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiab-&gt;jbia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;j,a||b,i&gt;_aaaa</span>
+<span class="n">h_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi-&gt;jbia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;i,b||a,j&gt;_aaaa</span>
+<span class="n">h_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj-&gt;jbia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+
+<span class="c1"># -1.00 &lt;a,b||j,i&gt;_aaaa</span>
+<span class="n">h_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abji-&gt;jbia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+
+
+<span class="c1"># a-b spin block</span>
+
+<span class="c1">#  1.00 &lt;i,j||a,b&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ijab-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;a,j||i,b&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ajib-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;i,b||a,j&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;a,b||i,j&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+
+<span class="c1"># b-a spin block</span>
+
+<span class="c1">#  1.00 &lt;j,i||b,a&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiba-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;j,a||b,i&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;b,i||j,a&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'bija-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;b,a||j,i&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'baji-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+
+<span class="c1"># b-b spin block</span>
+
+<span class="c1"># -1.00 d(a,b)*f_bb(j,i)</span>
+<span class="n">h_bb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ab,ji-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#  1.00 d(i,j)*f_bb(a,b)</span>
+<span class="n">h_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ij,ab-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1"># -1.00 d(b,a)*f_bb(i,j)</span>
+<span class="n">h_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ba,ij-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#  1.00 d(j,i)*f_bb(b,a)</span>
+<span class="n">h_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,ba-&gt;jbia'</span><span class="p">,</span> <span class="n">kd_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1"># -1.00 &lt;j,i||a,b&gt;_bbbb</span>
+<span class="n">h_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiab-&gt;jbia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;j,a||b,i&gt;_bbbb</span>
+<span class="n">h_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi-&gt;jbia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1">#  1.00 &lt;i,b||a,j&gt;_bbbb</span>
+<span class="n">h_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj-&gt;jbia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+
+<span class="c1"># -1.00 &lt;a,b||j,i&gt;_bbbb</span>
+<span class="n">h_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abji-&gt;jbia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -7952,6 +8025,13 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we should invert the double commutator matrix, but note that the spin blocks are coupled, <em>i.e.</em>,</p>
+<p>$$\begin{align}
+h = \begin{pmatrix} h_{j_\alpha b_\alpha, i_\alpha a_\alpha} &amp; h_{j_\alpha b_\alpha, i_\beta a_\beta} \\
+h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta} \\
+\end{pmatrix}
+\end{align}$$</p>
+<p>so we should invert the super matrix, rather than any of the individual blocks. We could then unpack the spin blocks of the inverted matrix, but it will be easier to work with the inverted super matrix.</p>
 </div>
 </div>
 </div>
@@ -7960,10 +8040,24 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># number of alpha- and beta-spin virtual orbitals</span>
+<span class="n">nva</span> <span class="o">=</span> <span class="n">nmo</span> <span class="o">-</span> <span class="n">noa</span>
+<span class="n">nvb</span> <span class="o">=</span> <span class="n">nmo</span> <span class="o">-</span> <span class="n">nob</span>
+
+<span class="c1"># reshape tensors</span>
+<span class="n">h_aa</span> <span class="o">=</span> <span class="n">h_aa</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">,</span> <span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">)</span>
+<span class="n">h_ab</span> <span class="o">=</span> <span class="n">h_ab</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">,</span> <span class="n">nob</span><span class="o">*</span><span class="n">nvb</span><span class="p">)</span>
+<span class="n">h_ba</span> <span class="o">=</span> <span class="n">h_ba</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nob</span><span class="o">*</span><span class="n">nvb</span><span class="p">,</span> <span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">)</span>
+<span class="n">h_bb</span> <span class="o">=</span> <span class="n">h_bb</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nob</span><span class="o">*</span><span class="n">nvb</span><span class="p">,</span> <span class="n">nob</span><span class="o">*</span><span class="n">nvb</span><span class="p">)</span>
+
+<span class="c1"># pack into super matrix</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span><span class="n">h_aa</span><span class="p">,</span> <span class="n">h_ab</span><span class="p">],</span> <span class="p">[</span><span class="n">h_ba</span><span class="p">,</span> <span class="n">h_bb</span><span class="p">]])</span>
+
+<span class="c1"># invert super matrix</span>
+<span class="n">hinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7976,48 +8070,93 @@ mat += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Given the inverted double commutator matrix and the dipole integrals in the MO basis, we can finally evaluate the response vectors and the elements of the dipole polarizability tensor. Recall, the response vectors are given by</p>
+<p>$$\begin{align}
+\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   2 \mu_{i_\tau a_\tau}^\alpha
+\end{align}$$</p>
+<p>and the dipole polarizability is</p>
+<p>$$\begin{align}
+\alpha_{\alpha\beta} = 2 \mu_{i_\sigma a_\sigma}^{\alpha} \left .\frac{\partial \kappa_{i_\sigma a_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon=0}
+\end{align}$$</p>
+<p>where we have added spin labels in the polarizability expression. The following code evaluates the response vectors and the elements of the polarizability tensor. Note that matrix-vector products and dot products are most easily evaluated if we construct vectors with a dimension matching that of the inverted double commutator matrix that contain both the alpha-spin and beta-spin dipole integrals.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0050a383-e6cb-4d15-aead-43dd93a3eddd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0050a383-e6cb-4d15-aead-43dd93a3eddd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># combine alpha- and beta-spin dipole integrals into a single vector the length of hinv</span>
+<span class="n">mu_x_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">mua_x</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">mub_x</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
+<span class="n">mu_y_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">mua_y</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">mub_y</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
+<span class="n">mu_z_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">mua_z</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">mub_z</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
+
+<span class="c1"># response vectors</span>
+<span class="n">kappa_x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'pq,q-&gt;p'</span><span class="p">,</span> <span class="n">hinv</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">)</span> 
+<span class="n">kappa_y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'pq,q-&gt;p'</span><span class="p">,</span> <span class="n">hinv</span><span class="p">,</span> <span class="n">mu_y_vec</span><span class="p">)</span>
+<span class="n">kappa_z</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'pq,q-&gt;p'</span><span class="p">,</span> <span class="n">hinv</span><span class="p">,</span> <span class="n">mu_z_vec</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    ==&gt; Static Dipole Polarizability &lt;=='</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">alpha_xx</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'p,p-&gt;'</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">,</span> <span class="n">kappa_x</span><span class="p">)</span>
+<span class="n">alpha_xy</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'p,p-&gt;'</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">,</span> <span class="n">kappa_y</span><span class="p">)</span>
+<span class="n">alpha_xz</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'p,p-&gt;'</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">)</span>
+<span class="n">alpha_yy</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'p,p-&gt;'</span><span class="p">,</span> <span class="n">mu_y_vec</span><span class="p">,</span> <span class="n">kappa_y</span><span class="p">)</span>
+<span class="n">alpha_yz</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'p,p-&gt;'</span><span class="p">,</span> <span class="n">mu_y_vec</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">)</span>
+<span class="n">alpha_zz</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'p,p-&gt;'</span><span class="p">,</span> <span class="n">mu_z_vec</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(xx) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_xx</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(xy) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_xy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(xz) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_xz</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(yy) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_yy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(yz) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_yz</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(zz) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_zz</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d6e3b3ee-7b45-4d2e-aa6c-dfd5ba230b5b">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+    ==&gt; Static Dipole Polarizability &lt;==
+
+    alpha(xx) =   3.0444
+    alpha(xy) =  -0.0000
+    alpha(xz) =  -0.0000
+    alpha(yy) =   6.6932
+    alpha(yz) =  -0.0000
+    alpha(zz) =   4.9785
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=60107b2b-13bd-4de2-800c-77e38cad1e14">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Compare these values to the computed Hartree-Fock/cc-pVDZ values provided on the <a href="https://cccbdb.nist.gov/">Computational Chemistry Comparison and Benchmark DataBase</a>. How did we do?? Be sure to double check the units.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=242a0cf8-d7ff-40d1-97ad-8d45e35a83de">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=97d6aedd-8a35-41e7-b92c-1cd54d5472d9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b59417ce-5806-4d66-b442-cf65d48e8c4f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
