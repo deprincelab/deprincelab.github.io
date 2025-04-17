@@ -7555,7 +7555,7 @@ E = E_0 - \mu_\alpha \epsilon_\alpha- \frac{1}{2} \alpha_{\alpha\beta} \epsilon_
 \alpha_{\alpha\beta} &amp;= -\left .\frac{\partial^2 E}{\partial \epsilon_\alpha\partial \epsilon_\beta}\right |_{\epsilon = 0}\\
 \beta_{\alpha\beta\gamma} &amp;= -\left .\frac{\partial^3 E}{\partial \epsilon_\alpha \partial \epsilon_\beta \partial \epsilon_\gamma}\right |_{\epsilon = 0}
 \end{align}$$</p>
-<p>Below, we will derive and implement Python code to evaluate these molecular static response properties for a molecular system described at the <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">Hartree-Fock</a> level of theory.  All of the required molecular integrals will be obtained from the Psi4 package, and we will generate the required equations and Python expressions with the help of the <a href="https://github.com/edeprince3/pdaggerq">p$^\dagger$q package</a>.</p>
+<p>Below, we will derive expressions and implement Python code to evaluate the static electric dipole polarizability for a molecular system described at the <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">Hartree-Fock</a> level of theory.  All of the required molecular integrals will be obtained from the Psi4 package, and we will generate the required equations and Python expressions with the help of the <a href="https://github.com/edeprince3/pdaggerq">p$^\dagger$q package</a>.</p>
 </div>
 </div>
 </div>
@@ -7674,10 +7674,10 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
     <span class="k">for</span> <span class="n">s2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">]:</span>
 
         <span class="n">spin_labels</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">'i'</span><span class="p">:</span> <span class="n">s1</span><span class="p">,</span>
-            <span class="s1">'a'</span><span class="p">:</span> <span class="n">s1</span><span class="p">,</span>
-            <span class="s1">'j'</span><span class="p">:</span> <span class="n">s2</span><span class="p">,</span>
-            <span class="s1">'b'</span><span class="p">:</span> <span class="n">s2</span><span class="p">,</span>
+            <span class="s1">'j'</span><span class="p">:</span> <span class="n">s1</span><span class="p">,</span>
+            <span class="s1">'b'</span><span class="p">:</span> <span class="n">s1</span><span class="p">,</span>
+            <span class="s1">'i'</span><span class="p">:</span> <span class="n">s2</span><span class="p">,</span>
+            <span class="s1">'a'</span><span class="p">:</span> <span class="n">s2</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
@@ -7731,32 +7731,32 @@ h_aa += -1.00 * einsum('abji-&gt;jbia', g_aaaa[va, va, oa, oa])
 
 # a-b spin block
 
-#  1.00 &lt;i,j||a,b&gt;_abab
-h_ab +=  1.00 * einsum('ijab-&gt;jbia', g_abab[oa, ob, va, vb])
+#  1.00 &lt;j,i||b,a&gt;_abab
+h_ab +=  1.00 * einsum('jiba-&gt;jbia', g_abab[oa, ob, va, vb])
 
-#  1.00 &lt;a,j||i,b&gt;_abab
-h_ab +=  1.00 * einsum('ajib-&gt;jbia', g_abab[va, ob, oa, vb])
+#  1.00 &lt;j,a||b,i&gt;_abab
+h_ab +=  1.00 * einsum('jabi-&gt;jbia', g_abab[oa, vb, va, ob])
 
-#  1.00 &lt;i,b||a,j&gt;_abab
-h_ab +=  1.00 * einsum('ibaj-&gt;jbia', g_abab[oa, vb, va, ob])
+#  1.00 &lt;b,i||j,a&gt;_abab
+h_ab +=  1.00 * einsum('bija-&gt;jbia', g_abab[va, ob, oa, vb])
 
-#  1.00 &lt;a,b||i,j&gt;_abab
-h_ab +=  1.00 * einsum('abij-&gt;jbia', g_abab[va, vb, oa, ob])
+#  1.00 &lt;b,a||j,i&gt;_abab
+h_ab +=  1.00 * einsum('baji-&gt;jbia', g_abab[va, vb, oa, ob])
 
 
 # b-a spin block
 
-#  1.00 &lt;j,i||b,a&gt;_abab
-h_ba +=  1.00 * einsum('jiba-&gt;jbia', g_abab[oa, ob, va, vb])
+#  1.00 &lt;i,j||a,b&gt;_abab
+h_ba +=  1.00 * einsum('ijab-&gt;jbia', g_abab[oa, ob, va, vb])
 
-#  1.00 &lt;j,a||b,i&gt;_abab
-h_ba +=  1.00 * einsum('jabi-&gt;jbia', g_abab[oa, vb, va, ob])
+#  1.00 &lt;a,j||i,b&gt;_abab
+h_ba +=  1.00 * einsum('ajib-&gt;jbia', g_abab[va, ob, oa, vb])
 
-#  1.00 &lt;b,i||j,a&gt;_abab
-h_ba +=  1.00 * einsum('bija-&gt;jbia', g_abab[va, ob, oa, vb])
+#  1.00 &lt;i,b||a,j&gt;_abab
+h_ba +=  1.00 * einsum('ibaj-&gt;jbia', g_abab[oa, vb, va, ob])
 
-#  1.00 &lt;b,a||j,i&gt;_abab
-h_ba +=  1.00 * einsum('baji-&gt;jbia', g_abab[va, vb, oa, ob])
+#  1.00 &lt;a,b||i,j&gt;_abab
+h_ba +=  1.00 * einsum('abij-&gt;jbia', g_abab[va, vb, oa, ob])
 
 
 # b-b spin block
@@ -7816,6 +7816,7 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 
 <span class="c1"># set molecule</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">0 1</span>
 <span class="s2">O1	0.00000   0.00000   0.11572</span>
 <span class="s2">H2	0.00000   0.74879  -0.46288</span>
 <span class="s2">H3	0.00000  -0.74879  -0.46288</span>
@@ -7865,12 +7866,14 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <span class="n">mints</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">MintsHelper</span><span class="p">(</span><span class="n">wfn</span><span class="o">.</span><span class="n">basisset</span><span class="p">())</span>
 
 <span class="c1"># build the integrals in chemists' notation</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">))</span>
+<span class="n">g_aaaa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">))</span>
+<span class="n">g_aabb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Ca</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">))</span>
+<span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">mo_eri</span><span class="p">(</span><span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cb</span><span class="p">))</span>
 
 <span class="c1"># antisymmetrized integrals in physicists' notation</span>
-<span class="n">g_aaaa</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">g</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">g_aaaa</span>
-<span class="n">g_abab</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">g_aaaa</span> <span class="o">=</span> <span class="n">g_aaaa</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">g_aaaa</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">g_bbbb</span> <span class="o">=</span> <span class="n">g_bbbb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">g_bbbb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">g_abab</span> <span class="o">=</span> <span class="n">g_aabb</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">noa</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nalpha</span><span class="p">()</span>
 <span class="n">nob</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">nbeta</span><span class="p">()</span>
@@ -7959,32 +7962,32 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 
 <span class="c1"># a-b spin block</span>
 
-<span class="c1">#  1.00 &lt;i,j||a,b&gt;_abab</span>
-<span class="n">h_ab</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ijab-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;j,i||b,a&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiba-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
 
-<span class="c1">#  1.00 &lt;a,j||i,b&gt;_abab</span>
-<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ajib-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;j,a||b,i&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
 
-<span class="c1">#  1.00 &lt;i,b||a,j&gt;_abab</span>
-<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;b,i||j,a&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'bija-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
 
-<span class="c1">#  1.00 &lt;a,b||i,j&gt;_abab</span>
-<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;b,a||j,i&gt;_abab</span>
+<span class="n">h_ab</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'baji-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
 
 
 <span class="c1"># b-a spin block</span>
 
-<span class="c1">#  1.00 &lt;j,i||b,a&gt;_abab</span>
-<span class="n">h_ba</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiba-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;i,j||a,b&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ijab-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
 
-<span class="c1">#  1.00 &lt;j,a||b,i&gt;_abab</span>
-<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;a,j||i,b&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ajib-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
 
-<span class="c1">#  1.00 &lt;b,i||j,a&gt;_abab</span>
-<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'bija-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;i,b||a,j&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
 
-<span class="c1">#  1.00 &lt;b,a||j,i&gt;_abab</span>
-<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'baji-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+<span class="c1">#  1.00 &lt;a,b||i,j&gt;_abab</span>
+<span class="n">h_ba</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij-&gt;jbia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
 
 
 <span class="c1"># b-b spin block</span>
