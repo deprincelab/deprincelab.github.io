@@ -7634,11 +7634,11 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
 \end{align}$$</p>
 <p>and assuming we can store and invert this tensor, we could determine the response vector as</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = h_{jb, ia} ^{-1} 2 \mu_{ia}^\alpha
+\left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = 2 h_{jb, ia} ^{-1} \mu_{ia}^\alpha
 \end{align}$$</p>
 <p>Here, we have expressed all quantities in a basis of spin orbitals. If we explicitly account for spin, then we have two response equations for $\alpha$- and $\beta$-spin:</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   2 \mu_{i_\tau a_\tau}^\alpha
+\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2 h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   \mu_{i_\tau a_\tau}^\alpha
 \end{align}$$</p>
 <p>We can use the p$^\dagger$q package to evaluate the different spin blocks of $h_{jb,ia}$ using the following code.</p>
 </div>
@@ -7817,9 +7817,9 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <span class="c1"># set molecule</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">0 1</span>
-<span class="s2">O1	0.00000   0.00000   0.11572</span>
-<span class="s2">H2	0.00000   0.74879  -0.46288</span>
-<span class="s2">H3	0.00000  -0.74879  -0.46288</span>
+<span class="s2">O	0.00000   0.00000   0.11572</span>
+<span class="s2">H	0.00000   0.74879  -0.46288</span>
+<span class="s2">H	0.00000  -0.74879  -0.46288</span>
 <span class="s2">symmetry c1</span>
 <span class="s2">"""</span><span class="p">)</span>   
 
@@ -8074,7 +8074,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Given the inverted double commutator matrix and the dipole integrals in the MO basis, we can finally evaluate the response vectors and the elements of the dipole polarizability tensor. Recall, the response vectors are given by</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   2 \mu_{i_\tau a_\tau}^\alpha
+\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2 h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   \mu_{i_\tau a_\tau}^\alpha
 \end{align}$$</p>
 <p>and the dipole polarizability is</p>
 <p>$$\begin{align}
