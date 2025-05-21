@@ -7649,7 +7649,7 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
@@ -7807,7 +7807,7 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -7853,7 +7853,7 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Grab data from wavfunction</span>
@@ -7930,7 +7930,7 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># a-a spin block</span>
@@ -8042,7 +8042,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># number of alpha- and beta-spin virtual orbitals</span>
@@ -8089,7 +8089,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># combine alpha- and beta-spin dipole integrals into a single vector the length of hinv</span>
@@ -8182,7 +8182,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">kappa_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_x_vec</span><span class="p">)</span>
@@ -8321,10 +8321,27 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We get the same answer as when explicitly inverting the hessian! Great! Now, we also not that it may not always be desirable to even store the hessian matrix. Fortunately, the hessian matrix itself is not really necessary. All we need is the action of the hessian on the response vector. We can generate equations for this matrix vector product using the unitary coupled-cluster (CC) functionality in the p$^\dagger$q. It turns out that the singles amplitudes in unitary CC theory have a similar structure as the response vector, <em>i.e.</em>, $t_1 = t_{ai} (\hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a)$. The following code will generate einsum expressions corresoponding to</p>
+<p>We get the same answer as when explicitly inverting the hessian! Great! Now, we also not that it may not always be desirable to even store the hessian matrix. Fortunately, the hessian matrix itself is not really necessary. All we need is the action of the hessian on the response vector,</p>
 <p>$$\begin{align}
 \sigma_{i_\tau a_\tau} = h_{j_\sigma b_\sigma, i_\tau a_\tau} \left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}
 \end{align}$$</p>
+<p>Recall that</p>
+<p>$$\begin{align}
+h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],(\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)]| \Phi(\kappa_0)\rangle
+\end{align}$$</p>
+<p>so we can write</p>
+<p>$$\begin{align}
+\sigma_{i_\tau a_\tau} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],(\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)]| \Phi(\kappa_0)\rangle \left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}
+\end{align}$$</p>
+<p>We can generate equations for this matrix vector product using the unitary coupled-cluster (CC) functionality in the p$^\dagger$q. It turns out that the singles amplitudes in unitary CC theory have a similar structure as the response vector, <em>i.e.</em>, $\hat{t}_1 = t_{bj} (\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)$. If we define</p>
+<p>$$\begin{align}
+t_{bj} = \left .\frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}
+\end{align}$$</p>
+<p>then we can write</p>
+<p>$$\begin{align}
+\sigma_{i_\tau a_\tau} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],\hat{t}_1]| \Phi(\kappa_0)\rangle 
+\end{align}$$</p>
+<p>The following code generates einsum expressions for $\sigma_{i_\tau a_\tau}$.</p>
 </div>
 </div>
 </div>
@@ -8333,15 +8350,15 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># don't build the hessian matrix, instead, build the action of hessian on a vector</span>
-
-<span class="kn">import</span> <span class="nn">pdaggerq</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
 <span class="kn">from</span> <span class="nn">pdaggerq.parser</span> <span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
 
 <span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
+
+<span class="c1"># we need to use the antihermitian cluster operator from UCC</span>
 <span class="n">pq</span><span class="o">.</span><span class="n">set_unitary_cc</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">ham</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'f'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">]:</span>    
@@ -8358,7 +8375,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
     <span class="n">terms</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">strings</span><span class="p">(</span><span class="n">spin_labels</span> <span class="o">=</span> <span class="n">spin_labels</span><span class="p">)</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="n">contracted_strings_to_tensor_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'sigma_'</span> <span class="o">+</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s1</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">))))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">einsum_string</span><span class="p">(</span><span class="n">update_val</span><span class="o">=</span><span class="s1">'sigma_'</span> <span class="o">+</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s1</span><span class="p">,</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">))))</span>
 
 <span class="n">pq</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
@@ -8373,30 +8390,30 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>sigma_aa += -1.00 * einsum('ij,aj-&gt;ia', f_aa[oa, oa], t1_aa)
-sigma_aa +=  1.00 * einsum('ba,bi-&gt;ia', f_aa[va, va], t1_aa)
-sigma_aa += -1.00 * einsum('ji,aj-&gt;ia', f_aa[oa, oa], t1_aa)
-sigma_aa +=  1.00 * einsum('ab,bi-&gt;ia', f_aa[va, va], t1_aa)
-sigma_aa += -1.00 * einsum('jiab,bj-&gt;ia', g_aaaa[oa, oa, va, va], t1_aa)
-sigma_aa +=  1.00 * einsum('ijab,bj-&gt;ia', g_abab[oa, ob, va, vb], t1_bb)
-sigma_aa +=  1.00 * einsum('ibaj,bj-&gt;ia', g_aaaa[oa, va, va, oa], t1_aa)
-sigma_aa +=  1.00 * einsum('ibaj,bj-&gt;ia', g_abab[oa, vb, va, ob], t1_bb)
-sigma_aa +=  1.00 * einsum('jabi,bj-&gt;ia', g_aaaa[oa, va, va, oa], t1_aa)
-sigma_aa +=  1.00 * einsum('ajib,bj-&gt;ia', g_abab[va, ob, oa, vb], t1_bb)
-sigma_aa += -1.00 * einsum('abji,bj-&gt;ia', g_aaaa[va, va, oa, oa], t1_aa)
-sigma_aa +=  1.00 * einsum('abij,bj-&gt;ia', g_abab[va, vb, oa, ob], t1_bb)
-sigma_bb += -1.00 * einsum('ij,aj-&gt;ia', f_bb[ob, ob], t1_bb)
-sigma_bb +=  1.00 * einsum('ba,bi-&gt;ia', f_bb[vb, vb], t1_bb)
-sigma_bb += -1.00 * einsum('ji,aj-&gt;ia', f_bb[ob, ob], t1_bb)
-sigma_bb +=  1.00 * einsum('ab,bi-&gt;ia', f_bb[vb, vb], t1_bb)
-sigma_bb +=  1.00 * einsum('jiba,bj-&gt;ia', g_abab[oa, ob, va, vb], t1_aa)
-sigma_bb += -1.00 * einsum('jiab,bj-&gt;ia', g_bbbb[ob, ob, vb, vb], t1_bb)
-sigma_bb +=  1.00 * einsum('bija,bj-&gt;ia', g_abab[va, ob, oa, vb], t1_aa)
-sigma_bb +=  1.00 * einsum('ibaj,bj-&gt;ia', g_bbbb[ob, vb, vb, ob], t1_bb)
-sigma_bb +=  1.00 * einsum('jabi,bj-&gt;ia', g_abab[oa, vb, va, ob], t1_aa)
-sigma_bb +=  1.00 * einsum('jabi,bj-&gt;ia', g_bbbb[ob, vb, vb, ob], t1_bb)
-sigma_bb +=  1.00 * einsum('baji,bj-&gt;ia', g_abab[va, vb, oa, ob], t1_aa)
-sigma_bb += -1.00 * einsum('abji,bj-&gt;ia', g_bbbb[vb, vb, ob, ob], t1_bb)
+<pre>sigma_aa += -1.00 * einsum('ij,aj-&gt;ai', f_aa[oa, oa], t1_aa)
+sigma_aa +=  1.00 * einsum('ba,bi-&gt;ai', f_aa[va, va], t1_aa)
+sigma_aa += -1.00 * einsum('ji,aj-&gt;ai', f_aa[oa, oa], t1_aa)
+sigma_aa +=  1.00 * einsum('ab,bi-&gt;ai', f_aa[va, va], t1_aa)
+sigma_aa += -1.00 * einsum('jiab,bj-&gt;ai', g_aaaa[oa, oa, va, va], t1_aa)
+sigma_aa +=  1.00 * einsum('ijab,bj-&gt;ai', g_abab[oa, ob, va, vb], t1_bb)
+sigma_aa +=  1.00 * einsum('ibaj,bj-&gt;ai', g_aaaa[oa, va, va, oa], t1_aa)
+sigma_aa +=  1.00 * einsum('ibaj,bj-&gt;ai', g_abab[oa, vb, va, ob], t1_bb)
+sigma_aa +=  1.00 * einsum('jabi,bj-&gt;ai', g_aaaa[oa, va, va, oa], t1_aa)
+sigma_aa +=  1.00 * einsum('ajib,bj-&gt;ai', g_abab[va, ob, oa, vb], t1_bb)
+sigma_aa += -1.00 * einsum('abji,bj-&gt;ai', g_aaaa[va, va, oa, oa], t1_aa)
+sigma_aa +=  1.00 * einsum('abij,bj-&gt;ai', g_abab[va, vb, oa, ob], t1_bb)
+sigma_bb += -1.00 * einsum('ij,aj-&gt;ai', f_bb[ob, ob], t1_bb)
+sigma_bb +=  1.00 * einsum('ba,bi-&gt;ai', f_bb[vb, vb], t1_bb)
+sigma_bb += -1.00 * einsum('ji,aj-&gt;ai', f_bb[ob, ob], t1_bb)
+sigma_bb +=  1.00 * einsum('ab,bi-&gt;ai', f_bb[vb, vb], t1_bb)
+sigma_bb +=  1.00 * einsum('jiba,bj-&gt;ai', g_abab[oa, ob, va, vb], t1_aa)
+sigma_bb += -1.00 * einsum('jiab,bj-&gt;ai', g_bbbb[ob, ob, vb, vb], t1_bb)
+sigma_bb +=  1.00 * einsum('bija,bj-&gt;ai', g_abab[va, ob, oa, vb], t1_aa)
+sigma_bb +=  1.00 * einsum('ibaj,bj-&gt;ai', g_bbbb[ob, vb, vb, ob], t1_bb)
+sigma_bb +=  1.00 * einsum('jabi,bj-&gt;ai', g_abab[oa, vb, va, ob], t1_aa)
+sigma_bb +=  1.00 * einsum('jabi,bj-&gt;ai', g_bbbb[ob, vb, vb, ob], t1_bb)
+sigma_bb +=  1.00 * einsum('baji,bj-&gt;ai', g_abab[va, vb, oa, ob], t1_aa)
+sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 </pre>
 </div>
 </div>
@@ -8409,7 +8426,69 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ia', g_bbbb[vb, vb, ob, ob], t1_bb)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The code below implements these expressions in a function that evaluates the action of the hessian on the response vectors and uses this function when solving the response equations. In this way, we do not need to explicitly store the entire hessian matrix, only its diagonal elements. Be careful how you reshape the response vectors into t1-like containers for use in the einsum expressions generated by p$^\dagger$q.</p>
+<p>The code below implements these expressions in a function that evaluates the contraction of the hessian matrix and t1 operator.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=36cd65fd-4c55-477f-8306-8cec816b4b75">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Hx</span><span class="p">(</span><span class="n">t1_aa</span><span class="p">,</span> <span class="n">t1_bb</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    evaluate contraction of Hessian matrix against a t1-shaped operator</span>
+
+<span class="sd">    :param t1_aa: the alpha-spin part of t1 (the response vector)</span>
+<span class="sd">    :param t1_bb: the beta-spin part of t1 (the response vector)</span>
+
+<span class="sd">    :return sigma_aa</span>
+<span class="sd">    :return sigma_bb</span>
+<span class="sd">    """</span>
+    
+    <span class="n">sigma_aa</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ij,aj-&gt;ai'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ba,bi-&gt;ai'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,aj-&gt;ai'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ab,bi-&gt;ai'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiab,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ijab,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ajib,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abji,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    
+    <span class="n">sigma_bb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ij,aj-&gt;ai'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ba,bi-&gt;ai'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,aj-&gt;ai'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ab,bi-&gt;ai'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiba,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiab,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'bija,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'baji,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
+    <span class="n">sigma_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abji,bj-&gt;ai'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sigma_aa</span><span class="p">,</span> <span class="n">sigma_bb</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=40c5fcfc-761e-4e11-812a-f22174f8ede6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we can solve the response equations without the need to explicitly store the entire hessian matrix. Note that we have rewritten this solver slightly to use containers the shape of t1 like p$^\dagger$q uses.</p>
 </div>
 </div>
 </div>
@@ -8418,74 +8497,58 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ia', g_bbbb[vb, vb, ob, ob], t1_bb)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Hx</span><span class="p">(</span><span class="n">t1_aa</span><span class="p">,</span> <span class="n">t1_bb</span><span class="p">):</span>
-    
-    <span class="n">sigma_aa</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ij,aj-&gt;ia'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ba,bi-&gt;ia'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,aj-&gt;ia'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ab,bi-&gt;ia'</span><span class="p">,</span> <span class="n">f_aa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiab,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ijab,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ajib,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abji,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_aaaa</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">oa</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_aa</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abij,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    
-    <span class="n">sigma_bb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ij,aj-&gt;ia'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ba,bi-&gt;ia'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ji,aj-&gt;ia'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ab,bi-&gt;ia'</span><span class="p">,</span> <span class="n">f_bb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiba,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jiab,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'bija,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'ibaj,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">oa</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'jabi,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">ob</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span>  <span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'baji,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_abab</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">oa</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_aa</span><span class="p">)</span>
-    <span class="n">sigma_bb</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">1.00</span> <span class="o">*</span> <span class="n">einsum</span><span class="p">(</span><span class="s1">'abji,bj-&gt;ia'</span><span class="p">,</span> <span class="n">g_bbbb</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ob</span><span class="p">],</span> <span class="n">t1_bb</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># dipole integrals shaped as [v, o]</span>
 
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sigma_aa</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">sigma_bb</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
+<span class="n">mu_a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mu_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mua_x</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+<span class="n">mu_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mua_y</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
+<span class="n">mu_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mua_z</span><span class="p">[</span><span class="n">va</span><span class="p">,</span> <span class="n">oa</span><span class="p">])</span>
 
-    <span class="k">return</span> <span class="n">sigma</span>
-        
-<span class="n">kappa_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_x_vec</span><span class="p">)</span>
-<span class="n">kappa_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_y_vec</span><span class="p">)</span>
-<span class="n">kappa_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_z_vec</span><span class="p">)</span>
+<span class="n">mu_b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mu_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mub_x</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+<span class="n">mu_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mub_y</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
+<span class="n">mu_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mub_z</span><span class="p">[</span><span class="n">vb</span><span class="p">,</span> <span class="n">ob</span><span class="p">])</span>
 
-<span class="n">old_kappa_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_x_vec</span><span class="p">)</span>
-<span class="n">old_kappa_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_y_vec</span><span class="p">)</span>
-<span class="n">old_kappa_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_z_vec</span><span class="p">)</span>
+<span class="c1"># response vectors shaped as [v, o]</span>
+<span class="n">kappa_a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kappa_b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">old_kappa_a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">old_kappa_b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">kappa_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]))</span>
+    <span class="n">kappa_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]))</span>
+    <span class="n">old_kappa_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]))</span>
+    <span class="n">old_kappa_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]))</span>
+
+<span class="c1"># diagonal of hessian shaped as [v, o]</span>
+<span class="n">h_diag_a</span> <span class="o">=</span> <span class="n">h_diag</span><span class="p">[:</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">h_diag_b</span> <span class="o">=</span> <span class="n">h_diag</span><span class="p">[</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nob</span><span class="p">,</span> <span class="n">nvb</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'    ==&gt; First-Order Response Equations &lt;=='</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    iter         |dk|'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'    iter       ||dk||'</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
 
-    <span class="n">sigma_x</span> <span class="o">=</span> <span class="n">Hx</span><span class="p">(</span><span class="n">kappa_x</span><span class="p">[:</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">kappa_x</span><span class="p">[</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">sigma_y</span> <span class="o">=</span> <span class="n">Hx</span><span class="p">(</span><span class="n">kappa_y</span><span class="p">[:</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">kappa_y</span><span class="p">[</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">sigma_z</span> <span class="o">=</span> <span class="n">Hx</span><span class="p">(</span><span class="n">kappa_z</span><span class="p">[:</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">[</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">noa</span><span class="p">,</span> <span class="n">nva</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        
+        <span class="n">sigma_a</span><span class="p">,</span> <span class="n">sigma_b</span> <span class="o">=</span> <span class="n">Hx</span><span class="p">(</span><span class="n">kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">],</span> <span class="n">kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">])</span>
 
-    <span class="n">new_kappa_x</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">h_diag</span> <span class="o">*</span> <span class="p">(</span> <span class="n">mu_x_vec</span> <span class="o">-</span> <span class="n">sigma_x</span> <span class="o">+</span> <span class="n">h_diag</span> <span class="o">*</span> <span class="n">kappa_x</span><span class="p">)</span>
-    <span class="n">new_kappa_y</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">h_diag</span> <span class="o">*</span> <span class="p">(</span> <span class="n">mu_y_vec</span> <span class="o">-</span> <span class="n">sigma_y</span> <span class="o">+</span> <span class="n">h_diag</span> <span class="o">*</span> <span class="n">kappa_y</span><span class="p">)</span>
-    <span class="n">new_kappa_z</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">h_diag</span> <span class="o">*</span> <span class="p">(</span> <span class="n">mu_z_vec</span> <span class="o">-</span> <span class="n">sigma_z</span> <span class="o">+</span> <span class="n">h_diag</span> <span class="o">*</span> <span class="n">kappa_z</span><span class="p">)</span>
-  
-    <span class="n">kappa_x</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">*</span> <span class="n">old_kappa_x</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">damp</span><span class="p">)</span> <span class="o">*</span> <span class="n">new_kappa_x</span>
-    <span class="n">kappa_y</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">*</span> <span class="n">old_kappa_y</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">damp</span><span class="p">)</span> <span class="o">*</span> <span class="n">new_kappa_y</span>
-    <span class="n">kappa_z</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">*</span> <span class="n">old_kappa_z</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">damp</span><span class="p">)</span> <span class="o">*</span> <span class="n">new_kappa_z</span>
-
-    <span class="n">conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">kappa_x</span> <span class="o">-</span> <span class="n">old_kappa_x</span><span class="p">)</span>
-    <span class="n">conv</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">kappa_y</span> <span class="o">-</span> <span class="n">old_kappa_y</span><span class="p">)</span>
-    <span class="n">conv</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">kappa_z</span> <span class="o">-</span> <span class="n">old_kappa_z</span><span class="p">)</span>
-
-    <span class="n">old_kappa_x</span> <span class="o">=</span> <span class="n">kappa_x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">old_kappa_y</span> <span class="o">=</span> <span class="n">kappa_y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">old_kappa_z</span> <span class="o">=</span> <span class="n">kappa_z</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_kappa_a</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">h_diag_a</span> <span class="o">*</span> <span class="p">(</span> <span class="n">mu_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">-</span> <span class="n">sigma_a</span> <span class="o">+</span> <span class="n">h_diag_a</span> <span class="o">*</span> <span class="n">kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">])</span>
+        <span class="n">new_kappa_b</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">h_diag_b</span> <span class="o">*</span> <span class="p">(</span> <span class="n">mu_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">-</span> <span class="n">sigma_b</span> <span class="o">+</span> <span class="n">h_diag_b</span> <span class="o">*</span> <span class="n">kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">])</span>
+    
+        <span class="n">kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">*</span> <span class="n">old_kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">damp</span><span class="p">)</span> <span class="o">*</span> <span class="n">new_kappa_a</span>
+        <span class="n">kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">*</span> <span class="n">old_kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">damp</span><span class="p">)</span> <span class="o">*</span> <span class="n">new_kappa_b</span>
+    
+        <span class="n">conv</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">-</span> <span class="n">old_kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">])</span>
+        <span class="n">conv</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">-</span> <span class="n">old_kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">])</span>
+        
+        <span class="n">old_kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">=</span> <span class="n">kappa_a</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">old_kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span> <span class="o">=</span> <span class="n">kappa_b</span><span class="p">[</span><span class="n">xyz</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">'    </span><span class="si">%4i</span><span class="s1"> </span><span class="si">%12.8f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">conv</span><span class="p">))</span>
     
@@ -8501,19 +8564,25 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ia', g_bbbb[vb, vb, ob, ob], t1_bb)
     <span class="nb">print</span><span class="p">(</span><span class="s1">'    response equations converged!'</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> 
 
-<span class="n">alpha_xx</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'i,i-&gt;'</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">,</span> <span class="n">kappa_x</span><span class="p">)</span>
-<span class="n">alpha_xy</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'i,i-&gt;'</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">,</span> <span class="n">kappa_y</span><span class="p">)</span>
-<span class="n">alpha_xz</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'i,i-&gt;'</span><span class="p">,</span> <span class="n">mu_x_vec</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">)</span>
-<span class="n">alpha_yy</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'i,i-&gt;'</span><span class="p">,</span> <span class="n">mu_y_vec</span><span class="p">,</span> <span class="n">kappa_y</span><span class="p">)</span>
-<span class="n">alpha_yz</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'i,i-&gt;'</span><span class="p">,</span> <span class="n">mu_y_vec</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">)</span>
-<span class="n">alpha_zz</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'i,i-&gt;'</span><span class="p">,</span> <span class="n">mu_z_vec</span><span class="p">,</span> <span class="n">kappa_z</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">dir1</span> <span class="o">=</span> <span class="s1">'x'</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+        <span class="n">dir1</span> <span class="o">=</span> <span class="s1">'y'</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">dir1</span> <span class="o">=</span> <span class="s1">'z'</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(xx) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_xx</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(xy) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_xy</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(xz) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_xz</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(yy) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_yy</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(yz) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_yz</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(zz) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha_zz</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">dir2</span> <span class="o">=</span> <span class="s1">'x'</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+            <span class="n">dir2</span> <span class="o">=</span> <span class="s1">'y'</span>
+        <span class="k">elif</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">dir2</span> <span class="o">=</span> <span class="s1">'z'</span>
+            
+        <span class="n">alpha</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'ai,ai-&gt;'</span><span class="p">,</span> <span class="n">mu_a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">kappa_a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">alpha</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">'ai,ai-&gt;'</span><span class="p">,</span> <span class="n">mu_a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">kappa_b</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'    alpha(</span><span class="si">%s%s</span><span class="s1">) = </span><span class="si">%8.4f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">dir1</span><span class="p">,</span> <span class="n">dir2</span><span class="p">,</span> <span class="n">alpha</span><span class="p">))</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8530,41 +8599,42 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ia', g_bbbb[vb, vb, ob, ob], t1_bb)
 <pre>
     ==&gt; First-Order Response Equations &lt;==
 
-    iter         |dk|
-       0   1.42781193
-       1   0.59140965
-       2   0.28247428
-       3   0.14133161
-       4   0.07329898
-       5   0.03896359
-       6   0.02111298
-       7   0.01161663
-       8   0.00647116
-       9   0.00364119
-      10   0.00206562
-      11   0.00117962
-      12   0.00067731
-      13   0.00039063
-      14   0.00022612
-      15   0.00013129
-      16   0.00007643
-      17   0.00004458
-      18   0.00002605
-      19   0.00001525
-      20   0.00000894
-      21   0.00000524
-      22   0.00000308
-      23   0.00000181
-      24   0.00000106
-      25   0.00000063
-      26   0.00000037
-      27   0.00000022
-      28   0.00000013
-      29   0.00000008
-      30   0.00000004
-      31   0.00000003
+    iter       ||dk||
+       0   2.01923099
+       1   0.83637955
+       2   0.39947896
+       3   0.19987308
+       4   0.10366042
+       5   0.05510283
+       6   0.02985827
+       7   0.01642840
+       8   0.00915160
+       9   0.00514943
+      10   0.00292122
+      11   0.00166823
+      12   0.00095787
+      13   0.00055244
+      14   0.00031979
+      15   0.00018568
+      16   0.00010808
+      17   0.00006305
+      18   0.00003685
+      19   0.00002157
+      20   0.00001264
+      21   0.00000742
+      22   0.00000436
+      23   0.00000256
+      24   0.00000151
+      25   0.00000089
+      26   0.00000052
+      27   0.00000031
+      28   0.00000018
+      29   0.00000011
+      30   0.00000006
+      31   0.00000004
       32   0.00000002
       33   0.00000001
+      34   0.00000001
 
     response equations converged!
 
@@ -8581,6 +8651,20 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ia', g_bbbb[vb, vb, ob, ob], t1_bb)
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ea7c3c0-d1c9-4d42-a5a4-3882b425d483">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=69aebca5-1c55-45dd-862a-f91186f5a0a1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
