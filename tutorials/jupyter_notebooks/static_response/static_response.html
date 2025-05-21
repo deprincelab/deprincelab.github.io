@@ -8182,7 +8182,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">kappa_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mu_x_vec</span><span class="p">)</span>
@@ -8426,7 +8426,7 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The code below implements these expressions in a function that evaluates the contraction of the hessian matrix and t1 operator.</p>
+<p>The code below defines a function implementing these expressions.</p>
 </div>
 </div>
 </div>
@@ -8435,7 +8435,7 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Hx</span><span class="p">(</span><span class="n">t1_aa</span><span class="p">,</span> <span class="n">t1_bb</span><span class="p">):</span>
@@ -8488,7 +8488,7 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Now, we can solve the response equations without the need to explicitly store the entire hessian matrix. Note that we have rewritten this solver slightly to use containers the shape of t1 like p$^\dagger$q uses.</p>
+<p>Now, we can solve the response equations without the need to explicitly store the entire hessian matrix. Note that we have rewritten this solver to use containers that are the same shape as that used for t1 in p$^\dagger$q.</p>
 </div>
 </div>
 </div>
@@ -8497,7 +8497,7 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># dipole integrals shaped as [v, o]</span>
@@ -8651,20 +8651,6 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ea7c3c0-d1c9-4d42-a5a4-3882b425d483">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=69aebca5-1c55-45dd-862a-f91186f5a0a1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
