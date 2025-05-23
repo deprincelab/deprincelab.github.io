@@ -7747,7 +7747,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
@@ -7823,7 +7823,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># define the molecule. be sure to disable point-group symmetry</span>
@@ -7863,7 +7863,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># diagonalize the overlap matrix</span>
@@ -7904,17 +7904,17 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># core guess</span>
 <span class="n">F_a</span> <span class="o">=</span> <span class="n">h</span>
 
 <span class="c1"># transform Fock matrix to the orthogonal basis</span>
-<span class="n">F_a</span> <span class="o">=</span> <span class="n">Shalf</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">@</span> <span class="n">F_a</span> <span class="o">@</span> <span class="n">Shalf</span>
+<span class="n">F_a_prime</span> <span class="o">=</span> <span class="n">Shalf</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">@</span> <span class="n">F_a</span> <span class="o">@</span> <span class="n">Shalf</span>
 
 <span class="c1"># diaogonalize the Fock matrix</span>
-<span class="n">eps_a</span><span class="p">,</span> <span class="n">c_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">F_a</span><span class="p">)</span>
+<span class="n">eps_a</span><span class="p">,</span> <span class="n">c_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">F_a_prime</span><span class="p">)</span>
 
 <span class="c1"># back transform one index of the MO coefficient matrix to the non-orthogonal basis</span>
 <span class="n">c_a</span> <span class="o">=</span> <span class="n">Shalf</span> <span class="o">@</span> <span class="n">c_a</span>
@@ -7953,7 +7953,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">e_convergence</span> <span class="o">=</span> <span class="mf">1e-8</span>
@@ -8010,7 +8010,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 
     <span class="c1"># when printing the energy, don't forget the nuclear repulsion contribution</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'    </span><span class="si">%5i</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1"> </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">energy</span> <span class="o">+</span> <span class="n">mol</span><span class="o">.</span><span class="n">nuclear_repulsion_energy</span><span class="p">(),</span> <span class="n">dE</span><span class="p">,</span> <span class="n">dD</span><span class="p">)</span> <span class="p">)</span>
-
+    
     <span class="c1"># save energy and density</span>
     <span class="n">old_energy</span> <span class="o">=</span> <span class="n">energy</span>
     <span class="n">old_D_a</span> <span class="o">=</span> <span class="n">D_a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -8052,7 +8052,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 
      Iter               energy                   dE                   dD 
 
-        0     -57.734126997170      71.939640465972      14.603237074230
+        0     -57.734126997170      68.445632685822      14.603237074230
         1     -90.876714355657      33.142587358487      13.993740119593
         2     -63.585014510045      27.291699845612       7.341481100050
         3     -86.340905976536      22.755891466491       7.061971349659
@@ -8165,7 +8165,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">diis_solver</span><span class="p">:</span>
@@ -8253,7 +8253,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">scf_iterations</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">print_level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
@@ -8422,7 +8422,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
@@ -8507,7 +8507,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># define a new molecule</span>
@@ -8579,7 +8579,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">scf_iterations</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">print_level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
@@ -8759,7 +8759,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
@@ -8842,7 +8842,7 @@ c_n \\
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
@@ -8920,7 +8920,7 @@ $\chi_1$ is an $s$-type basis function centered on one hydrogen atom and $\chi_2
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
