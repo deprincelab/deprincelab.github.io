@@ -6,10 +6,10 @@ logo: "/images/deprince_group_logo.png"
 
 # --- URL Settings ---
 # The absolute base hostname
-url: "https://www.chem.fsu.edu"
+#url: "https://www.chem.fsu.edu"
 
 # The path that comes AFTER the domain
-baseurl: "/~deprince"
+#baseurl: "/~deprince"
 
 # --- Build Settings ---
 remote_theme: vfvong/jekyll-theme-tao
