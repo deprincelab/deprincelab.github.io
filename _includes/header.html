@@ -1,0 +1,78 @@
+<header class="masthead">
+  <h2 class="masthead-title">
+    <center>
+      <a href="{{ site.baseurl }}/">
+        {% if site.logo %}
+          <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}" style="height: 120px;" alt="DePrince group logo">
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </a>
+    </center>
+  </h2>
+  {% if site.tagline %}
+    <h5 class="masthead-tagline">{{ site.tagline }}</h5>
+  {% endif %}
+</header>
+
+<!--
+<style>
+  /* Only target links inside the main content area */
+  .post-content a, 
+  .page-content a, 
+  article a,
+  #main a {
+    color: #78243C !important;
+    text-decoration: none !important;
+  }
+
+  /* Hover effect for main content links */
+  .post-content a:hover, 
+  .page-content a:hover, 
+  article a:hover,
+  #main a:hover {
+    color: #84754E !important;
+    text-decoration: underline !important;
+  }
+
+  /* The Sidebar/Nav: This ensures they stay the theme's default */
+  /* If you want to force them to be white or gray, use this: */
+  .sidebar a, 
+  .nav-links a, 
+  .site-nav a {
+    color: inherit !important; 
+  }
+</style>
+-->
+
+<style>
+  /* 1. MAIN CONTENT LINKS (Garnet) */
+  .post-content a, 
+  .page-content a, 
+  article a,
+  #main a {
+    color: #78243C !important;
+    text-decoration: none;
+  }
+
+  .post-content a:hover, 
+  article a:hover {
+    color: #84754E !important;
+    text-decoration: underline;
+  }
+
+  /* 2. SIDEBAR LINKS (Force back to White) */
+  /* We target the common Tao theme sidebar classes */
+  .sidebar a, 
+  .side-nav a, 
+  .navigation a,
+  .site-nav a {
+    color: #ffffff !important; 
+    text-decoration: none;
+  }
+
+  .sidebar a:hover, 
+  .site-nav a:hover {
+    color: #ceb888 !important; /* Optional: FSU Gold hover for the sidebar */
+  }
+</style>

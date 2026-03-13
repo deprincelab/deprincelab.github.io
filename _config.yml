@@ -1,12 +1,27 @@
-plugins:
-  - jekyll-remote-theme
-  
+# --- Site Settings ---
+title: DePrince Lab
+description: "Quantum Chemistry Method Development and Simulations"
+
+logo: "/images/deprince_group_logo.png"
+
+# --- URL Settings ---
+# The absolute base hostname
+url: "https://www.chem.fsu.edu"
+
+# The path that comes AFTER the domain
+baseurl: "/~deprince"
+
+# --- Build Settings ---
 remote_theme: vfvong/jekyll-theme-tao
 
-#plugins:
-#  - jekyll-paginate
+plugins:
+  - jekyll-remote-theme
+  - jekyll-paginate
 
-#paginate: 2
+# --- Pagination Settings (Required by Tao theme) ---
+paginate: 5
+paginate_path: "/page:num/"
 
-title: DePrince Lab
-#description: Quantum Chemistry Method Development and Simulations
+# --- Markdown Settings ---
+markdown: kramdown
+highlighter: rouge
