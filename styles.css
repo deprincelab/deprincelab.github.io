@@ -18,6 +18,7 @@ body {
 }
 
 
+/* AED 3/30/26: Custom CSS Overrides */
 .sr-only {
   position: absolute; !important;
   width: 1px; !important;
@@ -27,4 +28,18 @@ body {
   overflow: hidden; !important;
   clip: rect(0, 0, 0, 0); !important;
   border: 0; !important;
+}
+
+/* Override the footer text color for ADA compliance */
+footer.footer, 
+footer.footer p, 
+footer.footer time {
+    color: #333333 !important; /* A dark charcoal that passes 4.5:1 ratio */
+    background-color: #ffffff !important; /* Ensures the background is solid white */
+}
+
+/* Optional: if there are links in your footer, they need high contrast too */
+footer.footer a {
+    color: #002855 !important; /* FSU Dark Blue or similar high-contrast blue */
+    text-decoration: underline; /* WCAG best practice for links */
 }
