@@ -1,0 +1,20 @@
+---
+layout: default
+---
+
+<!-- 
+
+AED added 3/30/26 when adding header/h1 content for screen readers
+
+-->
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title sr-only">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+</article>
