@@ -1,17 +1,18 @@
 <header class="masthead">
-  <h2 class="masthead-title">
+  <div class="masthead-title">
     <center>
       <a href="{{ site.baseurl }}/">
         {% if site.logo %}
-          <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}" style="width: 75%;" alt="DePrince group logo">
+          <img src="{{ site.logo | relative_url }}" alt="DePrince Research Group Logo" style="width: 75%;">
         {% else %}
           {{ site.title }}
         {% endif %}
       </a>
     </center>
-  </h2>
+  </div>
+  
   {% if site.tagline %}
-    <h5 class="masthead-tagline">{{ site.tagline }}</h5>
+    <p class="masthead-tagline" style="text-align: center;">{{ site.tagline }}</p>
   {% endif %}
 </header>
 
