@@ -1,8 +1,9 @@
 ---
 layout: page
+title: Writing a Rubik's Cube Solver in C++
 ---
 
-
+<!--
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
 .js?lang=css&skin=desert"></script>
 
@@ -30,6 +31,7 @@ pre {
     text-indent: 1cm;
 }
 </style>
+-->
 
 <br>
 
@@ -318,42 +320,42 @@ code takes, along with the visualization of the cube.
 
   cube-&gtLocateOrigin();
 </pre>
-<img src=rubiks1.png width=65%> <br>
+<img src=rubiks1.png alt="locate origin" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtFormCross();
 </pre>
-<img src=rubiks2.png width=65%> <br>
+<img src=rubiks2.png alt="form cross" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtSolveTopLayer();
 </pre>
-<img src=rubiks3.png width=65%> <br>
+<img src=rubiks3.png alt="solve top layer" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtSolveMiddleLayer();
 </pre>
-<img src=rubiks4.png width=65%> <br>
+<img src=rubiks4.png alt="solve middle layer" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtFormBottomCross();
 </pre>
-<img src=rubiks5.png width=65%> <br>
+<img src=rubiks5.png alt="form bottom cross" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtPermuteBottomCorners();
 </pre>
-<img src=rubiks7.png width=65%> <br>
+<img src=rubiks7.png alt="permute bottom corners" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtOrientBottomCorners();
 </pre>
-<img src=rubiks8.png width=65%> <br>
+<img src=rubiks8.png alt="orient bottom corners" width=65%> <br>
 <pre class="prettyprint">
 
   cube-&gtPermuteBottomEdges();
 </pre>
-<img src=rubiks9.png width=65%> <br>
+<img src=rubiks9.png alt="permute bottom edges" width=65%> <br>
 <br>
 Your Rubik's cube solver  <br>
 <div id="content" style="background-color:#000000;text-align:justify;height:1px;
