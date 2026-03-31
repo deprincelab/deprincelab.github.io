@@ -1,49 +1,55 @@
 <header class="masthead">
-  <div class="masthead-title">
-    <center>
-      <a href="{{ site.baseurl }}/">
-        {% if site.logo %}
-          <img src="{{ site.logo | relative_url }}" alt="DePrince Research Group Logo" style="width: 75%;">
-        {% else %}
-          {{ site.title }}
-        {% endif %}
-      </a>
-    </center>
+  <div class="masthead-title logo-wrapper">
+    <a href="{{ site.baseurl }}/">
+      {% if site.logo %}
+        <img src="{{ site.logo | relative_url }}" alt="DePrince Research Group Logo" style="width: 75%;">
+      {% else %}
+        {{ site.title }}
+      {% endif %}
+    </a>
   </div>
   
   {% if site.tagline %}
-    <p class="masthead-tagline" style="text-align: center;">{{ site.tagline }}</p>
+    <p class="masthead-tagline">{{ site.tagline }}</p>
   {% endif %}
 </header>
 
+
 <style>
-  /* 1. MAIN CONTENT LINKS (Garnet) */
-  .post-content a, 
-  .page-content a, 
+  /* 1. MAIN CONTENT LINKS */
+  .post-content a,
+  .page-content a,
   article a,
   #main a {
     color: #78243C !important;
-    text-decoration: none;
+    text-decoration: underline !important; /* Ensure it stays underlined */
   }
 
+  /* Target BOTH hover and focus for full compliance */
   .post-content a:hover, 
-  article a:hover {
-    color: #84754E !important;
-    text-decoration: underline;
+  .post-content a:focus,
+  article a:hover,
+  article a:focus {
+    color: #84754E !important; /* FSU Gold */
+    text-decoration: underline !important;
+    outline: 2px solid #84754E; /* Adds a visible 'box' when tabbing for AAA compliance */
+    outline-offset: 2px;
   }
 
-  /* 2. SIDEBAR LINKS (Force back to White) */
-  /* We target the common Tao theme sidebar classes */
-  .sidebar a, 
-  .side-nav a, 
+  /* 2. SIDEBAR LINKS */
+  .sidebar a,
+  .side-nav a,
   .navigation a,
   .site-nav a {
-    color: #ffffff !important; 
+    color: #ffffff !important;
     text-decoration: none;
   }
 
-  .sidebar a:hover, 
-  .site-nav a:hover {
-    color: #ceb888 !important; /* Optional: FSU Gold hover for the sidebar */
+  .sidebar a:hover,
+  .sidebar a:focus,
+  .site-nav a:hover,
+  .site-nav a:focus {
+    color: #ceb888 !important;
+    text-decoration: underline; /* Sidebars usually need this on focus too! */
   }
 </style>

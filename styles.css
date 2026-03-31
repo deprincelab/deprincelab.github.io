@@ -43,3 +43,83 @@ footer.footer a {
     color: #002855 !important; /* FSU Dark Blue or similar high-contrast blue */
     text-decoration: underline; /* WCAG best practice for links */
 }
+
+/* 1. Ensure the container spans the full width and centers content */
+.logo-wrapper {
+    display: flex !important;
+    flex-direction: column !important; /* Stack items vertically if needed */
+    align-items: center !important;     /* Centers horizontally in a flex-column */
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;     /* Fallback for older browsers */
+}
+
+/* 2. Ensure the link and image behave as block elements to respect centering */
+.logo-wrapper a {
+    display: inline-block !important;
+    width: 100% !important;
+}
+
+.logo-wrapper img {
+    display: block !important;
+    margin: 0 auto !important;         /* The classic CSS "Center Me" trick */
+    max-width: 75% !important;
+    height: auto !important;
+}
+
+/* Skip link - Enhanced Contrast Fix */
+.skip-link {
+  position: absolute;
+  top: -1000px; /* Move it way off-screen so it's not 'floating' near other text */
+  left: 0;
+  background: #000000 !important; /* Pure black background for max contrast */
+  color: #ffffff !important;    /* Pure white text */
+  padding: 15px 25px;
+  z-index: 10000;
+  font-weight: 900;             /* Extra bold for better legibility */
+  text-decoration: underline;    /* Required for AAA link recognition */
+  border: 3px solid #ceb888;    /* FSU Gold border */
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 5px solid #78243c;   /* High-visibility focus ring */
+}
+
+/* CODE SNIPPETS! */
+
+/* 1. Reset the "Nuclear" backgrounds for all wrappers */
+div[class*="jp-"], .highlight, .input_area, .output_area, .jp-InputArea-editor {
+    background-color: transparent !important;
+    background: none !important;
+    border: none !important;
+}
+
+/* 2. Style the PRE container for both Jupyter and Terminal snippets */
+pre {
+    background-color: transparent !important;
+    border: 1px solid !important;
+    /*border-left: 4px solid #78243c*/ !important; /* FSU Garnet strip */
+    padding: 15px !important;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    
+    /* CRITICAL: Force terminal alignment */
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+    white-space: pre !important; /* Keeps your spaces/tabs exactly as they are */
+    overflow-x: auto !important;  /* Adds scrollbar if lines are too long */
+}
+
+/* 3. Ensure the inner CODE tag doesn't break the alignment */
+pre code {
+    font-family: inherit !important; /* Inherits the monospace from 'pre' */
+    font-size: inherit !important;
+    font-weight: 400 !important;
+    color: inherit !important;
+    background: none !important;
+    padding: 0 !important;
+    white-space: inherit !important; /* Prevents text wrapping that ruins columns */
+}
