@@ -123,3 +123,70 @@ pre code {
     padding: 0 !important;
     white-space: inherit !important; /* Prevents text wrapping that ruins columns */
 }
+
+/* CODE SNIPPET COLORS FOR CONTRAST */
+
+/* Darken Python Keywords (The Green) to 7.2:1 Contrast */
+/* Deep Forest Green - AAA Pass */
+/*    color: #005a00 !important; */
+/* Deep Forest Green - 7.15:1 Contrast Ratio (AAA Pass) */
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr {
+    color: #005900 !important; 
+    font-weight: bold;
+}
+/* ALL Python Keywords and Keyword Operators (7.1:1 Green) */
+.highlight .k,  /* General keywords: if, for, while */
+.highlight .kn, /* Namespace: import, from */
+.highlight .kp, /* Pseudos: None, True, False */
+.highlight .kr, /* Reserved */
+.highlight .ko, /* Keyword Operators: in, is, and, or, not */
+.highlight .ow  /* Operator Word: another common tag for 'in' */
+{
+    color: #005900 !important;
+    font-weight: bold;
+}
+/* import XXX, class XXX */
+.highlight .nn, .highlight .nc {
+    color: #005900 !important; 
+    font-weight: 500;
+}
+/* numerical values */
+.highlight .m, 
+.highlight .mi, 
+.highlight .mf, 
+.highlight .mh, 
+.highlight .mo, 
+.highlight .il {
+    color: #005900 !important;
+}
+
+/* Darken Python Strings (The Red/Orange) to 7.5:1 Contrast */
+/* Deep Crimson - AAA Pass */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sd{
+    color: #910000 !important; 
+}
+
+/* Darken Python Comments (The Gray) to 7:1 Contrast */
+/* Neutral Deep Gray - AAA Pass   */
+/*  color: #595959 !important;  */
+/* Deep royal blue */
+.highlight .c, .highlight .c1, .highlight .cm {
+    color: #0044CC !important; 
+    font-style: italic;
+}
+
+/* 1. Target Punctuation (periods, commas, colons, brackets) */
+.highlight .p {
+    color: #222222 !important; /* Near-black - 15.9:1 Contrast */
+}
+
+/* 2. Target Operators (equals, plus, minus, greater than) */
+.highlight .o {
+    color: #222222 !important; /* Matches punctuation for a clean look */
+}
+
+/* 3. Target Built-in Pseudo-names (specifically 'self' in Python) */
+.highlight .bp {
+    color: #005900 !important; /* Deep Forest Green to match your names */
+}
+
