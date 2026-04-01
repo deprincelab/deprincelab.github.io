@@ -159,10 +159,38 @@ pre code {
 .highlight .il {
     color: #005900 !important;
 }
+/* ALL Python Keywords, Constants, and Booleans (7.1:1 Green) */
+.highlight .k,  /* if, def, import */
+.highlight .kn, /* import, from */
+.highlight .kp, /* None, True, False (Pseudo) */
+.highlight .kc, /* True, False, None (Constant) - TRY THIS */
+.highlight .ko, /* in, is, and */
+.highlight .ow, /* in, is, and (Operator Word) */
+.highlight .nb  /* built-ins like 'range' or sometimes 'True' */
+{
+    color: #005900 !important;
+    font-weight: bold;
+}
 
 /* Darken Python Strings (The Red/Orange) to 7.5:1 Contrast */
 /* Deep Crimson - AAA Pass */
 .highlight .s, .highlight .s1, .highlight .s2, .highlight .sd{
+    color: #910000 !important; 
+}
+/* 1. Target %f, %d, and {curly braces} inside strings */
+.highlight .si {
+    color: #910000 !important;
+}
+/* Update String Prefixes (r, f, b) and Strings to 7.1:1 Brown */
+.highlight .s, .highlight .sb, .highlight .s2, .highlight .s1 {
+    color: #910000 !important;
+}
+/* Update String Affixes (r, f) and Strings to 7.1:1 Brown */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sa, .highlight .sb {
+    color: #910000 !important; /* Your compliant brown */
+}
+/* Update Strings (\t, \n, and Affixes) to 7.1:1 Brown */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sa, .highlight .se {
     color: #910000 !important; 
 }
 
@@ -190,3 +218,9 @@ pre code {
     color: #005900 !important; /* Deep Forest Green to match your names */
 }
 
+
+/* MATHJAX */
+#MathJax_Message {
+    display: none !important;
+    visibility: hidden !important;
+}
