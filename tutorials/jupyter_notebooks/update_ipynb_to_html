@@ -7,5 +7,5 @@ for name in qm_postulates translation vibration rotation hydrogen variation pert
     ./replace "--jp-ui-font-size1: 13px;" "--jp-ui-font-size1: 18px;" ${file}
     ./replace "--jp-content-font-size1: 14px;" "--jp-content-font-size1: 16px;" ${file}
     ./replace "--jp-code-font-size: 13px;" "--jp-code-font-size: 12px;" ${file}
-    ./replace "autoplay" "muted autoplay" ${file}
+    #./replace "autoplay" "muted autoplay" ${file}
 done
