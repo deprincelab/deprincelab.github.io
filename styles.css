@@ -17,6 +17,17 @@ body {
     /* Your other styles for content go here */
 }
 
+/* AED footer */
+.site-footer-content {
+    font-size: 0.85rem; /* Makes text about 15% smaller than the body text */
+    line-height: 1.4;   /* Keeps it readable at smaller sizes */
+    color: #555555;     /* Ensure this still passes 7.1:1 contrast! */
+}
+
+.site-footer-content p {
+    margin-bottom: 0.5em;
+}
+
 
 /* AED 3/30/26: Custom CSS Overrides */
 .sr-only {
