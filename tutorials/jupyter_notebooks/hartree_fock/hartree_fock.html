@@ -7890,7 +7890,7 @@ $$K^\alpha_{\mu\nu} = \sum_{\lambda \sigma} D^\alpha_{\lambda\sigma} (\mu\sigma|
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Step-3.-Construct-Guess-Orbitals-and-Density">Step 3. Construct Guess Orbitals and Density<a class="anchor-link" href="#Step-3.-Construct-Guess-Orbitals-and-Density">¶</a></h3><p>The UHF procedure must be seeded with some guess for the molecular orbital coefficients. The simplest guess is obtained by ignoring the Coulomb and exchange parts of the Fock matrices, which is known as a "core Hamiltonian" guess:</p>
 <p>$$ F^\alpha_{\mu\nu} = F^\beta_{\mu\nu} \approx h_{\mu\nu}$$</p>
-<p>Other, more sophisticated, guesses exist, and you can read more about them <a href="https://psicode.org/psi4manual/master/scf.html#sec-scfguess">here</a>. Once we have our initial Fock matrix, we bring it to the orthogonal basis using the transformation matrix defined above</p>
+<p>Other, more sophisticated, guesses exist, and you can <a href="https://psicode.org/psi4manual/master/scf.html#sec-scfguess">read more about them here</a>. Once we have our initial Fock matrix, we bring it to the orthogonal basis using the transformation matrix defined above</p>
 <p>$$ {\bf F}^{\sigma \prime} = ({\bf S}^{-1/2})^T {\bf F}^\sigma {\bf S}^{-1/2} $$</p>
 <p>Now the Fock matrices can be diagonalized to obtain their eigenvectors</p>
 <p>$$ {\bf F}^{\sigma \prime}{\bf c}^{\sigma \prime} = {\bf \epsilon}^\sigma {\bf c}^{\sigma \prime}$$</p>
