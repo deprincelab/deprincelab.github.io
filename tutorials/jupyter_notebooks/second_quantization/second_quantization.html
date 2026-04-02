@@ -8,23 +8,11 @@ math: true
 <br>
 <hr>
 
-<ol>
-<li>
-<a href=../hartree_fock/hartree_fock.html style="color:#e65100;">Hartree Fock Theory</a>  <br>
-</li>
-<li>
-<a href=../second_quantization/second_quantization.html style="color:#e65100;">Second Quantization</a>  <br>
-</li>
-<li>
-<a href=../mbpt/mbpt.html style="color:#e65100;">Many-Body Perturbation Theory</a>  <br>
-</li>
-<li>
-<a href=../cis/cis.html style="color:#e65100;">Configuration Interaction with Single Excitations</a>  <br>
-</li>
-<li>
-<a href=../static_response/static_response.html style="color:#e65100;">Static Response Properties</a>  <br>
-</li>
-</ol>
+1. <a href=../hartree_fock/hartree_fock.html style="color:#e65100;">Hartree Fock Theory</a>  <br>
+2. <a href=../second_quantization/second_quantization.html style="color:#e65100;">Second Quantization</a>  <br>
+3. <a href=../mbpt/mbpt.html style="color:#e65100;">Many-Body Perturbation Theory</a>  <br>
+4. <a href=../cis/cis.html style="color:#e65100;">Configuration Interaction with Single Excitations</a>  <br>
+5. <a href=../static_response/static_response.html style="color:#e65100;">Static Response Properties</a>  <br>
 
 <hr>
 
@@ -7620,17 +7608,17 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Second-Quantized-Operators">Second-Quantized Operators<a class="anchor-link" href="#Second-Quantized-Operators">¶</a></h2><p>As suggested above, sums / products of creation and annihilation operators can be used to represent quantum mechanical operators.</p>
-<h4 id="One-Body-Operators">One-Body Operators<a class="anchor-link" href="#One-Body-Operators">¶</a></h4><p>Consider a one-body operator</p>
+<h3 id="One-Body-Operators">One-Body Operators<a class="anchor-link" href="#One-Body-Operators">¶</a></h3><p>Consider a one-body operator</p>
 <p>$$ \mathcal{O}_1 = \sum_i^N \hat{h}({\bf x}_i) $$</p>
 <p>where $i$ sums over all the $N$ electrons in the system and ${\bf x}_i$ represents the coordinates (spatial plus spin) of electron $i$. The second-quantized form of this operator, expanded within a basis of $m$ spin orbitals, $\{ \phi \}$, is</p>
 <p>$$ \mathcal{O}_1 = \sum_{p}^m \sum_q^m \langle \phi_p({\bf x}_1) | \hat{h}({\bf x}_1) | \phi_q({\bf x}_1) \rangle \hat{a}^\dagger_p \hat{a}_q = \sum_{pq} h_{pq} \hat{a}^\dagger_p \hat{a}_q $$</p>
 <p>Note that the sum in the original expression runs over the particles in the system, whereas the sums in the second-quantized form of the operator run over the spin-orbitals. Moving forward, it is assumed that the sums have these limits, and this notation is suppressed.</p>
-<h4 id="Two-Body-Operators">Two-Body Operators<a class="anchor-link" href="#Two-Body-Operators">¶</a></h4><p>Consider a general two-body operator</p>
+<h3 id="Two-Body-Operators">Two-Body Operators<a class="anchor-link" href="#Two-Body-Operators">¶</a></h3><p>Consider a general two-body operator</p>
 <p>$$\mathcal{O}_2 = \frac{1}{2} \sum_{i \neq j} \hat{g}({\bf x}_i, {\bf x}_j) $$</p>
 <p>The second-quantized form of this operator, expanded within a basis of $m$ spin orbitals, is</p>
 <p>$$ \mathcal{O}_2 = \frac{1}{2} \sum_{pqrs} \langle \phi_p({\bf x}_1)\phi_q({\bf x}_2) | \hat{g}({\bf x}_i, {\bf x}_j) | \phi_r({\bf x}_1) \phi_s({\bf x}_2) \rangle \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r = \frac{1}{2} \sum_{pqrs} g_{pqrs} \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r $$</p>
 <p>Note that the double sum in the original operator is restricted, whereas no restrictions appear in the second-quantized form of the operator.</p>
-<h4 id="Products-of-Operators">Products of Operators<a class="anchor-link" href="#Products-of-Operators">¶</a></h4><p>Occasionally one may encounter products of operators, and it is important to recognize that the second-quantized form of the product operator depends on whether the one takes the product of the original operators or their second-quantized forms. Consider two one-body operators, $\hat{A}$ and $\hat{B}$, defined as</p>
+<h3 id="Products-of-Operators">Products of Operators<a class="anchor-link" href="#Products-of-Operators">¶</a></h3><p>Occasionally one may encounter products of operators, and it is important to recognize that the second-quantized form of the product operator depends on whether the one takes the product of the original operators or their second-quantized forms. Consider two one-body operators, $\hat{A}$ and $\hat{B}$, defined as</p>
 <p>$$
 \begin{align}
 \hat{A} &amp;= \sum_i \hat{A}({\bf x}_i) \\
@@ -7729,7 +7717,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Normal-Order">Normal Order<a class="anchor-link" href="#Normal-Order">¶</a></h2><h4 id="The-True-Vacuum">The True Vacuum<a class="anchor-link" href="#The-True-Vacuum">¶</a></h4><p>One of the benefits of second quantization is that it simplifies the way in which we evaluate integrals involving quantum mechanical operators and many-body wave functions. It turns out that integrals over these operators are most conveniently dealt with when the operators are in "normal order," that is, when all of the creation operators lie to the left of the annihilation operators. Technically, this this definition of normal order is relative to the true vacuum state ($|\rangle$), whereas many electronic structure methods rely on a normal order relative to a different state, which is usually the  Fermi vacuum. This case will be discussed in the next section.</p>
+<h2 id="Normal-Order">Normal Order<a class="anchor-link" href="#Normal-Order">¶</a></h2><h3 id="The-True-Vacuum">The True Vacuum<a class="anchor-link" href="#The-True-Vacuum">¶</a></h3><p>One of the benefits of second quantization is that it simplifies the way in which we evaluate integrals involving quantum mechanical operators and many-body wave functions. It turns out that integrals over these operators are most conveniently dealt with when the operators are in "normal order," that is, when all of the creation operators lie to the left of the annihilation operators. Technically, this this definition of normal order is relative to the true vacuum state ($|\rangle$), whereas many electronic structure methods rely on a normal order relative to a different state, which is usually the  Fermi vacuum. This case will be discussed in the next section.</p>
 <p>For the true vacuum state, normal order is defined when the creation operators are all to the left of the annihilation operators. In this way, any expectation value of a string of normal-ordered operators (with respect to the vacuum state) will be zero. For example,</p>
 <p>$$ 
 \begin{align} 
@@ -7798,7 +7786,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>This simple example can be verified by hand.  Other more complicated strings can be much more annoying to rearrange.</p>
-<h4 id="The-Fermi-Vacuum">The Fermi Vacuum<a class="anchor-link" href="#The-Fermi-Vacuum">¶</a></h4><p>In correlated methods like CI or CC theory, normal order is not defined relative to the true vacuum state, but, rather, relative to the "Fermi vacuum," which is the Hartree-Fock (HF) state (a single Slater determinant). Recall that such a state can be generated by adding electrons to the true vacuum state</p>
+<h3 id="The-Fermi-Vacuum">The Fermi Vacuum<a class="anchor-link" href="#The-Fermi-Vacuum">¶</a></h3><p>In correlated methods like CI or CC theory, normal order is not defined relative to the true vacuum state, but, rather, relative to the "Fermi vacuum," which is the Hartree-Fock (HF) state (a single Slater determinant). Recall that such a state can be generated by adding electrons to the true vacuum state</p>
 <p>$$|\Phi_0\rangle = \prod_i^N \hat{a}_i^{\dagger} |\rangle$$</p>
 <p>Now, given this reference state, rearranging operator strings for normal order relative to the true vacuum will become far too complicated because of the need to deal with all of the creation operators associated with constructing the HF state. The solution is to define normal order in a different way.</p>
 <p>Our goal is to arrange our operators such that the expectation value of any term involving operators is zero, and the only non-zero terms are the fully-contracted ones involving no creation or annihilation operators. According to this rule, the usual creation or annihilation operators can act as either creators or annihilators on the Fermi vacuum, depending on the space (particle or hole) in which they act. So, $\hat{a}^{\dagger}_i$ and $\hat{a}_a$, should be treated as annihilation operators with respect to the Fermi vacuum because</p>

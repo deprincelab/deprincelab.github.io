@@ -3,36 +3,6 @@ layout: page
 title: Writing a Sudoku Solver in Python
 ---
 
-<!--
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
-.js?lang=css&skin=desert"></script>
-
-<style>
-.border_gradient {
-border: 8px solid #000;
-padding: 5px 5px 5px 15px;
-width: 300px;
-}
-code {
-    background: hsl(220, 80%, 90%);
-}
-
-pre {
-    padding-bottom: 20px;
-    padding-left:   20px;
-    border:solid;
-    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    width:100%;
-    background: #353535;
-    color: white;
-    text-indent: 1cm;
-}
-</style>
--->
-
 <br>
 
 Fun Stuff: Solving a Sudoku puzzle<br>
@@ -116,7 +86,6 @@ the following situations
 <u>Step 1.  Read the puzzle</u>
 <br>
 <br>
-<br>
 Consider the following puzzle:
 
 <img src="puzzle.png" style="width:50%" alt="Sudoku puzzle">
@@ -125,9 +94,7 @@ The puzzle above is one of the puzzles given in the
 <a href=puzzles.txt>file provided here</a>. Specifically, the puzzle above is the seventh puzzle, 
 defined in that file by
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet depicting an input Sudoku puzzle">
 Grid 07
 043080250
 600000000
@@ -139,16 +106,13 @@ Grid 07
 000000005
 034090710
 </pre>
-<br>
 
 So, the first thing we need to do is develop a function to read in each puzzle from this file and to place 
 the data into
 a suitable container. The Python function below will read in a single puzzle from 
 the sample file and return that puzzle as a 9x9 numpy array of integers.
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet for reading an input Sudoku puzzle">
 import numpy as np
 
 def read_puzzle(f):
@@ -171,11 +135,8 @@ def read_puzzle(f):
 
     return puzzle
 </pre>
-<br>
-<br>
 
 <u>Step 2.  Initialize the candidate lists</u>
-<br>
 <br>
 <br>
 For each blank spot in the puzzle (denoted with "0" in Project Euler's format), we can
@@ -183,14 +144,9 @@ develop a list of possible candidate values for the solved puzzle. I find that a
 each of the positions in the 9x9 grid is a suitable object that will allow us to add candidates [list.append(candidate)], 
 remove candidates [list.remove(candidate)], or search for candidates within a given list [candidate in list]. Such an object
 can be initialized as 81 empty lists as
-<br>
-<br>
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet initializing a candidate list">
 candidate_list = [ [] for _ in range(81) ]
 </pre>
-<br>
-
 
 An initial candidate list can be populated by 
 marching through each blank position and checking whether each possible number (1-9) appears in the 
@@ -198,10 +154,7 @@ corresponding row/column/block.
 If the number does appear in the corresponding row/column/block, then it cannot be a candidate for that position. 
 The update_candidate_list function defined here performs this task.
 <br>
-<br>
-
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet updating the candidate list for each element of a puzzle">
 def update_candidate_list(puzzle, candidate_list):
     """
     update candidate list for each element of puzzle
@@ -239,8 +192,6 @@ def update_candidate_list(puzzle, candidate_list):
     return candidate_list
 </pre>
 
-<br>
-
 Note that the function "check_block" has yet to be defined. I leave it to you as an exercise to implement this
 function yourself. If you get stuck, you can find a working version in the full <a href=sudoku.py>Python code</a>.
 
@@ -252,12 +203,8 @@ have been built, we can check if any position has only one possible candidate. I
 can be updated accordingly. 
 Consider the puzzle given above, where I have labeled the candidate lists for the first 3x3 sub-block:
 <br>
-<br>
-<br>
-
 <img src="puzzle_sole.png" style="width:50%" alt="Sudoku puzzle">
 
-<br>
 
 The candidate lists for the positions highlighted in red have only one possible value, so we know these
 values must be solutions for these positions. Further, once the value 6 has been assigned to the bottom
@@ -271,21 +218,16 @@ To make real progress for more challenging puzzles, though, we will need to impl
 allow us to eliminate potential candidates from the candidate lists.
 <br>
 <br>
-<br>
 <u>Step 3.  Identify loners</u>
-<br>
 <br>
 <br>
 If a candidate only occurs once in a row/column/box, then it can be designated as the sole valid candiate for that 
 position. 
 Consider the puzzle given above, after applying the logic we just discussed to the first sub-block:
 <br>
-<br>
-<br>
 
 <img src="puzzle_loner.png" style="width:50%" alt="Sudoku puzzle">
 
-<br>
 The position highlighted in red has two candidate values: 1 and 4. However, we can see
 that the value of 1 is special because no other position in the block can accomodate this value. Therefore,
 we can remove the other candidate from the candidate list for the position highlighted in red; the final value
@@ -297,9 +239,7 @@ The following function identifies such loners in each row/column/block of the pu
 candidate lists 
 accordingly.
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet defining a function to identify loners">
 def loners(candidate_list):
     """
     if a candidate only occurs once in a row/column/box, then it can be designated
@@ -372,27 +312,18 @@ def loners(candidate_list):
 
     return candidate_list
 </pre>
-<br>
-<br>
-<br>
 As simple as the procedure for identifying loners is, this logic is sufficient to solve many easy Sudoku puzzles. At 
 this point, your solver could be smart enough to solve 40 of the 75 sample puzzles!
-<br>
 <br>
 <br>
 <u>Step 4.  Identify naked pairs</u>
 <br>
 <br>
-<br>
 If a pair of positions in the same row/column/block have only two candidates and these candidates are identical, those values can be removed from the candidate lists for the remaining positions in that row/column/block.
 Consider again the puzzle from above:
 <br>
-<br>
-<br>
 
 <img src="puzzle_pair.png" style="width:50%" alt="Sudoku puzzle">
-
-<br>
 
 The positions highlighted in red have only two candidate values, 4 and 9, making them a naked pair. 
 The positions
@@ -407,9 +338,7 @@ The following function identifies naked pairs in each row/column and block of th
 lists accordingly.
 
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet defining a function to identify naked pairsj">
 def naked_pairs(candidate_list):
     """
     if a pair of positions in the same row/column/block have only two candidates and these candidates
@@ -467,8 +396,6 @@ def naked_pairs(candidate_list):
 
     return candidate_list
 </pre>
-<br>
-<br>
 In this code snippet, the logic applied to identifying naked pairs within rows can also be applied to columns
 and blocks, but the
 relevant code has been suppressed. If you have trouble
@@ -479,9 +406,7 @@ of the 75 sample
 puzzles.
 <br>
 <br>
-<br>
 <u>Step 5.  Identify hidden pairs</u>
-<br>
 <br>
 <br>
 If a pair of positions in the same row/column/block shared two common candidates that appear
@@ -494,9 +419,7 @@ You can find working code for identifying hidden pairs in the full <a href=sudok
 
 <br>
 <br>
-<br>
 <u>Step 6.  Identify naked triples</u>
-<br>
 <br>
 <br>
 If three positions in the same row/column/block share the same three and only 
@@ -512,9 +435,7 @@ With the addition of this logic, your solver should be able
 to solve 58 of the 75 sample puzzles. 
 <br>
 <br>
-<br>
 <u>Step 7.  Box claiming and row/column claiming</u>
-<br>
 <br>
 <br>
 If a candidate appears in only one row/column of a block, then the number is claimed for that block and removed from the 
@@ -530,9 +451,7 @@ The remaining puzzle (#7) can be solved with some human intervention
 (i.e., by supplying one additional correct value to these puzzles in the input file).
 <br>
 <br>
-<br>
 <u>Step 8.  Iterate</u>
-<br>
 <br>
 <br>
 To solve any Sudoku puzzle, the logic outlined above must be applied in an iterative fashion until no more moves can 
@@ -540,9 +459,7 @@ be made. The following code reads puzzles from <a href=puzzles.txt>puzzle.txt</a
 A warning message is printed whenever a solution 
 cannot be found:
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre role="region" aria-label="Code snippet outlining the full procedure to solve the Sudoku puzzle">
 import numpy as np
 
 def main():
@@ -615,10 +532,5 @@ def main():
 if __name__ == "__main__":
     main()
 </pre>
-<br>
-<br>
 
-<hr>
-
-<br>
 
