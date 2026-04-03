@@ -3,43 +3,6 @@ layout: page
 title: Getting Started with Psi4 Plugins
 ---
 
-<!-- 
-CODE SNIPPETS HANDLED BY JEKYLL
--->
-<!--
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
-.js?lang=css&skin=desert"></script>
-
-<style>
-.border_gradient {
-border: 8px solid #000;
-padding: 5px 5px 5px 15px;
-width: 300px;
-}
-code {
-    background: hsl(220, 80%, 90%);
-}
-
-pre {
-    padding-bottom: 20px;
-    padding-left:   20px;
-    border:solid;
-    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    width:100%;
-    background: #353535;
-    color: white;
-    text-indent: 1cm;
-}
-</style>
--->
-<!--
-    white-space: pre-wrap;
-    background: rgb(248,248,248);
--->
-
 <br>
 
 Programming Projects: Getting Started <br>
@@ -54,11 +17,9 @@ First, you must download and install <span style="font-variant: small-caps;">Psi
 
 <br>
 
-Once you have downloaded and installed <span style="font-variant: small-caps;">Psi4</span>, create a new plugin directory.  I'm going to call my plugin 'myscf': <br>
+Once you have downloaded and installed <span style="font-variant: small-caps;">Psi4</span>, create a new plugin directory.  I'm going to call my plugin 'myscf': 
 <br>
-
 <pre>
-
 (13:39 ~/) psi4 --plugin-name myscf
 -- Creating "myscf" with "basic" template. ----------------------
 /Users/deprince/software/psi4/install/share/psi4/plugin/basic/__init__.py.template
@@ -78,10 +39,7 @@ total 48
 -rw-r--r--  1 deprince  staff   296B Nov 15 13:39 input.dat
 -rw-r--r--  1 deprince  staff   1.7K Nov 15 13:39 plugin.cc
 -rw-r--r--  1 deprince  staff   2.2K Nov 15 13:39 pymodule.py
-
 </pre>
-
-<br>
 
 You can see that <span style="font-variant: small-caps;">Psi4</span> generated several files automatically for you.  Your
 C++ code will reside in plugin.cc, and you can interface with other modules
@@ -92,10 +50,7 @@ in <span style="font-variant: small-caps;">Psi4</span> through the driver in pym
 
 The closest thing to a 'main()' function will reside in plugin.cc.  Take a look:
 <br>
-<br>
-
-<pre class="prettyprint">
-
+<pre>
 extern "C" PSI_API
 SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
 {
@@ -107,26 +62,19 @@ SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
     return ref_wfn;
 }
 </pre>
-<br>
 
 Like the comment says, you're code belongs in the myscf(SharedWavefunction ref_wfn, Options& options) function.  
 The name of this function matches whatever you called your plugin.  
 Let's add a print statement using <span style="font-variant: small-caps;">Psi4</span>'s printer class 'outfile':
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
     /* Your code goes here */
     outfile->Printf("Hello from my first psi4 plugin!\n");
 </pre>
-<br>
 
 Next, check out the 'read_options' function:
 <br>
-<br>
-
-<pre class="prettyprint">
-
+<pre>
 extern "C" PSI_API
 int read_options(std::string name, Options& options)
 {
@@ -138,7 +86,6 @@ int read_options(std::string name, Options& options)
     return true;
 }
 </pre>
-<br>
 
 This function is where you will define any input options that are
 specific to your plugin.  Note that you can still use any other
@@ -150,10 +97,7 @@ Now, let's compile and run the plugin.  You can use <span style="font-variant: s
 a Makefile, which you can then use to compile your plugin with make.
 
 <br>
-<br>
-
-<pre class="prettyprint">
-
+<pre>
 (13:40 ~/myscf/) psi4 --plugin-compile | /bin/bash
 loading initial cache file /Users/deprince/software/psi4/install/share/cmake/psi4/psi4PluginCache.cmake
 -- The CXX compiler identification is Clang 4.0.1
@@ -190,29 +134,21 @@ SharedWavefunction myscf(SharedWavefunction ref_wfn, Options& options)
 [100%] Linking CXX shared module myscf.so
 [100%] Built target myscf
 </pre>
-<br>
 
 If you look in input.dat,
 you should see a call to energy('myscf') was automatically placed
 there when you created the plugin. So, to run your plugin, you need
 only excecute psi4 using this input file.  
-
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
 (13:40 ~/myscf/) psi4
 Attention! This SCF may be density-fitted.
 </pre>
-<br>
 
 After the program is finished, open output.dat and scroll to the bottom.
 
 <br>
-<br> 
-
-<pre class="prettyprint">
-
+<pre>
       Number of primitives:             15
       Number of atomic orbitals:         7
       Number of basis functions:         7
@@ -240,7 +176,6 @@ Hello from my first psi4 plugin!
 
 *** Psi4 exiting successfully. Buy a developer a beer!
 </pre>
-<br>
 
 What you should see is some text indicating that <span style="font-variant: small-caps;">Psi4</span> has generated 
 one- and two-electron integrals and written them to disk, followed by 

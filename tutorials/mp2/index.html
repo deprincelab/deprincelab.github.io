@@ -4,37 +4,6 @@ math: true
 title: Unrestricted MP2 in C++
 ---
 
-
-<!--
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify
-.js?lang=css&skin=desert"></script>
-
-<style>
-.border_gradient {
-border: 8px solid #000;
-padding: 5px 5px 5px 15px;
-width: 300px;
-}
-code {
-    background: hsl(220, 80%, 90%);
-}
-
-pre {
-    padding-bottom: 20px;
-    padding-left:   20px;
-    border:solid;
-    -moz-border-bottom-colors:#787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-top-colors:   #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-left-colors:  #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    -moz-border-right-colors: #787878 #888888 #989898 #A8A8A8 #B8B8B8 #C8C8C8 #D8D8D8  #E8E8E8 #F8F8F8;
-    width:100%;
-    background: #353535;
-    color: white;
-    text-indent: 1cm;
-}
-</style>
--->
-
 <br>
 
 Programming Projects: Unrestricted MP2 <br>
@@ -178,13 +147,11 @@ If you have completed the previous Hartree-Fock tutorials, you can add the
 MP2 energy evaluation to the end of your plugin, after the Hartree-Fock
 procedure converges.  Otherwise, create a new 
 <span style="font-variant: small-caps;">Psi4</span> plugin, as described
-<a href=http://www.chem.fsu.edu/~deprince/programming_projects/getting_started.php>here</a>.
+<a href=http://www.chem.fsu.edu/~deprince/tutorials/cpp_getting_started/index.html>here</a>.
 Before moving on, open the input file in your plugin directory (input.dat)
 and look at the molecule block
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
     molecule {
     O
     H 1 R
@@ -196,23 +163,19 @@ and look at the molecule block
     symmetry c1
     }
 </pre>
-<br>
 This plugin will not make use of point group symmetry, so you
 should add a line specifying that the computation be performed
 using C<sub>1</sub> symmetry.  Now, add a flag indicating that
 the computation will use density fitting techniques in the
 Hartree-Fock procedure:
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
 set {
   #add this line!
   scf_type df
   basis sto-3g
 }
 </pre>
-<br>
 For the remainder of this
 project, I've assumed that the rest of the input is unchanged.
 Keep this in mind when comparing to my results.
@@ -230,9 +193,7 @@ add a few additional lines that ensure that the reference wave
 function passed into the plugin knows what density fitting basis
 set is appropriate for our MP2 procedure:
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
     # Ensure IWL files have been written when not using DF/CD
     #proc_util.check_iwl_file_from_scf_type(psi4.core.get_option('SCF', 'SCF_TYPE'), ref_wfn)
 
@@ -241,7 +202,6 @@ set is appropriate for our MP2 procedure:
                                     "RIFIT", psi4.core.get_global_option('BASIS'))
     ref_wfn.set_basisset("DF_BASIS_MP2", aux_basis)
 </pre>
-<br>
 In order to use
 <span style="font-variant: small-caps;">Psi4</span>'s density fitting
 capabilities and the Matrix, Vector, and Wavefunction classes,
@@ -249,9 +209,7 @@ we must include the corresponding
 headers in plugin.cc.  If you are making this plugin from scratch, then you
 will need to add the following:
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
 #include "psi4/libmints/wavefunction.h"
 #include "psi4/libmints/matrix.h"
 #include "psi4/libmints/vector.h"
@@ -259,16 +217,13 @@ will need to add the following:
 #include "psi4/lib3index/dftensor.h"
 #include "psi4/libqt/qt.h"
 </pre>
-<br>
 
 As in the previous tutorials, we can ask the reference wave function
 passed into the plugin for some information about the system
 (the number of &alpha; electrons, the orbital transformation matrices, etc.):
 <br>
-<br>
 
-<pre class="prettyprint">
-
+<pre>
     // total number of alpha electrons 
     int na  = ref_wfn-&gtnalpha();
 
@@ -284,7 +239,6 @@ passed into the plugin for some information about the system
     std::shared_ptr&ltMatrix&gt Ca = ref_wfn-&gtCa();
     std::shared_ptr&ltMatrix&gt Cb = ref_wfn-&gtCb();
 </pre>
-<br>
 If you are writing your MP2 code as an extension to your previous
 Hartree-Fock plugin, use the orbital transformation matrices
 optimized by your procedure.  Now, use the DFTensor class to
@@ -293,9 +247,7 @@ Be sure to use the auxiliary basis set that is
 appropriate for MP2, as opposed to that for Hartree-Fock theory 
 (<span style="font-variant: small-caps;">Psi4</span> refers to this basis as "DF_BASIS_MP2").
 <br>
-
-<pre class="prettyprint">
-
+<pre>
     // grab the molecule from the wavefunction that was passed into the plugin
     std::shared_ptr&ltMolecule&gt mol = ref_wfn-&gtmolecule();
 
@@ -312,7 +264,6 @@ appropriate for MP2, as opposed to that for Hartree-Fock theory
     std::shared_ptr&ltDFTensor&gt DF (new DFTensor(primary,auxiliary,Ca,na,nso-na,nb,nso-nb,options));
     std::shared_ptr&ltMatrix&gt Qso = DF-&gtQso();
 </pre>
-<br>
 You can now use the &alpha;- and &beta;-spin MO transformatrices to
 transform the three-index integrals from the atomic orbital basis
 to the molecular orbital basis.  For unrestricted MP2, you will need
@@ -324,16 +275,13 @@ and (&beta;&beta;|&beta;&beta;) type integrals.
 The last necessary ingredient for the MP2 energy is the list of molecular orbital
 energies.  You can grab these from the reference wavefunction:
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
     std::shared_ptr&ltVector&gt epsilon_a = std::shared_ptr&ltVector&gt(new Vector(nmo));
     epsilon_a-&gtcopy(reference_wavefunction_-&gtepsilon_a().get());
 
     std::shared_ptr&ltVector&gt epsilon_b = std::shared_ptr&ltVector&gt(new Vector(nmo));
     epsilon_b-&gtcopy(reference_wavefunction_-&gtepsilon_b().get());
 </pre>
-<br>
 If you are writing this plugin as an extension of a previously 
 completed Hartree-Fock plugin, then you need not ask the reference
 wave function for the orbital energies.  Instead, you should use the 
@@ -348,9 +296,7 @@ your code can correctly recover the correlation energy for this neutral
 species, verify that you recover the correct correlation energy for an
 open-shell molecule:
 <br>
-<br>
-<pre class="prettyprint">
-
+<pre>
     molecule {
     1 2
     O
@@ -371,9 +317,7 @@ open-shell molecule:
     }
 
     energy('mymp2')
-
 </pre>
-<br>
 In this case, the DF-MP2 correlation energy should be
 -0.024767575359 E<sub>h</sub>.
 
