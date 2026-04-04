@@ -16,8 +16,9 @@ title: Angular Momentum, Rotational Motion, and Spin
 6. <a href=../variation/variation.html style="color:#e65100;">The Variation Theorem</a>  <br>
 7. <a href=../perturbation/perturbation.html style="color:#e65100;">Non-Degenerate Perturbation Theory</a>  <br>
 
+<hr>
 
-<hr><!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head><meta charset="utf-8"/>
@@ -7602,17 +7603,12 @@ L_z &amp;= x p_y - y p_x
 \end{align}$$</p>
 <p>Because these operators do not commute with one another, the Heisenberg uncertainty principle states that we cannot specify $L_x$ and $L_y$, $L_x$ and $L_z$, or $L_y$ and $L_z$ simultaneously, with arbitrary precision. Similarly, we cannot find a complete set of eigenfunctions of any pair of these operators.</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 1. Show that
+<p><strong>Practice Problem 1</strong></p>
+<p>Show that
 $$ \begin{align}
-[\hat{L}_y, \hat{L}_z] = i\hbar \hat{L}_x 
-\end{align}$$
-and
-$$ \begin{align}
+[\hat{L}_y, \hat{L}_z] = i\hbar \hat{L}_x \\
 [\hat{L}_z, \hat{L}_x] = i\hbar \hat{L}_y 
 \end{align}$$</p>
-</blockquote>
 </blockquote>
 </div>
 </div>
@@ -7655,17 +7651,12 @@ $$ \begin{align}
 \end{align}$$</p>
 <p>As a result, there exists a complete set of eigenfunctions of both $\hat{L}^2$ and one cartesian component of the angular momentum operator. According to the Heisenberg uncertainty principle, this result also suggests that it is possible to specify simultaneously, with arbitrary precision, both the square of the angular momentum ($L^2$) and the $x$-component of the angular momentum vector, $L_x$ (or $L^2$ and $L_y$ or $L^2$ and $L_z$).</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 2. Show that
+<p><strong>Practice Problem 2</strong></p>
+<p>Show that
 $$ \begin{align}
-[\hat{L}^2, \hat{L}_y] = 0 
-\end{align}$$
-and
-$$ \begin{align}
+[\hat{L}^2, \hat{L}_y] = 0 \\
 [\hat{L}^2, \hat{L}_z] = 0 
 \end{align}$$</p>
-</blockquote>
 </blockquote>
 </div>
 </div>
@@ -7842,13 +7833,12 @@ $$</p>
 \end{align}$$</p>
 <p>So, we have $L_z = b$ and $E = \frac{b^2}{2I} = \frac{L_z^2}{2I}.$ Note that the sign of $b$ provides information regarding the direction of rotation. A positive value of $b$ indicates that the rotation is clockwise, when viewing the ring from below. A negative value of $b$ indicates that the rotation is counter-clockwise, when viewing the ring from below.</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 3. Show that $\psi(\phi) = C e^{ib\phi/\hbar} + D e^{-ib\phi/\hbar}$ is a solution to the Schrödinger equation for the particle-on-a-ring problem. What is the energy?</p>
+<p><strong>Practice Problem 3</strong></p>
+<p>Show that $\psi(\phi) = C e^{ib\phi/\hbar} + D e^{-ib\phi/\hbar}$ is a solution to the Schrödinger equation for the particle-on-a-ring problem. What is the energy?</p>
 </blockquote>
 <blockquote>
-<p>Question 4. Show that $\psi(\phi) = C e^{ib\phi/\hbar} + D e^{-ib\phi/\hbar}$ is not an eigenfunction of the operator, $\hat{L}_z$.</p>
-</blockquote>
+<p><strong>Practice Problem 4</strong></p>
+<p>Show that $\psi(\phi) = C e^{ib\phi/\hbar} + D e^{-ib\phi/\hbar}$ is not an eigenfunction of the operator, $\hat{L}_z$.</p>
 </blockquote>
 </div>
 </div>
@@ -8337,13 +8327,10 @@ E = E_M + E_\mu
 <p>The first of these equations resembles the Schrödinger equation for a free-particle of mass, $M.$ As such, the energy, $E_M,$ corresponds to the translational energy of the entire system traveling through space and will not be quantized. The Schrödinger equation for the effective particle of mass, $\mu,$ is more complicated, and its solution will depend on the precise form of $V(\vec{r}).$ Depending on the form of this potential, $E_\mu$ may be quantized.</p>
 <p>To this point, this analysis has been completely general. The Hamiltonian for any two-particle system with a potential that depends on the inter-particle distance can be separated in this way. The $\vec{R}$-dependent part of the wave function will always look like that for a free-particle, where as the $\vec{r}$-dependent part will be more interesting.  Here, we are specifically concerned with the case where $\psi(\vec{r})$ is a wave function characterizing the rotational motion of a molecular system (specifically, a diatomic molecule). In the <strong>rigid rotor</strong> model, the atoms in this molecular are assumed to rotate about their center of mass, at a fixed distance, $d$ from one-another. As a result $V(\vec{r})$ is chosen to be zero when $|\vec{r}|=d$ and infinite otherwise. This potential is <strong>sperically symmetrical</strong>, meaning that it depends on the magnitude but not the orientation of $\vec{r}.$  For a particle experiencing such a potential, the force experienced by the particle is radially directed. For this reason, this type of a problem is called a <strong>central force problem</strong>.</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 5.</p>
-<p>Show that the force for a central force problem is</p>
-<p>$$\begin{align}\vec{f} = -\frac{d V(r)}{dr} \frac{\vec{r}}{r}\end{align}$$</p>
-<p>where $r = |\vec{r}|.$</p>
-</blockquote>
+<p><strong>Practice Problem 5</strong></p>
+<p>Show that the force for a central force problem is
+$$\begin{align}\vec{f} = -\frac{d V(r)}{dr} \frac{\vec{r}}{r}\end{align}$$
+where $r = |\vec{r}|.$</p>
 </blockquote>
 <p>It turns out that the wave function for a central force problem is separable as</p>
 <p>$$\begin{align}
@@ -8403,19 +8390,13 @@ P_{m,l \to m^\prime, l^\prime} \propto |\langle Y^m_l(\theta, \phi) | \hat{\mu} 
 \end{align}$$</p>
 <p>For the quantum harmonic oscillator model, we were able to derive selection rules from the recursion relations for Hermite polynomials. It turns out that we can derive selection rules for the rigid rotor that are related to the change in $m,$ $\Delta m = m - m^{\prime},$ from commutator relations involving the operators $\hat{L}_z$, $x,$, $y,$ and $z.$</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 6.</p>
-<p>Show that $[\hat{L}_z, x] = i\hbar y$</p>
-</blockquote>
-<blockquote>
-<p>Question 7.</p>
-<p>Show that $[\hat{L}_z, y] = -i\hbar x$</p>
-</blockquote>
-<blockquote>
-<p>Question 8.</p>
-<p>Show that $[\hat{L}_z, z] = 0$</p>
-</blockquote>
+<p><strong>Practice Problem 6</strong></p>
+<p>Show that
+$$\begin{align}
+[\hat{L}_z, x] &amp;= i\hbar y \\
+[\hat{L}_z, y] &amp;= -i\hbar x \\
+[\hat{L}_z, z] &amp;= 0
+\end{align}$$</p>
 </blockquote>
 <p>Let us insert $[\hat{L}_z, z] = 0$ into an integral involving the states $Y^m_l$ and $Y^{m^\prime}_{l^\prime}$, where we suppress the notation for the dependence on the coordinates $\theta$ and $\phi$</p>
 <p>$$\begin{align}
@@ -8445,11 +8426,8 @@ P_{m,l \to m^\prime, l^\prime} \propto |\langle Y^m_l(\theta, \phi) | \hat{\mu} 
 \end{align}$$</p>
 <p>In addition to these rules, non-zero transitions in "pure" rotational spectra (with no changes in vibrational energy levels) require that the molecule have a permanent dipole moment.</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 9:</p>
+<p><strong>Practice Problem 7</strong></p>
 <p>Derive the $\Delta m = \pm 1$ selection rules from the commutators $[\hat{L}_z, x]$ and $[\hat{L}_z, y]$</p>
-</blockquote>
 </blockquote>
 </div>
 </div>
@@ -8497,11 +8475,9 @@ P_{m,l \to m^\prime, l^\prime} \propto |\langle Y^m_l(\theta, \phi) | \hat{\mu} 
 \hat{M}_- \hat{M}_z &amp;= \hat{M}_z \hat{M}_- + \hbar \hat{M}_-
 \end{align}$$</p>
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 10.</p>
-<p>Show that $[\hat{M}_-, \hat{M}_z] = +\hbar \hat{M}_-$</p>
-</blockquote>
+<p><strong>Practice Problem 8</strong></p>
+<p>Show that
+$$[\hat{M}_-, \hat{M}_z] = +\hbar \hat{M}_-$$</p>
 </blockquote>
 <p>Now, consider the eigenvalue equation for $\hat{M}_z$</p>
 <p>$$\begin{align}
@@ -8774,9 +8750,7 @@ and, similarly,</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
-<p>Practice</p>
-<blockquote>
-<p>Question 11.</p>
+<p><strong>Practice Problem 9</strong></p>
 <p>Show that
 $$\begin{align}[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
 [\hat{S}^2, \hat{S}_y] &amp;= 0 \\
@@ -8787,23 +8761,22 @@ $$\begin{align}[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
 \end{align}$$</p>
 </blockquote>
 <blockquote>
-<p>Question 12.</p>
+<p><strong>Practice Problem 10</strong></p>
 <p>Find spin eigenfunctions of $\hat{S}_x$ and $\hat{S}_y.$ Are these eigenfunctions also eigenfunctions of $\hat{S}^2$?</p>
 </blockquote>
 <blockquote>
-<p>Question 13.</p>
+<p><strong>Practice Problem 11</strong></p>
 <p>Consider rasing and lowering spin operators</p>
 <p>$$\begin{align}
 \hat{S}_\pm &amp;= \hat{S}_x \pm i\hat{S}_y \\
 \end{align}$$</p>
-<p>Show that
-$$\begin{align}
+<p>Show that</p>
+<p>$$\begin{align}
 \hat{S}_+|\alpha\rangle &amp;= 0 \\
 \hat{S}_+|\beta\rangle &amp;= \hbar|\alpha\rangle \\
 \hat{S}_-|\alpha\rangle &amp;= \hbar|\beta\rangle \\
 \hat{S}_-|\beta\rangle &amp;= 0
 \end{align}$$</p>
-</blockquote>
 </blockquote>
 </div>
 </div>
