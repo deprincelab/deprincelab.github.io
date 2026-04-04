@@ -7623,14 +7623,12 @@ f(x) = x^2 + 3e^x
 \end{align}$$</p>
 <p>where $\hat{\Omega}$ is an operator, $f_i$ is a function, and $\omega_i$ is a constant. This equation is an example of an eigenvalue equation. The function, $f_i$, is referred to as an eigenfunction of $\hat{\Omega}$, and $\omega_i$ is the associated eigenvalue. The subscript $i$ is meant to imply that there could be many different eigenfunctions of $\Omega$, with (possibly) different eigenvalues.</p>
 <blockquote>
-<h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Which of the following functions are eigenfunctions of $\frac{d}{dx}$? If they are eigenfunctions, what are the associated eigenvalues?</p>
-<blockquote>
-<p>Question 1</p>
+<h4 id="Practice-Problem-1">Practice Problem 1<a class="anchor-link" href="#Practice-Problem-1">¶</a></h4><p>Which of the following functions are eigenfunctions of $\frac{d}{dx}$? If they are eigenfunctions, what are the associated eigenvalues?</p>
 <p>$$\begin{align}
 f(x) = e^{ax}
 \end{align}$$</p>
 <details>
-<summary>Answer 1</summary> 
+<summary>Answer</summary> 
 Well,
 
 <p>$$\begin{align}
@@ -7638,21 +7636,17 @@ Well,
 \end{align}$$</p>
 <p>so, yes, $f(x) = e^{ax}$ is an eigenfunction of $\frac{d}{dx}$, and the eigenvalue is $a$.</p>
 </details>
-</blockquote>
-<blockquote>
-<p>Question 2</p>
 <p>$$\begin{align}
 f(x) = e^{ax^2}
 \end{align}$$</p>
 <details>
-<summary>Answer 2</summary>
+<summary>Answer</summary>
 <p>Well,</p>
 <p>$$\begin{align}
 \frac{d}{dx} e^{ax^2} = 2 a x e^{ax^2}
 \end{align}$$</p>
 <p>so, no, $f(x) = e^{ax^2}$ is not an eigenfunction of $\frac{d}{dx}$.</p>
 </details>
-</blockquote>
 </blockquote>
 <p>Operators are defined by how they act on functions, so, when describing properties of operators, it is important to consider the function on which they act.</p>
 <p><strong>Equality of operators:</strong></p>
@@ -7717,16 +7711,14 @@ x \frac{d}{dx} \neq \frac{d}{dx} x
 \end{align}$$</p>
 <p>then we say that $\hat{A}$ and $\hat{B}$ do not commute.</p>
 <blockquote>
-<h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Evaluate the commutators of the following pairs of operators. Which pairs of operators commute?</p>
-<blockquote>
-<p>Question 3</p>
+<h4 id="Practice-Problem-2">Practice Problem 2<a class="anchor-link" href="#Practice-Problem-2">¶</a></h4><p>Evaluate the commutators of the following pairs of operators. Which pairs of operators commute?</p>
 <p>$$
 \begin{align}
 \hat{A} &amp;= 3 \\
 \hat{B} &amp;= \frac{d}{dx}
 \end{align}$$</p>
 <details>
-<summary>Answer 3</summary>
+<summary>Answer</summary>
 <p>$$ \begin{align}
 [\hat{A}, \hat{B}]f(x) &amp;= \hat{A}\hat{B}f(x) - \hat{B}\hat{A}f(x) \\
 &amp;= 3\frac{d}{dx}f(x) - \frac{d}{dx} 3f(x) \\
@@ -7736,16 +7728,13 @@ x \frac{d}{dx} \neq \frac{d}{dx} x
 $$</p>
 <p>Therefore, the operators $3$ and $\frac{d}{dx}$ commute.</p>
 </details>
-</blockquote>
-<blockquote>
-<p>Question 4</p>
 <p>$$
 \begin{align}
 \hat{A} &amp;= x \\
 \hat{B} &amp;= \frac{d}{dx}
 \end{align}$$</p>
 <details>
-<summary>Answer 4</summary>
+<summary>Answer</summary>
 <p>$$ \begin{align}
 [\hat{A}, \hat{B}]f(x) &amp;= \hat{A}\hat{B}f(x) - \hat{B}\hat{A}f(x) \\
 &amp;= x\frac{d}{dx}f(x) - \frac{d}{dx} xf(x) \\
@@ -7759,7 +7748,6 @@ $$ \begin{align}
 \end{align}$$
 and the operators $x$ and $\frac{d}{dx}$ do not commute.</p>
 </details>
-</blockquote>
 </blockquote>
 <p><strong>Powers of Operators</strong></p>
 <p>The square of an operator is simply the product of the operator with itself:</p>
@@ -7967,11 +7955,9 @@ f(\phi) = e^{i m \phi}
 0 &amp;\le \phi \le 2 \pi
 \end{align}$$</p>
 <blockquote>
-<h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><blockquote>
-<p>Question 5
-Is $f(\phi)$ an eigenfunction of the operator $\frac{d}{d\phi}$? If so, what is the eigenvalue?</p>
+<h4 id="Practice-Problem-3">Practice Problem 3<a class="anchor-link" href="#Practice-Problem-3">¶</a></h4><p>Is $f(\phi)$ an eigenfunction of the operator $\frac{d}{d\phi}$? If so, what is the eigenvalue?</p>
 <details>
-<summary>Answer 5</summary>
+<summary>Answer</summary>
 <p>$$ \begin{align}
 \frac{d}{d\phi} f(\phi) &amp;= \frac{d}{d\phi} e^{i m \phi} \\
 &amp;= im~ e^{i m \phi} \\
@@ -7982,10 +7968,9 @@ $$</p>
 </details>
 </blockquote>
 <blockquote>
-<p>Question 6
-Normalize $f(\phi)$. What is the normalization constant, $N$?</p>
+<h4 id="Practice-Problem-4">Practice Problem 4<a class="anchor-link" href="#Practice-Problem-4">¶</a></h4><p>Normalize $f(\phi)$. What is the normalization constant, $N$?</p>
 <details>
-<summary>Answer 6</summary>
+<summary>Answer</summary>
 <p>First, scale $f(\phi)$ by a constant, $N$.
 $$ \begin{align}
 f(\phi) \to N f(\phi)
@@ -8009,10 +7994,9 @@ N &amp;= \left ( \frac{1}{\int_0^{2\pi} |e^{im\phi}|^2 d\phi} \right )^{1/2}\\
 </details>
 </blockquote>
 <blockquote>
-<p>Question 7
-Is the normalized function, $N f(\phi)$, an eigenfunction of $\frac{d}{d\phi}$?</p>
+<h4 id="Practice-Problem-5">Practice Problem 5<a class="anchor-link" href="#Practice-Problem-5">¶</a></h4><p>Is the normalized function, $N f(\phi)$, an eigenfunction of $\frac{d}{d\phi}$?</p>
 <details>
-<summary>Answer 7</summary>
+<summary>Answer</summary>
 <p>$$ \begin{align}
 \frac{d}{d\phi} f(\phi) &amp;= \frac{d}{d\phi} \left (\frac{1}{2\pi}\right)^{1/2} e^{i m \phi} \\
 &amp;= im~ \left (\frac{1}{2\pi}\right)^{1/2} e^{i m \phi} \\
@@ -8021,7 +8005,6 @@ Is the normalized function, $N f(\phi)$, an eigenfunction of $\frac{d}{d\phi}$?<
 $$</p>
 <p>Therefore, yes, the normalized function is still an eigenfunction of $\frac{d}{d\phi}$, and the eigenvalue is still $im$.</p>
 </details>
-</blockquote>
 </blockquote>
 <p>As these practice problems showed us, normalizing the function $f(\phi)$ does not change the fact that it is an eigenfunction of the operator $\frac{d}{d\phi}$.</p>
 <p>As a more general example, consider a function $f_i$ that is an eigenfunction of a linear operator $\hat{\Omega}$</p>
@@ -8067,12 +8050,12 @@ $$\begin{align}
 </li>
 </ol>
 <blockquote>
-<h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Write down the quantum mechanical operators corresponding to the following observables.</p>
+<h4 id="Practice-Problem-6">Practice Problem 6<a class="anchor-link" href="#Practice-Problem-6">¶</a></h4><p>Write down the quantum mechanical operators corresponding to the following observables:</p>
+</blockquote>
 <blockquote>
-<p>Question 8</p>
 <p>The kinetic energy for a particle of mass, $m$, moving in one dimension ($x$), $\hat{T}_x$.</p>
 <details>
-<summary>Answer 8</summary>
+<summary>Answer</summary>
 <p>The classical expression for $T_x$ is</p>
 <p>$$\begin{align}
 T_x = \frac{p_x^2}{2m}
@@ -8086,10 +8069,9 @@ T_x = \frac{p_x^2}{2m}
 </details>
 </blockquote>
 <blockquote>
-<p>Question 9</p>
 <p>The total energy for a particle of mass, $m$, moving in one dimension, subject to the potential $V(x)$.</p>
 <details>
-<summary>Answer 9</summary>
+<summary>Answer</summary>
 <p>The classical expression for the total energy</p>
 <p>$$ \begin{align}
 E = \frac{p_x^2}{2m} + V(x)  
@@ -8102,10 +8084,9 @@ E = \frac{p_x^2}{2m} + V(x)
 </details>
 </blockquote>
 <blockquote>
-<p>Question 10</p>
 <p>The kinetic energy for a particle of mass, $m$, moving in three dimensions.</p>
 <details>
-<summary>Answer 10</summary> 
+<summary>Answer</summary> 
 The classical expression for the kinetic energy, $T$, is
 $$ \begin{align}
 T = \frac{1}{2m}\left ( p_x^2 + p_y^2 + p_z^2 \right ) 
@@ -8123,10 +8104,9 @@ where $\nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y
 </details>
 </blockquote>
 <blockquote>
-<p>Question 11</p>
 <p>The kinetic energy for $N$ particles, moving in three dimensions.</p>
 <details>
-<summary>Answer 11</summary> 
+<summary>Answer</summary> 
 The classical expression for the kinetic energy, $T$, is
 $$ \begin{align}
 T = \sum_i^N \frac{1}{2m_i}\left ( p_{x_i}^2 + p_{y_i}^2 + p_{z_i}^2 \right ) 
@@ -8140,7 +8120,6 @@ Given the result of Question 10, the quantum mechanical operator, $\hat{T}$ shou
     \end{align}$$
 where $m_i$ is the mass of particle $i$, and $\nabla_i^2 = \frac{\partial^2}{\partial x_i^2} + \frac{\partial^2}{\partial y_i^2} + \frac{\partial^2}{\partial z_i^2}$ is the Laplacian operator corresponding to particle $i$.</p>
 </details>
-</blockquote>
 </blockquote>
 </div>
 </div>
@@ -8378,15 +8357,14 @@ g_2 &amp;= G - \frac{\langle F | G \rangle}{\langle F | F \rangle} F
 <p>A related corollary is</p>
 <p><strong>Corollary 2</strong>: Linear combinations of eigenfunctions of linear Hermitian operators with different eigenvalues may not be eigenfunctions of that operator.</p>
 <blockquote>
-<h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>As a simple example of Corollary 2, consider two eigenfunctions of a linear Hermitian operator, $\hat{A}$, whose eigenvalues differ by a sign:
+<h4 id="Practice-Problem-7">Practice Problem 7<a class="anchor-link" href="#Practice-Problem-7">¶</a></h4><p>As a simple example of Corollary 2, consider two eigenfunctions of a linear Hermitian operator, $\hat{A}$, whose eigenvalues differ by a sign:
 $$\begin{align}
 \hat{A} h_+ &amp;= +a h_+ \\
 \hat{A} h_- &amp;= -a h_-
 \end{align}$$</p>
-<blockquote>
-<p>Question 12: Is the function $(h_+ + h_-)$ and eigenfunction of $\hat{A}$?</p>
+<p>Is the function $(h_+ + h_-)$ and eigenfunction of $\hat{A}$?</p>
 <details>
-<summary>Answer 12</summary>
+<summary>Answer</summary>
 <p>Consider the action of $\hat{A}$ on $(h_+ + h_-)$:
 $$
     \begin{align}
@@ -8396,7 +8374,6 @@ $$
     \end{align}$$
 Because $(h_+ + h_-) \neq ( h_+ - h_-)$, we can say that $(h_+ + h_-)$ is not an eigenfunction of $\hat{A}$.</p>
 </details>
-</blockquote>
 </blockquote>
 </div>
 </div>
@@ -8752,7 +8729,7 @@ E_n = \frac{\hbar^2\pi^2n^2}{2ml^2}
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<video muted autoplay="" controls="" height="480" loop="" width="640">
+<video autoplay="" controls="" height="480" loop="" width="640">
 <source src="data:video/mp4;base64,AAAAIGZ0eXBNNFYgAAACAE00ViBpc29taXNvMmF2YzEAAAAIZnJlZQAFWUdtZGF0AAACrwYF//+r
 3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2NCByMzEwOCAzMWUxOWY5IC0gSC4yNjQvTVBF
 Ry00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMyAtIGh0dHA6Ly93d3cudmlkZW9sYW4u
@@ -14975,14 +14952,13 @@ AAAAAAAAACxpbHN0AAAAJKl0b28AAAAcZGF0YQAAAAEAAAAATGF2ZjYxLjEuMTAw
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
-<h4 id="Practice">Practice<a class="anchor-link" href="#Practice">¶</a></h4><p>Consider a non-stationary state of the form
+<h4 id="Practice-Problem-8">Practice Problem 8<a class="anchor-link" href="#Practice-Problem-8">¶</a></h4><p>Consider a non-stationary state of the form
 $$ \begin{align}
 \Psi(\vec{q}, t) = \sum_k c_k e^{-iE_kt/\hbar} \psi_k(\vec{q})
 \end{align}$$</p>
-<blockquote>
-<p>Question 13: Does this state have a definite energy?</p>
+<p>Does this state have a definite energy?</p>
 <details>
-<summary>Answer 13</summary>
+<summary>Answer</summary>
 <p>No! When measuring the energy of this state, the probability of observing $E_k$ is proportional to (or equal to if $\Psi$ is normalized)
 $$\begin{align}
 |c_k e^{-iE_kt/\hbar}|^2 = |c_k|^2
@@ -14990,9 +14966,9 @@ $$\begin{align}
 </details>
 </blockquote>
 <blockquote>
-<p>Question 14: For this state, does the expectation value of the energy depend on time?</p>
+<h4 id="Practice-Problem-9">Practice Problem 9<a class="anchor-link" href="#Practice-Problem-9">¶</a></h4><p>For this same state, does the expectation value of the energy depend on time?</p>
 <details>
-<summary>Answer 14</summary>
+<summary>Answer</summary>
 <p>Assuming that the wave function is normalized, i.e., $\langle \Psi | \Psi \rangle = 1$, the expectation value of the energy is
 $$\begin{align}
 \langle E \rangle &amp;= \langle \Psi | \hat{H} | \Psi \rangle \\
@@ -15004,7 +14980,6 @@ $$\begin{align}
 \end{align}$$
 where, on the fifth line, we have assumed that the set of eigenfunctions of $\hat{H}$ are orthonormal. We can see that, no, the expectation value of the energy for a non-stationary state does not depend on time.</p>
 </details>
-</blockquote>
 </blockquote>
 </div>
 </div>
