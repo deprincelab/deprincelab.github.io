@@ -7709,7 +7709,7 @@ D    1   1.00
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Gaussian-product-theorem">Gaussian product theorem<a class="anchor-link" href="#Gaussian-product-theorem">¶</a></h3><p>The product of two Gaussian functions at centers <b>A</b> and <b>B</b> is given by another Gaussian function at a different center, <b>P</b>. As an example, let us consider the product of the $x$-component of two GTOs of the form defined above
+<h3 id="Gaussian-Product-Theorem">Gaussian Product Theorem<a class="anchor-link" href="#Gaussian-Product-Theorem">¶</a></h3><p>The product of two Gaussian functions at centers <b>A</b> and <b>B</b> is given by another Gaussian function at a different center, <b>P</b>. As an example, let us consider the product of the $x$-component of two GTOs of the form defined above
 $$\begin{align}
 G_i(x, a, A_x)G_j(x, b, B_x) &amp;= x_A^i x_B^j \exp(-ax_A^2) \exp(-b x_B^2) \\
 &amp;= x_A^i x_B^j K_{ab}^x \exp(-px_P^2)
@@ -7737,7 +7737,7 @@ The symbol $\mu = \frac{ab}{a+b}$ in the pre-exponential factor is the reduced e
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="One-electron-integral-evaluation-with-the-Obara-Saika-scheme">One-electron integral evaluation with the Obara-Saika scheme<a class="anchor-link" href="#One-electron-integral-evaluation-with-the-Obara-Saika-scheme">¶</a></h2><p>The Obara-Saika scheme defines molecular integrals with recursion relations derived from the translational invariance of the integrals. A detailed derivation of the recursion relations for various one-electron integrals can be found in section 9.3 of Helgaker's book.</p>
+<h2 id="One-Electron-Integral-Evaluation-with-the-Obara-Saika-Scheme">One-Electron Integral Evaluation with the Obara-Saika Scheme<a class="anchor-link" href="#One-Electron-Integral-Evaluation-with-the-Obara-Saika-Scheme">¶</a></h2><p>The Obara-Saika scheme defines molecular integrals with recursion relations derived from the translational invariance of the integrals. A detailed derivation of the recursion relations for various one-electron integrals can be found in section 9.3 of Helgaker's book.</p>
 </div>
 </div>
 </div>
@@ -7748,7 +7748,7 @@ The symbol $\mu = \frac{ab}{a+b}$ in the pre-exponential factor is the reduced e
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Overlap-integrals">Overlap integrals<a class="anchor-link" href="#Overlap-integrals">¶</a></h3><p>We start with the simplest molecular integral, which is the overlap of two primitive Cartesian Gaussian functions, $\langle G_{a} | G_{b} \rangle$, where we have introduced short-hand notation
+<h3 id="Overlap-Integrals">Overlap Integrals<a class="anchor-link" href="#Overlap-Integrals">¶</a></h3><p>We start with the simplest molecular integral, which is the overlap of two primitive Cartesian Gaussian functions, $\langle G_{a} | G_{b} \rangle$, where we have introduced short-hand notation
 $$\begin{align}
 G_a({\bf r}) &amp;= G_{ikm}({\bf r}, a, {\bf A})\\
 G_b({\bf r}) &amp;= G_{jln}({\bf r}, b, {\bf B})
@@ -7759,12 +7759,12 @@ $$\begin{align}
 \end{align}$$
 Each of the integrals on the right-hand side of this equation can be obtained via the recursion relations
 $$\begin{align}
-S^{\xi}_{ij} &amp;= X_{PA} S^{\xi}_{i-1, j} + \frac{1}{2p} \left((i-1)S^{\xi}_{i-2,j} + jS^{\xi}_{i-1,j-1}\right) \\
-S^{\xi}_{ij} &amp;= X_{PB} S^{\xi}_{i,j-1} + \frac{1}{2p} \left (iS^{\xi}_{i-1,j-1} + (j-1)S^{\xi}_{i,j-2}\right)
+S^{x}_{ij} &amp;= X_{PA} S^{x}_{i-1, j} + \frac{1}{2p} \left((i-1)S^{x}_{i-2,j} + jS^{x}_{i-1,j-1}\right) \\
+S^{x}_{ij} &amp;= X_{PB} S^{x}_{i,j-1} + \frac{1}{2p} \left (iS^{x}_{i-1,j-1} + (j-1)S^{x}_{i,j-2}\right)
 \end{align}$$
-where $\xi \in x,y,z$. The first recursion relation can be used for any $i &gt; 1$. The second recursion relation can be used for $i = 0$ and $j &gt; 1$. The overlap integral corresponding to $i = j = 0$ that seeds the recursion relations is
+with identical expressions for the $y$- and $z$-components of the integral. The first recursion relation can be used for any $i &gt; 1$. The second recursion relation can be used for $i = 0$ and $j &gt; 1$. The overlap integral corresponding to $i = j = 0$ that seeds the recursion relations is
 $$\begin{align}
-S^{\xi}_{00} = \sqrt{\frac{\pi}{p}}K_{ab}^{\xi}
+S^{x}_{00} = \sqrt{\frac{\pi}{p}}K_{ab}^{x}
 \end{align}$$</p>
 <p>Now, before we try to implement these integrals, we should consider two points. First, these integrals are overlaps of <i>primitive</i> GTOs. As such, we will need to accumulate integrals weighted by the contraction coefficients to generate the overal overlaps between the full GTO basis fuctions. Second, we will generate the $S^{\xi}_{ij}$ workspaces for entire shell pairs, not between single basis functions, so we need to think a bit about book-keeping. As an example, for two $p$-type shells, we generate the $S^{\xi}_{ij}$ workspaces for evaluating nine different overalp integrals simultaneously. The overlap of two $p_x$-type orbitals would be
 $$\begin{align}
@@ -7862,7 +7862,7 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -7907,7 +7907,7 @@ We need a way to map each of these instances to a basis function with a global i
         <span class="n">start_idx_B</span> <span class="o">=</span> <span class="n">basis</span><span class="o">.</span><span class="n">shell_to_basis_function</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
         <span class="c1"># evaluate the distance between centers </span>
-        <span class="n">X_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+        <span class="n">r_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
  
         <span class="c1"># loop over primitives in shell A</span>
         <span class="k">for</span> <span class="n">primitive_A</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">shell_A</span><span class="o">.</span><span class="n">nprimitive</span><span class="p">):</span>
@@ -7930,7 +7930,7 @@ We need a way to map each of these instances to a basis function with a global i
                 <span class="n">p_AB</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">+</span> <span class="n">exp_B</span>                    <span class="c1"># 9.2.11</span>
                 <span class="n">mu</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">*</span> <span class="n">exp_B</span> <span class="o">/</span> <span class="n">p_AB</span>               <span class="c1"># 9.2.12</span>
                 <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp_A</span> <span class="o">*</span> <span class="n">r_A</span> <span class="o">+</span> <span class="n">exp_B</span> <span class="o">*</span> <span class="n">r_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_AB</span>  <span class="c1"># 9.2.13</span>
-                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">X_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
+                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">r_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
 
                 <span class="c1"># construct workspace for this shell</span>
                 <span class="n">S_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># xyz/l/m</span>
@@ -7940,22 +7940,22 @@ We need a way to map each of these instances to a basis function with a global i
 
                 <span class="c1"># recursion ... 9.3.8, 9.3.9</span>
 
-                <span class="n">X_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
-                <span class="n">X_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                         
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="c1"># 9.3.8</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="c1"># 9.3.9</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
@@ -7992,7 +7992,7 @@ We need a way to map each of these instances to a basis function with a global i
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The following python code compares our overlap integrals to those generated by Psi4.</p>
+<p>The following Python code compares our overlap integrals to those generated by Psi4.</p>
 </div>
 </div>
 </div>
@@ -8001,7 +8001,7 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># get integrals from MintsHelper</span>
@@ -8047,7 +8047,26 @@ We need a way to map each of these instances to a basis function with a global i
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Multipole-integrals">Multipole integrals<a class="anchor-link" href="#Multipole-integrals">¶</a></h3>
+<h3 id="Multipole-Moment-Integrals">Multipole Moment Integrals<a class="anchor-link" href="#Multipole-Moment-Integrals">¶</a></h3><p>Let us now consider multipole moment integrals of the form
+$$\begin{align}
+S^{efg}_{ab} = \langle G_a | x_C^e y_C^f z_C|G_b\rangle
+\end{align}$$
+Here, $C$ represents the origin for the multipole moments, which we will just take to be $C = [0, 0, 0]$. Like the overlap integrals, the Cartesian multipole moment integrals are separable as
+$$\begin{align}
+S^{efg}_{ab} = S_{ij}^{x,e} S_{kl}^{y,f} S_{mn}^{z,g}
+\end{align}$$
+where
+$$\begin{align}
+S_{ij}^{x,e} = \langle G_i(x, a, A_x) | x_C^e | G_j(x, b, B_x)\rangle 
+\end{align}$$
+and we have similar expressions for the $y$- and $z$-components of the integral. Each Cartesian component of the multipole moment integrals can be obtained via the recursion relations
+$$\begin{align}
+S^{x,e}_{ij} &amp;= X_{PA} S^{x,e}_{i-1, j} + \frac{1}{2p} \left((i-1)S^{x,e}_{i-2,j} + jS^{x,e}_{i-1,j-1} + eS^{x,e-1}_{ij} \right) \\
+S^{x,e}_{ij} &amp;= X_{PB} S^{x,e}_{i,j-1} + \frac{1}{2p} \left (iS^{x,e}_{i-1,j-1} + (j-1)S^{x,e}_{i,j-2} + eS^{x,e-1}_{ij}\right) \\
+S_{ij}^{x,e+1} &amp;= X_{PC} S_{ij}^{x,e} + \frac{1}{2p} \left ( i S_{i-1,j}^{x,e} + jS_{i,j-1}^e + eS_{ij}^{e-1}\right )
+\end{align}$$
+For $e=0$, we can see that the first two equations are identical to the ones we used earlier for the overlap integrals. So, for dipole integrals, we first build up the workspaces for $e=0$, followed by $e=1$. For quadrupole integrals, we then build the workspace for $e=2$.</p>
+<p>The following code evaluates dipole and quadrupole integrals according to these recursion relations.</p>
 </div>
 </div>
 </div>
@@ -8061,6 +8080,8 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># dipole integrals</span>
 <span class="n">dipole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">nbf</span><span class="p">,</span> <span class="n">nbf</span><span class="p">])</span> <span class="c1"># x, y, z</span>
+
+<span class="c1"># quadrupole integrals</span>
 <span class="n">quadrupole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="n">nbf</span><span class="p">,</span> <span class="n">nbf</span><span class="p">])</span> <span class="c1"># xx, xy, xz, yy, yz, zz</span>
 
 <span class="c1"># origin</span>
@@ -8103,8 +8124,7 @@ We need a way to map each of these instances to a basis function with a global i
         <span class="n">start_idx_B</span> <span class="o">=</span> <span class="n">basis</span><span class="o">.</span><span class="n">shell_to_basis_function</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
         <span class="c1"># evaluate the distance between centers </span>
-        <span class="c1"># (Eq. 9.2.14 in Helgaker)</span>
-        <span class="n">X_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+        <span class="n">r_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
         
         <span class="c1"># loop over primitives in shell A</span>
         <span class="k">for</span> <span class="n">primitive_A</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">shell_A</span><span class="o">.</span><span class="n">nprimitive</span><span class="p">):</span>
@@ -8119,7 +8139,7 @@ We need a way to map each of these instances to a basis function with a global i
                 <span class="n">p_AB</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">+</span> <span class="n">exp_B</span>                    <span class="c1"># 9.2.11</span>
                 <span class="n">mu</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">*</span> <span class="n">exp_B</span> <span class="o">/</span> <span class="n">p_AB</span>               <span class="c1"># 9.2.12</span>
                 <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp_A</span> <span class="o">*</span> <span class="n">r_A</span> <span class="o">+</span> <span class="n">exp_B</span> <span class="o">*</span> <span class="n">r_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_AB</span>  <span class="c1"># 9.2.13</span>
-                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">X_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
+                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">r_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
 
                 <span class="c1"># overlap workspace</span>
                 <span class="n">S_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># xyz/l/m</span>
@@ -8127,45 +8147,45 @@ We need a way to map each of these instances to a basis function with a global i
 
                 <span class="c1"># overlap recursion ... 9.3.8, 9.3.9</span>
 
-                <span class="n">X_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
-                <span class="n">X_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
-                <span class="n">X_PC</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_C</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PC</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_C</span> <span class="c1"># 9.2.14</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                         
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
 
-                <span class="c1"># now, S^0 is built. now build S^1 by recursion ... 9.3.19</span>
+                <span class="c1"># S^0 has been built. build S^1 by recursion. 9.3.19</span>
                 <span class="n">d_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># mu_xyz / xyz / l/m</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                         <span class="c1"># 9.3.19</span>
-                        <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PC</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                        <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PC</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                             <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                             <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             
-                <span class="c1"># now, S^1 is built. now build S^2 by recursion ... 9.3.19</span>
+                <span class="c1"># S^1 has been built. build S^2 by recursion. 9.3.19</span>
                 <span class="n">q_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># mu_xyz / xyz / l/m</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                         <span class="c1"># 9.3.19</span>
-                        <span class="n">q_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PC</span> <span class="o">*</span> <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                        <span class="n">q_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PC</span> <span class="o">*</span> <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                         <span class="n">q_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
 
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
@@ -8173,7 +8193,7 @@ We need a way to map each of these instances to a basis function with a global i
                         <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                             <span class="n">q_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
 
-                <span class="c1"># now ... we have dip_x, dip_y, dip_z up to desired orders</span>
+                <span class="c1"># we have dip_x, dip_y, dip_z up to desired orders</span>
                 <span class="n">labels_A</span> <span class="o">=</span> <span class="n">get_cartesian_labels</span><span class="p">(</span><span class="n">i_A</span><span class="p">)</span>
                 <span class="n">labels_B</span> <span class="o">=</span> <span class="n">get_cartesian_labels</span><span class="p">(</span><span class="n">i_B</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">count_A</span><span class="p">,</span> <span class="n">l_A</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_A</span><span class="p">):</span>
@@ -8243,6 +8263,17 @@ We need a way to map each of these instances to a basis function with a global i
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5a755446-b56f-4c82-a052-e50a47219966">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we can compare our multipole moment integrals to those generated by Psi4.</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=384bf53d-6538-49d3-afe9-63a9d55ca91d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8251,14 +8282,15 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># check dipole and quadrupole integrals</span>
-<span class="nb">dir</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">dir</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">]</span>
 
+<span class="c1"># dipole integrals</span>
 <span class="n">psi4_dipole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_dipole</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'||mu(</span><span class="si">%s</span><span class="s1">) - mu(</span><span class="si">%s</span><span class="s1">,psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dipole</span> <span class="o">-</span> <span class="n">psi4_dipole</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 
+<span class="c1"># quadrupole integrals</span>
 <span class="n">psi4_quadrupole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_quadrupole</span><span class="p">())</span>
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -8299,7 +8331,30 @@ We need a way to map each of these instances to a basis function with a global i
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Linear-momentum-and-kinetic-energy-integrals">Linear momentum and kinetic energy integrals<a class="anchor-link" href="#Linear-momentum-and-kinetic-energy-integrals">¶</a></h3>
+<h3 id="Linear-Momentum-and-Kinetic-Energy-Integrals">Linear Momentum and Kinetic Energy Integrals<a class="anchor-link" href="#Linear-Momentum-and-Kinetic-Energy-Integrals">¶</a></h3><p>Integrals involving the linear momentum operator
+$$\begin{align}
+\hat{p}_x = -i\frac{\partial}{\partial x}
+\end{align}$$
+etc. and the kinetic energy operator
+$$\begin{align}
+\hat{T} = -\frac{1}{2}\nabla^2
+\end{align}$$
+can be evaluated using Obara-Saika recursion relations for differential operators. As above, integrals over differential operators of the form
+$$\begin{align}
+D^{efg}_{ab} = \langle G_a | \frac{\partial^e}{\partial x^e}\frac{\partial^f}{\partial y^f}\frac{\partial^g}{\partial z^g} | G_b \rangle
+\end{align}$$
+can be factorized along each Cartesian direction as
+$$\begin{align}
+D^{efg}_{ab} = D^{x,e}_{ij} D^{y,f}_{kl} D^{z,g}_{mn}
+\end{align}$$
+Each component can be obtained from the recursion relations
+$$\begin{align}
+D^{x,e}_{ij} &amp;= X_{PA} D^{x,e}_{i-1, j} + \frac{1}{2p} \left((i-1)D^{x,e}_{i-2,j} + jD^{x,e}_{i-1,j-1} - 2beD^{x,e-1}_{i-1,j} \right) \\
+D^{x,e}_{ij} &amp;= X_{PB} D^{x,e}_{i,j-1} + \frac{1}{2p} \left (iD^{x,e}_{i-1,j-1} + (j-1)D^{x,e}_{i,j-2} + 2aeD^{x,e-1}_{i,j-1}\right) \\
+D_{ij}^{x,e+1} &amp;= 2a D_{i+1,j}^{x,e} - i D_{i-1, j}^{x,e}
+\end{align}$$
+As we saw with the multipole moment integrals, the case of $e=0$ is special; the recursion relations reduce to those for the overlap integrals. So, we can start by constructing the workspace for $e=0$, and then we can build the integrals for $e=1$ using the third recursion relation. Note that each application of a differential operator ($e+1$) will require knowledge of one higher unit of angular momentum at the lower level ($e$). For example, if second derivative integrals are desired, the overlap integral workspace should be constructed to two units of angular momentum higher than the angular momentum of the primitive GTOs in that shell.</p>
+<p>The following code evaluates momentum and kinetic energy integrals according to these recursion relations.</p>
 </div>
 </div>
 </div>
@@ -8314,7 +8369,7 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># kinetic energy</span>
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nbf</span><span class="p">,</span> <span class="n">nbf</span><span class="p">])</span>
 
-<span class="c1"># nabla</span>
+<span class="c1"># nabla (the derivative part of the momentum operator)</span>
 <span class="n">nabla</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">nbf</span><span class="p">,</span> <span class="n">nbf</span><span class="p">])</span>
 
 <span class="c1"># loop over shell A</span>
@@ -8354,8 +8409,7 @@ We need a way to map each of these instances to a basis function with a global i
         <span class="n">start_idx_B</span> <span class="o">=</span> <span class="n">basis</span><span class="o">.</span><span class="n">shell_to_basis_function</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
         <span class="c1"># evaluate the distance between centers </span>
-        <span class="c1"># (Eq. 9.2.14 in Helgaker)</span>
-        <span class="n">X_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+        <span class="n">r_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
 
         <span class="c1"># loop over primitives for shell A</span>
         <span class="k">for</span> <span class="n">primitive_A</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">shell_A</span><span class="o">.</span><span class="n">nprimitive</span><span class="p">):</span>
@@ -8370,39 +8424,39 @@ We need a way to map each of these instances to a basis function with a global i
                 <span class="n">p_AB</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">+</span> <span class="n">exp_B</span>                    <span class="c1"># 9.2.11</span>
                 <span class="n">mu</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">*</span> <span class="n">exp_B</span> <span class="o">/</span> <span class="n">p_AB</span>               <span class="c1"># 9.2.12</span>
                 <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp_A</span> <span class="o">*</span> <span class="n">r_A</span> <span class="o">+</span> <span class="n">exp_B</span> <span class="o">*</span> <span class="n">r_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_AB</span>  <span class="c1"># 9.2.13</span>
-                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">X_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
+                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">r_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
 
                 <span class="n">S_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># xyz/l/m</span>
                 <span class="n">S_workspace</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="n">exp_A</span> <span class="o">+</span> <span class="n">exp_B</span><span class="p">))</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">K_AB</span>
 
                 <span class="c1"># recursion ... 9.3.8, 9.3.9</span>
 
-                <span class="n">X_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
-                <span class="n">X_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">3</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">3</span><span class="p">):</span>
                         
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="c1"># 9.3.8 ... with i+1 -&gt; i, i -&gt; i-1</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="c1"># 9.3.9 ... with j+1 -&gt; j, j -&gt; j-1</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
 
                 <span class="c1"># now, S is built. we can build nabla by recursion ... 9.3.30</span>
-                <span class="n">nabla_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># p_xyz / l/m</span>
+                <span class="n">nabla_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># p_xyz / l/m</span>
 
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
                         <span class="c1"># 9.3.30</span>
                         <span class="n">nabla_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">exp_A</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
@@ -8456,10 +8510,22 @@ We need a way to map each of these instances to a basis function with a global i
                         <span class="n">prod</span> <span class="o">*=</span> <span class="n">S_workspace</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">l_A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">l_B</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
                         <span class="n">prod</span> <span class="o">*=</span> <span class="n">T_workspace</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">l_A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">l_B</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
                         <span class="n">T</span><span class="p">[</span><span class="n">start_idx_A</span> <span class="o">+</span> <span class="n">count_A</span><span class="p">,</span> <span class="n">start_idx_B</span> <span class="o">+</span> <span class="n">count_B</span><span class="p">]</span> <span class="o">+=</span> <span class="n">coeff_A</span> <span class="o">*</span> <span class="n">coeff_B</span> <span class="o">*</span> <span class="n">prod</span>
-<span class="c1"># don't forget the factor of -1/2</span>
+                        
+<span class="c1"># don't forget the factor of -1/2 on the kinetic energy integrals</span>
 <span class="n">T</span> <span class="o">*=</span> <span class="o">-</span><span class="mf">0.5</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e0cdb377-ff77-43de-8bea-ac44f6309e97">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we can compare our derivative integrals to those generated by Psi4.</p>
 </div>
 </div>
 </div>
@@ -8471,12 +8537,13 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># check kinetic energy and nabla integrals</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># nabla integrals</span>
 <span class="n">psi4_nabla</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_nabla</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'||nabla(</span><span class="si">%s</span><span class="s1">) - nabla(</span><span class="si">%s</span><span class="s1">,psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">nabla</span> <span class="o">-</span> <span class="n">psi4_nabla</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 
+<span class="c1"># kinetic energy integrals</span>
 <span class="n">psi4_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_kinetic</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'||T - T(psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">psi4_T</span><span class="p">)))</span>
 </pre></div>
@@ -8508,7 +8575,25 @@ We need a way to map each of these instances to a basis function with a global i
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Angular-momentum-integrals">Angular momentum integrals<a class="anchor-link" href="#Angular-momentum-integrals">¶</a></h3>
+<h3 id="Angular-Momentum-Integrals">Angular Momentum Integrals<a class="anchor-link" href="#Angular-Momentum-Integrals">¶</a></h3><p>Lastly, we can use the Obara-Saika schemes for constructing dipole integrals and integrals over differential operators to generate integrals over the angular momentum operator
+$$\begin{align}
+\hat{\bf{L}} = {\bf r} \times \hat{{\bf p}}
+\end{align}$$
+which has Cartesian components
+$$\begin{align}
+L_x &amp;= -i \left ( y \frac{\partial}{\partial z} - z \frac{\partial}{\partial y} \right )  \\
+L_y &amp;= -i \left ( z \frac{\partial}{\partial x} - x \frac{\partial}{\partial z} \right )  \\
+L_z &amp;= -i \left ( x \frac{\partial}{\partial y} - y \frac{\partial}{\partial x} \right )  \\
+\end{align}$$
+The integral
+$$\begin{align}
+i\langle G_a | L_z | G_b\rangle = \langle G_a | x \frac{\partial}{\partial y} - y \frac{\partial}{\partial x} | G_b \rangle
+\end{align}$$
+factorizes into a product of an overlap integral in the $z$-direction and multipole moment and kinetic energy integrals in the $x$- and $y$-directions:
+$$\begin{align}
+\langle G_a | x \frac{\partial}{\partial y} - y \frac{\partial}{\partial x} | G_b \rangle = (S^{x,1}_{ij} D^{y,1}_{kl} - D^{x,1}_{ij} S^{y,1}_{kl}) S^z_{mn}
+\end{align}$$
+The following code implements the angular momentum integrals in this way.</p>
 </div>
 </div>
 </div>
@@ -8560,8 +8645,7 @@ We need a way to map each of these instances to a basis function with a global i
         <span class="n">start_idx_B</span> <span class="o">=</span> <span class="n">basis</span><span class="o">.</span><span class="n">shell_to_basis_function</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
         <span class="c1"># evaluate the distance between centers </span>
-        <span class="c1"># (Eq. 9.2.14 in Helgaker)</span>
-        <span class="n">X_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+        <span class="n">r_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
         
         <span class="c1"># loop over primitives for shell A</span>
         <span class="k">for</span> <span class="n">primitive_A</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">shell_A</span><span class="o">.</span><span class="n">nprimitive</span><span class="p">):</span>
@@ -8576,36 +8660,34 @@ We need a way to map each of these instances to a basis function with a global i
                 <span class="n">p_AB</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">+</span> <span class="n">exp_B</span>                    <span class="c1"># 9.2.11</span>
                 <span class="n">mu</span> <span class="o">=</span> <span class="n">exp_A</span> <span class="o">*</span> <span class="n">exp_B</span> <span class="o">/</span> <span class="n">p_AB</span>               <span class="c1"># 9.2.12</span>
                 <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp_A</span> <span class="o">*</span> <span class="n">r_A</span> <span class="o">+</span> <span class="n">exp_B</span> <span class="o">*</span> <span class="n">r_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_AB</span>  <span class="c1"># 9.2.13</span>
-                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">X_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
+                <span class="n">K_AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">r_AB</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>            <span class="c1"># 9.2.15</span>
 
                 <span class="n">S_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># xyz/l/m</span>
                 <span class="n">S_workspace</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="n">exp_A</span> <span class="o">+</span> <span class="n">exp_B</span><span class="p">))</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">K_AB</span>
 
                 <span class="c1"># recursion ... 9.3.8, 9.3.9</span>
 
-                <span class="n">X_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
-                <span class="n">X_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
-                <span class="n">X_PC</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_C</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PA</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_A</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PB</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
+                <span class="n">r_PC</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">r_C</span> <span class="c1"># 9.2.14</span>
 
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">3</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">3</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
                         
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="c1"># 9.3.8 ... with i+1 -&gt; i, i -&gt; i-1</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="c1"># 9.3.9 ... with j+1 -&gt; j, j -&gt; j-1</span>
-                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
 
-                <span class="c1"># now, S is built. we can build nabla by recursion ... 9.3.30</span>
+                <span class="c1"># S has been built. we can build nabla by recursion ... 9.3.30</span>
                 <span class="n">nabla_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># p_xyz / l/m</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
@@ -8615,13 +8697,13 @@ We need a way to map each of these instances to a basis function with a global i
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                             <span class="n">nabla_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
 
-                <span class="c1"># now, S^0 is built. now build S^1 by recursion ... 9.3.19</span>
+                <span class="c1"># S^0 has been built. now build S^1 by recursion ... 9.3.19</span>
                 <span class="n">d_workspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># mu_xyz / xyz / l/m</span>
 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_A</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                         <span class="c1"># 9.3.19</span>
-                        <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PC</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                        <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_PC</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                             <span class="n">d_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
@@ -8669,6 +8751,17 @@ We need a way to map each of these instances to a basis function with a global i
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a3ef1cca-c7fe-4d91-af8f-ff4a68e6f7f4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we can compare our angular momentum integrals to those generated by Psi4.</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ee7a3959-492d-4e8e-bfe1-1a7a17ba7957">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8700,20 +8793,6 @@ We need a way to map each of these instances to a basis function with a global i
 ||am(z) - am(z,psi4)|| =       0.000000000000
 
 </pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=58e8738b-48f0-4e2c-9415-6e14f7373b1b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 </div>
 </div>
 </div>
