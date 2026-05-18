@@ -7551,7 +7551,7 @@ a.anchor-link {
 $$\begin{align}
 G_{ijk}({\bf r}, a, {\bf A}) = x^i_A y_A^j z_A^k \exp(-a r_A^2)
 \end{align}$$
-Here, ${\bf r}$ represents the electronic coordinate, and ${\bf r}_A = {\bf r} - {\bf A}$. The superscripts $i$, $j$, and $k$ define the angular momentum of the function, $l = i + j + k$, and the positive, real-valued exponent factor $a$ defines the tightness of the GTO. In this tutorial, we limit our considerations to Cartesian GTOs, where there are $N = \frac{(l+1)(l+2)}{2}$ GTOs in a shell with total angular momentum $l$ (1 GTO for $s$-type functions, 3 for $p$-type functions, 6 for $d$-type, etc.). Integrals over Cartesian GTOs can be transformed into a spherical GTO basis after they have been evaluated.</p>
+Here, ${\bf r}$ represents the electronic coordinate, and ${\bf r}_A = {\bf r} - {\bf A}$. The superscripts $i$, $j$, and $k$ define the angular momentum of the function, $l = i + j + k$, and the positive, real-valued exponent factor $a$ defines the tightness of the GTO. In this tutorial, we limit our considerations to Cartesian GTOs, where there are $N = \frac{(l+1)(l+2)}{2}$ GTOs in a shell with total angular momentum $l$ (1 GTO for $s$-type functions, 3 for $p$-type functions, 6 for $d$-type functions, etc.). Integrals over Cartesian GTOs can be transformed into a spherical GTO basis after they have been evaluated.</p>
 <p>A nice property of the Cartesian GTOs is that they can be factorized as
 $$\begin{align}
 G_{ijk}({\bf r}, a, {\bf A}) = G_{i}(x, a, A_x) G_{j}(y, a, A_y) G_{k}(z, a, A_z)
@@ -7560,7 +7560,7 @@ with
 $$\begin{align}
 G_i(x, a, A_x) = x_A^i \exp(-ax_A^2)
 \end{align}$$
-etc. As a result, integrals over Cartesian GTOs are separable and be carried out considering one Cartesian component at a time.</p>
+etc. As a result, integrals over Cartesian GTOs are separable and can be carried out considering one Cartesian component at a time.</p>
 </div>
 </div>
 </div>
@@ -7571,11 +7571,12 @@ etc. As a result, integrals over Cartesian GTOs are separable and be carried out
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Obtaining-Contraction-Coefficients-and-Exponents">Obtaining Contraction Coefficients and Exponents<a class="anchor-link" href="#Obtaining-Contraction-Coefficients-and-Exponents">¶</a></h3><p>In molecular electronic structure theory, we typically use standard contracted GTO basis sets that are defined for each atom type. Files containing the contraction coefficients and exponents defining the GTOs can be found at the <a href="https://www.basissetexchange.org/">Basis Set Exchange</a>. If you visit the Basis Set Exchange, you will find that the files containing the basis set information can be formatted in multiple ways. For example, if we select the Dunning-type correlation consistent polarized valence double-$\zeta$ basis set (cc-pVDZ) for a carbon atom, in Psi4 format, the basis set file looks like:</p>
+<h3 id="Obtaining-Contraction-Coefficients-and-Exponents">Obtaining Contraction Coefficients and Exponents<a class="anchor-link" href="#Obtaining-Contraction-Coefficients-and-Exponents">¶</a></h3><p>Files containing the contraction coefficients and exponents defining the GTOs for standard basis sets can be found at the <a href="https://www.basissetexchange.org/">Basis Set Exchange</a>. If you visit the Basis Set Exchange, you will find that the files containing the basis set information can be formatted in multiple ways. For example, if we select the Dunning-type correlation consistent polarized valence double-$\zeta$ basis set (cc-pVDZ) for a carbon atom, in Psi4 format, the basis set file looks like:</p>
 </div>
 </div>
 </div>
-</div>spherical
+</div>```
+spherical
 
 !----------------------------------------------------------------------
 ! Basis Set Exchange
@@ -7623,6 +7624,7 @@ P    1   1.00
 D    1   1.00
       5.500000D-01           1.0000000
 ****
+```
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=79fa9661-ec13-416a-a2bf-19c0c3f6a6b1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7630,7 +7632,7 @@ D    1   1.00
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>At the top line, "spherical" indicates that the basis was optimized for spherical GTOs, as opposed to Cartesian GTOs. Further down, we see the atom name, "C", followed by sets of data labeled with different symbols for the angular momentum quantum number. The cc-pVDZ basis is a "split-valence" type basis, where there is one contracted GTO for the core (1$s$) orbital and two contracted GTOs for each of the valence orbital subshells (2$s$ and 2$p$). The first "S" label corresponds to the core function; we can see that this function is defined by a linear combination of 9 primitive GTO functions, with the exponents and contraction coefficients defined by the first and second columns. Next, there are coefficents and exponents defining the primitive GTOs for two $s$-type functions and two $p$-type functions that represent the valence orbitals. Note that, even though a neutral carbon atom only has 4 $p$-type electrons, the full set of $p$-type functions is considered as the valence space and share the same contraction coefficients and exponents. Lastly, we see a single additional $d$-type function, which is called a "polarization" function. Polarization functions are characterized by higher angular momentum higher than the valence functions.</p>
-<p>In principle, we could download basis set files for all of the atoms we want to consider and write code to parse the basis set files and store the contraction coefficients and exponents for each atom. However, that activity is not particularly exciting and is not the focus of this tutorial. So, we will use the existing machinery in the Psi4 package to parse the basis set for us. The following code snippet imports the Psi4 Python library, defines the geometry for a water molecule, defines a basis set (in this case, cc-pVDZ), and creates the corresponding "wavefunction" and "basis" objects. The basis object will contain all of the information we need to evaluate our molecular integrals.</p>
+<p>In principle, we could download basis set files for all of the atoms we want to consider and write code to parse the basis set files and store the contraction coefficients and exponents for each atom. However, that activity is not particularly exciting and is not the focus of this tutorial. Instead, we will use the existing machinery in the Psi4 package to parse the basis set for us. The following code snippet imports the Psi4 Python library, defines the geometry for a water molecule, defines a basis set (in this case, cc-pVDZ), and creates the corresponding "wavefunction" and "basis" objects. The basis object will contain all of the information we need to evaluate our molecular integrals.</p>
 </div>
 </div>
 </div>
@@ -7686,7 +7688,7 @@ D    1   1.00
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that we have added the option 'puream': 'False' to the Psi4 options dictionary. This option ensures that Psi4 is using Cartesian GTOs, even though the cc-pVDZ basis is optimized for spherical GTOs. In this way, we will be able to compare the results of our integrals over Cartesian GTOs to the integrals evaluated by the Psi4 package.</p>
+<p>Note that we have added the option 'puream': 'False' to the Psi4 options dictionary. This option ensures that Psi4 uses Cartesian GTOs, even though the cc-pVDZ basis is optimized for spherical GTOs. In this way, we will be able to compare our integrals over Cartesian GTOs to the integrals evaluated by the Psi4 package.</p>
 </div>
 </div>
 </div>
@@ -7750,7 +7752,7 @@ $$\begin{align}
 S^{\xi}_{ij} &amp;= X_{PA} S^{\xi}_{i-1, j} + \frac{1}{2p} \left((i-1)S^{\xi}_{i-2,j} + jS^{\xi}_{i-1,j-1}\right) \\
 S^{\xi}_{ij} &amp;= X_{PB} S^{\xi}_{i,j-1} + \frac{1}{2p} \left (iS^{\xi}_{i-1,j-1} + (j-1)S^{\xi}_{i,j-2}\right)
 \end{align}$$
-where $\xi \in x,y,z$, as appropriate. The first recursion relation can be used for any $i &gt; 1$. The second recursion relation can be used for $i = 0$ and $j &gt; 1$. The overlap integral corresponding to $i = j = 0$ that seeds the recursion relations is
+where $\xi \in x,y,z$. The first recursion relation can be used for any $i &gt; 1$. The second recursion relation can be used for $i = 0$ and $j &gt; 1$. The overlap integral corresponding to $i = j = 0$ that seeds the recursion relations is
 $$\begin{align}
 S^{\xi}_{00} = \sqrt{\frac{\pi}{p}}K_{ab}^{\xi}
 \end{align}$$</p>
@@ -7850,7 +7852,7 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -7888,14 +7890,13 @@ We need a way to map each of these instances to a basis function with a global i
         <span class="c1"># determine the cartesisan coordinates for center B</span>
         <span class="n">r_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">xyz</span><span class="p">(</span><span class="n">idx_B</span><span class="p">)[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
 
-        <span class="c1"># what is the total angular momentum for shell A?</span>
+        <span class="c1"># what is the total angular momentum for shell B?</span>
         <span class="n">i_B</span> <span class="o">=</span> <span class="n">shell_B</span><span class="o">.</span><span class="n">am</span>
 
         <span class="c1"># determine the starting index for basis functions in this shell</span>
         <span class="n">start_idx_B</span> <span class="o">=</span> <span class="n">basis</span><span class="o">.</span><span class="n">shell_to_basis_function</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
         <span class="c1"># evaluate the distance between centers </span>
-        <span class="c1"># (Eq. 9.2.14 in Helgaker)</span>
         <span class="n">X_AB</span> <span class="o">=</span> <span class="n">r_A</span> <span class="o">-</span> <span class="n">r_B</span> <span class="c1"># 9.2.14</span>
  
         <span class="c1"># loop over primitives in shell A</span>
@@ -7950,7 +7951,7 @@ We need a way to map each of these instances to a basis function with a global i
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
 
-                <span class="c1"># now, we have Sx, Sy, Sz up to desired orders</span>
+                <span class="c1"># now, we have Sx, Sy, Sz up to the desired orders</span>
 
                 <span class="c1"># get cartesian labels for shell A</span>
                 <span class="n">labels_A</span> <span class="o">=</span> <span class="n">get_cartesian_labels</span><span class="p">(</span><span class="n">i_A</span><span class="p">)</span>
@@ -7990,7 +7991,7 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># get integrals from MintsHelper</span>
@@ -8026,6 +8027,16 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Perfect!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=62132f26-d86a-4f0f-a4c5-2fab651185a3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Multipole-integrals">Multipole integrals<a class="anchor-link" href="#Multipole-integrals">¶</a></h3>
 </div>
 </div>
@@ -8114,14 +8125,12 @@ We need a way to map each of these instances to a basis function with a global i
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i_B</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                         
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="c1"># 9.3.8 ... with i+1 -&gt; i, i -&gt; i-1</span>
                             <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PA</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="c1"># 9.3.9 ... with j+1 -&gt; j, j -&gt; j-1</span>
                             <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_PB</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
                                 <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">S_workspace</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_AB</span><span class="p">)</span>
@@ -8233,14 +8242,19 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># check dipole and quadrupole integrals</span>
-<span class="n">psi4_dipole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_dipole</span><span class="p">())</span>
+<span class="nb">dir</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">]</span>
 
+<span class="n">psi4_dipole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_dipole</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dipole</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">psi4_dipole</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'||mu(</span><span class="si">%s</span><span class="s1">) - mu(</span><span class="si">%s</span><span class="s1">,psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dipole</span> <span class="o">-</span> <span class="n">psi4_dipole</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 
 <span class="n">psi4_quadrupole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_quadrupole</span><span class="p">())</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">quadrupole</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">psi4_quadrupole</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'||q(</span><span class="si">%s%s</span><span class="s1">) - q(</span><span class="si">%s%s</span><span class="s1">,psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">quadrupole</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">-</span> <span class="n">psi4_quadrupole</span><span class="p">[</span><span class="n">count</span><span class="p">])))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -8253,15 +8267,16 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>2.716595587178432e-15
-3.2855515514804442e-15
-3.2406181150474584e-15
-4.175591592745859e-15
-2.1386314743244013e-15
-1.9951304328563668e-15
-6.947358654790701e-15
-3.173517569837613e-15
-5.33666532274001e-15
+<pre>||mu(x) - mu(x,psi4)|| =       0.000000000000
+||mu(y) - mu(y,psi4)|| =       0.000000000000
+||mu(z) - mu(z,psi4)|| =       0.000000000000
+
+||q(xx) - q(xx,psi4)|| =       0.000000000000
+||q(xy) - q(xy,psi4)|| =       0.000000000000
+||q(xz) - q(xz,psi4)|| =       0.000000000000
+||q(yy) - q(yy,psi4)|| =       0.000000000000
+||q(yz) - q(yz,psi4)|| =       0.000000000000
+||q(zz) - q(zz,psi4)|| =       0.000000000000
 </pre>
 </div>
 </div>
@@ -8447,14 +8462,13 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># check kinetic energy and nabla integrals</span>
-<span class="n">psi4_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_kinetic</span><span class="p">())</span>
 <span class="n">psi4_nabla</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_nabla</span><span class="p">())</span>
-
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">nabla</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">psi4_nabla</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'||nabla(</span><span class="si">%s</span><span class="s1">) - nabla(</span><span class="si">%s</span><span class="s1">,psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">nabla</span> <span class="o">-</span> <span class="n">psi4_nabla</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">psi4_T</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<span class="n">psi4_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_kinetic</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'||T - T(psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">psi4_T</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -8467,12 +8481,11 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>2.436144109082233e-15
-2.842147540448186e-15
-2.5585015607633982e-15
-2.515865294495152e-14
-8.022719039615941e-15
-3.286411395175341e-16
+<pre>||nabla(x) - nabla(x,psi4)|| =       0.000000000000
+||nabla(y) - nabla(y,psi4)|| =       0.000000000000
+||nabla(z) - nabla(z,psi4)|| =       0.000000000000
+
+||T - T(psi4)|| =       0.000000000000
 </pre>
 </div>
 </div>
@@ -8658,7 +8671,8 @@ We need a way to map each of these instances to a basis function with a global i
 <span class="n">psi4_am</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mints</span><span class="o">.</span><span class="n">ao_angular_momentum</span><span class="p">())</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">am</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">psi4_am</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'||am(</span><span class="si">%s</span><span class="s1">) - am(</span><span class="si">%s</span><span class="s1">,psi4)|| = </span><span class="si">%20.12f</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">am</span> <span class="o">-</span> <span class="n">psi4_am</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8671,10 +8685,25 @@ We need a way to map each of these instances to a basis function with a global i
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>2.1389770594503908e-15
-1.822418654342945e-15
-1.868485461996188e-15
+<pre>||am(x) - am(x,psi4)|| =       0.000000000000
+||am(y) - am(y,psi4)|| =       0.000000000000
+||am(z) - am(z,psi4)|| =       0.000000000000
+
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=58e8738b-48f0-4e2c-9415-6e14f7373b1b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
 </div>
 </div>
 </div>
