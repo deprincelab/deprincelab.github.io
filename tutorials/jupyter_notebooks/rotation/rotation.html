@@ -7332,6 +7332,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7351,7 +7352,12 @@ a.anchor-link {
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs")).default;
+    const elkUrl = "https://cdnjs.cloudflare.com/ajax/libs/mermaid-layout-elk/0.1.9/mermaid-layout-elk.esm.min.mjs";
+    if(elkUrl) {
+      const elkLayouts = (await import(elkUrl)).default;
+      mermaid.registerLayoutLoaders(elkLayouts);
+    }
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -7448,7 +7454,8 @@ a.anchor-link {
      * Post-process to ensure mermaid diagrams contain only valid SVG and XHTML.
      */
     function cleanMermaidSvg(svg) {
-      return svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      svg = svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      return `${SVG_XML_HEADER}${svg}`;
     }
 
 
@@ -7474,6 +7481,285 @@ a.anchor-link {
       }
       return `<${tag} ${rest}>`;
     }
+
+
+  /**
+   * Named HTML entities with their decimal equivalent codes.
+   *
+   * @see https://www.w3.org/TR/WD-html40-970708/sgml/entities.html
+   * */
+  const HTML_ENTITIES = `<!ENTITY Aacute "&#193;">
+<!ENTITY aacute "&#225;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY acirc "&#226;">
+<!ENTITY acute "&#180;">
+<!ENTITY AElig "&#198;">
+<!ENTITY aelig "&#230;">
+<!ENTITY Agrave "&#192;">
+<!ENTITY agrave "&#224;">
+<!ENTITY alefsym "&#8501;">
+<!ENTITY Alpha "&#913;">
+<!ENTITY alpha "&#945;">
+<!ENTITY amp "&#38;">
+<!ENTITY and "&#8869;">
+<!ENTITY ang "&#8736;">
+<!ENTITY Aring "&#197;">
+<!ENTITY aring "&#229;">
+<!ENTITY asymp "&#8776;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY atilde "&#227;">
+<!ENTITY Auml "&#196;">
+<!ENTITY auml "&#228;">
+<!ENTITY bdquo "&#8222;">
+<!ENTITY Beta "&#914;">
+<!ENTITY beta "&#946;">
+<!ENTITY brvbar "&#166;">
+<!ENTITY bull "&#8226;">
+<!ENTITY cap "&#8745;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY cedil "&#184;">
+<!ENTITY cent "&#162;">
+<!ENTITY Chi "&#935;">
+<!ENTITY chi "&#967;">
+<!ENTITY circ "&#710;">
+<!ENTITY clubs "&#9827;">
+<!ENTITY cong "&#8773;">
+<!ENTITY copy "&#169;">
+<!ENTITY crarr "&#8629;">
+<!ENTITY cup "&#8746;">
+<!ENTITY curren "&#164;">
+<!ENTITY dagger "&#8224;">
+<!ENTITY Dagger "&#8225;">
+<!ENTITY darr "&#8595;">
+<!ENTITY dArr "&#8659;">
+<!ENTITY deg "&#176;">
+<!ENTITY Delta "&#916;">
+<!ENTITY delta "&#948;">
+<!ENTITY diams "&#9830;">
+<!ENTITY divide "&#247;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY eacute "&#233;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY egrave "&#232;">
+<!ENTITY empty "&#8709;">
+<!ENTITY emsp "&#8195;">
+<!ENTITY ensp "&#8194;">
+<!ENTITY epsilon "&#949;">
+<!ENTITY Epsilon "&#917;">
+<!ENTITY equiv "&#8801;">
+<!ENTITY Eta "&#919;">
+<!ENTITY eta "&#951;">
+<!ENTITY ETH "&#208;">
+<!ENTITY eth "&#240;">
+<!ENTITY Euml "&#203;">
+<!ENTITY euml "&#235;">
+<!ENTITY exist "&#8707;">
+<!ENTITY fnof "&#402;">
+<!ENTITY forall "&#8704;">
+<!ENTITY frac12 "&#189;">
+<!ENTITY frac14 "&#188;">
+<!ENTITY frac34 "&#190;">
+<!ENTITY frasl "&#8260;">
+<!ENTITY Gamma "&#915;">
+<!ENTITY gamma "&#947;">
+<!ENTITY ge "&#8805;">
+<!ENTITY gt "&#62;">
+<!ENTITY harr "&#8596;">
+<!ENTITY hArr "&#8660;">
+<!ENTITY hearts "&#9829;">
+<!ENTITY hellip "&#8230;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY iacute "&#237;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iexcl "&#161;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY igrave "&#236;">
+<!ENTITY image "&#8465;">
+<!ENTITY infin "&#8734;">
+<!ENTITY int "&#8747;">
+<!ENTITY Iota "&#921;">
+<!ENTITY iota "&#953;">
+<!ENTITY iquest "&#191;">
+<!ENTITY isin "&#8712;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY iuml "&#239;">
+<!ENTITY Kappa "&#922;">
+<!ENTITY kappa "&#954;">
+<!ENTITY Lambda "&#923;">
+<!ENTITY lambda "&#955;">
+<!ENTITY lang "&#9001;">
+<!ENTITY laquo "&#171;">
+<!ENTITY larr "&#8592;">
+<!ENTITY lArr "&#8656;">
+<!ENTITY lceil "&#8968;">
+<!ENTITY ldquo "&#8220;">
+<!ENTITY le "&#8804;">
+<!ENTITY lfloor "&#8970;">
+<!ENTITY lowast "&#8727;">
+<!ENTITY loz "&#9674;">
+<!ENTITY lrm "&#8206;">
+<!ENTITY lsaquo "&#8249;">
+<!ENTITY lsquo "&#8216;">
+<!ENTITY lt "&#60;">
+<!ENTITY macr "&#175;">
+<!ENTITY mdash "&#8212;">
+<!ENTITY micro "&#181;">
+<!ENTITY middot "&#183;">
+<!ENTITY minus "&#8722;">
+<!ENTITY Mu "&#924;">
+<!ENTITY mu "&#956;">
+<!ENTITY nabla "&#8711;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY ndash "&#8211;">
+<!ENTITY ne "&#8800;">
+<!ENTITY ni "&#8715;">
+<!ENTITY not "&#172;">
+<!ENTITY notin "&#8713;">
+<!ENTITY nsub "&#8836;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY Nu "&#925;">
+<!ENTITY nu "&#957;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY oacute "&#243;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY OElig "&#338;">
+<!ENTITY oelig "&#339;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oline "&#8254;">
+<!ENTITY Omega "&#937;">
+<!ENTITY omega "&#969;">
+<!ENTITY Omicron "&#927;">
+<!ENTITY omicron "&#959;">
+<!ENTITY oplus "&#8853;">
+<!ENTITY or "&#8870;">
+<!ENTITY ordf "&#170;">
+<!ENTITY ordm "&#186;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY oslash "&#248;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY otilde "&#245;">
+<!ENTITY otimes "&#8855;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY ouml "&#246;">
+<!ENTITY para "&#182;">
+<!ENTITY part "&#8706;">
+<!ENTITY permil "&#8240;">
+<!ENTITY perp "&#8869;">
+<!ENTITY Phi "&#934;">
+<!ENTITY phi "&#966;">
+<!ENTITY Pi "&#928;">
+<!ENTITY pi "&#960;">
+<!ENTITY piv "&#982;">
+<!ENTITY plusmn "&#177;">
+<!ENTITY pound "&#163;">
+<!ENTITY prime "&#8242;">
+<!ENTITY Prime "&#8243;">
+<!ENTITY prod "&#8719;">
+<!ENTITY prop "&#8733;">
+<!ENTITY Psi "&#936;">
+<!ENTITY psi "&#968;">
+<!ENTITY quot "&#34;">
+<!ENTITY radic "&#8730;">
+<!ENTITY rang "&#9002;">
+<!ENTITY raquo "&#187;">
+<!ENTITY rarr "&#8594;">
+<!ENTITY rArr "&#8658;">
+<!ENTITY rceil "&#8969;">
+<!ENTITY rdquo "&#8221;">
+<!ENTITY real "&#8476;">
+<!ENTITY reg "&#174;">
+<!ENTITY rfloor "&#8971;">
+<!ENTITY Rho "&#929;">
+<!ENTITY rho "&#961;">
+<!ENTITY rlm "&#8207;">
+<!ENTITY rsaquo "&#8250;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY sbquo "&#8218;">
+<!ENTITY Scaron "&#352;">
+<!ENTITY scaron "&#353;">
+<!ENTITY sdot "&#8901;">
+<!ENTITY sect "&#167;">
+<!ENTITY shy "&#173;">
+<!ENTITY Sigma "&#931;">
+<!ENTITY sigma "&#963;">
+<!ENTITY sigmaf "&#962;">
+<!ENTITY sim "&#8764;">
+<!ENTITY spades "&#9824;">
+<!ENTITY sub "&#8834;">
+<!ENTITY sube "&#8838;">
+<!ENTITY sum "&#8721;">
+<!ENTITY sup "&#8835;">
+<!ENTITY sup1 "&#185;">
+<!ENTITY sup2 "&#178;">
+<!ENTITY sup3 "&#179;">
+<!ENTITY supe "&#8839;">
+<!ENTITY szlig "&#223;">
+<!ENTITY Tau "&#932;">
+<!ENTITY tau "&#964;">
+<!ENTITY there4 "&#8756;">
+<!ENTITY Theta "&#920;">
+<!ENTITY theta "&#952;">
+<!ENTITY thetasym "&#977;">
+<!ENTITY thinsp "&#8201;">
+<!ENTITY THORN "&#222;">
+<!ENTITY thorn "&#254;">
+<!ENTITY tilde "&#732;">
+<!ENTITY times "&#215;">
+<!ENTITY trade "&#8482;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY uacute "&#250;">
+<!ENTITY uarr "&#8593;">
+<!ENTITY uArr "&#8657;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uml "&#168;">
+<!ENTITY upsih "&#978;">
+<!ENTITY Upsilon "&#933;">
+<!ENTITY upsilon "&#965;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY uuml "&#252;">
+<!ENTITY weierp "&#8472;">
+<!ENTITY Xi "&#926;">
+<!ENTITY xi "&#958;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY yacute "&#253;">
+<!ENTITY yen "&#165;">
+<!ENTITY Yuml "&#376;">
+<!ENTITY yuml "&#255;">
+<!ENTITY Zeta "&#918;">
+<!ENTITY zeta "&#950;">
+<!ENTITY zwj "&#8205;">
+<!ENTITY zwnj "&#8204;">`.replace(/\n/g, ' ');
+
+  /**
+   * A reasonably strict xml declaration.
+   */
+  const XML_DECL = '<?xml version="1.0" standalone="no"?>';
+
+  /**
+   * The beginning of the XML doctype declaration.
+   */
+  const DOCTYPE_START = `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [`;
+
+  /**
+   * The end of the XML docype declaration.
+   */
+  const DOCTYPE_END = ']>';
+
+  /**
+   * A full header for an SVG XML document.
+   */
+  const SVG_XML_HEADER = `${XML_DECL}
+    ${DOCTYPE_START}${HTML_ENTITIES}${DOCTYPE_END}`;
 
     void Promise.all([...diagrams].map(renderOneMarmaid));
   });
@@ -7537,7 +7823,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Angular-Momentum,-Rotational-Motion,-and-Spin">Angular Momentum, Rotational Motion, and Spin<a class="anchor-link" href="#Angular-Momentum,-Rotational-Motion,-and-Spin">¶</a></h1><p>The Jupyter notebook for this tutorial can be found <a href="rotation.ipynb" style="color:#e65100;">here</a>.</p>
-<p>In the previous notebooks, we discussed quantum mechanical problems involving translational and vibrational motion. In this notebook, we explore the properties of the operators corresponding to the angular momentum of a microscopic particle and model problems for rotational motion. We will find analytic solutions the Schrödinger equation for the particle-on-a-ring and particle-on-a-sphere models, which are models for rotational in two or three dimensions, respectively. The particle-on-a-sphere model is also known as the rigid rotor. We will also use an alternative approach based on "ladder" operators to find eigenvalues of some angular momentum operators. We close with a discussion of spin angular momentum and the associated spin operators and eigenfunctions.</p>
+<p>In the previous notebooks, we discussed quantum mechanical problems involving translational and vibrational motion. In this notebook, we explore the properties of the operators corresponding to the angular momentum of a microscopic particle and model problems for rotational motion. We will find analytic solutions to the Schrödinger equation for the particle-on-a-ring and particle-on-a-sphere models, which are models for rotational motion in two or three dimensions, respectively. The particle-on-a-sphere model is also known as the rigid rotor. We will also use an alternative approach based on "ladder" operators to find eigenvalues of some angular momentum operators. We close with a discussion of spin angular momentum and the associated spin operators and eigenfunctions.</p>
 </div>
 </div>
 </div>
@@ -7570,7 +7856,7 @@ L_z &amp;= x p_y - y p_x
 <p>$$\begin{align} 
 \hat{L}^2 = \hat{L} \cdot \hat{L} = \hat{L}_x^2 + \hat{L}_y^2 + \hat{L}_z^2
 \end{align}$$</p>
-<p>It will be useful to consider the commutator properties of these operators. If any commute, then it will be possible to determine simultaneous eigenfunctions of the operators, and, as a result, it will be possible to specify the corresponding observables simultaneously, with arbitrary precision. Let us begin with the commutator of $\hat{L}_x$ and $\hat{L}_z$:</p>
+<p>It will be useful to consider the commutator properties of these operators. If any commute, then it will be possible to determine simultaneous eigenfunctions of the operators, and, as a result, it will be possible to specify the corresponding observables simultaneously, with arbitrary precision. Let us begin with the commutator of $\hat{L}_x$ and $\hat{L}_y$:</p>
 <p>$$ \begin{align}
 [\hat{L}_x, \hat{L}_y] f(x, y, z) = \hat{L}_x \hat{L}_y f(x, y, z) - \hat{L}_y \hat{L}_x f(x, y, z)
 \end{align}$$</p>
@@ -7668,7 +7954,7 @@ $$ \begin{align}
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Spherical-Polar-Coordinates">Spherical Polar Coordinates<a class="anchor-link" href="#Spherical-Polar-Coordinates">¶</a></h2><p>The spherical polar coordinate depicted below is the most natural coordinate system for describing rotational motion.</p>
+<h2 id="Spherical-Polar-Coordinates">Spherical Polar Coordinates<a class="anchor-link" href="#Spherical-Polar-Coordinates">¶</a></h2><p>The spherical polar coordinate system depicted below is the most natural coordinate system for describing rotational motion.</p>
 </div>
 </div>
 </div>
@@ -7680,7 +7966,7 @@ $$ \begin{align}
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 <span class="n">Image</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s2">"spherical_polar_coordinates.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7706,7 +7992,7 @@ $$ \begin{align}
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Here, $r$, represents the distance from the origin and spans the range $r = [0, \infty]$. The angle, $\phi$, is the azimuthal angle, which spans the range $\phi = [0, 2\pi]$ radians. The angle, $\theta$, is the polar angle, which spanse the range $\theta = [0, \pi]$ radians. The spherical polar coordinates are related to the usual Cartesian coordinates by</p>
+<p>Here, $r$, represents the distance from the origin and spans the range $r = [0, \infty]$. The angle, $\phi$, is the azimuthal angle, which spans the range $\phi = [0, 2\pi]$ radians. The angle, $\theta$, is the polar angle, which spans the range $\theta = [0, \pi]$ radians. The spherical polar coordinates are related to the usual Cartesian coordinates by</p>
 <p>$$\begin{align}
 x &amp;= r \sin(\theta)\cos(\phi) \\
 y &amp;= r \sin(\theta)\sin(\phi) \\
@@ -7716,16 +8002,16 @@ r &amp;= \left ( x^2 + y^2 + z^2 \right )^{1/2}
 <p>In order to represent quantum mechanical operators in spherical polar coordinates, we first write down the operator in Cartesian coordinates and then use the relations above, as well as the chain rule to transform any derivatives. For the partial derivative with respect to $x$, we have</p>
 <p>$$ \begin{align}
 \frac{\partial }{\partial x} &amp;= \left (\frac{\partial r}{\partial x} \right )_{y,z} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial x} \right )_{y,z} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial x} \right )_{y,z} \frac{\partial }{\partial \phi} \\
-&amp;= \sin(\theta)\cos(\phi)\frac{\partial}{\partial r} + \frac{\cos(\theta)\cos(\phi)}{r}\frac{\partial}{\partial\theta}-\frac{\sin(\theta)}{r\sin(\theta)}\frac{\partial}{\partial \phi}
+&amp;= \sin(\theta)\cos(\phi)\frac{\partial}{\partial r} + \frac{\cos(\theta)\cos(\phi)}{r}\frac{\partial}{\partial\theta}-\frac{\sin(\phi)}{r\sin(\theta)}\frac{\partial}{\partial \phi}
 \end{align}$$</p>
 <p>Similarly, for the partial derivative with respect to $y$, we have</p>
 <p>$$ \begin{align}
 \frac{\partial }{\partial y} &amp;= \left (\frac{\partial r}{\partial y} \right )_{x,z} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial y} \right )_{x,z} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial y} \right )_{x,z} \frac{\partial }{\partial \phi} \\
 &amp;= \sin(\theta)\sin(\phi)\frac{\partial}{\partial r} + \frac{\cos(\theta)\sin(\phi)}{r}\frac{\partial}{\partial\theta}+\frac{\cos(\theta)}{r\sin(\theta)}\frac{\partial}{\partial \phi}
 \end{align}$$</p>
-<p>Lastly, for the partial derivative with respect to $y$, we have</p>
+<p>Lastly, for the partial derivative with respect to $z$, we have</p>
 <p>$$ \begin{align}
-\frac{\partial }{\partial z} &amp;= \left (\frac{\partial r}{\partial z} \right )_{y,z} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial z} \right )_{y,z} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial z} \right )_{y,z} \frac{\partial }{\partial \phi} \\
+\frac{\partial }{\partial z} &amp;= \left (\frac{\partial r}{\partial z} \right )_{x,y} \frac{\partial }{\partial r} + \left (\frac{\partial \theta}{\partial z} \right )_{x,y} \frac{\partial }{\partial \theta} + \left (\frac{\partial \phi}{\partial z} \right )_{x,y} \frac{\partial }{\partial \phi} \\
 &amp;= \cos(\theta)\frac{\partial}{\partial r} - \frac{\sin(\theta)}{r}\frac{\partial}{\partial \theta}
 \end{align}$$</p>
 <p>Given these results, we can express the angular momentum operators in spherical coordinates as</p>
@@ -7800,7 +8086,7 @@ $$\begin{align}
 &amp;= -\frac{\hbar^2}{2m}\left ( \frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\left [ \frac{1}{\sin^2(\theta)}\frac{\partial^2}{\partial \phi^2} + \frac{1}{\sin(\theta)}\frac{\partial}{\partial \theta} \sin(\theta)\frac{\partial}{\partial \theta} \right ] \right )
 \end{align}
 $$</p>
-<p>The particle-on-a-rign energy eigenfunctions will be functions of the azimuthal angle, $\phi,$ only, so we can safely ignore all derivatives involving $r$ or $\theta$. The Laplacian, $\nabla^2$, then simplifies to</p>
+<p>The particle-on-a-ring energy eigenfunctions will be functions of the azimuthal angle, $\phi,$ only, so we can safely ignore all derivatives involving $r$ or $\theta$. The Laplacian, $\nabla^2$, then simplifies to</p>
 <p>$$ 
 \begin{align}
 \nabla^2 = \frac{1}{r^2}\left [ \frac{1}{\sin^2(\theta)}\frac{\partial^2}{\partial \phi^2} \right ]
@@ -7815,7 +8101,7 @@ $$</p>
 <p>$$ \begin{align}
 \hat{H} = \frac{\hat{L}^2_z}{2I}
 \end{align}$$</p>
-<p>Given this form for the Hamiltonian, is is clear that $\hat{H}$ and $\hat{L}_z$ will commute and we should thus be able to obtain simultaneous eigenfunctions of both operators.</p>
+<p>Given this form for the Hamiltonian, it is clear that $\hat{H}$ and $\hat{L}_z$ will commute and we should thus be able to obtain simultaneous eigenfunctions of both operators.</p>
 <p>Now, let us find solutions to the Schrödinger equation. We have</p>
 <p>$$\begin{align}
 \hat{H} \psi(\phi) &amp;= E \psi(\phi) \\
@@ -7976,14 +8262,14 @@ $$</p>
 Y(\theta, \phi) = \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta)
 \end{align}
 $$</p>
-<p>with $m = 0, \pm 1, \pm 2$, etc. Without the restriction on $m,$ the $phi$ component of $Y(\theta, \phi)$ would not be well behaved. Like we found for the particle-on-a-ring model, the eigenvalue $b$ is equal to $m\hbar$.</p>
+<p>with $m = 0, \pm 1, \pm 2$, etc. Without the restriction on $m,$ the $\phi$ component of $Y(\theta, \phi)$ would not be well behaved. Like we found for the particle-on-a-ring model, the eigenvalue $b$ is equal to $m\hbar$.</p>
 <p>To find $f(\theta)$, we consider the eigenvalue equation for $\hat{L}^2$</p>
 <p>$$
 \begin{align}
 \hat{L}^2 \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta) = c \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta)
 \end{align}
 $$</p>
-<p>which, after evaluating the action of $\hat{L}^2$ on $g(\theta)$ and collecting terms, gives</p>
+<p>which, after evaluating the action of $\hat{L}^2$ on $f(\theta)$ and collecting terms, gives</p>
 <p>$$\begin{align}
 \frac{d^2}{d\theta^2} f(\theta) + \cot(\theta) \frac{d}{d\theta} f(\theta) - \frac{m^2}{\sin^2(\theta)}f(\theta) = -\frac{c}{\hbar^2} f(\theta)
 \end{align}$$</p>
@@ -8013,7 +8299,7 @@ c = \hbar^2(k_\text{max} + |m|)(k_\text{max} + |m| + 1)
 <p>$$\begin{align}
 l = k_\text{max} + |m| = 0, 1, 2, ...
 \end{align}$$</p>
-<p>and thus the square of the angular momentum for a particle confined to move on a sphere is quantized,</p>
+<p>and thus the square of the angular momentum for a particle confined to move on a sphere is quantized.</p>
 <p>Note that this relationship also implies that $m$ is bounded by $l$, i.e.,</p>
 <p>$$\begin{align}
 m = 0, \pm 1, \pm 2, ..., \pm l
@@ -8039,7 +8325,7 @@ L_z &amp;= m\hbar \\
 \end{align}
 $$</p>
 <p>From these results, we can see that the energy depends only on the quantum number, $l,$ and, each energy level is $(2l+1)$-fold degenerate because, for each $l$, there are $2l+1$ possible values of the quantum number, $m.$</p>
-<p>Because the states can be characterized $l$ and $m,$ we label the wave functions for these states as $Y(\theta, \phi) \to Y^m_l(\theta, \phi).$ What is the form of these functions? We have</p>
+<p>Because the states can be characterized by $l$ and $m,$ we label the wave functions for these states as $Y(\theta, \phi) \to Y^m_l(\theta, \phi).$ What is the form of these functions? We have</p>
 <p>$$\begin{align}
 Y^m_l(\theta, \phi) &amp;= \left ( \frac{1}{2\pi} \right )^{1/2} e^{im\phi} f(\theta)
 \end{align}$$</p>
@@ -8049,13 +8335,13 @@ f(\theta) &amp;= \sin^{|m|}(\theta)\sum_{j \in \{\text{odd or even}\}}^{l - |m|}
 \end{align}$$
 where the series expansion coefficients are determined by recursion. Note that the sum runs over even or odd non-negative integers depending on whether $k_\text{max} = l - |m|$ is even or odd. The sum must be restricted in this way to guarantee that the series truncates at $k_\text{max}.$ It turns out that $f(\theta)$ can be expressed in terms of special functions called <strong>associated Legendre polynomials</strong>, $\rho_l^{|m|},$</p>
 <p>$$\begin{align}
-f(\theta) &amp;= \left [ \frac{2l+1}{2}\frac{(l-|m|)!}{(l+|m|)!}\right ] \rho_l^{|m|}(\cos(\theta))
+f(\theta) &amp;= \left [ \frac{2l+1}{2}\frac{(l-|m|)!}{(l+|m|)!}\right ]^{1/2} \rho_l^{|m|}(\cos(\theta))
 \end{align}$$</p>
 <p>so the wave function is</p>
 <p>$$\begin{align}
-Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\right ] \rho_l^{|m|}(\cos(\theta))e^{im\phi} f(\theta)
+Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\right ]^{1/2} \rho_l^{|m|}(\cos(\theta))e^{im\phi}
 \end{align}$$</p>
-<p>These special functions are known as the <strong>spherical harmonics</strong>. The spherical harmonics with up to $l=2$ are tabulated below.</p>
+<p>These special functions are known as the <strong>spherical harmonics</strong>. The spherical harmonics with up to $l=2$ are tabulated below. The table follows the common Condon-Shortley phase convention, which multiplies the expression above by an additional factor of $(-1)^m$ for $m &gt; 0$; this overall phase does not change any physical property of the state.</p>
 <table>
 <thead>
 <tr>
@@ -8112,8 +8398,8 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="p">[]</span>
@@ -8170,7 +8456,7 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 <p>From this figure, we can make the following observations:</p>
 <ol>
 <li>The ground state ($l=0$) is a state for which the particle has zero angular momentum.</li>
-<li>For all states with $l&gt;0,$, there are $2l+1$ different states with different $m$ values. The magnitude of the angular momentum is the same for each of these states (as is the energy), but the direction in which the angular momentum vector points is different.</li>
+<li>For all states with $l&gt;0$, there are $2l+1$ different states with different $m$ values. The magnitude of the angular momentum is the same for each of these states (as is the energy), but the direction in which the angular momentum vector points is different.</li>
 <li>The $z$ projection of the angular momentum is quantized. This space quantization is at odds with the classical picture of angular momentum in a classical rotating body. However, we can see that the number of possible $z$ projections increases with $l$. In the limit that $l$ becomes large, the $z$ projection of the angular momentum becomes effectively continuous. This result is another manifestation of the <strong>Bohr Correspondence Principle</strong>.</li>
 </ol>
 <p>This vector diagram is informative, but it is misleading in the sense that it makes it appear as though, in addition to knowledge regarding the magnitude and $z$ projection of the angular momentum vector, we also know something about its $x$ or $y$ component, depending on what the $x$ axis in the figure above is meant to represent. In reality, we can know <strong>nothing</strong> about the $x$ and $y$ components of the angular momentum vector because we know exactly what the $z$ component is and the relevant operators do not commute (although, the $l=0$ state is a special case which we will consider below). In reality, the angular momentum vector should lie on the edge of a <strong>cone</strong> with known magnitude and $z$ projection, as the following Python code illustrates for the $l=1$ states.</p>
@@ -8240,7 +8526,7 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 <p>$$\begin{align}
 \Delta A \Delta B \ge \frac{1}{2} | \langle [\hat{A}, \hat{B} ] \rangle|
 \end{align}$$</p>
-<p>If this commutator is zero, then it is possible to specify a complete set of common eigenfunctions of $\hat{A}$ and $\hat{B}$. Conversely, if these operators do not commute, then no such set of eigenfunctions exist, and it will not be possible, in general, to specify both $A$ and $B$ exactly, simultaneously.</p>
+<p>If this commutator is zero, then it is possible to specify a complete set of common eigenfunctions of $\hat{A}$ and $\hat{B}$. Conversely, if these operators do not commute, then no such set of eigenfunctions exists, and it will not be possible, in general, to specify both $A$ and $B$ exactly, simultaneously.</p>
 <p>For a particle constrained to move on a sphere in a state described by $Y^m_l(\theta, \phi),$ the product of the uncertainties in the $x$ and $y$ projections of the angular momentum would be</p>
 <p>$$\begin{align}
 \Delta L_x \Delta L_y &amp;\ge \frac{1}{2} \left | \langle Y^m_l(\theta, \phi) | [\hat{L}_x, \hat{L}_y] | Y^m_l(\theta, \phi) \rangle \right | \\
@@ -8260,9 +8546,9 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 <h2 id="The-Rigid-Rotor">The Rigid Rotor<a class="anchor-link" href="#The-Rigid-Rotor">¶</a></h2><p>The particle-on-a-sphere model is equivalent to a model for molecular rotations known as the rigid rotor. In this section, we derive the Hamiltonian for the rigid-rotor problem and show the equivalence of these two models.</p>
 <p>Consider two particles of mass $m_1$ and $m_2$ moving in three dimensions with coordinates $\vec{r}_1$ and $\vec{r}_2.$ The Hamiltonian for this system depends on the coordinates of both particles</p>
 <p>$$\begin{align}
-\hat{H} = -\frac{\hbar^2}{2m_1}\nabla_1^2  - \frac{\hbar^2}{2m_1}\nabla_2^2 + V(\vec{r})
+\hat{H} = -\frac{\hbar^2}{2m_1}\nabla_1^2  - \frac{\hbar^2}{2m_2}\nabla_2^2 + V(\vec{r})
 \end{align}$$</p>
-<p>where $V(\vec{r})$ is a potenial that depends on the inter-particle separation</p>
+<p>where $V(\vec{r})$ is a potential that depends on the inter-particle separation</p>
 <p>$$\begin{align}
 \vec{r} = \vec{r}_2 - \vec{r}_1
 \end{align}$$</p>
@@ -8279,7 +8565,7 @@ Y^m_l(\theta, \phi) &amp;=  \left [ \frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\r
 M &amp;= m_1 + m_2 \\
 \mu &amp;= \frac{m_1 m_2}{m_1 + m_2}
 \end{align}$$</p>
-<p>From the expression for the center-of-mass cordinate, we have</p>
+<p>From the expression for the center-of-mass coordinate, we have</p>
 <p>$$\begin{align}
 M \vec{R} = M \vec{r}_1 + m_2 \vec{r} 
 \end{align}$$</p>
@@ -8325,7 +8611,7 @@ E = E_M + E_\mu
 \hat{H}_\mu &amp;= \frac{\hat{p}_\mu^2}{2\mu} + V(\vec{r}) 
 \end{align}$$</p>
 <p>The first of these equations resembles the Schrödinger equation for a free-particle of mass, $M.$ As such, the energy, $E_M,$ corresponds to the translational energy of the entire system traveling through space and will not be quantized. The Schrödinger equation for the effective particle of mass, $\mu,$ is more complicated, and its solution will depend on the precise form of $V(\vec{r}).$ Depending on the form of this potential, $E_\mu$ may be quantized.</p>
-<p>To this point, this analysis has been completely general. The Hamiltonian for any two-particle system with a potential that depends on the inter-particle distance can be separated in this way. The $\vec{R}$-dependent part of the wave function will always look like that for a free-particle, where as the $\vec{r}$-dependent part will be more interesting.  Here, we are specifically concerned with the case where $\psi(\vec{r})$ is a wave function characterizing the rotational motion of a molecular system (specifically, a diatomic molecule). In the <strong>rigid rotor</strong> model, the atoms in this molecular are assumed to rotate about their center of mass, at a fixed distance, $d$ from one-another. As a result $V(\vec{r})$ is chosen to be zero when $|\vec{r}|=d$ and infinite otherwise. This potential is <strong>sperically symmetrical</strong>, meaning that it depends on the magnitude but not the orientation of $\vec{r}.$  For a particle experiencing such a potential, the force experienced by the particle is radially directed. For this reason, this type of a problem is called a <strong>central force problem</strong>.</p>
+<p>To this point, this analysis has been completely general. The Hamiltonian for any two-particle system with a potential that depends on the inter-particle distance can be separated in this way. The $\vec{R}$-dependent part of the wave function will always look like that for a free-particle, whereas the $\vec{r}$-dependent part will be more interesting.  Here, we are specifically concerned with the case where $\psi(\vec{r})$ is a wave function characterizing the rotational motion of a molecular system (specifically, a diatomic molecule). In the <strong>rigid rotor</strong> model, the atoms in this molecule are assumed to rotate about their center of mass, at a fixed distance, $d$ from one-another. As a result $V(\vec{r})$ is chosen to be zero when $|\vec{r}|=d$ and infinite otherwise. This potential is <strong>spherically symmetrical</strong>, meaning that it depends on the magnitude but not the orientation of $\vec{r}.$  For a particle experiencing such a potential, the force experienced by the particle is radially directed. For this reason, this type of a problem is called a <strong>central force problem</strong>.</p>
 <blockquote>
 <p><strong>Practice Problem 5</strong></p>
 <p>Show that the force for a central force problem is
@@ -8356,8 +8642,8 @@ $$</p>
 <p>The corresponding Schrödinger equation is</p>
 <p>$$\begin{align}
 \hat{H}_\mu \psi_\mu &amp;= E_\mu \psi_\mu \\
-\frac{1}{2\mu d^2}\hat{L}^2 Y^m_l &amp;= E_\mu Y^l_m \\
-&amp;= \frac{l(l+1)\hbar^2}{2\mu d^2} Y^l_m
+\frac{1}{2\mu d^2}\hat{L}^2 Y^m_l &amp;= E_\mu Y^m_l \\
+&amp;= \frac{l(l+1)\hbar^2}{2\mu d^2} Y^m_l
 \end{align}$$</p>
 <p>So, the energy for a two-particle rigid rotor is quantized and given by</p>
 <p>$$\begin{align}
@@ -8371,7 +8657,7 @@ l &amp;= 0, 1, 2, ... \\
 m &amp;= 0, \pm 1, \pm 2, ... \pm l
 \end{align}$$</p>
 <p>As such, each energy level is $(2l+1)$-fold degenerate.</p>
-<p>Note that this result is generalizable to rotating molecules with more than two atoms. Rotational energy levels are given by the energy expression above, augmented by the appropriate moment of inertia.</p>
+<p>Note that this result also applies to linear polyatomic molecules (and to spherical tops), with $I$ replaced by the appropriate moment of inertia. Nonlinear molecules with unequal moments of inertia (symmetric and asymmetric tops) have more complicated rotational energy-level patterns.</p>
 </div>
 </div>
 </div>
@@ -8388,7 +8674,7 @@ m &amp;= 0, \pm 1, \pm 2, ... \pm l
 <p>$$\begin{align}
 P_{m,l \to m^\prime, l^\prime} \propto |\langle Y^m_l(\theta, \phi) | \hat{\mu} | Y^{m^\prime}_{l^\prime}(\theta, \phi) \rangle |^2
 \end{align}$$</p>
-<p>For the quantum harmonic oscillator model, we were able to derive selection rules from the recursion relations for Hermite polynomials. It turns out that we can derive selection rules for the rigid rotor that are related to the change in $m,$ $\Delta m = m - m^{\prime},$ from commutator relations involving the operators $\hat{L}_z$, $x,$, $y,$ and $z.$</p>
+<p>For the quantum harmonic oscillator model, we were able to derive selection rules from the recursion relations for Hermite polynomials. It turns out that we can derive selection rules for the rigid rotor that are related to the change in $m,$ $\Delta m = m - m^{\prime},$ from commutator relations involving the operators $\hat{L}_z$, $x$, $y$, and $z.$</p>
 <blockquote>
 <p><strong>Practice Problem 6</strong></p>
 <p>Show that
@@ -8453,15 +8739,15 @@ $$\begin{align}
 [\hat{M}_z, \hat{M}_x] &amp;= i\hbar \hat{M}_y \\
 [\hat{M}_y, \hat{M}_z] &amp;= i\hbar \hat{M}_x \\
 \end{align}$$</p>
-<p>Now, we introduce "raising" and "lowering" operators, $\hat{M}_-$ and $\hat{M}_+,$ respectively, whose names will become clear soon.</p>
+<p>Now, we introduce "raising" and "lowering" operators, $\hat{M}_+$ and $\hat{M}_-,$ respectively, whose names will become clear soon.</p>
 <p>$$\begin{align}
 \hat{M}_+ &amp;= \hat{M}_x + i \hat{M}_y \\
 \hat{M}_- &amp;= \hat{M}_x - i \hat{M}_y \\
 \end{align}$$</p>
 <p>Do these operators commute with $\hat{M}_z$? Let's check.</p>
 <p>$$\begin{align}
-[\hat{M}_+, \hat{M}_z ] &amp;= [\hat{M}_+, \hat{M}_x + i \hat{M}_y] \\
-&amp;= [\hat{M}_+, \hat{M}_x] + i [\hat{M}_+, \hat{M}_y] \\
+[\hat{M}_+, \hat{M}_z ] &amp;= [\hat{M}_x + i \hat{M}_y, \hat{M}_z] \\
+&amp;= [\hat{M}_x, \hat{M}_z] + i [\hat{M}_y, \hat{M}_z] \\
 &amp;= -i\hbar \hat{M}_y - \hbar\hat{M}_x \\
 &amp;= -\hbar \hat{M}_+
 \end{align}$$</p>
@@ -8515,7 +8801,7 @@ $$[\hat{M}_-, \hat{M}_z] = +\hbar \hat{M}_-$$</p>
 \hat{M}_\pm^k \hat{M}^2 Y &amp;= c \hat{M}_\pm^k Y \\
 \hat{M}^2(\hat{M}_\pm^k Y) &amp;= c (\hat{M}_\pm^k Y)
 \end{align}$$</p>
-<p>This result indicates that the function $\hat{M}_+ Y$ is an eigenfunction of $\hat{M}^2$ with the same eigenvalue as $Y.$ As such, each "rung" on the ladder generated by $\hat{M}_\pm^k$ is an eigenfunction of both $\hat{M}_z$ and $\hat{M}^2$.</p>
+<p>This result indicates that the function $\hat{M}_\pm^k Y$ is an eigenfunction of $\hat{M}^2$ with the same eigenvalue as $Y.$ As such, each "rung" on the ladder generated by $\hat{M}_\pm^k$ is an eigenfunction of both $\hat{M}_z$ and $\hat{M}^2$.</p>
 </div>
 </div>
 </div>
@@ -8532,12 +8818,12 @@ $$[\hat{M}_-, \hat{M}_z] = +\hbar \hat{M}_-$$</p>
 \end{align}$$</p>
 <p>where</p>
 <p>$$\begin{align}
-Y_k &amp;= \hat{M}^k_\pm Y_k \\
+Y_k &amp;= \hat{M}^k_\pm Y \\
 b_k &amp;= b \pm k \hbar
 \end{align}$$</p>
-<p>Now, if we act on the state $Y_k$ with the operator $\hat{M}^2 - \hat{M}_z$ we have</p>
+<p>Now, if we act on the state $Y_k$ with the operator $\hat{M}^2 - \hat{M}_z^2$ we have</p>
 <p>$$\begin{align}
-(\hat{M}^2 - \hat{M}_z)Y_k &amp;= (c - b_k^2)Y_k \\
+(\hat{M}^2 - \hat{M}_z^2)Y_k &amp;= (c - b_k^2)Y_k \\
 \end{align}$$</p>
 <p>or, equivalently, based on how $\hat{M}^2$ was defined above</p>
 <p>$$\begin{align}
@@ -8547,11 +8833,11 @@ b_k &amp;= b \pm k \hbar
 <p>$$\begin{align}
 \langle Y_k | \hat{M}_x^2 | Y_k \rangle + \langle Y_k | \hat{M}^2_y | Y_k\rangle &amp;= (c - b_k^2)\langle Y_k | Y_k \rangle \\
 \end{align}$$</p>
-<p>The two integrals on the left-hand side of this equation represent expectation values of the square of an operator, the results of which much be non-negative. Similarly, the integral on the right-hand side of this expression is also non-negative. As such, we expect that the quantity $c-b_k^2$ must also be non-negative, which implies that</p>
+<p>The two integrals on the left-hand side of this equation represent expectation values of the square of an operator, the results of which must be non-negative. Similarly, the integral on the right-hand side of this expression is also non-negative. As such, we expect that the quantity $c-b_k^2$ must also be non-negative, which implies that</p>
 <p>$$\begin{align}
 -c^{1/2} \le b_k \le c^{1/2} 
 \end{align}$$</p>
-<p>This result indicates that $b_k$ is bounded by $c.$ In other words, the ladder of functions $Y_k$ is finite!</p>
+<p>This result indicates that $|b_k|$ is bounded by $c^{1/2}.$ In other words, the ladder of functions $Y_k$ is finite!</p>
 <p>If a bound on $b_k$ exists, our next goal should be to find the maximum / minimum allowed values of $b_k$ that satisfy</p>
 <p>$$\begin{align}
 \hat{M}_z Y_\text{max} &amp;= b_\text{max} Y_\text{max} \\
@@ -8561,7 +8847,7 @@ b_k &amp;= b \pm k \hbar
 <p>$$\begin{align}
 \hat{M}_z (\hat{M}_+ Y_\text{max}) = (b_\text{max} + \hbar)(\hat{M}_+ Y_\text{max})
 \end{align}$$</p>
-<p>This result suggests that the state $\hat{M}_+ Y_\text{max}$ has a larger $z$ projection of the angular momentum than the state $Y_\text{max}$, which contradicts our assertion that $Y_\text{max}$ represents the top rung of the ladder of functions. To avoid this contridiction, the application of $\hat{M}_+$ to $Y_\text{max}$ must be zero:</p>
+<p>This result suggests that the state $\hat{M}_+ Y_\text{max}$ has a larger $z$ projection of the angular momentum than the state $Y_\text{max}$, which contradicts our assertion that $Y_\text{max}$ represents the top rung of the ladder of functions. To avoid this contradiction, the application of $\hat{M}_+$ to $Y_\text{max}$ must be zero:</p>
 <p>$$\begin{align}
 \hat{M}_+Y_\text{max} = 0
 \end{align}$$</p>
@@ -8585,7 +8871,7 @@ c = b_\text{max}(b_\text{max} + \hbar)
 <p>$$\begin{align} 
 \hat{M}_- Y_\text{min} = 0
 \end{align}$$</p>
-<p>which must be true to avoid a similar contradition as we encountered above, we obtain</p>
+<p>which must be true to avoid a similar contradiction as we encountered above, we obtain</p>
 <p>$$\begin{align}
 \hat{M}_+\hat{M}_- Y_\text{min} &amp;= 0 \\
 &amp;= (\hat{M}_x + i \hat{M}_y)(\hat{M}_x - i\hat{M}_y) Y_\text{min} \\
@@ -8661,8 +8947,8 @@ c = j(j+1)\hbar^2
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Spin-Angular-Momentum">Spin Angular Momentum<a class="anchor-link" href="#Spin-Angular-Momentum">¶</a></h2><p>Spin angular momentum is an intrinsic property of microscopic particles, like their mass and charge. The concept of spin emerges in Dirac's relativistic extension of the Schrödinger equation. In non-relativistic quantum mechanics, spin is incorporated into a wave function because we know, from experiment, that quantum particles possess this property. Fundamental particles can be chategorized in one of two ways, based on their spin. <strong>Fermions</strong> have half-integer spin; for example, electrons are fermions with a spin quantum number, $s = \frac{1}{2}.$ <strong>Bosons</strong> have integer spin; for example, photons are bosons with $s = 1.$</p>
-<p>Let us consider the spin of an electron, which is a fermion. All electrons have $s = \frac{1}{2},$ which determins the magnitude of the spin angular momentum, $s(s+1)\hbar^2 = \frac{3}{4}\hbar^2.$ From general chemistry, we learn that electrons can have $\alpha$ or $\beta$ spin, and we also refer to these electrons has having spin up or down. The terms "up" and "down" refer to the $z$ projection of the spin angular momentum, $m_s \hbar.$ From the analysis in the previous section, we know $m_s$ for an electron can take on two values. $\alpha$ spin electrons have $m_s = + \frac{1}{2},$ while $\beta$ spin electrons have $m_s = - \frac{1}{2}.$</p>
+<h2 id="Spin-Angular-Momentum">Spin Angular Momentum<a class="anchor-link" href="#Spin-Angular-Momentum">¶</a></h2><p>Spin angular momentum is an intrinsic property of microscopic particles, like their mass and charge. The concept of spin emerges in Dirac's relativistic extension of the Schrödinger equation. In non-relativistic quantum mechanics, spin is incorporated into a wave function because we know, from experiment, that quantum particles possess this property. Fundamental particles can be categorized in one of two ways, based on their spin. <strong>Fermions</strong> have half-integer spin; for example, electrons are fermions with a spin quantum number, $s = \frac{1}{2}.$ <strong>Bosons</strong> have integer spin; for example, photons are bosons with $s = 1.$</p>
+<p>Let us consider the spin of an electron, which is a fermion. All electrons have $s = \frac{1}{2},$ which determines the magnitude of the spin angular momentum, $s(s+1)\hbar^2 = \frac{3}{4}\hbar^2.$ From general chemistry, we learn that electrons can have $\alpha$ or $\beta$ spin, and we also refer to these electrons as having spin up or down. The terms "up" and "down" refer to the $z$ projection of the spin angular momentum, $m_s \hbar.$ From the analysis in the previous section, we know $m_s$ for an electron can take on two values. $\alpha$ spin electrons have $m_s = + \frac{1}{2},$ while $\beta$ spin electrons have $m_s = - \frac{1}{2}.$</p>
 <p>The operators for spin angular momentum are analogous to those we considered above for orbital angular momentum. We have</p>
 <p>$$\begin{align}
 \vec{S} &amp;= \hat{S}_x \vec{i} + \hat{S}_y \vec{j} + \hat{S}_z \vec{k} \\
@@ -8766,7 +9052,7 @@ $$\begin{align}[\hat{S}^2, \hat{S}_x] &amp;= 0 \\
 </blockquote>
 <blockquote>
 <p><strong>Practice Problem 11</strong></p>
-<p>Consider rasing and lowering spin operators</p>
+<p>Consider raising and lowering spin operators</p>
 <p>$$\begin{align}
 \hat{S}_\pm &amp;= \hat{S}_x \pm i\hat{S}_y \\
 \end{align}$$</p>

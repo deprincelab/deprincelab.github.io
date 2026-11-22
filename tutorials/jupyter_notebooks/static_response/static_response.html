@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Static Molecular Response Properties
 math: true
+title: Static Molecular Response Properties
 ---
 
 <b>Jupyter Notebook Tutorials: Quantum Chemistry</b>
@@ -7331,6 +7331,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7350,7 +7351,12 @@ a.anchor-link {
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs")).default;
+    const elkUrl = "https://cdnjs.cloudflare.com/ajax/libs/mermaid-layout-elk/0.1.9/mermaid-layout-elk.esm.min.mjs";
+    if(elkUrl) {
+      const elkLayouts = (await import(elkUrl)).default;
+      mermaid.registerLayoutLoaders(elkLayouts);
+    }
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -7447,7 +7453,8 @@ a.anchor-link {
      * Post-process to ensure mermaid diagrams contain only valid SVG and XHTML.
      */
     function cleanMermaidSvg(svg) {
-      return svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      svg = svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      return `${SVG_XML_HEADER}${svg}`;
     }
 
 
@@ -7473,6 +7480,285 @@ a.anchor-link {
       }
       return `<${tag} ${rest}>`;
     }
+
+
+  /**
+   * Named HTML entities with their decimal equivalent codes.
+   *
+   * @see https://www.w3.org/TR/WD-html40-970708/sgml/entities.html
+   * */
+  const HTML_ENTITIES = `<!ENTITY Aacute "&#193;">
+<!ENTITY aacute "&#225;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY acirc "&#226;">
+<!ENTITY acute "&#180;">
+<!ENTITY AElig "&#198;">
+<!ENTITY aelig "&#230;">
+<!ENTITY Agrave "&#192;">
+<!ENTITY agrave "&#224;">
+<!ENTITY alefsym "&#8501;">
+<!ENTITY Alpha "&#913;">
+<!ENTITY alpha "&#945;">
+<!ENTITY amp "&#38;">
+<!ENTITY and "&#8869;">
+<!ENTITY ang "&#8736;">
+<!ENTITY Aring "&#197;">
+<!ENTITY aring "&#229;">
+<!ENTITY asymp "&#8776;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY atilde "&#227;">
+<!ENTITY Auml "&#196;">
+<!ENTITY auml "&#228;">
+<!ENTITY bdquo "&#8222;">
+<!ENTITY Beta "&#914;">
+<!ENTITY beta "&#946;">
+<!ENTITY brvbar "&#166;">
+<!ENTITY bull "&#8226;">
+<!ENTITY cap "&#8745;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY cedil "&#184;">
+<!ENTITY cent "&#162;">
+<!ENTITY Chi "&#935;">
+<!ENTITY chi "&#967;">
+<!ENTITY circ "&#710;">
+<!ENTITY clubs "&#9827;">
+<!ENTITY cong "&#8773;">
+<!ENTITY copy "&#169;">
+<!ENTITY crarr "&#8629;">
+<!ENTITY cup "&#8746;">
+<!ENTITY curren "&#164;">
+<!ENTITY dagger "&#8224;">
+<!ENTITY Dagger "&#8225;">
+<!ENTITY darr "&#8595;">
+<!ENTITY dArr "&#8659;">
+<!ENTITY deg "&#176;">
+<!ENTITY Delta "&#916;">
+<!ENTITY delta "&#948;">
+<!ENTITY diams "&#9830;">
+<!ENTITY divide "&#247;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY eacute "&#233;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY egrave "&#232;">
+<!ENTITY empty "&#8709;">
+<!ENTITY emsp "&#8195;">
+<!ENTITY ensp "&#8194;">
+<!ENTITY epsilon "&#949;">
+<!ENTITY Epsilon "&#917;">
+<!ENTITY equiv "&#8801;">
+<!ENTITY Eta "&#919;">
+<!ENTITY eta "&#951;">
+<!ENTITY ETH "&#208;">
+<!ENTITY eth "&#240;">
+<!ENTITY Euml "&#203;">
+<!ENTITY euml "&#235;">
+<!ENTITY exist "&#8707;">
+<!ENTITY fnof "&#402;">
+<!ENTITY forall "&#8704;">
+<!ENTITY frac12 "&#189;">
+<!ENTITY frac14 "&#188;">
+<!ENTITY frac34 "&#190;">
+<!ENTITY frasl "&#8260;">
+<!ENTITY Gamma "&#915;">
+<!ENTITY gamma "&#947;">
+<!ENTITY ge "&#8805;">
+<!ENTITY gt "&#62;">
+<!ENTITY harr "&#8596;">
+<!ENTITY hArr "&#8660;">
+<!ENTITY hearts "&#9829;">
+<!ENTITY hellip "&#8230;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY iacute "&#237;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iexcl "&#161;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY igrave "&#236;">
+<!ENTITY image "&#8465;">
+<!ENTITY infin "&#8734;">
+<!ENTITY int "&#8747;">
+<!ENTITY Iota "&#921;">
+<!ENTITY iota "&#953;">
+<!ENTITY iquest "&#191;">
+<!ENTITY isin "&#8712;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY iuml "&#239;">
+<!ENTITY Kappa "&#922;">
+<!ENTITY kappa "&#954;">
+<!ENTITY Lambda "&#923;">
+<!ENTITY lambda "&#955;">
+<!ENTITY lang "&#9001;">
+<!ENTITY laquo "&#171;">
+<!ENTITY larr "&#8592;">
+<!ENTITY lArr "&#8656;">
+<!ENTITY lceil "&#8968;">
+<!ENTITY ldquo "&#8220;">
+<!ENTITY le "&#8804;">
+<!ENTITY lfloor "&#8970;">
+<!ENTITY lowast "&#8727;">
+<!ENTITY loz "&#9674;">
+<!ENTITY lrm "&#8206;">
+<!ENTITY lsaquo "&#8249;">
+<!ENTITY lsquo "&#8216;">
+<!ENTITY lt "&#60;">
+<!ENTITY macr "&#175;">
+<!ENTITY mdash "&#8212;">
+<!ENTITY micro "&#181;">
+<!ENTITY middot "&#183;">
+<!ENTITY minus "&#8722;">
+<!ENTITY Mu "&#924;">
+<!ENTITY mu "&#956;">
+<!ENTITY nabla "&#8711;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY ndash "&#8211;">
+<!ENTITY ne "&#8800;">
+<!ENTITY ni "&#8715;">
+<!ENTITY not "&#172;">
+<!ENTITY notin "&#8713;">
+<!ENTITY nsub "&#8836;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY Nu "&#925;">
+<!ENTITY nu "&#957;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY oacute "&#243;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY OElig "&#338;">
+<!ENTITY oelig "&#339;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oline "&#8254;">
+<!ENTITY Omega "&#937;">
+<!ENTITY omega "&#969;">
+<!ENTITY Omicron "&#927;">
+<!ENTITY omicron "&#959;">
+<!ENTITY oplus "&#8853;">
+<!ENTITY or "&#8870;">
+<!ENTITY ordf "&#170;">
+<!ENTITY ordm "&#186;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY oslash "&#248;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY otilde "&#245;">
+<!ENTITY otimes "&#8855;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY ouml "&#246;">
+<!ENTITY para "&#182;">
+<!ENTITY part "&#8706;">
+<!ENTITY permil "&#8240;">
+<!ENTITY perp "&#8869;">
+<!ENTITY Phi "&#934;">
+<!ENTITY phi "&#966;">
+<!ENTITY Pi "&#928;">
+<!ENTITY pi "&#960;">
+<!ENTITY piv "&#982;">
+<!ENTITY plusmn "&#177;">
+<!ENTITY pound "&#163;">
+<!ENTITY prime "&#8242;">
+<!ENTITY Prime "&#8243;">
+<!ENTITY prod "&#8719;">
+<!ENTITY prop "&#8733;">
+<!ENTITY Psi "&#936;">
+<!ENTITY psi "&#968;">
+<!ENTITY quot "&#34;">
+<!ENTITY radic "&#8730;">
+<!ENTITY rang "&#9002;">
+<!ENTITY raquo "&#187;">
+<!ENTITY rarr "&#8594;">
+<!ENTITY rArr "&#8658;">
+<!ENTITY rceil "&#8969;">
+<!ENTITY rdquo "&#8221;">
+<!ENTITY real "&#8476;">
+<!ENTITY reg "&#174;">
+<!ENTITY rfloor "&#8971;">
+<!ENTITY Rho "&#929;">
+<!ENTITY rho "&#961;">
+<!ENTITY rlm "&#8207;">
+<!ENTITY rsaquo "&#8250;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY sbquo "&#8218;">
+<!ENTITY Scaron "&#352;">
+<!ENTITY scaron "&#353;">
+<!ENTITY sdot "&#8901;">
+<!ENTITY sect "&#167;">
+<!ENTITY shy "&#173;">
+<!ENTITY Sigma "&#931;">
+<!ENTITY sigma "&#963;">
+<!ENTITY sigmaf "&#962;">
+<!ENTITY sim "&#8764;">
+<!ENTITY spades "&#9824;">
+<!ENTITY sub "&#8834;">
+<!ENTITY sube "&#8838;">
+<!ENTITY sum "&#8721;">
+<!ENTITY sup "&#8835;">
+<!ENTITY sup1 "&#185;">
+<!ENTITY sup2 "&#178;">
+<!ENTITY sup3 "&#179;">
+<!ENTITY supe "&#8839;">
+<!ENTITY szlig "&#223;">
+<!ENTITY Tau "&#932;">
+<!ENTITY tau "&#964;">
+<!ENTITY there4 "&#8756;">
+<!ENTITY Theta "&#920;">
+<!ENTITY theta "&#952;">
+<!ENTITY thetasym "&#977;">
+<!ENTITY thinsp "&#8201;">
+<!ENTITY THORN "&#222;">
+<!ENTITY thorn "&#254;">
+<!ENTITY tilde "&#732;">
+<!ENTITY times "&#215;">
+<!ENTITY trade "&#8482;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY uacute "&#250;">
+<!ENTITY uarr "&#8593;">
+<!ENTITY uArr "&#8657;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uml "&#168;">
+<!ENTITY upsih "&#978;">
+<!ENTITY Upsilon "&#933;">
+<!ENTITY upsilon "&#965;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY uuml "&#252;">
+<!ENTITY weierp "&#8472;">
+<!ENTITY Xi "&#926;">
+<!ENTITY xi "&#958;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY yacute "&#253;">
+<!ENTITY yen "&#165;">
+<!ENTITY Yuml "&#376;">
+<!ENTITY yuml "&#255;">
+<!ENTITY Zeta "&#918;">
+<!ENTITY zeta "&#950;">
+<!ENTITY zwj "&#8205;">
+<!ENTITY zwnj "&#8204;">`.replace(/\n/g, ' ');
+
+  /**
+   * A reasonably strict xml declaration.
+   */
+  const XML_DECL = '<?xml version="1.0" standalone="no"?>';
+
+  /**
+   * The beginning of the XML doctype declaration.
+   */
+  const DOCTYPE_START = `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [`;
+
+  /**
+   * The end of the XML docype declaration.
+   */
+  const DOCTYPE_END = ']>';
+
+  /**
+   * A full header for an SVG XML document.
+   */
+  const SVG_XML_HEADER = `${XML_DECL}
+    ${DOCTYPE_START}${HTML_ENTITIES}${DOCTYPE_END}`;
 
     void Promise.all([...diagrams].map(renderOneMarmaid));
   });
@@ -7540,7 +7826,7 @@ a.anchor-link {
 <p>$$\begin{align}
 E = E_0 - \mu_\alpha \epsilon_\alpha- \frac{1}{2} \alpha_{\alpha\beta} \epsilon_\alpha \epsilon_\beta - \frac{1}{6} \beta_{\alpha\beta\gamma} \epsilon_\alpha \epsilon_\beta\epsilon_\gamma  + ...
 \end{align}$$</p>
-<p>Here, $E_0$ is the unperturbed energy of the system, $\mu_\alpha$ represents cartesian components of the electric dipole moment, $\alpha_{\alpha\beta}$, $\xi_{\alpha\beta}$ is an element of the the electric dipole polarizability tensor, and $\beta_{\alpha\beta\gamma}$ is an element of the first hyperpolarizability tensor. Note that here and throughout this tutorial, repeated labels imply summation. Note also that this expression could be generalized to account for static external magnetic fields as well, in which case terms involving the magnetizability, NMR shielding tensor, etc. would appear. From this energy expression, we can see that the static response properties can be evaluated as derivatives of the energy with respect to the external field, <em>i.e.</em>,</p>
+<p>Here, $E_0$ is the unperturbed energy of the system, $\mu_\alpha$ represents Cartesian components of the electric dipole moment, $\alpha_{\alpha\beta}$ is an element of the electric dipole polarizability tensor, and $\beta_{\alpha\beta\gamma}$ is an element of the first hyperpolarizability tensor. Note that here and throughout this tutorial, repeated labels imply summation. Note also that this expression could be generalized to account for static external magnetic fields as well, in which case terms involving the magnetizability, NMR shielding tensor, etc. would appear. From this energy expression, we can see that the static response properties can be evaluated as derivatives of the energy with respect to the external field, <em>i.e.</em>,</p>
 <p>$$\begin{align}
 \mu_\alpha &amp;= -\left .\frac{d E}{d \epsilon_\alpha}\right |_{\epsilon = 0}\\
 \alpha_{\alpha\beta} &amp;= -\left .\frac{d^2 E}{d \epsilon_\alpha d \epsilon_\beta}\right |_{\epsilon = 0}\\
@@ -7557,7 +7843,7 @@ E = E_0 - \mu_\alpha \epsilon_\alpha- \frac{1}{2} \alpha_{\alpha\beta} \epsilon_
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Perturbed-Hartree-Fock-Wave-Function">The Perturbed Hartree-Fock Wave Function<a class="anchor-link" href="#The-Perturbed-Hartree-Fock-Wave-Function">¶</a></h2><p>At the Hartree-Fock level of theory, the $N$-electron wave function is approximated as an antisymmetrized product of $N$ one-electron functions called molecular orbitals (MOs), which is called a Slater determinant that we will label as $|\Phi\rangle$. When considering the response of this wave function to an external perturbation, it is convenient to define a perturbed wave function, which can be achieved via the introduction of orbital rotation parametes, $\kappa_{ia}$, as</p>
+<h2 id="The-Perturbed-Hartree-Fock-Wave-Function">The Perturbed Hartree-Fock Wave Function<a class="anchor-link" href="#The-Perturbed-Hartree-Fock-Wave-Function">¶</a></h2><p>At the Hartree-Fock level of theory, the $N$-electron wave function is approximated as an antisymmetrized product of $N$ one-electron functions called molecular orbitals (MOs), which is called a Slater determinant that we will label as $|\Phi\rangle$. When considering the response of this wave function to an external perturbation, it is convenient to define a perturbed wave function, which can be achieved via the introduction of orbital rotation parameters, $\kappa_{ia}$, as</p>
 <p>$$\begin{align}
 |\Phi({\kappa})\rangle = \text{exp}\left (\kappa_{ia} ( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a ) \right ) | \Phi\rangle
 \end{align}$$</p>
@@ -7575,7 +7861,7 @@ E(\kappa, \epsilon) = \langle \Phi(\kappa)|\hat{H}_0 -  \hat{\mu}_\alpha \epsilo
 \end{align}$$</p>
 <p>At this point, it is also useful to go ahead and consider the derivative of the perturbed wave function with respect to the external perturbation.</p>
 <p>$$\begin{align}
-\left . \frac{d}{d \epsilon_\alpha} |\Phi({\kappa})\rangle\right |_{\epsilon=0} &amp;= \left .\frac{\partial}{\partial \epsilon_a}|\Phi({\kappa})\rangle\right |_{\epsilon=0} +  \frac{\partial |\Phi({\kappa})\rangle }{\partial \kappa_{ia}}  \left . \frac{\partial \kappa_{ia}}{\partial \epsilon_\alpha} \right |_{\epsilon=0}\\
+\left . \frac{d}{d \epsilon_\alpha} |\Phi({\kappa})\rangle\right |_{\epsilon=0} &amp;= \left .\frac{\partial}{\partial \epsilon_\alpha}|\Phi({\kappa})\rangle\right |_{\epsilon=0} +  \frac{\partial |\Phi({\kappa})\rangle }{\partial \kappa_{ia}}  \left . \frac{\partial \kappa_{ia}}{\partial \epsilon_\alpha} \right |_{\epsilon=0}\\
 &amp;= \left . ( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )|\Phi({\kappa_0})\rangle\frac{\partial \kappa_{ia}}{\partial \epsilon_\alpha} \right |_{\epsilon=0}
 \end{align}$$
 and
@@ -7605,19 +7891,19 @@ where, in the last line, we have recognized that the commutator expression corre
 <p>$$\begin{align}
 \mu_{ia}^{\alpha} = \langle \Phi(\kappa_0)|\hat{\mu}_\alpha \hat{a}^\dagger_a \hat{a}_i | \Phi(\kappa_0)\rangle = \langle \Phi(\kappa_0)|\hat{a}^\dagger_i \hat{a}_a\hat{\mu}_\alpha | \Phi(\kappa_0)\rangle
 \end{align}$$</p>
-<p>Oh, no! In order to determine the electric dipole polarizability, we must first determine the first-order response of the wave function parameters to the perturbation, $\left .\frac{\partial \kappa_{ia}}{\partial \epsilon_\beta} \right |_{\epsilon=0}$! We can find an equation to determine this quantity from the orbital gradient for the perturbed Hamiltonian, which should be zero at zero field, i.e.,</p>
+<p>Oh, no! In order to determine the electric dipole polarizability, we must first determine the first-order response of the wave function parameters to the perturbation, $\left .\frac{\partial \kappa_{ia}}{\partial \epsilon_\beta} \right |_{\epsilon=0}$! We can find an equation to determine this quantity from the orbital gradient for the perturbed Hamiltonian, which must vanish for the optimal parameters, $\kappa(\epsilon)$, at every field strength (not just at zero field), i.e.,</p>
 <p>$$\begin{align}
-0 = \left . \langle \Phi(\kappa_0)|[\hat{H}_0 - \mu_\alpha \epsilon_\alpha,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa_0)\rangle \right |_{\epsilon=0}
+0 = \langle \Phi(\kappa)|[\hat{H}_0 - \hat{\mu}_\gamma \epsilon_\gamma,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa)\rangle
 \end{align}$$</p>
 <p>We differentiate this expression with respect to the external field to obtain</p>
 <p>$$\begin{align}
-0 &amp;= \left . \frac{d}{d \epsilon_\beta}  \langle \Phi(\kappa)|[\hat{H}_0 - \mu_\alpha \epsilon_\alpha,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa)\rangle \right |_{\epsilon=0} \\
-&amp;= \left . \left ( \frac{\partial}{\partial \epsilon_\beta} + \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \frac{\partial }{\partial \kappa_{jb}}\right ) \langle \Phi(\kappa)|[\hat{H}_0 - \mu_\alpha \epsilon_\alpha,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa)\rangle \right |_{\epsilon=0} \\
-&amp;=  \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],(\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)]| \Phi(\kappa_0)\rangle \left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0} - \langle \Phi(\kappa_0)|[\mu_\alpha \epsilon_\alpha,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa_0)\rangle
+0 &amp;= \left . \frac{d}{d \epsilon_\beta}  \langle \Phi(\kappa)|[\hat{H}_0 - \hat{\mu}_\gamma \epsilon_\gamma,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa)\rangle \right |_{\epsilon=0} \\
+&amp;= \left . \left ( \frac{\partial}{\partial \epsilon_\beta} + \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \frac{\partial }{\partial \kappa_{jb}}\right ) \langle \Phi(\kappa)|[\hat{H}_0 - \hat{\mu}_\gamma \epsilon_\gamma,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa)\rangle \right |_{\epsilon=0} \\
+&amp;=  \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],(\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)]| \Phi(\kappa_0)\rangle \left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0} - \langle \Phi(\kappa_0)|[\hat{\mu}_\beta,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )]| \Phi(\kappa_0)\rangle
 \end{align}$$</p>
 <p>or</p>
 <p>$$\begin{align}
-\langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],(\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)]| \Phi(\kappa_0)\rangle \left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = 2 \mu_{ia}^\alpha
+\langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - \hat{a}^\dagger_i \hat{a}_a )],(\hat{a}^\dagger_b \hat{a}_j - \hat{a}^\dagger_j \hat{a}_b)]| \Phi(\kappa_0)\rangle \left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = 2 \mu_{ia}^\beta
 \end{align}$$</p>
 <p>So, in order to determine the first-order response of the wave function, we must solve a set of linear equations involving the orbital hessian (the double commutator expression) and the dipole integrals.  Defining</p>
 <p>$$\begin{align}
@@ -7625,11 +7911,11 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
 \end{align}$$</p>
 <p>and assuming we can store and invert this tensor, we could determine the response vector as</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = 2 h_{jb, ia} ^{-1} \mu_{ia}^\alpha
+\left . \frac{\partial \kappa_{jb}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  = 2 h_{jb, ia} ^{-1} \mu_{ia}^\beta
 \end{align}$$</p>
 <p>Here, we have expressed all quantities in a basis of spin orbitals. If we explicitly account for spin, then we have two response equations for $\alpha$- and $\beta$-spin:</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2 h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   \mu_{i_\tau a_\tau}^\alpha
+\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2 h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   \mu_{i_\tau a_\tau}^\beta
 \end{align}$$</p>
 <p>We can use the p$^\dagger$q package to evaluate the different spin blocks of $h_{jb,ia}$ using the following code.</p>
 </div>
@@ -7643,9 +7929,9 @@ h_{jb, ia} = \langle \Phi(\kappa_0)|[[\hat{H}_0,( \hat{a}^\dagger_a \hat{a}_i - 
 <div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pdaggerq</span>
 
-<span class="kn">from</span> <span class="nn">pdaggerq.parser</span> <span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdaggerq.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
 
 <span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
 
@@ -7801,9 +8087,9 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">einsum</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psi4</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">einsum</span>
 
 <span class="c1"># set molecule</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
@@ -7847,7 +8133,7 @@ h_bb += -1.00 * einsum('abji-&gt;jbia', g_bbbb[vb, vb, ob, ob])
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Grab data from wavfunction</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Grab data from wavefunction</span>
 
 <span class="c1"># all orbitals</span>
 <span class="n">Ca</span> <span class="o">=</span> <span class="n">wfn</span><span class="o">.</span><span class="n">Ca</span><span class="p">()</span>
@@ -8065,13 +8351,13 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Given the inverted double commutator matrix and the dipole integrals in the MO basis, we can finally evaluate the response vectors and the elements of the dipole polarizability tensor. Recall, the response vectors are given by</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2 h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   \mu_{i_\tau a_\tau}^\alpha
+\left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2 h^{-1}_{j_\sigma b_\sigma, i_\tau a_\tau}   \mu_{i_\tau a_\tau}^\beta
 \end{align}$$</p>
 <p>and the dipole polarizability is</p>
 <p>$$\begin{align}
 \alpha_{\alpha\beta} = 2 \mu_{i_\sigma a_\sigma}^{\alpha} \left .\frac{\partial \kappa_{i_\sigma a_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon=0}
 \end{align}$$</p>
-<p>where we have added spin labels in the polarizability expression. The following code evaluates the response vectors and the elements of the polarizability tensor. Note that matrix-vector products and dot products are most easily evaluated if we construct vectors that contain the relevant elements the alpha-spin and beta-spin dipole integral matrices.</p>
+<p>where we have added spin labels in the polarizability expression. The following code evaluates the response vectors and the elements of the polarizability tensor. Note that matrix-vector products and dot products are most easily evaluated if we construct vectors that contain the relevant elements of the alpha-spin and beta-spin dipole integral matrices.</p>
 </div>
 </div>
 </div>
@@ -8156,13 +8442,13 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Iterative-Solution-of-the-Response-Equations">Iterative Solution of the Response Equations<a class="anchor-link" href="#Iterative-Solution-of-the-Response-Equations">¶</a></h2><p>Inverting the Hessian matrix is computationally demanding, requiring $\mathcal{O}(o^3v^3)$ floating-point operators, where $o$ and $v$ represent the number of occupied and unoccupied orbitals, respectively. Since the cost of solving for the Hartree-Fock energy scales only with the fourth power of system size, we should probably avoid the use of any operations in the corresponding response theory that exhibit worse scaling. Here, we solve</p>
+<h2 id="Iterative-Solution-of-the-Response-Equations">Iterative Solution of the Response Equations<a class="anchor-link" href="#Iterative-Solution-of-the-Response-Equations">¶</a></h2><p>Inverting the Hessian matrix is computationally demanding, requiring $\mathcal{O}(o^3v^3)$ floating-point operations, where $o$ and $v$ represent the number of occupied and unoccupied orbitals, respectively. Since the cost of solving for the Hartree-Fock energy scales only with the fourth power of system size, we should probably avoid the use of any operations in the corresponding response theory that exhibit worse scaling. Here, we solve</p>
 <p>$$\begin{align}
-\left . h_{j_\sigma b_\sigma, i_\tau a_\tau} \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2    \mu_{i_\tau a_\tau}^\alpha
+\left . h_{j_\sigma b_\sigma, i_\tau a_\tau} \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  2    \mu_{i_\tau a_\tau}^\beta
 \end{align}$$</p>
 <p>iteratively for the response vector, using the Jacobi method. Given an initial guess for the response vector, we obtain an updated guess from</p>
 <p>$$\begin{align}
-\left . \frac{\partial \kappa_{i_\sigma a_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  h^{-1}_{i_\sigma a_\sigma, i_\sigma a_\sigma} \left ( 2 \mu_{i_\tau a_\tau}^\alpha - h^\prime_{j_\sigma b_\sigma, i_\tau a_\tau} \left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0} \right ) 
+\left . \frac{\partial \kappa_{i_\sigma a_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}  =  h^{-1}_{i_\sigma a_\sigma, i_\sigma a_\sigma} \left ( 2 \mu_{i_\tau a_\tau}^\beta - h^\prime_{j_\sigma b_\sigma, i_\tau a_\tau} \left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0} \right ) 
 \end{align}$$</p>
 <p>where the prime denotes that the sum excludes the diagonal elements of the hessian. In the code below, note that we have dampened the iterations because they do not converge otherwise.</p>
 </div>
@@ -8314,7 +8600,7 @@ h_{j_\beta b_\beta, i_\alpha a_\alpha} &amp; h_{j_\beta b_\beta, i_\beta a_\beta
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We get the same answer as when explicitly inverting the hessian! Great! Now, we also not that it may not always be desirable to even store the hessian matrix. Fortunately, the hessian matrix itself is not really necessary. All we need is the action of the hessian on the response vector,</p>
+<p>We get the same answer as when explicitly inverting the hessian! Great! Now, we also note that it may not always be desirable to even store the hessian matrix. Fortunately, the hessian matrix itself is not really necessary. All we need is the action of the hessian on the response vector,</p>
 <p>$$\begin{align}
 \sigma_{i_\tau a_\tau} = h_{j_\sigma b_\sigma, i_\tau a_\tau} \left . \frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\beta} \right |_{\epsilon = 0}
 \end{align}$$</p>
@@ -8346,8 +8632,8 @@ t_{bj} = \left .\frac{\partial \kappa_{j_\sigma b_\sigma}}{\partial \epsilon_\be
 <div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
-<span class="kn">from</span> <span class="nn">pdaggerq.parser</span> <span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pdaggerq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdaggerq.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">contracted_strings_to_tensor_terms</span>
 
 <span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"fermi"</span><span class="p">)</span>
 
@@ -8431,7 +8717,7 @@ sigma_bb += -1.00 * einsum('abji,bj-&gt;ai', g_bbbb[vb, vb, ob, ob], t1_bb)
 <div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Hx</span><span class="p">(</span><span class="n">t1_aa</span><span class="p">,</span> <span class="n">t1_bb</span><span class="p">):</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Hx</span><span class="p">(</span><span class="n">t1_aa</span><span class="p">,</span> <span class="n">t1_bb</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    evaluate contraction of Hessian matrix against a t1-shaped operator</span>
 

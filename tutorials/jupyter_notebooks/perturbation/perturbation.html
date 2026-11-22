@@ -7332,6 +7332,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7351,7 +7352,12 @@ a.anchor-link {
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs")).default;
+    const elkUrl = "https://cdnjs.cloudflare.com/ajax/libs/mermaid-layout-elk/0.1.9/mermaid-layout-elk.esm.min.mjs";
+    if(elkUrl) {
+      const elkLayouts = (await import(elkUrl)).default;
+      mermaid.registerLayoutLoaders(elkLayouts);
+    }
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -7448,7 +7454,8 @@ a.anchor-link {
      * Post-process to ensure mermaid diagrams contain only valid SVG and XHTML.
      */
     function cleanMermaidSvg(svg) {
-      return svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      svg = svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      return `${SVG_XML_HEADER}${svg}`;
     }
 
 
@@ -7474,6 +7481,285 @@ a.anchor-link {
       }
       return `<${tag} ${rest}>`;
     }
+
+
+  /**
+   * Named HTML entities with their decimal equivalent codes.
+   *
+   * @see https://www.w3.org/TR/WD-html40-970708/sgml/entities.html
+   * */
+  const HTML_ENTITIES = `<!ENTITY Aacute "&#193;">
+<!ENTITY aacute "&#225;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY acirc "&#226;">
+<!ENTITY acute "&#180;">
+<!ENTITY AElig "&#198;">
+<!ENTITY aelig "&#230;">
+<!ENTITY Agrave "&#192;">
+<!ENTITY agrave "&#224;">
+<!ENTITY alefsym "&#8501;">
+<!ENTITY Alpha "&#913;">
+<!ENTITY alpha "&#945;">
+<!ENTITY amp "&#38;">
+<!ENTITY and "&#8869;">
+<!ENTITY ang "&#8736;">
+<!ENTITY Aring "&#197;">
+<!ENTITY aring "&#229;">
+<!ENTITY asymp "&#8776;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY atilde "&#227;">
+<!ENTITY Auml "&#196;">
+<!ENTITY auml "&#228;">
+<!ENTITY bdquo "&#8222;">
+<!ENTITY Beta "&#914;">
+<!ENTITY beta "&#946;">
+<!ENTITY brvbar "&#166;">
+<!ENTITY bull "&#8226;">
+<!ENTITY cap "&#8745;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY cedil "&#184;">
+<!ENTITY cent "&#162;">
+<!ENTITY Chi "&#935;">
+<!ENTITY chi "&#967;">
+<!ENTITY circ "&#710;">
+<!ENTITY clubs "&#9827;">
+<!ENTITY cong "&#8773;">
+<!ENTITY copy "&#169;">
+<!ENTITY crarr "&#8629;">
+<!ENTITY cup "&#8746;">
+<!ENTITY curren "&#164;">
+<!ENTITY dagger "&#8224;">
+<!ENTITY Dagger "&#8225;">
+<!ENTITY darr "&#8595;">
+<!ENTITY dArr "&#8659;">
+<!ENTITY deg "&#176;">
+<!ENTITY Delta "&#916;">
+<!ENTITY delta "&#948;">
+<!ENTITY diams "&#9830;">
+<!ENTITY divide "&#247;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY eacute "&#233;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY egrave "&#232;">
+<!ENTITY empty "&#8709;">
+<!ENTITY emsp "&#8195;">
+<!ENTITY ensp "&#8194;">
+<!ENTITY epsilon "&#949;">
+<!ENTITY Epsilon "&#917;">
+<!ENTITY equiv "&#8801;">
+<!ENTITY Eta "&#919;">
+<!ENTITY eta "&#951;">
+<!ENTITY ETH "&#208;">
+<!ENTITY eth "&#240;">
+<!ENTITY Euml "&#203;">
+<!ENTITY euml "&#235;">
+<!ENTITY exist "&#8707;">
+<!ENTITY fnof "&#402;">
+<!ENTITY forall "&#8704;">
+<!ENTITY frac12 "&#189;">
+<!ENTITY frac14 "&#188;">
+<!ENTITY frac34 "&#190;">
+<!ENTITY frasl "&#8260;">
+<!ENTITY Gamma "&#915;">
+<!ENTITY gamma "&#947;">
+<!ENTITY ge "&#8805;">
+<!ENTITY gt "&#62;">
+<!ENTITY harr "&#8596;">
+<!ENTITY hArr "&#8660;">
+<!ENTITY hearts "&#9829;">
+<!ENTITY hellip "&#8230;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY iacute "&#237;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iexcl "&#161;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY igrave "&#236;">
+<!ENTITY image "&#8465;">
+<!ENTITY infin "&#8734;">
+<!ENTITY int "&#8747;">
+<!ENTITY Iota "&#921;">
+<!ENTITY iota "&#953;">
+<!ENTITY iquest "&#191;">
+<!ENTITY isin "&#8712;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY iuml "&#239;">
+<!ENTITY Kappa "&#922;">
+<!ENTITY kappa "&#954;">
+<!ENTITY Lambda "&#923;">
+<!ENTITY lambda "&#955;">
+<!ENTITY lang "&#9001;">
+<!ENTITY laquo "&#171;">
+<!ENTITY larr "&#8592;">
+<!ENTITY lArr "&#8656;">
+<!ENTITY lceil "&#8968;">
+<!ENTITY ldquo "&#8220;">
+<!ENTITY le "&#8804;">
+<!ENTITY lfloor "&#8970;">
+<!ENTITY lowast "&#8727;">
+<!ENTITY loz "&#9674;">
+<!ENTITY lrm "&#8206;">
+<!ENTITY lsaquo "&#8249;">
+<!ENTITY lsquo "&#8216;">
+<!ENTITY lt "&#60;">
+<!ENTITY macr "&#175;">
+<!ENTITY mdash "&#8212;">
+<!ENTITY micro "&#181;">
+<!ENTITY middot "&#183;">
+<!ENTITY minus "&#8722;">
+<!ENTITY Mu "&#924;">
+<!ENTITY mu "&#956;">
+<!ENTITY nabla "&#8711;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY ndash "&#8211;">
+<!ENTITY ne "&#8800;">
+<!ENTITY ni "&#8715;">
+<!ENTITY not "&#172;">
+<!ENTITY notin "&#8713;">
+<!ENTITY nsub "&#8836;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY Nu "&#925;">
+<!ENTITY nu "&#957;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY oacute "&#243;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY OElig "&#338;">
+<!ENTITY oelig "&#339;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oline "&#8254;">
+<!ENTITY Omega "&#937;">
+<!ENTITY omega "&#969;">
+<!ENTITY Omicron "&#927;">
+<!ENTITY omicron "&#959;">
+<!ENTITY oplus "&#8853;">
+<!ENTITY or "&#8870;">
+<!ENTITY ordf "&#170;">
+<!ENTITY ordm "&#186;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY oslash "&#248;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY otilde "&#245;">
+<!ENTITY otimes "&#8855;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY ouml "&#246;">
+<!ENTITY para "&#182;">
+<!ENTITY part "&#8706;">
+<!ENTITY permil "&#8240;">
+<!ENTITY perp "&#8869;">
+<!ENTITY Phi "&#934;">
+<!ENTITY phi "&#966;">
+<!ENTITY Pi "&#928;">
+<!ENTITY pi "&#960;">
+<!ENTITY piv "&#982;">
+<!ENTITY plusmn "&#177;">
+<!ENTITY pound "&#163;">
+<!ENTITY prime "&#8242;">
+<!ENTITY Prime "&#8243;">
+<!ENTITY prod "&#8719;">
+<!ENTITY prop "&#8733;">
+<!ENTITY Psi "&#936;">
+<!ENTITY psi "&#968;">
+<!ENTITY quot "&#34;">
+<!ENTITY radic "&#8730;">
+<!ENTITY rang "&#9002;">
+<!ENTITY raquo "&#187;">
+<!ENTITY rarr "&#8594;">
+<!ENTITY rArr "&#8658;">
+<!ENTITY rceil "&#8969;">
+<!ENTITY rdquo "&#8221;">
+<!ENTITY real "&#8476;">
+<!ENTITY reg "&#174;">
+<!ENTITY rfloor "&#8971;">
+<!ENTITY Rho "&#929;">
+<!ENTITY rho "&#961;">
+<!ENTITY rlm "&#8207;">
+<!ENTITY rsaquo "&#8250;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY sbquo "&#8218;">
+<!ENTITY Scaron "&#352;">
+<!ENTITY scaron "&#353;">
+<!ENTITY sdot "&#8901;">
+<!ENTITY sect "&#167;">
+<!ENTITY shy "&#173;">
+<!ENTITY Sigma "&#931;">
+<!ENTITY sigma "&#963;">
+<!ENTITY sigmaf "&#962;">
+<!ENTITY sim "&#8764;">
+<!ENTITY spades "&#9824;">
+<!ENTITY sub "&#8834;">
+<!ENTITY sube "&#8838;">
+<!ENTITY sum "&#8721;">
+<!ENTITY sup "&#8835;">
+<!ENTITY sup1 "&#185;">
+<!ENTITY sup2 "&#178;">
+<!ENTITY sup3 "&#179;">
+<!ENTITY supe "&#8839;">
+<!ENTITY szlig "&#223;">
+<!ENTITY Tau "&#932;">
+<!ENTITY tau "&#964;">
+<!ENTITY there4 "&#8756;">
+<!ENTITY Theta "&#920;">
+<!ENTITY theta "&#952;">
+<!ENTITY thetasym "&#977;">
+<!ENTITY thinsp "&#8201;">
+<!ENTITY THORN "&#222;">
+<!ENTITY thorn "&#254;">
+<!ENTITY tilde "&#732;">
+<!ENTITY times "&#215;">
+<!ENTITY trade "&#8482;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY uacute "&#250;">
+<!ENTITY uarr "&#8593;">
+<!ENTITY uArr "&#8657;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uml "&#168;">
+<!ENTITY upsih "&#978;">
+<!ENTITY Upsilon "&#933;">
+<!ENTITY upsilon "&#965;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY uuml "&#252;">
+<!ENTITY weierp "&#8472;">
+<!ENTITY Xi "&#926;">
+<!ENTITY xi "&#958;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY yacute "&#253;">
+<!ENTITY yen "&#165;">
+<!ENTITY Yuml "&#376;">
+<!ENTITY yuml "&#255;">
+<!ENTITY Zeta "&#918;">
+<!ENTITY zeta "&#950;">
+<!ENTITY zwj "&#8205;">
+<!ENTITY zwnj "&#8204;">`.replace(/\n/g, ' ');
+
+  /**
+   * A reasonably strict xml declaration.
+   */
+  const XML_DECL = '<?xml version="1.0" standalone="no"?>';
+
+  /**
+   * The beginning of the XML doctype declaration.
+   */
+  const DOCTYPE_START = `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [`;
+
+  /**
+   * The end of the XML docype declaration.
+   */
+  const DOCTYPE_END = ']>';
+
+  /**
+   * A full header for an SVG XML document.
+   */
+  const SVG_XML_HEADER = `${XML_DECL}
+    ${DOCTYPE_START}${HTML_ENTITIES}${DOCTYPE_END}`;
 
     void Promise.all([...diagrams].map(renderOneMarmaid));
   });
@@ -7537,7 +7823,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Perturbation-Theory">Perturbation Theory<a class="anchor-link" href="#Perturbation-Theory">¶</a></h1><p>The Jupyter notebook for this tutorial can be found <a href="perturbation.ipynb" style="color:#e65100;">here</a>.</p>
-<p>In the last notebook, we used the variation theorem to find approximate solutions to the Schrödinger equation. An alterative approach is based on perturbation theory. This notebook outlines the fundamental principles of time-independent and time-dependent perturbation theories.</p>
+<p>In the last notebook, we used the variation theorem to find approximate solutions to the Schrödinger equation. An alternative approach is based on perturbation theory. This notebook outlines the fundamental principles of time-independent and time-dependent perturbation theories.</p>
 <h2 id="Time-Independent-Perturbation-Theory">Time-Independent Perturbation Theory<a class="anchor-link" href="#Time-Independent-Perturbation-Theory">¶</a></h2><p>Time-independent perturbation theory is an approach for finding approximate solutions to the time-independent Schrödinger equation that complements the variational approach discussed in the last notebook. The basic idea is that the Hamiltonian for a system can be partitioned into a "simple" Hamiltonian for which solutions can be determined and a "small" perturbation to that simple Hamiltonian. We have</p>
 <p>$$\begin{align}
 \hat{H} = \hat{H}_0 + \lambda \hat{H}^\prime
@@ -7547,7 +7833,7 @@ a.anchor-link {
 \hat{H}_0 | \psi_n^{(0)}\rangle  = E_n^{(0)}|  \psi_n^{(0)}\rangle
 \end{align}$$</p>
 <p>where $E_n^{(0)}$ and $\psi_n^{(0)}$ are called the zeroth-order energies and wave functions, respectively.</p>
-<h3 id="Non-Degenerate-Perturbation-Theory">Non-Degenerate Perturbation Theory<a class="anchor-link" href="#Non-Degenerate-Perturbation-Theory">¶</a></h3><p>The next steps differ depending on whether or not any of the eigenvalues of $\hat{H}_0$ are degenerate. We will consider only the case that the eigenvalues are all non-degenerate; the resulting perturbation theory is thus called non-denerate perturbation theory.</p>
+<h3 id="Non-Degenerate-Perturbation-Theory">Non-Degenerate Perturbation Theory<a class="anchor-link" href="#Non-Degenerate-Perturbation-Theory">¶</a></h3><p>The next steps differ depending on whether or not any of the eigenvalues of $\hat{H}_0$ are degenerate. We will consider only the case that the eigenvalues are all non-degenerate; the resulting perturbation theory is thus called non-degenerate perturbation theory.</p>
 <p>Consider a wave function, $|\psi_n\rangle$, that satisfies the time-independent Schrödinger equation,</p>
 <p>$$\begin{align}
 \hat{H} |\psi_n\rangle = E_n |\psi_n\rangle
@@ -7560,7 +7846,7 @@ a.anchor-link {
 <p>$$\begin{align}
 |\psi_n\rangle  = \left . |\psi_n\rangle  \right |_{\lambda = 0} + \lambda \left . \frac{\partial |\psi_n\rangle}{\partial \lambda} \right |_{\lambda = 0} + \lambda ^2\frac{1}{2!}\left . \frac{\partial^2 |\psi_n\rangle}{\partial \lambda^2} \right |_{\lambda = 0} + \lambda ^3 \frac{1}{3!} \left . \frac{\partial^3 |\psi_n\rangle}{\partial \lambda^3} \right |_{\lambda = 0} + ...
 \end{align}$$</p>
-<p>We can simply our notation by first noting that</p>
+<p>We can simplify our notation by first noting that</p>
 <p>$$\begin{align}
 \left . |\psi_n\rangle  \right |_{\lambda = 0} = |\psi_n^{(0)}\rangle
 \end{align}$$</p>
@@ -7623,9 +7909,9 @@ E_n = E_n^{(0)} + \lambda E_n^{(1)}   + \lambda ^2 E_n^{(2)}  + \lambda^3 E_n^{(
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Let us go back to the Schrödinger equation, with $|\psi_n\rangle$ and $E_n$ expanded in powers of $\lambda$:</p>
 <p>$$\begin{align}
-(\hat{H}_0 + \lambda \hat{H}^\prime) ( |\psi_0\rangle + \lambda |\psi_n^{(1)}\rangle + ...) = ( E_n^{(0)} + \lambda E_n^{(1)} + ...)( |\psi_0\rangle + \lambda |\psi_n^{(1)}\rangle + ...)
+(\hat{H}_0 + \lambda \hat{H}^\prime) ( |\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + ...) = ( E_n^{(0)} + \lambda E_n^{(1)} + ...)( |\psi_n^{(0)}\rangle + \lambda |\psi_n^{(1)}\rangle + ...)
 \end{align}$$</p>
-<p>The right- and left-hand sides of this equation must be equal for all possible values of $\lambda$, which implies that terms on either side having the same power of $\lambda$ must be equivalent. Each order in $\lambda$ defines a different equation involving only a few of the corrections to the wave function and energy. For up to $\lambda = 2$, we have</p>
+<p>The right- and left-hand sides of this equation must be equal for all possible values of $\lambda$, which implies that terms on either side having the same power of $\lambda$ must be equivalent. Each order in $\lambda$ defines a different equation involving only a few of the corrections to the wave function and energy. For up to $\lambda^2$, we have</p>
 <p>$$\begin{align}
 \lambda^0:~~&amp; \hat{H}_0 |\psi_n^{(0)}\rangle = E_n^{(0)} |\psi_n^{(0)}\rangle \\
 \lambda^1:~~&amp; \hat{H}_0 |\psi_n^{(1)}\rangle + \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle \\
@@ -7637,7 +7923,7 @@ E_n = E_n^{(0)} + \lambda E_n^{(1)}   + \lambda ^2 E_n^{(2)}  + \lambda^3 E_n^{(
 <p>$$\begin{align}
 \hat{H}_0 |\psi_n^{(1)}\rangle + \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} |\psi_n^{(1)}\rangle + E_n^{(1)} |\psi_n^{(0)}\rangle
 \end{align}$$</p>
-<p>To isolate $E_n^{(1)}$, we can left-multiply both sides of this equation by $\langle \psi_n^{(0)}|$ and integrating each term over all space</p>
+<p>To isolate $E_n^{(1)}$, we can left-multiply both sides of this equation by $\langle \psi_n^{(0)}|$ and integrate each term over all space</p>
 <p>$$\begin{align}
 \langle \psi_n^{(0)}| \hat{H}_0 |\psi_n^{(1)}\rangle + \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle = E_n^{(0)} \langle \psi_n^{(0)}|\psi_n^{(1)}\rangle + E_n^{(1)} \langle \psi_n^{(0)}|\psi_n^{(0)}\rangle
 \end{align}$$</p>
@@ -7672,7 +7958,7 @@ E_n = E_n^{(0)} + \langle \psi_n^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle
 <p>$$\begin{align}
 \hat{H} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + \frac{1}{2} k x^2 + c x^3 + d x^4
 \end{align}$$</p>
-<p>Here, $x$ reprents the displacement of the oscillator from its equilibrium position, and $k,$ $c,$ and $d$ are constants. We can partition this Hamiltonian into a zeroth-order part that looks like the Hamiltonian for the quantum harmonic oscillator (QHO) problem,</p>
+<p>Here, $x$ represents the displacement of the oscillator from its equilibrium position, and $k,$ $c,$ and $d$ are constants. We can partition this Hamiltonian into a zeroth-order part that looks like the Hamiltonian for the quantum harmonic oscillator (QHO) problem,</p>
 <p>$$\begin{align}
 \hat{H}_0 = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + \frac{1}{2} k x^2
 \end{align}$$</p>
@@ -7694,7 +7980,7 @@ E_0 = E_0^{(0)} + \langle \psi_0^{(0)} | \hat{H}^\prime | \psi_0^{(0)}\rangle
 \end{align}$$</p>
 <p>Given that $E_0^{(0)} = \frac{1}{2}\hbar \omega$ and $|\psi_0^{(0)}\rangle = \left ( \frac{\alpha}{\pi}\right ) ^{1/4}e^{-\alpha x^2/2} $, we have</p>
 <p>$$\begin{align}
-E_0 &amp;= \frac{1}{2}\hbar \omega + \int_{-\infty}^{\infty} ( cx^3 + dx^4) \left ( \frac{\alpha}{\pi}\right ) ^{1/2}e^{-\alpha x^2} \\
+E_0 &amp;= \frac{1}{2}\hbar \omega + \int_{-\infty}^{\infty} ( cx^3 + dx^4) \left ( \frac{\alpha}{\pi}\right ) ^{1/2}e^{-\alpha x^2} dx \\
 &amp;= \frac{1}{2}\hbar \omega + d \left ( \frac{\alpha}{\pi}\right ) ^{1/2} \int_{-\infty}^{\infty} x^4 e^{-\alpha x^2} dx \\
 &amp;= \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2}
 \end{align}$$</p>
@@ -7739,7 +8025,7 @@ Note that, while the first-order correction to the wave function for state $n$ w
 <p>$$\begin{align}
 |\psi_n^{(1)}\rangle = \sum_{k\neq n} c^{(1)}_k |\psi_k^{(0)}\rangle
 \end{align}$$</p>
-<p>Note the restriction that $k \neq n$, which is necessary to guaratee that $\langle \psi_n^{(0)}|\psi_n^{(1)}\rangle = 0$. To determine a given expansion coefficient, we must project $|\psi_n^{(1)}\rangle$ onto the corresponding basis function:</p>
+<p>Note the restriction that $k \neq n$, which is necessary to guarantee that $\langle \psi_n^{(0)}|\psi_n^{(1)}\rangle = 0$. To determine a given expansion coefficient, we must project $|\psi_n^{(1)}\rangle$ onto the corresponding basis function:</p>
 <p>$$\begin{align}
 \langle \psi_m^{(0)} | \psi_n^{(1)} \rangle &amp;= \sum_{k\neq n} c^{(1)}_k\langle \psi_m^{(0)} | \psi_k^{(0)} \rangle \\
 &amp;= \sum_{k\neq n} c^{(1)}_k \delta_{mk}\\
@@ -7755,9 +8041,9 @@ c^{(1)}_m = \frac{\langle \psi_m^{(0)}| \hat{H}^\prime | \psi_n^{(0)} \rangle}{E
 \end{align}$$</p>
 <p>From our anharmonic oscillator example, the first-order correction to the wave function for state $n$ would be</p>
 <p>$$\begin{align}
-|\psi_n^{(1)}\rangle = \sum_{k\neq n}^\infty \frac{N_k N_n \int_{-\infty}^{\infty} e^{-\alpha x^2} H_k(\alpha^{1/2}x) H_n(\alpha^{1/2} x) (cx^3 + dx^4)}{\hbar\omega ( n - k )} |\psi_k^{(0)}\rangle
+|\psi_n^{(1)}\rangle = \sum_{k\neq n}^\infty \frac{N_k N_n \int_{-\infty}^{\infty} e^{-\alpha x^2} H_k(\alpha^{1/2}x) H_n(\alpha^{1/2} x) (cx^3 + dx^4) dx}{\hbar\omega ( n - k )} |\psi_k^{(0)}\rangle
 \end{align}$$</p>
-<p>In this case, we can see that the summation is over an infinite number of states, $k$. Note, however, that this is not generally the case. In Møller-Plesset perturbation theory, for example, evalulating the first-order correction to the wave function does not require an infinite summation.</p>
+<p>In this case, we can see that the summation is over an infinite number of states, $k$. Note, however, that this is not generally the case. In Møller-Plesset perturbation theory, for example, evaluating the first-order correction to the wave function does not require an infinite summation.</p>
 </div>
 </div>
 </div>
@@ -7792,7 +8078,7 @@ E_n^{(2)} &amp;= \sum_{k\neq n} \langle \psi_n^{(0)} | \hat{H}^\prime | \psi_k^{
 \end{align}$$</p>
 <p>Recall the anharmonic oscillator. To second-order the ground-state energy for this system would be</p>
 <p>$$\begin{align}
-E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k N_0 \left [ \int_{-\infty}^{\infty} e^{-\alpha x^2} H_k(\alpha^{1/2}x) H_0(\alpha^{1/2} x) (cx^3 + dx^4) dx\right ] }{\frac{1}{2}\hbar\omega-\hbar\omega (k + \frac{1}{2})}
+E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k^2 N_0^2 \left [ \int_{-\infty}^{\infty} e^{-\alpha x^2} H_k(\alpha^{1/2}x) H_0(\alpha^{1/2} x) (cx^3 + dx^4) dx\right ]^2 }{\frac{1}{2}\hbar\omega-\hbar\omega (k + \frac{1}{2})}
 \end{align}$$</p>
 <p>Note that, unlike the first-order energy, the second-order energy  for the anharmonic oscillator will depend on both the $c$ and $d$ parameters.</p>
 </div>
@@ -7809,8 +8095,8 @@ E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k 
 <li>Perturbed energies and wave functions allow us to "mix" character of other zeroth-order states into state $n$. This mixing is necessary because $|\psi_n^{(0)}\rangle$ will not look exactly like $|\psi_n\rangle$.</li>
 <li>The $\frac{1}{E_n^{(0)} - E_k^{(0)}}$ term implies that states nearby in energy dominate perturbative corrections for state $n$.</li>
 <li>In general, summations can be infinite (e.g., as we saw for the anharmonic oscillator problem). Exceptions include Møller-Plesset perturbation theory.</li>
-<li>Higher-order corrections to the energies and wave functions can become extremely complicated. In electronic structure theory, the highest-order corrections one would typically encouter would be fourth or fifth order. As an example, the perturbative triple excitation correction (T) to the coupled-cluster with single and double excitations (CCSD) energy [CCSD(T)], mostly looks like the triples part of the fourth-order energy in Møller-Plesset perturbation theory. It also contains some terms that appear at fifth-order.</li>
-<li>If the zeroth-order problem has a continuum of eigenfunctions (e.g., unbound states in the hydrogen atom problem), the these states must be included in the perturbative expansins (in these cases, sums over states become integrals).</li>
+<li>Higher-order corrections to the energies and wave functions can become extremely complicated. In electronic structure theory, the highest-order corrections one would typically encounter would be fourth or fifth order. As an example, the perturbative triple excitation correction (T) to the coupled-cluster with single and double excitations (CCSD) energy [CCSD(T)], mostly looks like the triples part of the fourth-order energy in Møller-Plesset perturbation theory. It also contains some terms that appear at fifth-order.</li>
+<li>If the zeroth-order problem has a continuum of eigenfunctions (e.g., unbound states in the hydrogen atom problem), these states must be included in the perturbative expansions (in these cases, sums over states become integrals).</li>
 <li>The approach outlined above works well for $\hat{H}_0$ with non-degenerate energy levels and when the perturbation is "small." In such cases, $|\psi_n^{(0)}\rangle$ gives a good approximation to $|\psi_n\rangle$.</li>
 <li>It is important to recognize that the energy in perturbation theory is not variational, i.e., there is no guarantee that it will be an upper bound to the true ground-state energy.</li>
 </ol>
@@ -7836,10 +8122,8 @@ E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k 
 <div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
-
-<span class="kn">import</span> <span class="nn">psi4</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psi4</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># set molecule</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
@@ -7892,7 +8176,7 @@ E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k 
 <div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hf_energy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Hartree-Fock'</span><span class="p">)</span>
@@ -7932,7 +8216,7 @@ E_0 = \frac{1}{2}\hbar \omega + \frac{3d}{4\alpha^2} + \sum_{k\neq 0} \frac{N_k 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The Hartree-Fock approach is variational, so the Hartree-Fock energy is always an upper-bound to the full CI energy. We can see that MP2, MP3, and MP4 improve upon the Hartree-Fock result near equilibrium but begin to give nonsense results at stretched H--H distances. In particular, the MPn energy can be lower than the "exact" variational approach (recall that perturbation theory is not a variational theory). Why is this happening? Like any non-degenerate perturbation theory, Møller-Plesset perturbation theory only works well when the zeroth-order energies are non-degenerate. Recall the expression for the second-order energy,</p>
+<p>The Hartree-Fock approach is variational, so the Hartree-Fock energy is always an upper-bound to the full CI energy. We can see that MP2, MP3, and MP4 improve upon the Hartree-Fock result near equilibrium but begin to give nonsense results at stretched H-H distances. In particular, the MPn energy can be lower than the "exact" variational approach (recall that perturbation theory is not a variational theory). Why is this happening? Like any non-degenerate perturbation theory, Møller-Plesset perturbation theory only works well when the zeroth-order energies are non-degenerate. Recall the expression for the second-order energy,</p>
 <p>$$\begin{align}
 E_n^{(2)} = \sum_{k\neq n} \frac{ |\langle \psi_k^{(0)}|\hat{H}^\prime | \psi_n^{(0)} \rangle |^2 }{E_n^{(0)} - E_k^{(0)}} 
 \end{align}$$</p>

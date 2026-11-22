@@ -7332,6 +7332,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7351,7 +7352,12 @@ a.anchor-link {
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs")).default;
+    const elkUrl = "https://cdnjs.cloudflare.com/ajax/libs/mermaid-layout-elk/0.1.9/mermaid-layout-elk.esm.min.mjs";
+    if(elkUrl) {
+      const elkLayouts = (await import(elkUrl)).default;
+      mermaid.registerLayoutLoaders(elkLayouts);
+    }
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -7448,7 +7454,8 @@ a.anchor-link {
      * Post-process to ensure mermaid diagrams contain only valid SVG and XHTML.
      */
     function cleanMermaidSvg(svg) {
-      return svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      svg = svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      return `${SVG_XML_HEADER}${svg}`;
     }
 
 
@@ -7474,6 +7481,285 @@ a.anchor-link {
       }
       return `<${tag} ${rest}>`;
     }
+
+
+  /**
+   * Named HTML entities with their decimal equivalent codes.
+   *
+   * @see https://www.w3.org/TR/WD-html40-970708/sgml/entities.html
+   * */
+  const HTML_ENTITIES = `<!ENTITY Aacute "&#193;">
+<!ENTITY aacute "&#225;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY acirc "&#226;">
+<!ENTITY acute "&#180;">
+<!ENTITY AElig "&#198;">
+<!ENTITY aelig "&#230;">
+<!ENTITY Agrave "&#192;">
+<!ENTITY agrave "&#224;">
+<!ENTITY alefsym "&#8501;">
+<!ENTITY Alpha "&#913;">
+<!ENTITY alpha "&#945;">
+<!ENTITY amp "&#38;">
+<!ENTITY and "&#8869;">
+<!ENTITY ang "&#8736;">
+<!ENTITY Aring "&#197;">
+<!ENTITY aring "&#229;">
+<!ENTITY asymp "&#8776;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY atilde "&#227;">
+<!ENTITY Auml "&#196;">
+<!ENTITY auml "&#228;">
+<!ENTITY bdquo "&#8222;">
+<!ENTITY Beta "&#914;">
+<!ENTITY beta "&#946;">
+<!ENTITY brvbar "&#166;">
+<!ENTITY bull "&#8226;">
+<!ENTITY cap "&#8745;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY cedil "&#184;">
+<!ENTITY cent "&#162;">
+<!ENTITY Chi "&#935;">
+<!ENTITY chi "&#967;">
+<!ENTITY circ "&#710;">
+<!ENTITY clubs "&#9827;">
+<!ENTITY cong "&#8773;">
+<!ENTITY copy "&#169;">
+<!ENTITY crarr "&#8629;">
+<!ENTITY cup "&#8746;">
+<!ENTITY curren "&#164;">
+<!ENTITY dagger "&#8224;">
+<!ENTITY Dagger "&#8225;">
+<!ENTITY darr "&#8595;">
+<!ENTITY dArr "&#8659;">
+<!ENTITY deg "&#176;">
+<!ENTITY Delta "&#916;">
+<!ENTITY delta "&#948;">
+<!ENTITY diams "&#9830;">
+<!ENTITY divide "&#247;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY eacute "&#233;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY egrave "&#232;">
+<!ENTITY empty "&#8709;">
+<!ENTITY emsp "&#8195;">
+<!ENTITY ensp "&#8194;">
+<!ENTITY epsilon "&#949;">
+<!ENTITY Epsilon "&#917;">
+<!ENTITY equiv "&#8801;">
+<!ENTITY Eta "&#919;">
+<!ENTITY eta "&#951;">
+<!ENTITY ETH "&#208;">
+<!ENTITY eth "&#240;">
+<!ENTITY Euml "&#203;">
+<!ENTITY euml "&#235;">
+<!ENTITY exist "&#8707;">
+<!ENTITY fnof "&#402;">
+<!ENTITY forall "&#8704;">
+<!ENTITY frac12 "&#189;">
+<!ENTITY frac14 "&#188;">
+<!ENTITY frac34 "&#190;">
+<!ENTITY frasl "&#8260;">
+<!ENTITY Gamma "&#915;">
+<!ENTITY gamma "&#947;">
+<!ENTITY ge "&#8805;">
+<!ENTITY gt "&#62;">
+<!ENTITY harr "&#8596;">
+<!ENTITY hArr "&#8660;">
+<!ENTITY hearts "&#9829;">
+<!ENTITY hellip "&#8230;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY iacute "&#237;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iexcl "&#161;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY igrave "&#236;">
+<!ENTITY image "&#8465;">
+<!ENTITY infin "&#8734;">
+<!ENTITY int "&#8747;">
+<!ENTITY Iota "&#921;">
+<!ENTITY iota "&#953;">
+<!ENTITY iquest "&#191;">
+<!ENTITY isin "&#8712;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY iuml "&#239;">
+<!ENTITY Kappa "&#922;">
+<!ENTITY kappa "&#954;">
+<!ENTITY Lambda "&#923;">
+<!ENTITY lambda "&#955;">
+<!ENTITY lang "&#9001;">
+<!ENTITY laquo "&#171;">
+<!ENTITY larr "&#8592;">
+<!ENTITY lArr "&#8656;">
+<!ENTITY lceil "&#8968;">
+<!ENTITY ldquo "&#8220;">
+<!ENTITY le "&#8804;">
+<!ENTITY lfloor "&#8970;">
+<!ENTITY lowast "&#8727;">
+<!ENTITY loz "&#9674;">
+<!ENTITY lrm "&#8206;">
+<!ENTITY lsaquo "&#8249;">
+<!ENTITY lsquo "&#8216;">
+<!ENTITY lt "&#60;">
+<!ENTITY macr "&#175;">
+<!ENTITY mdash "&#8212;">
+<!ENTITY micro "&#181;">
+<!ENTITY middot "&#183;">
+<!ENTITY minus "&#8722;">
+<!ENTITY Mu "&#924;">
+<!ENTITY mu "&#956;">
+<!ENTITY nabla "&#8711;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY ndash "&#8211;">
+<!ENTITY ne "&#8800;">
+<!ENTITY ni "&#8715;">
+<!ENTITY not "&#172;">
+<!ENTITY notin "&#8713;">
+<!ENTITY nsub "&#8836;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY Nu "&#925;">
+<!ENTITY nu "&#957;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY oacute "&#243;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY OElig "&#338;">
+<!ENTITY oelig "&#339;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oline "&#8254;">
+<!ENTITY Omega "&#937;">
+<!ENTITY omega "&#969;">
+<!ENTITY Omicron "&#927;">
+<!ENTITY omicron "&#959;">
+<!ENTITY oplus "&#8853;">
+<!ENTITY or "&#8870;">
+<!ENTITY ordf "&#170;">
+<!ENTITY ordm "&#186;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY oslash "&#248;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY otilde "&#245;">
+<!ENTITY otimes "&#8855;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY ouml "&#246;">
+<!ENTITY para "&#182;">
+<!ENTITY part "&#8706;">
+<!ENTITY permil "&#8240;">
+<!ENTITY perp "&#8869;">
+<!ENTITY Phi "&#934;">
+<!ENTITY phi "&#966;">
+<!ENTITY Pi "&#928;">
+<!ENTITY pi "&#960;">
+<!ENTITY piv "&#982;">
+<!ENTITY plusmn "&#177;">
+<!ENTITY pound "&#163;">
+<!ENTITY prime "&#8242;">
+<!ENTITY Prime "&#8243;">
+<!ENTITY prod "&#8719;">
+<!ENTITY prop "&#8733;">
+<!ENTITY Psi "&#936;">
+<!ENTITY psi "&#968;">
+<!ENTITY quot "&#34;">
+<!ENTITY radic "&#8730;">
+<!ENTITY rang "&#9002;">
+<!ENTITY raquo "&#187;">
+<!ENTITY rarr "&#8594;">
+<!ENTITY rArr "&#8658;">
+<!ENTITY rceil "&#8969;">
+<!ENTITY rdquo "&#8221;">
+<!ENTITY real "&#8476;">
+<!ENTITY reg "&#174;">
+<!ENTITY rfloor "&#8971;">
+<!ENTITY Rho "&#929;">
+<!ENTITY rho "&#961;">
+<!ENTITY rlm "&#8207;">
+<!ENTITY rsaquo "&#8250;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY sbquo "&#8218;">
+<!ENTITY Scaron "&#352;">
+<!ENTITY scaron "&#353;">
+<!ENTITY sdot "&#8901;">
+<!ENTITY sect "&#167;">
+<!ENTITY shy "&#173;">
+<!ENTITY Sigma "&#931;">
+<!ENTITY sigma "&#963;">
+<!ENTITY sigmaf "&#962;">
+<!ENTITY sim "&#8764;">
+<!ENTITY spades "&#9824;">
+<!ENTITY sub "&#8834;">
+<!ENTITY sube "&#8838;">
+<!ENTITY sum "&#8721;">
+<!ENTITY sup "&#8835;">
+<!ENTITY sup1 "&#185;">
+<!ENTITY sup2 "&#178;">
+<!ENTITY sup3 "&#179;">
+<!ENTITY supe "&#8839;">
+<!ENTITY szlig "&#223;">
+<!ENTITY Tau "&#932;">
+<!ENTITY tau "&#964;">
+<!ENTITY there4 "&#8756;">
+<!ENTITY Theta "&#920;">
+<!ENTITY theta "&#952;">
+<!ENTITY thetasym "&#977;">
+<!ENTITY thinsp "&#8201;">
+<!ENTITY THORN "&#222;">
+<!ENTITY thorn "&#254;">
+<!ENTITY tilde "&#732;">
+<!ENTITY times "&#215;">
+<!ENTITY trade "&#8482;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY uacute "&#250;">
+<!ENTITY uarr "&#8593;">
+<!ENTITY uArr "&#8657;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uml "&#168;">
+<!ENTITY upsih "&#978;">
+<!ENTITY Upsilon "&#933;">
+<!ENTITY upsilon "&#965;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY uuml "&#252;">
+<!ENTITY weierp "&#8472;">
+<!ENTITY Xi "&#926;">
+<!ENTITY xi "&#958;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY yacute "&#253;">
+<!ENTITY yen "&#165;">
+<!ENTITY Yuml "&#376;">
+<!ENTITY yuml "&#255;">
+<!ENTITY Zeta "&#918;">
+<!ENTITY zeta "&#950;">
+<!ENTITY zwj "&#8205;">
+<!ENTITY zwnj "&#8204;">`.replace(/\n/g, ' ');
+
+  /**
+   * A reasonably strict xml declaration.
+   */
+  const XML_DECL = '<?xml version="1.0" standalone="no"?>';
+
+  /**
+   * The beginning of the XML doctype declaration.
+   */
+  const DOCTYPE_START = `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [`;
+
+  /**
+   * The end of the XML docype declaration.
+   */
+  const DOCTYPE_END = ']>';
+
+  /**
+   * A full header for an SVG XML document.
+   */
+  const SVG_XML_HEADER = `${XML_DECL}
+    ${DOCTYPE_START}${HTML_ENTITIES}${DOCTYPE_END}`;
 
     void Promise.all([...diagrams].map(renderOneMarmaid));
   });
@@ -7537,7 +7823,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Vibrational-Motion">Vibrational Motion<a class="anchor-link" href="#Vibrational-Motion">¶</a></h1><p>The Jupyter notebook for this tutorial can be found <a href="vibration.ipynb" style="color:#e65100;">here</a>.</p>
-<p>In the previous notebook, we discussed quantum mechanical problems involving translational motion: the free-particle, the particle-in-a-box model, the finite square well potential model, and tunneling through a one-dimensional potential energy barrier. In this notebook, we continue exploring model problems, with a focus, this time, on vibrational motion. In particular, we will find analytic solutions the Schrödinger equation for the (one-dimensional) quantum harmonic oscillator model, which captures the main qualitative features of vibrational motion in molecular systems.</p>
+<p>In the previous notebook, we discussed quantum mechanical problems involving translational motion: the free-particle, the particle-in-a-box model, the finite square well potential model, and tunneling through a one-dimensional potential energy barrier. In this notebook, we continue exploring model problems, with a focus, this time, on vibrational motion. In particular, we will find analytic solutions to the Schrödinger equation for the (one-dimensional) quantum harmonic oscillator model, which captures the main qualitative features of vibrational motion in molecular systems.</p>
 </div>
 </div>
 </div>
@@ -7564,7 +7850,7 @@ V(x) = \frac{1}{2} k (x - x_e)^2 + c
 <p>$$ \begin{align}
 V(x) = \frac{1}{2} k (x - x_e)^2
 \end{align}$$</p>
-<p>Because the harmonic oscillator problem is a model for molecular vibrations, it will be illustrative to consider how this potential relates to one for an actual molecular system. For the sake of simlicity, let us take the molecule to be molecular hydrogen, H$_2$. Below, we will calculate the potential energy curve along the bond stretch coordinate for H$_2$ using one of the simplest procedures for finding approximate solutions to the electronic part of the Schrödinger equation, the Hartree-Fock approach. You can read more about Hartree-Fock theory in <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">this notebook</a>. Specifically, we will use the unrestricted Hartree-Fock approach, as implemented in the <a href="https://psicode.org">Psi4</a> electronic structure package, with the cc-pVDZ basis set.</p>
+<p>Because the harmonic oscillator problem is a model for molecular vibrations, it will be illustrative to consider how this potential relates to one for an actual molecular system. For the sake of simplicity, let us take the molecule to be molecular hydrogen, H$_2$. Below, we will calculate the potential energy curve along the bond stretch coordinate for H$_2$ using one of the simplest procedures for finding approximate solutions to the electronic part of the Schrödinger equation, the Hartree-Fock approach. You can read more about Hartree-Fock theory in <a href="https://deprincelab.github.io/tutorials/jupyter_notebooks/hartree_fock/hartree_fock.html">this notebook</a>. Specifically, we will use the unrestricted Hartree-Fock approach, as implemented in the <a href="https://psicode.org">Psi4</a> electronic structure package, with the cc-pVDZ basis set.</p>
 </div>
 </div>
 </div>
@@ -7576,8 +7862,8 @@ V(x) = \frac{1}{2} k (x - x_e)^2
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psi4</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psi4</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># set molecule</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">"""</span>
@@ -7646,7 +7932,7 @@ V(x) = \frac{1}{2} k (x - x_e)^2
 <span class="c1"># shift potential so the minimum value is zero</span>
 <span class="n">hf_potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hf_potential</span><span class="p">)</span> <span class="o">-</span> <span class="n">V_e</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hf_potential</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Hartree-Fock'</span><span class="p">)</span>
@@ -7693,7 +7979,7 @@ k = \frac{d^2}{dx^2} V(x)
 <p>$$\begin{align}
 k \approx \frac{V(x_e + h) - 2 V(x_e) + V(x_e - h)}{h^2} 
 \end{align}$$</p>
-<p>where $h$ is a displacement from the equilbrium H-H distance, $x_e$. Here, we calculate $k$ in this way and visualize the harmonic and Hartree-Fock potentials together.</p>
+<p>where $h$ is a displacement from the equilibrium H-H distance, $x_e$. Here, we calculate $k$ in this way and visualize the harmonic and Hartree-Fock potentials together.</p>
 </div>
 </div>
 </div>
@@ -7705,7 +7991,7 @@ k \approx \frac{V(x_e + h) - 2 V(x_e) + V(x_e - h)}{h^2}
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># equilbirum bond length</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># equilibrium bond length</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">hf_potential</span><span class="p">)</span>
 <span class="n">x_e</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
@@ -7764,7 +8050,7 @@ k \approx \frac{V(x_e + h) - 2 V(x_e) + V(x_e - h)}{h^2}
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="One-Dimensional-Classical-Harmonic-Oscillator">One-Dimensional Classical Harmonic Oscillator<a class="anchor-link" href="#One-Dimensional-Classical-Harmonic-Oscillator">¶</a></h2><p>Now, we seek solultions to the classical harmonic oscillator problem. In this case, let us assume that the equilibrium position, $x_e = 0$, and note that we would like to solve for the position as a function of time, $x(t)$. Recall that the harmonic restoring force is linear in the displacement,</p>
+<h2 id="One-Dimensional-Classical-Harmonic-Oscillator">One-Dimensional Classical Harmonic Oscillator<a class="anchor-link" href="#One-Dimensional-Classical-Harmonic-Oscillator">¶</a></h2><p>Now, we seek solutions to the classical harmonic oscillator problem. In this case, let us assume that the equilibrium position, $x_e = 0$, and note that we would like to solve for the position as a function of time, $x(t)$. Recall that the harmonic restoring force is linear in the displacement,</p>
 <p>$$ \begin{align}
 F_x = -k x(t)
 \end{align}$$</p>
@@ -7811,7 +8097,7 @@ x(t) = A\text{sin}\left ( \left [ k/m \right ]^{1/2} t + B \right )
 <span class="c1"># position, x(t)</span>
 <span class="n">x_t</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
 
-<span class="c1"># calculate velocicty from the position using np.gradient</span>
+<span class="c1"># calculate velocity from the position using np.gradient</span>
 <span class="n">velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
 <span class="c1"># kinetic energy</span>
@@ -7872,7 +8158,7 @@ x(t) = A\text{sin}\left ( \left [ k/m \right ]^{1/2} t + B \right )
 <p>$$ \begin{align}
 \omega = 2 \pi \nu = \left ( \frac{k}{m} \right )^{1/2}
 \end{align}$$</p>
-<p>The kinetic and potential energy also oscillate in time, but their sum, the total energy, is constant in time. This result makes sense because the oscillator is not being driven, nor is it interacting with any sort of bath, so the total energy should be conserved. Note also that the frequency with which the the kinetic and potential energy oscillate is twice the frequency with which the position oscillates. This behavior reflects the symmetry of the potential, $V(x)$. For example, the potential energy should go to zero twice per single oscillation of the position, once as the oscillator moves past its equilibrium position in the $+x$ direction and again when it passes through equilibrium in the $-x$ direction. Similarly, the kinetic energy should go to zero twice per oscillation in the position, at the two <strong>classical turning points</strong>.</p>
+<p>The kinetic and potential energy also oscillate in time, but their sum, the total energy, is constant in time. This result makes sense because the oscillator is not being driven, nor is it interacting with any sort of bath, so the total energy should be conserved. Note also that the frequency with which the kinetic and potential energy oscillate is twice the frequency with which the position oscillates. This behavior reflects the symmetry of the potential, $V(x)$. For example, the potential energy should go to zero twice per single oscillation of the position, once as the oscillator moves past its equilibrium position in the $+x$ direction and again when it passes through equilibrium in the $-x$ direction. Similarly, the kinetic energy should go to zero twice per oscillation in the position, at the two <strong>classical turning points</strong>.</p>
 <p>The classical turning point is the point at which the potential energy is equal to the total energy and the kinetic energy is equal to zero. The term, turning point, refers to the fact that this is the point at which the oscillator stops moving and reverses direction. For the classical harmonic oscillator with</p>
 <p>$$ \begin{align}
 x(t) = A\text{sin}\left ( \left [ k/m \right ]^{1/2} t + B \right ) 
@@ -7970,7 +8256,7 @@ V(x) = \frac{1}{2} k x^2
 \end{align}$$</p>
 <p>$m$ represents the mass of the oscillator, and we have assumed that $x_e = 0$. Recall from the classical harmonic oscillator problem that the force constant is related to the frequency of oscillation as</p>
 <p>$$\begin{align}
-k = \frac{1}{2\pi}\left ( \frac{k}{m} \right )^{1/2}
+\nu = \frac{1}{2\pi}\left ( \frac{k}{m} \right )^{1/2}
 \end{align}$$</p>
 <p>so the potential can be expressed as</p>
 <p>$$\begin{align}
@@ -7992,11 +8278,11 @@ V(x) = 2 m \nu^2 \pi^2 x^2
 <p>$$\begin{align}
 -\frac{\hbar^2}{2m}\left ( \frac{d^2}{dx^2} - \alpha^2 x^2 \right) \psi(x) = E \psi(x)
 \end{align}$$</p>
-<p>Rerranging this equation slightly gives us</p>
+<p>Rearranging this equation slightly gives us</p>
 <p>$$\begin{align}
 \frac{d^2}{dx^2} \psi(x) + \left (\frac{2 m E}{\hbar^2} - \alpha^2 x^2 \right )\psi(x) = 0 
 \end{align}$$</p>
-<p>Unfortunately, we can see that this differential equation is much more complicated than any that we have encountered so far, which is attributable to the fact that the potential depends the displacement, $x$. In order to solve this equation, we find a power series solution.</p>
+<p>Unfortunately, we can see that this differential equation is much more complicated than any that we have encountered so far, which is attributable to the fact that the potential depends on the displacement, $x$. In order to solve this equation, we find a power series solution.</p>
 </div>
 </div>
 </div>
@@ -8040,7 +8326,7 @@ e^{-\alpha x^2/2}\left [ -\alpha f(x) + \alpha^2 x^2 f(x) - 2\alpha x f^{\prime}
 <p>$$\begin{align}
 f^{\prime\prime}(x) - 2\alpha x f^{\prime}(x) + \left (\frac{2 m E}{\hbar^2} - \alpha\right )  f(x) = 0 
 \end{align}$$</p>
-<p>Now, we must evaluate the first and scond derivative of $f(x)$. Recall</p>
+<p>Now, we must evaluate the first and second derivative of $f(x)$. Recall</p>
 <p>$$ \begin{align}
 f(x) = \sum_{n=0}^{\infty} c_n x^n
 \end{align}$$</p>
@@ -8101,9 +8387,9 @@ c_{n+2} = \frac{\alpha(2n+1) - 2mE/\hbar^2}{(n+1)(n+2)} c_n
 <p>$$ \begin{align}
 \psi(x) = A e^{-\alpha x^2/2} \sum_{l=0}^{\infty} c_{2l+1} x^{2l+1} + B e^{-\alpha x^2/2} \sum_{l=0}^{\infty} c_{2l} x^{2l} 
 \end{align}$$</p>
-<p>Our task is not to determine the coefficients $A$, $B$, $c_0$, and $c_1$. To do so, we should ask ourselves how do these functions behave in the limit that $l$ becomes very large? Let us consider the ratio of two successive coefficients in the in the even series, $c_{2l+2}$ and $c_{2l}$:</p>
+<p>Our task is now to determine the coefficients $A$, $B$, $c_0$, and $c_1$. To do so, we should ask ourselves how do these functions behave in the limit that $l$ becomes very large? Let us consider the ratio of two successive coefficients in the even series, $c_{2l+2}$ and $c_{2l}$:</p>
 <p>$$ \begin{align}
-\frac{c_{2l+2}}{c_{2l}} = \frac{\alpha + 4 \alpha l - 2mE/\hbar^2}{(2l+1))(2l+2)}
+\frac{c_{2l+2}}{c_{2l}} = \frac{\alpha + 4 \alpha l - 2mE/\hbar^2}{(2l+1)(2l+2)}
 \end{align}$$</p>
 <p>In the limit of large $l$, we have</p>
 <p>$$\begin{align}
@@ -8117,7 +8403,7 @@ c_{n+2} = \frac{\alpha(2n+1) - 2mE/\hbar^2}{(n+1)(n+2)} c_n
 of already knowing the right answer, let us attempt to find a Taylor series expansion that looks similar in the limit of large $l$. Consider the Taylor series expansion for the Gaussian function</p>
 <p>$$\begin{align}
 e^{\alpha x^2} &amp;= \sum_{n=0} \frac{(\alpha x^2)^n}{n!} \\
-&amp;= 1 + \alpha x^2 + ... + \frac{\alpha^lx^{2l}}{l!} + \frac{\alpha^{l+1}x^{2l+1}}{(l+1)!}
+&amp;= 1 + \alpha x^2 + ... + \frac{\alpha^lx^{2l}}{l!} + \frac{\alpha^{l+1}x^{2l+2}}{(l+1)!}
 \end{align}$$</p>
 <p>Taking the ratio of the coefficients in the last two terms yields</p>
 <p>$$ \begin{align}
@@ -8139,7 +8425,7 @@ e^{\alpha x^2} &amp;= \sum_{n=0} \frac{(\alpha x^2)^n}{n!} \\
 \end{align}$$</p>
 <p>Recall that $\alpha = 2\pi\nu m / \hbar &gt; 0$ is a positive number, so</p>
 <p>$$\begin{align}
-\lim_{x \to \infty} \psi(x) = 0 
+\lim_{x \to \infty} \psi(x) = \infty 
 \end{align}$$</p>
 <p>which clearly is not acceptable because this result implies that</p>
 <ol>
@@ -8159,12 +8445,12 @@ E_v = \hbar\omega\left ( v + \frac{1}{2} \right) = h\nu \left( v + \frac{1}{2} \
 <ol>
 <li>The energy of the QHO is quantized, and $v$ is the quantum number. $v = 0, 1, 2, ...$ are allowed values for the quantum number.</li>
 <li>Once again, the application of boundary conditions has led to the quantization of the energy.</li>
-<li>The energy leves for a QHO are evenly spaced (by $\hbar \omega$ or $h\nu$).</li>
-<li>If $v=0$ is allowed (it is), then they lowest energy is
+<li>The energy levels for a QHO are evenly spaced (by $\hbar \omega$ or $h\nu$).</li>
+<li>If $v=0$ is allowed (it is), then the lowest energy is
 $$\begin{align}
 E_0 = \frac{1}{2} \hbar \omega = \frac{1}{2} h \nu
 \end{align}$$
-which is called the "zero-point" energy. Since there is no lower energy leven, the interpretation is that the energy of the QHO is non-zero, even at zero kelvin.</li>
+which is called the "zero-point" energy. Since there is no lower energy level, the interpretation is that the energy of the QHO is non-zero, even at zero kelvin.</li>
 </ol>
 </div>
 </div>
@@ -8255,7 +8541,7 @@ c_6 &amp;= 0 \\
 </tr>
 </tbody>
 </table>
-<p>Because the Gaussian part of the wave function, $e^{-\alpha x^2/2}$, is even in the displacement coordinate, the symmetry of the Hermite polynomials determines the overall symmetry of the wave function. Let us visualize the first few QHO wave functions using the built-in Hermite polynomial functionality in scipy library. For this excercise, we will use arbitrary values for the parameters, $\alpha$ and $m$, that are chosen for ease of visualization.</p>
+<p>Because the Gaussian part of the wave function, $e^{-\alpha x^2/2}$, is even in the displacement coordinate, the symmetry of the Hermite polynomials determines the overall symmetry of the wave function. Let us visualize the first few QHO wave functions using the built-in Hermite polynomial functionality in scipy library. For this exercise, we will use arbitrary values for the parameters, $\alpha$ and $m$, that are chosen for ease of visualization.</p>
 </div>
 </div>
 </div>
@@ -8268,10 +8554,10 @@ c_6 &amp;= 0 \\
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># for hermite polynomials</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
 
 <span class="c1"># for the factorial function</span>
-<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
 <span class="c1"># displacements</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -8389,7 +8675,7 @@ E = T_x + V(x)
 <p>$$ \begin{align}
 E = \langle T_x \rangle + \langle V(x) \rangle
 \end{align}$$</p>
-<p>if the state is an eigenfunction of the Hamiltonian. For the QHO problem, $\hat{T}$ does not commute with the Hamiltonian, nor does $V(x)$, so, it is impossible to define simultaneous eigenfunctions of these three operators, so we can only predict the expecation values, $\langle T\rangle $ and $\langle V(x)\rangle $. In one of the previous notebooks, we proved that</p>
+<p>if the state is an eigenfunction of the Hamiltonian. For the QHO problem, $\hat{T}$ does not commute with the Hamiltonian, nor does $V(x)$, so, it is impossible to define simultaneous eigenfunctions of these three operators, so we can only predict the expectation values, $\langle T\rangle $ and $\langle V(x)\rangle $. In one of the previous notebooks, we proved that</p>
 <p>$$ \begin{align}
 \langle T_x \rangle  \ge 0
 \end{align}$$</p>
@@ -8463,7 +8749,7 @@ P &amp;= 1 - \frac{2}{\pi^{1/2}} \int_{0}^1 e^{-\xi^2} d\xi \\
 &amp;= 0.1573
 \end{align}
 $$</p>
-<p>where erf(1) is <a href="https://mathworld.wolfram.com/Erf.html">the error function</a>. According to this analysis, there is a $\approx 16\%$ probability that an oscillator in the $v=0$ will be found past the classical turning point.</p>
+<p>where erf(1) is <a href="https://mathworld.wolfram.com/Erf.html">the error function</a>. According to this analysis, there is a $\approx 16\%$ probability that an oscillator in the $v=0$ state will be found past the classical turning point.</p>
 <p>How does the tunneling probability change with the quantum number, $v$? The <strong>Bohr Correspondence Principle</strong> states that quantum mechanics should recover classical results in the limit of large quantum numbers. Since the tunneling probability is zero for a classical harmonic oscillator, we should expect the tunneling probability to decrease with increasing $v$. The following Python code calculates the tunneling probability numerically so that we can visualize this trend, for up to $v=100.$</p>
 </div>
 </div>
@@ -8499,7 +8785,7 @@ $$</p>
     <span class="n">psi_v</span> <span class="o">=</span> <span class="n">N_v</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">H_v</span><span class="p">(</span><span class="n">alpha</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># P = 1 - 2 int...</span>
-    <span class="n">my_P</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">psi_v</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span> <span class="o">*</span> <span class="n">psi_v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">my_P</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">psi_v</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span> <span class="o">*</span> <span class="n">psi_v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
     <span class="n">P</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_P</span><span class="p">)</span>
 
@@ -8534,7 +8820,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Indeed, this numerical study demonstrates that the tunneling probability decreases monotonically with increasing $v$, as expected.</p>
-<p>A second manifiestation of the Bohr Correspondence Principle is the evolution of the overall shape of the probability density toward the classical limit, which is <a href="https://en.wikipedia.org/wiki/Classical_probability_density">given by</a></p>
+<p>A second manifestation of the Bohr Correspondence Principle is the evolution of the overall shape of the probability density toward the classical limit, which is <a href="https://en.wikipedia.org/wiki/Classical_probability_density">given by</a></p>
 <p>$$\begin{align}
 P = \frac{1}{\pi (x_\text{tp}^2 - x^2)^{1/2}}
 \end{align}$$</p>
@@ -8564,7 +8850,7 @@ P = \frac{1}{\pi (x_\text{tp}^2 - x^2)^{1/2}}
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
 
 <span class="c1"># animation function</span>
-<span class="k">def</span> <span class="nf">probability_density</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">probability_density</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
 
     <span class="c1"># energy</span>
     <span class="n">my_energy</span> <span class="o">=</span> <span class="n">hbar</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">*</span> <span class="p">(</span> <span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
@@ -8591,18 +8877,16 @@ P = \frac{1}{\pi (x_\text{tp}^2 - x^2)^{1/2}}
     <span class="c1"># P = 1/(pi * sqrt(xtp^2 - x^2))</span>
     <span class="n">P_classical</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">my_x_tp</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x_classical</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
-    <span class="n">P</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_P</span><span class="p">)</span>
-
     <span class="n">line1</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x_classical</span><span class="p">,</span> <span class="n">P_classical</span><span class="p">)</span>
     <span class="n">line2</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x_quantum</span><span class="p">,</span> <span class="n">P_quantum</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">animation</span>
 
 <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">probability_density</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -10507,7 +10791,7 @@ P_{i\to f} \propto |\epsilon_x|^2 |\langle \psi_i | \hat{\mu}_x |\psi_f \rangle 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Fermi's-Golden-Rule-for-Molecular-Vibrations">Fermi's Golden Rule for Molecular Vibrations<a class="anchor-link" href="#Fermi's-Golden-Rule-for-Molecular-Vibrations">¶</a></h4><p>Consider a vibrational mode in a molecular system that is modeled as a harmonic oscillator. For simplicity, let consider only a diatomic molecule. As discussed in the next section, vibrations in such a molecule can be described by the one-dimensional QHO model. Given the solutions to the Schrödinger equation derived above, we can use Fermi's Golden Rule to examine light-mediated transitions between vibrational states, $v$ and $v^\prime$. Assuming that the frequency-matching condition is met by the external perturbation, we have</p>
+<h4 id="Fermi's-Golden-Rule-for-Molecular-Vibrations">Fermi's Golden Rule for Molecular Vibrations<a class="anchor-link" href="#Fermi's-Golden-Rule-for-Molecular-Vibrations">¶</a></h4><p>Consider a vibrational mode in a molecular system that is modeled as a harmonic oscillator. For simplicity, let us consider only a diatomic molecule. As discussed in the next section, vibrations in such a molecule can be described by the one-dimensional QHO model. Given the solutions to the Schrödinger equation derived above, we can use Fermi's Golden Rule to examine light-mediated transitions between vibrational states, $v$ and $v^\prime$. Assuming that the frequency-matching condition is met by the external perturbation, we have</p>
 <p>$$ \begin{align}
 P_{v \to v^\prime} \propto | \langle \psi_{v^\prime}| \hat{\mu}_x | \psi_v \rangle|^2 
 \end{align}$$</p>
@@ -10523,7 +10807,7 @@ P_{v \to v^\prime} \propto | \langle \psi_{v^\prime}| x | \psi_v \rangle|^2
 <p>$$ \begin{align}
 N_v = (2^v v!)^{-1/2} \left ( \frac{\alpha}{\pi}\right )^{1/4}
 \end{align}$$</p>
-<p>Given states of these form, what are the selection rules? In other words, for what $v$ and $v^\prime$ is the integral $\langle \psi_{v^\prime}| x | \psi_v \rangle,$ and, thus, $P_{v\to v^\prime}$, nonzero? We can answer that question relatively easily with the following two properties:</p>
+<p>Given states of this form, what are the selection rules? In other words, for what $v$ and $v^\prime$ is the integral $\langle \psi_{v^\prime}| x | \psi_v \rangle,$ and, thus, $P_{v\to v^\prime}$, nonzero? We can answer that question relatively easily with the following two properties:</p>
 <ol>
 <li><p><strong>Orthonormality</strong>: Normalized QHO eigenfunctions form an orthonormal set:
 $$ \begin{align}
@@ -10564,7 +10848,7 @@ z H_v(z) = v H_{v-1}(z) + \frac{1}{2} H_{v+1}(z)
 \end{align}$$
 and
 $$\begin{align}
-\int_{-\infty}^\infty e^{-z^2} H_{v^\prime}(z) H_{v+1}(z) dz \propto \langle \psi_{v^\prime}|\psi_{v-1}\rangle = \delta_{v^\prime(v+1)}
+\int_{-\infty}^\infty e^{-z^2} H_{v^\prime}(z) H_{v+1}(z) dz \propto \langle \psi_{v^\prime}|\psi_{v+1}\rangle = \delta_{v^\prime(v+1)}
 \end{align}$$</p>
 <p>which implies that</p>
 <p>$$ \begin{align}
@@ -10578,7 +10862,7 @@ v^\prime = v - 1
 <p>$$ \begin{align}
 v^\prime = v + 1
 \end{align}$$</p>
-<p>In order words, the change in the vibrational quantum number $\Delta v = v^\prime - v$ must be</p>
+<p>In other words, the change in the vibrational quantum number $\Delta v = v^\prime - v$ must be</p>
 <p>$$\begin{align}
 \Delta v = \pm 1
 \end{align}$$</p>
@@ -10613,7 +10897,7 @@ E_\text{vib} = \sum_i h \nu_i ( v_i + 1/2 )
 <p>$$\begin{align}
 E_\text{ZPE} = \frac{1}{2} \sum_i h \nu_i
 \end{align}$$</p>
-<p>The harmonic vibrational frequencies can be determined using the method of <a href="https://en.wikipedia.org/wiki/GF_method">F and G matrices</a>, for example. Let us consider the simplest case, a heteronuclear diatomic molecule, $H_2$. As discussed above, one can calculate the potential energy curve as a function of the H-H distance using a quantum chemistry method such as Hartree-Fock theory. The potential near the equilibrium geometry can then be approximated with a harmonic one, where the force constant is defined by the second derivative of the calculated potential. Here is the same Python code used above to visualize the calculated and harmonic potentials.</p>
+<p>The harmonic vibrational frequencies can be determined using the method of <a href="https://en.wikipedia.org/wiki/GF_method">F and G matrices</a>, for example. Let us consider the simplest case, a homonuclear diatomic molecule, $H_2$. As discussed above, one can calculate the potential energy curve as a function of the H-H distance using a quantum chemistry method such as Hartree-Fock theory. The potential near the equilibrium geometry can then be approximated with a harmonic one, where the force constant is defined by the second derivative of the calculated potential. Here is the same Python code used above to visualize the calculated and harmonic potentials.</p>
 </div>
 </div>
 </div>
@@ -10625,11 +10909,11 @@ E_\text{ZPE} = \frac{1}{2} \sum_i h \nu_i
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># redefine x because it has been over written</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># redefine x because it has been overwritten</span>
 <span class="n">dx</span> <span class="o">=</span> <span class="mf">0.05</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">3.05</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
 
-<span class="c1"># equilbirum bond length</span>
+<span class="c1"># equilibrium bond length</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">hf_potential</span><span class="p">)</span>
 <span class="n">x_e</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
@@ -10689,7 +10973,7 @@ E_\text{ZPE} = \frac{1}{2} \sum_i h \nu_i
 <p>$$\begin{align}
 \nu = \frac{1}{2\pi} \left ( \frac{k}{\mu} \right )^{1/2}
 \end{align}$$</p>
-<p>We can determine $\nu$ using the value for $k$ extracted from the Hartree-Fock potential energy curve. We must be careful of our units, though. Having calculated $k$ as the second derivative of the potential, its units are $E_h / Å^2$, where $E_h$ represents the Hartree, the atomic unit for energy. Calculating $\nu$ is probabaly easiest done in atomic units, where 1 Å = 1.8897259886 a$_0$, where a$_0$ is the Bohr, the atomic unit of distance.</p>
+<p>We can determine $\nu$ using the value for $k$ extracted from the Hartree-Fock potential energy curve. We must be careful of our units, though. Having calculated $k$ as the second derivative of the potential, its units are $E_h / Å^2$, where $E_h$ represents the Hartree, the atomic unit for energy. Calculating $\nu$ is probably easiest done in atomic units, where 1 Å = 1.8897259886 a$_0$, where a$_0$ is the Bohr, the atomic unit of distance.</p>
 </div>
 </div>
 </div>
@@ -10821,7 +11105,7 @@ The harmonic frequency is   4581.4 cm^-1
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Transition-State-Optimization">Transition State Optimization<a class="anchor-link" href="#Transition-State-Optimization">¶</a></h3><p>In addition to frequency information, vibrational analysis can be used to confirm whether a stationary point that has been identified via a geometry optimization is a minimum in all of the coordinates, a transition state, or some other high-order saddle point. Each of these cases can be differentiated by the number of <strong>imaginary</strong> frequencies that result from the vibrational analysis. Recall that the harmonic frequency is related to the square root of the second derivative of the potential along one of the normal modes. If the potential is a minimum along this coordinate, then the second derivative is positive, and the frequency is real (because the square root of a positive number is real-valued). If the potential is a maximum along this coordinate, then the second derivative is negative, and the frequency is imaginary (because the square root of a negative number is imaginary). Hence, if all of the frequencies obtained from the vibrational analysis are real, then the molecule is at a minimum all of coordinates. If there exists one and only one imaginary frequency, then the molecule is at a transition state. If there are multiple imaginary fruequencies, then the molecule is at some high-order saddle point that is not a transition state.</p>
+<h3 id="Transition-State-Optimization">Transition State Optimization<a class="anchor-link" href="#Transition-State-Optimization">¶</a></h3><p>In addition to frequency information, vibrational analysis can be used to confirm whether a stationary point that has been identified via a geometry optimization is a minimum in all of the coordinates, a transition state, or some other higher-order saddle point. Each of these cases can be differentiated by the number of <strong>imaginary</strong> frequencies that result from the vibrational analysis. Recall that the harmonic frequency is related to the square root of the second derivative of the potential along one of the normal modes. If the potential is a minimum along this coordinate, then the second derivative is positive, and the frequency is real (because the square root of a positive number is real-valued). If the potential is a maximum along this coordinate, then the second derivative is negative, and the frequency is imaginary (because the square root of a negative number is imaginary). Hence, if all of the frequencies obtained from the vibrational analysis are real, then the molecule is at a minimum in all of the coordinates. If there exists one and only one imaginary frequency, then the molecule is at a transition state. If there are multiple imaginary frequencies, then the molecule is at some higher-order saddle point that is not a transition state.</p>
 <p>Consider the following simple isomerization reaction:</p>
 <p>$$\begin{align}
 \text{HCN} \longleftrightarrow \text{HNC} \nonumber
@@ -10910,11 +11194,11 @@ The harmonic frequency for mode 2 is   2881.8 cm^-1
 <p>$$\begin{align}
 \rho_i = \frac{e^{-E_i/kT}}{\sum_j e^{-E_j/kT}}
 \end{align}$$</p>
-<p>Where $E_i$ is the energy of the state, $k$ is the Boltzmann constant, and the term in the denominator is the canonical partition function. The relative populations of two states is given by</p>
+<p>Where $E_i$ is the energy of the state, $k$ is the Boltzmann constant, and the term in the denominator is the canonical partition function. The relative population of two states is given by</p>
 <p>$$\begin{align}
 \frac{\rho_i}{\rho_j} = e^{-(E_i-E_j)/kT}
 \end{align}$$</p>
-<p>Obviously, the relative populations depend on the temperature. The populations also depend on how closely-spaced the energy levels are. Recall that $\nu = \frac{1}{2\pi}\left ( \frac{k}{\mu} \right )$. As such, if $\mu$ is small (e.g., H$_2$, HCl), then the spacing between levels will be large, and, at room temperature, the $v=0$ state will be the most populated. On the other hand, if $\mu$ is large (e.g., I$_2$), the spacing between levels is much smaller, and other vibrational states may become thermally accessible.</p>
+<p>Obviously, the relative populations depend on the temperature. The populations also depend on how closely-spaced the energy levels are. Recall that $\nu = \frac{1}{2\pi}\left ( \frac{k}{\mu} \right )^{1/2}$. As such, if $\mu$ is small (e.g., H$_2$, HCl), then the spacing between levels will be large, and, at room temperature, the $v=0$ state will be the most populated. On the other hand, if $\mu$ is large (e.g., I$_2$), the spacing between levels is much smaller, and other vibrational states may become thermally accessible.</p>
 <p>At low temperatures, the principal absorption band in a vibrational spectrum will correspond to the $v=0 \to v=1$ transition. Depending on the temperature, the spectrum may also include <strong>hot bands</strong> corresponding to transitions from higher-energy vibrational states (e.g., $v=1 \to v=2$, etc.).</p>
 </div>
 </div>

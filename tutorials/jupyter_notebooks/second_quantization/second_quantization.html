@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Second Quantization
 math: true
+title: Second Quantization
 ---
 
 <b>Jupyter Notebook Tutorials: Quantum Chemistry</b>
@@ -7331,6 +7331,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7350,7 +7351,12 @@ a.anchor-link {
     if (!diagrams.length) {
       return;
     }
-    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs")).default;
+    const mermaid = (await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs")).default;
+    const elkUrl = "https://cdnjs.cloudflare.com/ajax/libs/mermaid-layout-elk/0.1.9/mermaid-layout-elk.esm.min.mjs";
+    if(elkUrl) {
+      const elkLayouts = (await import(elkUrl)).default;
+      mermaid.registerLayoutLoaders(elkLayouts);
+    }
     const parser = new DOMParser();
 
     mermaid.initialize({
@@ -7447,7 +7453,8 @@ a.anchor-link {
      * Post-process to ensure mermaid diagrams contain only valid SVG and XHTML.
      */
     function cleanMermaidSvg(svg) {
-      return svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      svg = svg.replace(RE_VOID_ELEMENT, replaceVoidElement);
+      return `${SVG_XML_HEADER}${svg}`;
     }
 
 
@@ -7473,6 +7480,285 @@ a.anchor-link {
       }
       return `<${tag} ${rest}>`;
     }
+
+
+  /**
+   * Named HTML entities with their decimal equivalent codes.
+   *
+   * @see https://www.w3.org/TR/WD-html40-970708/sgml/entities.html
+   * */
+  const HTML_ENTITIES = `<!ENTITY Aacute "&#193;">
+<!ENTITY aacute "&#225;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY acirc "&#226;">
+<!ENTITY acute "&#180;">
+<!ENTITY AElig "&#198;">
+<!ENTITY aelig "&#230;">
+<!ENTITY Agrave "&#192;">
+<!ENTITY agrave "&#224;">
+<!ENTITY alefsym "&#8501;">
+<!ENTITY Alpha "&#913;">
+<!ENTITY alpha "&#945;">
+<!ENTITY amp "&#38;">
+<!ENTITY and "&#8869;">
+<!ENTITY ang "&#8736;">
+<!ENTITY Aring "&#197;">
+<!ENTITY aring "&#229;">
+<!ENTITY asymp "&#8776;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY atilde "&#227;">
+<!ENTITY Auml "&#196;">
+<!ENTITY auml "&#228;">
+<!ENTITY bdquo "&#8222;">
+<!ENTITY Beta "&#914;">
+<!ENTITY beta "&#946;">
+<!ENTITY brvbar "&#166;">
+<!ENTITY bull "&#8226;">
+<!ENTITY cap "&#8745;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY cedil "&#184;">
+<!ENTITY cent "&#162;">
+<!ENTITY Chi "&#935;">
+<!ENTITY chi "&#967;">
+<!ENTITY circ "&#710;">
+<!ENTITY clubs "&#9827;">
+<!ENTITY cong "&#8773;">
+<!ENTITY copy "&#169;">
+<!ENTITY crarr "&#8629;">
+<!ENTITY cup "&#8746;">
+<!ENTITY curren "&#164;">
+<!ENTITY dagger "&#8224;">
+<!ENTITY Dagger "&#8225;">
+<!ENTITY darr "&#8595;">
+<!ENTITY dArr "&#8659;">
+<!ENTITY deg "&#176;">
+<!ENTITY Delta "&#916;">
+<!ENTITY delta "&#948;">
+<!ENTITY diams "&#9830;">
+<!ENTITY divide "&#247;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY eacute "&#233;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY egrave "&#232;">
+<!ENTITY empty "&#8709;">
+<!ENTITY emsp "&#8195;">
+<!ENTITY ensp "&#8194;">
+<!ENTITY epsilon "&#949;">
+<!ENTITY Epsilon "&#917;">
+<!ENTITY equiv "&#8801;">
+<!ENTITY Eta "&#919;">
+<!ENTITY eta "&#951;">
+<!ENTITY ETH "&#208;">
+<!ENTITY eth "&#240;">
+<!ENTITY Euml "&#203;">
+<!ENTITY euml "&#235;">
+<!ENTITY exist "&#8707;">
+<!ENTITY fnof "&#402;">
+<!ENTITY forall "&#8704;">
+<!ENTITY frac12 "&#189;">
+<!ENTITY frac14 "&#188;">
+<!ENTITY frac34 "&#190;">
+<!ENTITY frasl "&#8260;">
+<!ENTITY Gamma "&#915;">
+<!ENTITY gamma "&#947;">
+<!ENTITY ge "&#8805;">
+<!ENTITY gt "&#62;">
+<!ENTITY harr "&#8596;">
+<!ENTITY hArr "&#8660;">
+<!ENTITY hearts "&#9829;">
+<!ENTITY hellip "&#8230;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY iacute "&#237;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iexcl "&#161;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY igrave "&#236;">
+<!ENTITY image "&#8465;">
+<!ENTITY infin "&#8734;">
+<!ENTITY int "&#8747;">
+<!ENTITY Iota "&#921;">
+<!ENTITY iota "&#953;">
+<!ENTITY iquest "&#191;">
+<!ENTITY isin "&#8712;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY iuml "&#239;">
+<!ENTITY Kappa "&#922;">
+<!ENTITY kappa "&#954;">
+<!ENTITY Lambda "&#923;">
+<!ENTITY lambda "&#955;">
+<!ENTITY lang "&#9001;">
+<!ENTITY laquo "&#171;">
+<!ENTITY larr "&#8592;">
+<!ENTITY lArr "&#8656;">
+<!ENTITY lceil "&#8968;">
+<!ENTITY ldquo "&#8220;">
+<!ENTITY le "&#8804;">
+<!ENTITY lfloor "&#8970;">
+<!ENTITY lowast "&#8727;">
+<!ENTITY loz "&#9674;">
+<!ENTITY lrm "&#8206;">
+<!ENTITY lsaquo "&#8249;">
+<!ENTITY lsquo "&#8216;">
+<!ENTITY lt "&#60;">
+<!ENTITY macr "&#175;">
+<!ENTITY mdash "&#8212;">
+<!ENTITY micro "&#181;">
+<!ENTITY middot "&#183;">
+<!ENTITY minus "&#8722;">
+<!ENTITY Mu "&#924;">
+<!ENTITY mu "&#956;">
+<!ENTITY nabla "&#8711;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY ndash "&#8211;">
+<!ENTITY ne "&#8800;">
+<!ENTITY ni "&#8715;">
+<!ENTITY not "&#172;">
+<!ENTITY notin "&#8713;">
+<!ENTITY nsub "&#8836;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY Nu "&#925;">
+<!ENTITY nu "&#957;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY oacute "&#243;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY OElig "&#338;">
+<!ENTITY oelig "&#339;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oline "&#8254;">
+<!ENTITY Omega "&#937;">
+<!ENTITY omega "&#969;">
+<!ENTITY Omicron "&#927;">
+<!ENTITY omicron "&#959;">
+<!ENTITY oplus "&#8853;">
+<!ENTITY or "&#8870;">
+<!ENTITY ordf "&#170;">
+<!ENTITY ordm "&#186;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY oslash "&#248;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY otilde "&#245;">
+<!ENTITY otimes "&#8855;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY ouml "&#246;">
+<!ENTITY para "&#182;">
+<!ENTITY part "&#8706;">
+<!ENTITY permil "&#8240;">
+<!ENTITY perp "&#8869;">
+<!ENTITY Phi "&#934;">
+<!ENTITY phi "&#966;">
+<!ENTITY Pi "&#928;">
+<!ENTITY pi "&#960;">
+<!ENTITY piv "&#982;">
+<!ENTITY plusmn "&#177;">
+<!ENTITY pound "&#163;">
+<!ENTITY prime "&#8242;">
+<!ENTITY Prime "&#8243;">
+<!ENTITY prod "&#8719;">
+<!ENTITY prop "&#8733;">
+<!ENTITY Psi "&#936;">
+<!ENTITY psi "&#968;">
+<!ENTITY quot "&#34;">
+<!ENTITY radic "&#8730;">
+<!ENTITY rang "&#9002;">
+<!ENTITY raquo "&#187;">
+<!ENTITY rarr "&#8594;">
+<!ENTITY rArr "&#8658;">
+<!ENTITY rceil "&#8969;">
+<!ENTITY rdquo "&#8221;">
+<!ENTITY real "&#8476;">
+<!ENTITY reg "&#174;">
+<!ENTITY rfloor "&#8971;">
+<!ENTITY Rho "&#929;">
+<!ENTITY rho "&#961;">
+<!ENTITY rlm "&#8207;">
+<!ENTITY rsaquo "&#8250;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY sbquo "&#8218;">
+<!ENTITY Scaron "&#352;">
+<!ENTITY scaron "&#353;">
+<!ENTITY sdot "&#8901;">
+<!ENTITY sect "&#167;">
+<!ENTITY shy "&#173;">
+<!ENTITY Sigma "&#931;">
+<!ENTITY sigma "&#963;">
+<!ENTITY sigmaf "&#962;">
+<!ENTITY sim "&#8764;">
+<!ENTITY spades "&#9824;">
+<!ENTITY sub "&#8834;">
+<!ENTITY sube "&#8838;">
+<!ENTITY sum "&#8721;">
+<!ENTITY sup "&#8835;">
+<!ENTITY sup1 "&#185;">
+<!ENTITY sup2 "&#178;">
+<!ENTITY sup3 "&#179;">
+<!ENTITY supe "&#8839;">
+<!ENTITY szlig "&#223;">
+<!ENTITY Tau "&#932;">
+<!ENTITY tau "&#964;">
+<!ENTITY there4 "&#8756;">
+<!ENTITY Theta "&#920;">
+<!ENTITY theta "&#952;">
+<!ENTITY thetasym "&#977;">
+<!ENTITY thinsp "&#8201;">
+<!ENTITY THORN "&#222;">
+<!ENTITY thorn "&#254;">
+<!ENTITY tilde "&#732;">
+<!ENTITY times "&#215;">
+<!ENTITY trade "&#8482;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY uacute "&#250;">
+<!ENTITY uarr "&#8593;">
+<!ENTITY uArr "&#8657;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uml "&#168;">
+<!ENTITY upsih "&#978;">
+<!ENTITY Upsilon "&#933;">
+<!ENTITY upsilon "&#965;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY uuml "&#252;">
+<!ENTITY weierp "&#8472;">
+<!ENTITY Xi "&#926;">
+<!ENTITY xi "&#958;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY yacute "&#253;">
+<!ENTITY yen "&#165;">
+<!ENTITY Yuml "&#376;">
+<!ENTITY yuml "&#255;">
+<!ENTITY Zeta "&#918;">
+<!ENTITY zeta "&#950;">
+<!ENTITY zwj "&#8205;">
+<!ENTITY zwnj "&#8204;">`.replace(/\n/g, ' ');
+
+  /**
+   * A reasonably strict xml declaration.
+   */
+  const XML_DECL = '<?xml version="1.0" standalone="no"?>';
+
+  /**
+   * The beginning of the XML doctype declaration.
+   */
+  const DOCTYPE_START = `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [`;
+
+  /**
+   * The end of the XML docype declaration.
+   */
+  const DOCTYPE_END = ']>';
+
+  /**
+   * A full header for an SVG XML document.
+   */
+  const SVG_XML_HEADER = `${XML_DECL}
+    ${DOCTYPE_START}${HTML_ENTITIES}${DOCTYPE_END}`;
 
     void Promise.all([...diagrams].map(renderOneMarmaid));
   });
@@ -7570,8 +7856,8 @@ a.anchor-link {
 \end{align}
 $$</p>
 <p>The right-hand side of the first equation is zero because one cannot annihilate an electron in an empty spin-orbital. The right-hand side of the last equation is zero because the spin-orbitals can contain a maximum of one electron. Acting on a multielectron state is similar, except that we must be a little careful because we need to account for the antisymmetry of the state. For example, consider an annihilator acting on a two-electron / two-orbital state</p>
-<p>$$ \hat{a}_1 = | 1_0, 1_1 \rangle = -\hat{a}_1| 1_1, 1_0 \rangle = -|0_1 1_0\rangle = -|1_0 0_1 \rangle$$</p>
-<p>The minus sign resuts from the fact that we need to move orbital 1 to the front of the occupation number vector in order to annihilate the electron in that orbital, and we accumulate a minus sign every time we swap two occupied orbitals. For a general Fock state, we would have</p>
+<p>$$ \hat{a}_1 | 1_0, 1_1 \rangle = -\hat{a}_1| 1_1, 1_0 \rangle = -|0_1 1_0\rangle = -|1_0 0_1 \rangle$$</p>
+<p>The minus sign results from the fact that we need to move orbital 1 to the front of the occupation number vector in order to annihilate the electron in that orbital, and we accumulate a minus sign every time we swap two occupied orbitals. For a general Fock state, we would have</p>
 <p>$$ 
 \begin{align}
 \hat{a}_k | n_0, n_1, ..., 1_k, n_{k+1}, ..., n_m \rangle &amp;= (-1)^{\sum_{l &lt; k} n_l} \hat{a}_k | 1_k, n_0, n_1, ..., n_{k+1}, ..., n_m \rangle \\
@@ -7591,7 +7877,7 @@ $$</p>
 <p>$$ \hat{a}^\dagger_k \hat{a}_k | n_0, n_1, ..., n_k, ..., n_m \rangle = n_k | n_0, n_1, ..., n_k, ..., n_{k+1}, ..., n_m \rangle  $$</p>
 <p>which suggests that we can define a number operator to count the total number of electrons in the state as</p>
 <p>$$ \hat{N} = \sum_p \hat{a}^\dagger_p \hat{a}_p $$</p>
-<p>The existence of this operator is our first clue that we should be able build useful quantum mechanical operators from sums / products of creation and annihilation operators.</p>
+<p>The existence of this operator is our first clue that we should be able to build useful quantum mechanical operators from sums / products of creation and annihilation operators.</p>
 <p>The algebraic properties of Fermionic creation and annihilation operators encode the antisymmetry properties that should be satisfied by many-electron wave functions. Specifically, Fermionic creation and annihilation operators satisfy the following anticommutation relations</p>
 <p>$$ \{\hat{a}_p, \hat{a}_q \} = \hat{a}_p \hat{a}_q + \hat{a}_q \hat{a}_p = 0$$</p>
 <p>$$ \{\hat{a}^\dagger_p, \hat{a}^\dagger_q \} = \hat{a}^\dagger_p \hat{a}^\dagger_q + \hat{a}^\dagger_q \hat{a}^\dagger_p = 0$$</p>
@@ -7619,7 +7905,7 @@ $$</p>
 <p>The second-quantized form of this operator, expanded within a basis of $m$ spin orbitals, is</p>
 <p>$$ \mathcal{O}_2 = \frac{1}{2} \sum_{pqrs} \langle \phi_p({\bf x}_1)\phi_q({\bf x}_2) | \hat{g}({\bf x}_i, {\bf x}_j) | \phi_r({\bf x}_1) \phi_s({\bf x}_2) \rangle \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r = \frac{1}{2} \sum_{pqrs} g_{pqrs} \hat{a}_p^\dagger \hat{a}_q^\dagger \hat{a}_s \hat{a}_r $$</p>
 <p>Note that the double sum in the original operator is restricted, whereas no restrictions appear in the second-quantized form of the operator.</p>
-<h3 id="Products-of-Operators">Products of Operators<a class="anchor-link" href="#Products-of-Operators">¶</a></h3><p>Occasionally one may encounter products of operators, and it is important to recognize that the second-quantized form of the product operator depends on whether the one takes the product of the original operators or their second-quantized forms. Consider two one-body operators, $\hat{A}$ and $\hat{B}$, defined as</p>
+<h3 id="Products-of-Operators">Products of Operators<a class="anchor-link" href="#Products-of-Operators">¶</a></h3><p>Occasionally one may encounter products of operators, and it is important to recognize that the second-quantized form of the product operator depends on whether one takes the product of the original operators or their second-quantized forms. Consider two one-body operators, $\hat{A}$ and $\hat{B}$, defined as</p>
 <p>$$
 \begin{align}
 \hat{A} &amp;= \sum_i \hat{A}({\bf x}_i) \\
@@ -7657,20 +7943,20 @@ $$</p>
 \left ( \sum_{pr} A_{pr} \hat{a}^\dagger_p \hat{a}_r \right ) \left ( \sum_{qs} B_{qs} \hat{a}^\dagger_q \hat{a}_s \right ) &amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}_r \hat{a}^\dagger_q \hat{a}_s \\
 &amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p (\delta_{qr} - \hat{a}^\dagger_q \hat{a}_r ) \hat{a}_s \\
 &amp;= -\sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}^\dagger_q \hat{a}_r \hat{a}_s + 
-\sum_{pqrs} \delta_{pr} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}_s \\
+\sum_{pqrs} \delta_{qr} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}_s \\
 &amp;= \sum_{pqrs} A_{pr} B_{qs} \hat{a}^\dagger_p \hat{a}^\dagger_q \hat{a}_s \hat{a}_r + \sum_{pq} \left ( \sum_r A_{pr} B_{rq}  \right ) \hat{a}^\dagger_p \hat{a}_q
 \end{align}
 $$</p>
-<p>where, in the second and fourth lines, we have made use of two of the anticommutator identies given above. We can see that these two representations of $\hat{A}\hat{B}$ differ in the one-body part, and it turns out that these representations are only equivalent in the limit that the basis set $\{\phi\}$ is complete. This result makes sense because we can relate the two forms of the one-body part through the resolution of the identity, i.e.,</p>
+<p>where, in the second and fourth lines, we have made use of two of the anticommutator identities given above. We can see that these two representations of $\hat{A}\hat{B}$ differ in the one-body part, and it turns out that these representations are only equivalent in the limit that the basis set $\{\phi\}$ is complete. This result makes sense because we can relate the two forms of the one-body part through the resolution of the identity, i.e.,</p>
 <p>$$ 
 \begin{align}
-\sum_r A_{pr} B_{rq} &amp;= \sum_r \langle \phi_p({\bf x}_1)| \hat{A}({\bf x}_1) |\phi_r({\bf x}_1\rangle \langle \phi_r({\bf x}_1)| \hat{B}({\bf x}_1) | \phi_q({\bf x}_1)\rangle \\
+\sum_r A_{pr} B_{rq} &amp;= \sum_r \langle \phi_p({\bf x}_1)| \hat{A}({\bf x}_1) |\phi_r({\bf x}_1)\rangle \langle \phi_r({\bf x}_1)| \hat{B}({\bf x}_1) | \phi_q({\bf x}_1)\rangle \\
 &amp; = \langle \phi_p({\bf x}_1)| \hat{A}({\bf x}_1) \hat{B}({\bf x}_1) | \phi_q({\bf x}_1)\rangle \\
 &amp; = (AB)_{pq}
 \end{align}
 $$</p>
 <p>where we have used the fact that</p>
-<p>$$\sum_r |\phi_r({\bf x}_1\rangle \langle \phi_r({\bf x}_1)| = \hat{1}$$</p>
+<p>$$\sum_r |\phi_r({\bf x}_1)\rangle \langle \phi_r({\bf x}_1)| = \hat{1}$$</p>
 <p>if the basis set is complete.</p>
 </div>
 </div>
@@ -7698,7 +7984,7 @@ $$</p>
 <p>Here, the labels $i$, $j$, $k$, ... refer to orbitals that are occupied in the reference determinant, $|\Phi_0\rangle$, and $a$, $b$, $c$, ... refer to unoccupied orbitals. So, the operator $\hat{C}_1$ is a single excitation operator, which generates Slater determinants where an electron in occupied orbital $\phi_i$ is moved to virtual orbital $\phi_a$. Similarly, $\hat{C}_2$ is a double excitation operator that generates configurations that are doubly substituted with respect to $|\Phi_0\rangle$. The coefficients, $c_i^a$, $c_{ij}^{ab}$, etc. are variable parameters that can be determined according to the variation theorem (i.e., by minimizing the electronic energy with respect to variations in the coefficients). Additional details regarding the properties of CI wave functions and how the CI coefficients can be determined in practice will be provided in another tutorial project.</p>
 <p>Other types of wave functions can be defined in a similar way. For example, the coupled-cluster family of wave functions has the form</p>
 <p>$$ |\Psi_{\rm CC}\rangle = \text{exp}(\hat{T})|\Phi_0\rangle$$</p>
-<p>where $\hat{T} = \hat{T}_1 + \hat{T}_2 + ... \hat{T}_N$ is the cluster operator and</p>
+<p>where $\hat{T} = \hat{T}_1 + \hat{T}_2 + ... + \hat{T}_N$ is the cluster operator and</p>
 <p>$$
 \begin{align}
 \hat{T}_1 &amp;= \sum_{ia} t_i^a \hat{a}^\dagger_a \hat{a}_i \\
@@ -7718,7 +8004,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Normal-Order">Normal Order<a class="anchor-link" href="#Normal-Order">¶</a></h2><h3 id="The-True-Vacuum">The True Vacuum<a class="anchor-link" href="#The-True-Vacuum">¶</a></h3><p>One of the benefits of second quantization is that it simplifies the way in which we evaluate integrals involving quantum mechanical operators and many-body wave functions. It turns out that integrals over these operators are most conveniently dealt with when the operators are in "normal order," that is, when all of the creation operators lie to the left of the annihilation operators. Technically, this this definition of normal order is relative to the true vacuum state ($|\rangle$), whereas many electronic structure methods rely on a normal order relative to a different state, which is usually the  Fermi vacuum. This case will be discussed in the next section.</p>
+<h2 id="Normal-Order">Normal Order<a class="anchor-link" href="#Normal-Order">¶</a></h2><h3 id="The-True-Vacuum">The True Vacuum<a class="anchor-link" href="#The-True-Vacuum">¶</a></h3><p>One of the benefits of second quantization is that it simplifies the way in which we evaluate integrals involving quantum mechanical operators and many-body wave functions. It turns out that integrals over these operators are most conveniently dealt with when the operators are in "normal order," that is, when all of the creation operators lie to the left of the annihilation operators. Technically, this definition of normal order is relative to the true vacuum state ($|\rangle$), whereas many electronic structure methods rely on a normal order relative to a different state, which is usually the  Fermi vacuum. This case will be discussed in the next section.</p>
 <p>For the true vacuum state, normal order is defined when the creation operators are all to the left of the annihilation operators. In this way, any expectation value of a string of normal-ordered operators (with respect to the vacuum state) will be zero. For example,</p>
 <p>$$ 
 \begin{align} 
@@ -7733,7 +8019,7 @@ $$</p>
 \langle | \hat{a}^\dagger_p \hat{a}^\dagger_q = \left (\hat{a}_q \hat{a}_p|\rangle\right )^\dagger = 0 \\
 \end{align}
 $$</p>
-<p>Now, consider an operator that is not normal ordered, $\hat{a}_p \hat{a}^\dagger_q$. Briging this operator to normal order is easy; we simply apply the Fermionic anticommutation relations given above. We then find</p>
+<p>Now, consider an operator that is not normal ordered, $\hat{a}_p \hat{a}^\dagger_q$. Bringing this operator to normal order is easy; we simply apply the Fermionic anticommutation relations given above. We then find</p>
 <p>$$ \langle | \hat{a}_p \hat{a}^\dagger_q | \rangle = \langle | \delta_{pq} | \rangle - \langle | \hat{a}^\dagger_p \hat{a}_q | \rangle = \delta_{pq} $$</p>
 <p>The term that does not vanish is the one that does not include any operators. This is the power of the concept of normal order. If we would like to evaluate the expectation value of some second-quantized object, we simply need to bring that object to normal order. The only non-zero terms will be the "fully-contracted" ones that do not involve any operators.</p>
 <p>Bringing more general strings of creation and annihilation operators to normal order is straightforward enough, given the anti-commutator relations obeyed by the operators. The challenge is really just that the application of these rules can become tedious. Thankfully, computers are well suited for tedious tasks.  We have developed a tool (<a href="https://github.com/edeprince3/pdaggerq">pdaggerq</a>) that uses a simple Python interface to define and rearrange complicated strings of creation and annihilation operators. For example, the following Python code will bring the expression $\hat{a}_i^{\dagger}\hat{a}_j \hat{a}_l^{\dagger} \hat{a}_k$ to normal order.</p>
@@ -7748,7 +8034,7 @@ $$</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pdaggerq</span>
 
 <span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s2">"true"</span><span class="p">)</span>
 
@@ -7833,9 +8119,9 @@ $$</p>
 <p>Let us use what we have learned so far to evaluate the expectation value of the one-body operator</p>
 <p>$$\hat{\mathcal{O}}_1 = \sum_{pq} h_{pq} \hat{a}^\dagger_p \hat{a}_q$$</p>
 <p>with respect to the Hartree-Fock state, $|\Phi_0\rangle$. In order to bring this operator to normal order with respect to the Fermi vacuum, we need to split each sum over general orbitals into separate sums over occupied and virtual orbitals. In this way, we can more clearly identify which operators annihilate the Fermi vacuum. We have</p>
-<p>$$\hat{\mathcal{O}}_1 = \sum_{ij} h_{ij} \hat{a}^\dagger_i \hat{a}_j + \sum_{ia} h_{ia} \hat{a}^\dagger_i \hat{a}_a + \sum_{ai} h_{ai} \hat{a}^\dagger_a \hat{a}_i + \sum_{ab} h_{ia} \hat{a}^\dagger_a \hat{a}_b $$</p>
+<p>$$\hat{\mathcal{O}}_1 = \sum_{ij} h_{ij} \hat{a}^\dagger_i \hat{a}_j + \sum_{ia} h_{ia} \hat{a}^\dagger_i \hat{a}_a + \sum_{ai} h_{ai} \hat{a}^\dagger_a \hat{a}_i + \sum_{ab} h_{ab} \hat{a}^\dagger_a \hat{a}_b $$</p>
 <p>Here, only the first sum involves an operator that is not in normal order. Bringing it to normal order $(\hat{a}^\dagger_i \hat{a}_j = \delta_{ij} - \hat{a}_j \hat{a}^\dagger_i)$, we have</p>
-<p>$$ \hat{\mathcal{O}}_1 = \sum_{i} h_{ii} - \sum_{ij} h_{ij} \hat{a}_j \hat{a}^\dagger_i  + \sum_{ia} h_{ia} \hat{a}^\dagger_i \hat{a}_a + \sum_{ai} h_{ai} \hat{a}^\dagger_a \hat{a}_i + \sum_{ab} h_{ia} \hat{a}^\dagger_a \hat{a}_b $$</p>
+<p>$$ \hat{\mathcal{O}}_1 = \sum_{i} h_{ii} - \sum_{ij} h_{ij} \hat{a}_j \hat{a}^\dagger_i  + \sum_{ia} h_{ia} \hat{a}^\dagger_i \hat{a}_a + \sum_{ai} h_{ai} \hat{a}^\dagger_a \hat{a}_i + \sum_{ab} h_{ab} \hat{a}^\dagger_a \hat{a}_b $$</p>
 <p>and the expectation value of $\hat{\mathcal{O}_1}$ is</p>
 <p>$$ \langle \Phi_0 | \hat{\mathcal{O}}_1 |\Phi_0\rangle = \sum_{i} h_{ii} $$</p>
 <p>because, as shown above, all of the expectation values involving the normal-ordered operators vanish. Note that this result is consistent with the Slater-Condon rules, as we should expect! Just to be sure, let's check if we can get the same result from the pdaggerq package. We can use the built-in operator 'h' to represent the one-body operator here.</p>
@@ -7994,7 +8280,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>This result is equivalent to the one above because, in the MO basis,</p>
-<p>$$ f_{ii} = \sum_{ii} h_{ii} + \sum_{ij} \langle ji || ji \rangle$$</p>
+<p>$$ f_{ii} = h_{ii} + \sum_{j} \langle ij || ij \rangle$$</p>
 <p>so</p>
 <p>$$ \sum_{i} f_{ii} - \frac{1}{2} \sum_{ij} \langle ji||ji \rangle = \sum_{i} h_{ii} + \frac{1}{2} \sum_{ij} \langle ji||ji \rangle$$</p>
 </div>
@@ -8010,7 +8296,7 @@ $$</p>
 <p>Now, let's consider one last, slightly more complicated example. We will use pdaggerq to evaluate the CC with single and double excitations (CCSD) energy expression:</p>
 <p>$$E_{\rm {CC}} = \langle \Phi_0|\text{exp}(-\hat{T}) \hat{H} \text{exp}(\hat{T})|\Phi_0 \rangle$$</p>
 <p>Here, $\hat{T}=\hat{T}_1+\hat{T}_2$ represents the cluster operator, and $\text{exp}(-\hat{T}) \hat{H} \text{exp}(\hat{T})$ is a similarity transformation of the Hamiltonian. This similarity transformation can be carried out using commutators according to the Baker Campbell Hausdorff (BCH) expansion of the Hamiltonian, which truncates after four nested commutators</p>
-<p>$$ \hat{H} = \hat{H} + [\hat{H}, \hat{T}] + \frac{1}{2!} [[\hat{H}, \hat{T}], \hat{T}] + \frac{1}{3!} [[[\hat{H}, \hat{T}], \hat{T}], \hat{T}] + \frac{1}{4!} [[[[\hat{H}, \hat{T}], \hat{T}], \hat{T}], \hat{T}]$$</p>
+<p>$$ e^{-\hat{T}} \hat{H} e^{\hat{T}} = \hat{H} + [\hat{H}, \hat{T}] + \frac{1}{2!} [[\hat{H}, \hat{T}], \hat{T}] + \frac{1}{3!} [[[\hat{H}, \hat{T}], \hat{T}], \hat{T}] + \frac{1}{4!} [[[[\hat{H}, \hat{T}], \hat{T}], \hat{T}], \hat{T}]$$</p>
 <p>The following code makes use of the built-in operator string types in pdaggerq ('t1', 't2', etc.), as well as commutator and double commutator functions, to evaluate the CCSD energy. Note that, for the energy expression, we only need to consider the BCH expansion up to double commutators. For specific definitions of these operators and functions, see the $p^\dagger q$ package <a href="https://github.com/edeprince3/pdaggerq">README</a>.</p>
 </div>
 </div>
@@ -8023,7 +8309,7 @@ $$</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pdaggerq</span>
 
 <span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
 
@@ -8057,7 +8343,7 @@ $$</p>
 <span class="c1"># [v, T2]</span>
 <span class="n">pq</span><span class="o">.</span><span class="n">add_commutator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,[</span><span class="s1">'v'</span><span class="p">],[</span><span class="s1">'t2'</span><span class="p">])</span>
 
-<span class="c1"># [[v, T1], T1]]</span>
+<span class="c1"># [[v, T1], T1]</span>
 <span class="n">pq</span><span class="o">.</span><span class="n">add_double_commutator</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">[</span><span class="s1">'v'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">],[</span><span class="s1">'t1'</span><span class="p">])</span>
 
 <span class="n">pq</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
@@ -8115,7 +8401,7 @@ $$</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pdaggerq</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pdaggerq</span>
 
 <span class="n">pq</span> <span class="o">=</span> <span class="n">pdaggerq</span><span class="o">.</span><span class="n">pq_helper</span><span class="p">(</span><span class="s1">'fermi'</span><span class="p">)</span>
 
